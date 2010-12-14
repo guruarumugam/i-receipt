@@ -1,4 +1,4 @@
-package bodner.idan;
+package google.proj;
 
 import java.io.BufferedReader;
 import java.io.File;

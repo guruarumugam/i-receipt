@@ -1,4 +1,4 @@
-package bodner.idan;
+package google.proj;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import google.proj.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

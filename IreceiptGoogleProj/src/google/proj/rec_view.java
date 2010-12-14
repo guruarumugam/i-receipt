@@ -1,8 +1,10 @@
-package bodner.idan;
+package google.proj;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URI;
+
+import google.proj.R;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

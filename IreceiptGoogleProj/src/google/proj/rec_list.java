@@ -1,9 +1,11 @@
-package bodner.idan;
+package google.proj;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Comparator;
+
+import google.proj.R;
 import android.view.View;
 import android.app.Activity;
 import android.content.Context;

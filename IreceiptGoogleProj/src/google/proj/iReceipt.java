@@ -1,4 +1,4 @@
-package bodner.idan;
+package google.proj;
 
 public class iReceipt implements Receipt, java.io.Serializable {
 

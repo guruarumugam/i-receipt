@@ -1,19 +1,19 @@
-package bodner.idan;
+package google.proj;
 import java.io.Serializable;
 
-public class Date implements Comparable<Date>,Serializable {
+public class IDate implements Comparable<IDate>,Serializable {
 	
 	private int day;
 	private int month;
 	private int year;
 	
-	public Date(){
+	public IDate(){
 		day=0;
 		month=0;
 		year=0;
 	}
 	
-	public Date (int year,int month,int day){
+	public IDate (int year,int month,int day){
 		this.day=day;
 		this.month=month;
 		this.year=year;
@@ -39,7 +39,7 @@ public class Date implements Comparable<Date>,Serializable {
 	}
 
 	@Override//sort from current to oldest
-	public int compareTo(Date another) {
+	public int compareTo(IDate another) {
 		if (this.year>another.getYear())
 				return -1;
 		else
@@ -62,7 +62,7 @@ public class Date implements Comparable<Date>,Serializable {
 	}
 	
 	public String toString(){
-		return String.format("%2s.%2s.%4s",day,month,year);
+		return ""+ this.month+"-"+this.day+"-"+this.year;
 	}
 	
 	

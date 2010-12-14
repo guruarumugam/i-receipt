@@ -1,4 +1,4 @@
-package bodner.idan;
+package google.proj;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.view.View;
 import android.view.View.OnClickListener;
+import google.proj.R;
 
 public class statistics extends Activity {
 

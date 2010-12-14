@@ -1,7 +1,11 @@
-package bodner.idan;
+package google.proj;
+
+import google.proj.*;
 
 import java.io.FileNotFoundException;
-import bodner.idan.*;
+
+import google.proj.R;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;

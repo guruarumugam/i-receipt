@@ -1,4 +1,4 @@
-package bodner.idan;
+package google.proj;
 
 /*this interface is made to represent reciept DS.*/
 

@@ -1,5 +1,6 @@
-package bodner.idan;
+package google.proj;
 
+import google.proj.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
