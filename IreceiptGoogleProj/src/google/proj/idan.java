@@ -25,7 +25,7 @@ public class idan extends Activity {
 	public static List<iReceipt> rec_arr;
 
 	// private ImageButton new_scan, manual, receipts, stats;
-
+	//nothing
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
