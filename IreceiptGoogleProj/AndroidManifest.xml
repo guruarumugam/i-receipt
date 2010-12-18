@@ -17,11 +17,12 @@
 		</activity>
 		<activity android:name="statistics" android:label="screen of payments statistics">
 		</activity>
+		<activity android:name="listview" android:label="Receipts">
+		</activity>
+		<activity android:name="bigPic" android:label="Receipt image">
+		</activity>
 
-
-	
-<activity android:name="bigPic"></activity>
-</application>
+	</application>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 

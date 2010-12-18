@@ -2,26 +2,26 @@
 <resources>
 
 	<string name="app_name">Ireciept</string>
-
 	<string name="new_scan_handler">new_scan_handler</string>
 	<string name="manual_scan_handler">manual_scan_handler</string>
 	<string name="receipts_handler">receipts_handler</string>
 	<string name="statistics_handler">statistics_handler</string>
-	    
+
 	<color name="gray">#cccccc</color>
 	<color name="black">#000000</color>
 	<color name="col">#FFF8DC</color>
-<color name="Tex">#A52A2A</color>
-<string name="CatEdit">OnClickEditCatDialog</string>
-<string name="getDialogPrice">OnClickEditPricekDialog</string>
-<string name="closeDialog">close5Dialog</string>
-<string name="EditStoreName">OnClickEditStoreDialog</string>
+	<color name="Tex">#A52A2A</color>
+	<string name="CatEdit">OnClickEditCatDialog</string>
+	<string name="getDialogPrice">OnClickEditPricekDialog</string>
+	<string name="closeDialog">close5Dialog</string>
+	<string name="EditStoreName">OnClickEditStoreDialog</string>
 
-
-
-
-
-<color name="red">#ff0000</color>
-<color name="white">#ffffff</color>
-<string name="check_box_handler">check_box_handler</string>
+	<color name="red">#ff0000</color>
+	<color name="white">#ffffff</color>
+	<string name="check_box_handler">check_box_handler</string>
+	<color name="green">#228b22</color>
+	<color name="blue">#0000ff</color>
+	<color name="SteelBlue">#4682b4</color>
+	<color name="darkGreen">#006400</color>
+<string name="onClickPic">onClickPic</string>
 </resources>

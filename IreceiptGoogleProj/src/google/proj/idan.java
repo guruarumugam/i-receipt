@@ -5,14 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import google.proj.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +98,7 @@ public class idan extends Activity {
 	}
 
 	public void receipts_handler(View view) {
-		Intent i = new Intent(idan.this, rec_list.class);
+		Intent i = new Intent(idan.this, listview.class);
 		startActivity(i);
 	}
 

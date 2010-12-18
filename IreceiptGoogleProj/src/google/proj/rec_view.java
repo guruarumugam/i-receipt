@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class rec_view extends Activity {
 	/** Called when the activity is first created. */
 	private TextView mDateDisplay;
-	private Button mPickDate;
+	private TextView mPickDate;
 	private int mYear;
 	private int mMonth;
 	private int mDay;
@@ -32,22 +32,23 @@ public class rec_view extends Activity {
 	private iReceipt rec;
 	private EditText text[] = new EditText[4];
 	private CheckBox check;
-	ImageView image;
+	private EditText NotesEditText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
-		image = (ImageView) findViewById(R.id.Image01);
+		ImageView image = (ImageView) findViewById(R.id.Image01);
 		if (rec.getFilepath() != null)
 			image.setImageResource(R.drawable.receipt);
 
 		// capture our View elements
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
-		mPickDate = (Button) findViewById(R.id.pickDate);
+		mPickDate = (TextView) findViewById(R.id.TextView01);
 		check = (CheckBox) findViewById(R.id.CheckBox01);
-
+		NotesEditText = (EditText) findViewById(R.id.EditText01);
+		
 		// add a click listener to the button
 		mPickDate.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -68,6 +69,7 @@ public class rec_view extends Activity {
 		text[1].setText(((Double) rec.getTotal()).toString());
 		text[2].setText(rec.getCategory());
 		check.setChecked(rec.isFlaged());
+		NotesEditText.setText(rec.getNotes());
 		/*
 		 * if (rec.isFlaged()) text[3].setText("Yes"); else
 		 * text[3].setText("No");
@@ -126,10 +128,8 @@ public class rec_view extends Activity {
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
 		rec.setCategory(text[2].getText().toString());
 		rec.setFlaged(check.isChecked());
-		// Intent i = new Intent(this, rec_list.class);
-		// i.putExtra("Receipt", rec);
-		// setResult(10, i);
-		// saveR(rec);
+		rec.setNotes(NotesEditText.getText().toString());
+
 		saveList();
 		finish();
 	}
@@ -146,15 +146,4 @@ public class rec_view extends Activity {
 			ex.printStackTrace();
 		}
 	}
-	/*
-	 * public void saveR(iReceipt r) {
-	 * 
-	 * try{ ObjectOutputStream outputStream = new
-	 * ObjectOutputStream(openFileOutput(r.getplaceofsave(),
-	 * Context.MODE_PRIVATE)); outputStream.writeObject(r);
-	 * outputStream.close();
-	 * 
-	 * } catch (IOException ex) { ex.printStackTrace(); } }
-	 */
-
 }
