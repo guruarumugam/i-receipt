@@ -24,4 +24,6 @@
 	<color name="SteelBlue">#4682b4</color>
 	<color name="darkGreen">#006400</color>
 <string name="onClickPic">onClickPic</string>
+<string name="save_rec_handler">save_rec_handler</string>
+<string name="EditRecNote">EditRecNote</string>
 </resources>

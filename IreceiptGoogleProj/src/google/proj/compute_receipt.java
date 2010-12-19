@@ -41,7 +41,7 @@ public class compute_receipt extends Activity {
 	protected String prices[] = new String[4];
 	private String dates[] = new String[4];
 	private String stores[] = new String[4];
-	private String cat[] = new String[4];
+	public static String cat[] = new String[10];
 	static final int DATE_DIALOG_ID = 0;
 	private Spinner spinner_d;
 	private Spinner spinner_p;
@@ -51,7 +51,7 @@ public class compute_receipt extends Activity {
 	private ArrayAdapter<String> adapter_p;
 	private ArrayAdapter<String> adapter_s;
 	private ArrayAdapter<String> adapter_c;
-	private iReceipt r;
+	private iReceipt rec;
 	boolean t = false;// if true come from manual scan else come from rec_list
 	DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -61,9 +61,8 @@ public class compute_receipt extends Activity {
 			mMonth = monthOfYear;
 			mDay = dayOfMonth;
 			dates[3] = mMonth + 1 + "-" + mDay + "-" + mYear;
-			r.setRdate(new IDate(year, monthOfYear + 1, dayOfMonth));
+			rec.setRdate(new IDate(year, monthOfYear + 1, dayOfMonth));
 			spinner_d.setSelection(3);
-
 		}
 	};
 
@@ -72,10 +71,10 @@ public class compute_receipt extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.compute_receipt_layout);
 		int index = getIntent().getFlags();
-		r = (iReceipt) idan.rec_arr.get(index);
+		rec = (iReceipt) idan.rec_arr.get(index);
 		boolean good_ocr = false;
-		if (r.getFilepath() != null)
-			good_ocr = preform_ocr(r);
+		if (rec.getFilepath() != null)
+			good_ocr = preform_ocr(rec);
 		if (!good_ocr) {
 			prices[0] = "";
 			prices[1] = "";
@@ -91,11 +90,17 @@ public class compute_receipt extends Activity {
 		stores[2] = "";
 		stores[3] = "";
 
-		cat[0] = "sports";
-		cat[1] = "Fuel";
-		cat[2] = "market";
-		cat[3] = "cloths";
-
+		cat[0] = "Dining";
+		cat[1] = "Car";
+		cat[2] = "Travel";
+		cat[3] = "Shopping";
+		cat[4] = "Rent";
+		cat[5] = "Groceries";
+		cat[6] = "Presents";
+		cat[7] = "Entertainment";
+		cat[8] = "Household goods";
+		cat[9] = "Other";
+		
 		/*
 		 * Bundle extras = getIntent().getExtras(); if (extras!= null){ r=
 		 * (iReceipt) extras.getSerializable("Receipt"); } if
@@ -115,7 +120,7 @@ public class compute_receipt extends Activity {
 
 		spinner_s = (Spinner) findViewById(R.id.Spinner01);
 		adapter_s = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, stores);
+				android.R.layout.simple_spinner_item, stores);
 		adapter_s
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_s.setAdapter(adapter_s);
@@ -124,7 +129,7 @@ public class compute_receipt extends Activity {
 
 		spinner_d = (Spinner) findViewById(R.id.Spinner02);
 		adapter_d = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, dates);
+				android.R.layout.simple_spinner_item, dates);
 		adapter_d
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_d.setAdapter(adapter_d);
@@ -133,7 +138,7 @@ public class compute_receipt extends Activity {
 
 		spinner_p = (Spinner) findViewById(R.id.Spinner03);
 		adapter_p = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, prices);
+				android.R.layout.simple_spinner_item, prices);
 		adapter_p
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_p.setAdapter(adapter_p);
@@ -142,7 +147,7 @@ public class compute_receipt extends Activity {
 
 		spinner_c = (Spinner) findViewById(R.id.Spinner04);
 		adapter_c = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, cat);
+				android.R.layout.simple_spinner_item, cat);
 		adapter_c
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_c.setAdapter(adapter_c);
@@ -200,9 +205,9 @@ public class compute_receipt extends Activity {
 			Object item = parent.getItemAtPosition(pos);
 			String str = (String) item;
 			if (str.equals(""))
-				r.setTotal(0);
+				rec.setTotal(0);
 			else
-				r.setTotal(Double.valueOf(str));
+				rec.setTotal(Double.valueOf(str));
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
@@ -228,7 +233,7 @@ public class compute_receipt extends Activity {
 				int year = Integer.parseInt(str_arr[2]);
 				date = new IDate(year, month, day);
 			}
-			r.setRdate(date);
+			rec.setRdate(date);
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
@@ -244,7 +249,7 @@ public class compute_receipt extends Activity {
 				long id) {
 			Object item = parent.getItemAtPosition(pos);
 			String str = (String) item;
-			r.setStoreName(str);
+			rec.setStoreName(str);
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
@@ -260,7 +265,7 @@ public class compute_receipt extends Activity {
 				long id) {
 			Object item = parent.getItemAtPosition(pos);
 			String str = (String) item;
-			r.setCategory(str);
+			rec.setCategory(str);
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
@@ -307,7 +312,7 @@ public class compute_receipt extends Activity {
 					String price_new = text.getText().toString();
 					prices[3] = price_new;
 					spinner_p.setSelection(3);
-					r.setTotal(Double.valueOf(price_new));
+					rec.setTotal(Double.valueOf(price_new));
 					dialog5.dismiss();
 
 				}
@@ -340,7 +345,7 @@ public class compute_receipt extends Activity {
 					stores[3] = store_new;
 					spinner_s.setSelection(3);
 					spinner_s.refreshDrawableState();
-					r.setStoreName(store_new);
+					rec.setStoreName(store_new);
 					dialog3.dismiss();
 
 				}
@@ -378,7 +383,7 @@ public class compute_receipt extends Activity {
 					cat[3] = cat_new;
 					spinner_c.setSelection(3);
 					// spinner_c.refreshDrawableState();
-					r.setCategory(cat_new);
+					rec.setCategory(cat_new);
 					dialog7.dismiss();
 
 				}
@@ -403,7 +408,7 @@ public class compute_receipt extends Activity {
 
 	public void onClick(View view) {
 		setResult(1);
-		r.setProcessed(true);
+		rec.setProcessed(true);
 		saveList();
 		finish();
 	}

@@ -32,15 +32,15 @@ public class idan extends Activity {
 		rec_arr = new ArrayList<iReceipt>();
 
 		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 3), "AppleStore",
-				1.99, "music", true, true, "", "/data/4.jpg"));
+				1.99, "Travel", true, true, "", "/data/4.jpg"));
 		iReceipt rec2 = (new iReceipt(new IDate(2010, 10, 16), "BP-Gass", 19.92,
-				"fuel", false, true, "", "/data/2.jpg"));
+				"Car", false, true, "", "/data/2.jpg"));
 		iReceipt rec3 = (new iReceipt(new IDate(2010, 11, 18), "Chang-Mai ",
 				15.00, "Thai food", false, true, "", "/data/5.jpg"));
 		iReceipt rec4 = (new iReceipt(new IDate(2010, 11, 19), "Target", 3.00,
-				"Shops", false, true, "", "/data/6.jpg"));
+				"Shopping", false, true, "", "/data/6.jpg"));
 		iReceipt rec5 = (new iReceipt(new IDate(2010, 12, 4), "Sony", 99.99,
-				"Electricity", true, true, "", "/data/3.jpg"));
+				"Shopping", true, true, "", "/data/3.jpg"));
 		//iReceipt rec6 = (new iReceipt(new IDate(2010, 12, 5), " ", -1, " ",
 		//		false, false, "", "/data/111.jpg"));
 		//iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 6), " ", -1, " ",

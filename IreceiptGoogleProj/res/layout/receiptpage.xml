@@ -6,20 +6,22 @@
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="vertical" android:padding="5dip"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
-		android:minHeight="400sp" android:background="@drawable/recpage2">
+		android:minHeight="400sp" android:background="@drawable/recpage5">
 		<LinearLayout android:id="@+id/Layout06RP"
 			android:layout_width="fill_parent" android:paddingLeft="10sp"
-			android:layout_height="60sp">
+			android:layout_height="100sp">
 
 			<Button android:id="@+id/Button01" android:background="@drawable/cancel1"
 				android:layout_height="30sp" android:layout_width="70sp"
 				android:layout_marginLeft="30sp"></Button>
-			<CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content"
-				android:layout_gravity="bottom" android:layout_height="40sp"
-				android:layout_marginLeft="35sp"></CheckBox>
-			<Button android:onClick="onClick" android:id="@+id/B01"
-				android:background="@drawable/save2" android:layout_height="30sp"
-				android:layout_width="50sp" android:layout_marginLeft="35sp"></Button>
+			<ImageView android:id="@+id/Image01" android:src="@drawable/icon"
+				android:clickable="true" android:onClick="@string/onClickPic"
+				android:layout_height="100sp" android:layout_width="85sp"
+				android:layout_marginLeft="6sp"></ImageView>
+
+			<Button android:id="@+id/B01" android:background="@drawable/save2"
+				android:layout_height="30sp" android:layout_width="50sp"
+				android:onClick="onClick" android:layout_marginLeft="20sp"></Button>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout01RP"
 			android:layout_width="fill_parent" android:layout_height="45sp"
@@ -35,10 +37,10 @@
 				android:layout_marginLeft="35sp" android:textColor="@color/darkGreen"
 				android:gravity="right|center_vertical" />
 			<TextView android:id="@+id/TextView01"
-				android:layout_height="20sp" android:layout_width="20sp"
-				android:background="@drawable/editnext2" android:clickable="true"
+				android:layout_height="20sp" android:clickable="true"
 				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:onClick="@string/EditStoreName" android:layout_marginLeft="35sp"></TextView>
+				android:onClick="@string/EditStoreName" android:layout_marginLeft="35sp"
+				android:background="@drawable/editnext3" android:layout_width="12sp"></TextView>
 		</LinearLayout>
 
 		<LinearLayout android:id="@+id/Layout04RP"
@@ -81,24 +83,17 @@
 				android:layout_width="160sp" android:textColor="@color/darkGreen"></EditText>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout05RP"
-			android:layout_width="fill_parent" android:layout_height="45sp"
-			android:paddingLeft="10sp">
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="120sp">
 			<TextView android:layout_height="wrap_content"
-				android:textSize="20sp" android:id="@+id/Text05"
-				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:layout_width="100sp" android:textColor="@color/black"
-				android:text="Notes:"></TextView>
-			<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:minWidth="80sp"
-				android:maxWidth="180sp" android:maxLines="3" android:maxLength="80"></EditText>
-		</LinearLayout>
-
-		<LinearLayout android:layout_height="fill_parent"
-			android:layout_width="fill_parent" android:id="@+id/Layout07RP"
-			android:gravity="center">
-			<ImageView android:id="@+id/Image01" android:src="@drawable/icon"
-				android:maxHeight="500sp" android:maxWidth="250sp"
-				android:layout_height="wrap_content" android:layout_width="wrap_content" android:clickable="true" android:onClick="@string/onClickPic"></ImageView>
+				android:textSize="20sp" android:id="@+id/Text05" android:textColor="@color/black"
+				android:text="Notes:" android:layout_gravity="top"
+				android:layout_width="60sp"></TextView>
+			<TextView android:onClick="@string/EditRecNote" android:id="@+id/show_note"
+				android:clickable="true" android:layout_height="100sp"
+				android:layout_marginLeft="10sp" android:layout_width="190sp"></TextView>
+			<CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content"
+				android:layout_height="40sp" android:layout_gravity="top"></CheckBox>
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

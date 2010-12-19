@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -32,7 +33,8 @@ public class rec_view extends Activity {
 	private iReceipt rec;
 	private EditText text[] = new EditText[4];
 	private CheckBox check;
-	private EditText NotesEditText;
+	//private EditText NotesEditText;
+	private TextView show_notes;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,8 @@ public class rec_view extends Activity {
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
 		mPickDate = (TextView) findViewById(R.id.TextView01);
 		check = (CheckBox) findViewById(R.id.CheckBox01);
-		NotesEditText = (EditText) findViewById(R.id.EditText01);
+		//NotesEditText = (EditText) findViewById(R.id.EditText01);
+		show_notes = (TextView) findViewById(R.id.show_note);
 		
 		// add a click listener to the button
 		mPickDate.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +72,8 @@ public class rec_view extends Activity {
 		text[1].setText(((Double) rec.getTotal()).toString());
 		text[2].setText(rec.getCategory());
 		check.setChecked(rec.isFlaged());
-		NotesEditText.setText(rec.getNotes());
+		//NotesEditText.setText(rec.getNotes());
+		show_notes.setText(rec.getNotes());
 		/*
 		 * if (rec.isFlaged()) text[3].setText("Yes"); else
 		 * text[3].setText("No");
@@ -128,10 +132,41 @@ public class rec_view extends Activity {
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
 		rec.setCategory(text[2].getText().toString());
 		rec.setFlaged(check.isChecked());
-		rec.setNotes(NotesEditText.getText().toString());
-
+		rec.setNotes(show_notes.getText().toString());
 		saveList();
 		finish();
+	}
+	public void EditRecNote(View view) {
+		//final TextView show_notes = (TextView) findViewById(R.id.show_note);
+		final Dialog EditNoteDialog = new Dialog(this);
+		EditNoteDialog.setContentView(R.layout.editnote);
+		EditNoteDialog.setTitle("Edit note for current receipt");
+		final EditText note = (EditText) EditNoteDialog
+				.findViewById(R.id.EditNote01);
+		note.setText(show_notes.getText());
+		// b1 is ok button
+		Button b1Note = (Button) EditNoteDialog.findViewById(R.id.SetNote);
+		b1Note.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				String new_note = note.getText().toString();
+				//stores[3] = store_new;
+				//spinner_s.setSelection(3);
+				//spinner_s.refreshDrawableState();
+				rec.setNotes(new_note);
+				show_notes.setText(note.getText().toString());
+				EditNoteDialog.dismiss();
+			}
+		});
+		// b2 is cancel button
+		Button b1CancelNote = (Button) EditNoteDialog.findViewById(R.id.CancelNote);
+		b1CancelNote.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditNoteDialog.dismiss();
+			}
+		});
+		EditNoteDialog.show();
 	}
 
 	public void saveList() {

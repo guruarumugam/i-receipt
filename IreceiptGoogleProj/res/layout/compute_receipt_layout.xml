@@ -1,93 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:padding="9dip"
-	android:background="@color/white">
+	android:layout_height="fill_parent" android:background="@color/black">
 	<LinearLayout android:id="@+id/LinearLayoutComputeUP"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_marginBottom="10sp">
+		android:layout_marginBottom="10sp" android:orientation="vertical"
+		android:background="@drawable/recpage2" android:padding="5dip">
+		<LinearLayout android:id="@+id/LinearLayoutFlaged"
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="58sp">
+			<Button android:id="@+id/CancelBut" android:onClick="onClick2"
+				android:background="@drawable/cancel1" android:layout_height="30sp"
+				android:layout_width="70sp" android:layout_marginLeft="30sp"></Button>
+
+			<CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content"
+				android:clickable="true" android:layout_gravity="bottom"
+				android:layout_marginLeft="35sp" android:layout_height="35sp"></CheckBox>
+			<Button android:id="@+id/Button01saveandreturn"
+				android:onClick="onClick" android:gravity="center_vertical|center_horizontal"
+				android:layout_height="30sp" android:layout_width="50sp"
+				android:background="@drawable/save2" android:layout_marginLeft="35sp"></Button>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout01Spinner1" android:paddingLeft="10sp"
+			android:layout_height="40sp">
+			<TextView android:id="@+id/TextViewStoreName_computeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:text="Business:" android:textSize="20sp" android:textColor="@color/black"
+				android:layout_width="87sp" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center">
+			</TextView>
+			<Spinner android:id="@+id/Spinner01" android:layout_width="150sp"
+				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
+			<TextView android:onClick="@string/EditStoreName"
+				android:id="@+id/ButtonEditStorname" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:gravity="right" android:clickable="true"
+				android:layout_height="20sp" android:layout_marginLeft="25sp"
+				android:layout_width="12sp" android:background="@drawable/editnext3"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout02Spinner2" android:paddingLeft="10sp" android:layout_height="43sp">
+			<TextView android:text="Date:" android:id="@+id/TextView02Date_computeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:textSize="20sp" android:textColor="@color/black"
+				android:layout_width="87sp" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+			<Spinner android:id="@+id/Spinner02" android:layout_width="150sp"
+				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
+			<TextView android:onClick="@string/EditStoreName"
+				android:layout_gravity="center_vertical|center_horizontal|center"
+				android:gravity="right" android:clickable="true" android:id="@+id/EditDate"
+				android:layout_height="20sp" android:layout_marginLeft="25sp"
+				android:layout_width="12sp" android:background="@drawable/editnext3"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout03Spinner3" android:paddingLeft="10sp"
+			android:layout_height="45sp">
+			<TextView android:text="Price:" android:id="@+id/TextView03PriceComputeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:textSize="20sp" android:textColor="@color/black"
+				android:layout_width="87sp" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+			<Spinner android:id="@+id/Spinner03" android:layout_width="150sp"
+				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
+			<TextView android:onClick="@string/getDialogPrice"
+				android:id="@+id/Button03EditPrice" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:clickable="true" android:layout_height="20sp"
+				android:layout_marginLeft="25sp" android:background="@drawable/editnext3"
+				android:layout_width="12sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout04Spinner4" android:paddingLeft="10sp"
+			android:layout_height="45sp">
+			<TextView android:id="@+id/TextView03CatComputeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:text="Category:" android:textSize="20sp" android:textColor="@color/black"
+				android:layout_width="87sp" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+			<Spinner android:id="@+id/Spinner04" android:clipChildren="true"
+				android:clipToPadding="true" android:layout_width="150sp"
+				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
+			<TextView android:onClick="@string/CatEdit" android:id="@+id/Button04EditCat"
+				android:clickable="true" android:layout_gravity="right|center_vertical|center_horizontal|center"
+				android:layout_height="20sp" android:layout_marginLeft="25sp"
+				android:background="@drawable/editnext3" android:layout_width="12sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayoutNotes"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:paddingLeft="10sp">
+			<TextView android:id="@+id/TextView02" android:layout_width="87sp"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:text="Notes:" android:textColor="@color/black"
+				android:textSize="20sp" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+			<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:minWidth="80sp"
+				android:maxWidth="250sp" android:maxLength="120"></EditText>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayout01"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_margin="10sp">
+		</LinearLayout>
 	</LinearLayout>
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/LinearLayout01Spinner1">
-		<TextView android:layout_height="50sp"
-			android:id="@+id/TextViewStoreName_computeR" android:gravity="left|center_vertical|center_horizontal"
-			android:text="Business:" android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="87sp">
-		</TextView>
-		<Spinner android:id="@+id/Spinner01" android:layout_width="190sp"
-			android:layout_height="50sp"></Spinner>
-		<TextView android:text="Edit" android:onClick="@string/EditStoreName"
-			android:id="@+id/ButtonEditStorname" android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:layout_gravity="center_vertical|center_horizontal|center"
-			android:gravity="right" android:clickable="true" android:textColor="@color/red"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/LinearLayout02Spinner2">
-		<TextView android:text="Date:" android:layout_height="50sp"
-			android:id="@+id/TextView02Date_computeR" android:gravity="left|center_vertical|center_horizontal"
-			android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="87sp"></TextView>
-		<Spinner android:id="@+id/Spinner02" android:layout_width="190sp"
-			android:layout_height="50sp"></Spinner>
-		<TextView android:text="Edit" android:onClick="@string/EditStoreName"
-			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:layout_gravity="center_vertical|center_horizontal|center"
-			android:gravity="right" android:clickable="true" android:id="@+id/EditDate"
-			android:textColor="@color/red"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/LinearLayout03Spinner3">
-		<TextView android:text="Price:" android:layout_height="50sp"
-			android:id="@+id/TextView03PriceComputeR" android:gravity="left|center_vertical|center_horizontal"
-			android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="87sp"></TextView>
-		<Spinner android:id="@+id/Spinner03" android:layout_width="190sp"
-			android:layout_height="50sp"></Spinner>
-		<TextView android:text="Edit" android:onClick="@string/getDialogPrice"
-			android:id="@+id/Button03EditPrice" android:layout_gravity="center_vertical|center_horizontal|center"
-			android:layout_height="wrap_content" android:layout_width="wrap_content"
-			android:clickable="true" android:textColor="@color/red"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/LinearLayout04Spinner4">
-		<TextView android:layout_height="50sp" android:id="@+id/TextView03CatComputeR"
-			android:gravity="left|center_vertical|center_horizontal"
-			android:text="Category:" android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="87sp"></TextView>
-		<Spinner android:id="@+id/Spinner04" android:layout_width="190sp"
-			android:layout_height="50sp" android:addStatesFromChildren="true"
-			android:clipChildren="true" android:clipToPadding="true"></Spinner>
-		<TextView android:text="Edit" android:onClick="@string/CatEdit"
-			android:id="@+id/Button04EditCat" android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:clickable="true"
-			android:layout_gravity="right|center_vertical|center_horizontal|center"
-			android:textColor="@color/red"></TextView>
-	</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayoutFlaged"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<TextView android:id="@+id/TextView01" android:layout_height="50sp"
-			android:layout_width="87sp" android:gravity="left|center_vertical|center_horizontal"
-			android:text="Flaged:" android:textColor="@color/black"
-			android:textSize="20sp"></TextView>
-		<CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:clickable="true"></CheckBox>
-	</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayoutNotes"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<TextView android:id="@+id/TextView02" android:layout_height="50sp"
-			android:layout_width="87sp" android:gravity="left|center_vertical|center_horizontal"
-			android:text="Notes:" android:textColor="@color/black"
-			android:textSize="20sp"></TextView>
-		<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:minWidth="80sp"
-			android:maxWidth="250sp" android:maxLength="120"></EditText>
-	</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayout01"
-		android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="10sp">
-		<Button android:layout_width="wrap_content" android:id="@+id/Button01saveandreturn"
-			android:onClick="onClick" android:text="save and return"
-			android:layout_height="40sp"
-			android:gravity="center_vertical|center_horizontal" android:layout_gravity="bottom" android:layout_marginBottom="1sp" android:layout_marginLeft="80sp"></Button>
-	<Button android:layout_width="wrap_content" android:text="Cancel" android:layout_marginBottom="1sp" android:layout_gravity="bottom" android:layout_height="40sp" android:gravity="center" android:id="@+id/CancelBut" android:onClick="onClick2"></Button>
-</LinearLayout>
 </LinearLayout>
