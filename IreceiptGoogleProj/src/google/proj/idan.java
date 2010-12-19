@@ -41,17 +41,17 @@ public class idan extends Activity {
 				"Shops", false, true, "", "/data/6.jpg"));
 		iReceipt rec5 = (new iReceipt(new IDate(2010, 12, 4), "Sony", 99.99,
 				"Electricity", true, true, "", "/data/3.jpg"));
-		iReceipt rec6 = (new iReceipt(new IDate(2010, 12, 5), " ", -1, " ",
-				false, false, "", "/data/111.jpg"));
-		iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 6), " ", -1, " ",
-				false, false, "", "/data/1.jpg")); // ------- to test
+		//iReceipt rec6 = (new iReceipt(new IDate(2010, 12, 5), " ", -1, " ",
+		//		false, false, "", "/data/111.jpg"));
+		//iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 6), " ", -1, " ",
+		//		false, false, "", "/data/1.jpg")); // ------- to test
 		rec_arr.add(rec1);
 		rec_arr.add(rec2);
 		rec_arr.add(rec3);
 		rec_arr.add(rec4);
 		rec_arr.add(rec5);
-		rec_arr.add(rec6);
-		rec_arr.add(rec7);
+		//rec_arr.add(rec6);
+		//rec_arr.add(rec7);
 	}
 
 	/*
@@ -69,9 +69,12 @@ public class idan extends Activity {
 	 */
 
 	public void new_scan_handler(View view) {
-		// Intent i = new Intent(idan.this, idan.class);
-		// startActivityForResult(i, 0);
-		finish();
+		iReceipt r = new iReceipt();
+		Intent i = new Intent(idan.this, prev.class);
+		rec_arr.add(r);
+		int index = rec_arr.indexOf(r);
+		i.setFlags(index);
+		startActivityForResult(i, index);
 	}
 
 	public void manual_scan_handler(View view) {
