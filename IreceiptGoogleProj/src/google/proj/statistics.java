@@ -129,7 +129,7 @@ public class statistics extends Activity {
 		dateTo = new IDate(year, month, day);
 
 		if (dateTo.compareTo(dateFrom) > 0)
-			showTotalFromTo.setText("invalid dates, please check again"); // dateFrom
+			showTotalFromTo.setText("invalid dates..."); // dateFrom
 																			// >
 																			// dateTo
 		else {

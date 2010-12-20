@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Ireciept</string>
+	<string name="app_name">Ireceipt</string>
 	<string name="new_scan_handler">new_scan_handler</string>
 	<string name="manual_scan_handler">manual_scan_handler</string>
 	<string name="receipts_handler">receipts_handler</string>
