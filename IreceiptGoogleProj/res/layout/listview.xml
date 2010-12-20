@@ -9,7 +9,7 @@
 		<TextView android:id="@+id/TextView01" android:paddingLeft="5sp"
 			android:textSize="20sp" android:textColor="@color/black"
 			android:layout_height="25sp" android:gravity="center_vertical"
-			android:layout_width="150sp">
+			android:layout_width="150sp" android:isScrollContainer="true" android:maxLines="1">
 		</TextView>
 		
 		<TextView android:id="@+id/TextView02" android:textSize="20sp"

@@ -1,15 +1,12 @@
 package google.proj;
 
 import google.proj.*;
-
 import java.io.FileNotFoundException;
-
 import google.proj.R;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
-
+import java.util.List;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -22,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -100,7 +98,7 @@ public class compute_receipt extends Activity {
 		cat[7] = "Entertainment";
 		cat[8] = "Household goods";
 		cat[9] = "Other";
-		
+
 		/*
 		 * Bundle extras = getIntent().getExtras(); if (extras!= null){ r=
 		 * (iReceipt) extras.getSerializable("Receipt"); } if
@@ -332,9 +330,20 @@ public class compute_receipt extends Activity {
 			final Dialog dialog3 = new Dialog(this);
 			dialog3.setContentView(R.layout.edit_store_layout);
 			dialog3.setTitle("Edit your Store");
-
 			final EditText textstore = (EditText) dialog3
 					.findViewById(R.id.EditTextStore01);
+
+			// //////////////////////////////////////////////
+			final String store_names[] = new String[idan.rec_arr.size()];
+			for (int k = 0; k < idan.rec_arr.size(); k++) {
+				store_names[k] = idan.rec_arr.get(k).getStoreName();
+			}
+			ArrayAdapter<String> arrAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_dropdown_item_1line, store_names);
+			AutoCompleteTextView Business = (AutoCompleteTextView) findViewById(R.id.AutoCompleteBusiness);
+			Business.setAdapter(arrAdapter);
+
+			// //////////////////////////////////////////////
 
 			// b1 is ok button
 			Button b1store = (Button) dialog3.findViewById(R.id.ButtonStore01);
@@ -357,12 +366,10 @@ public class compute_receipt extends Activity {
 				@Override
 				public void onClick(View v) {
 					dialog3.dismiss();
-
 				}
 			});
 			dialog3.show();
 			return null;
-
 		}
 
 		case 7: {
@@ -412,6 +419,7 @@ public class compute_receipt extends Activity {
 		saveList();
 		finish();
 	}
+
 	public void onClick2(View view) {
 		setResult(0);
 		finish();

@@ -1,6 +1,7 @@
 package google.proj;
 
 import android.app.Activity;
+import java.lang.Number;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -15,7 +16,11 @@ public class statistics extends Activity {
 
 	private TextView fromPickDate;
 	private TextView toPickDate;
+	private TextView totalThisMonth, totalLastMonth, showTotalFromTo;
 	private int Year, Month, Day;
+	private double total1 = 0;
+	private double total2 = 0;
+	private IDate date1, date2, date3;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,9 @@ public class statistics extends Activity {
 		setContentView(R.layout.stats);
 		fromPickDate = (TextView) findViewById(R.id.pickDateFrom);
 		toPickDate = (TextView) findViewById(R.id.pickDateTo);
+		totalThisMonth = (TextView) findViewById(R.id.totalThisMonth);
+		totalLastMonth = (TextView) findViewById(R.id.totalLastMonth);
+		showTotalFromTo = (TextView) findViewById(R.id.totalFromTo);
 		toPickDate.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				showDialog(R.id.pickDateTo);
@@ -37,20 +45,103 @@ public class statistics extends Activity {
 		Year = c.get(Calendar.YEAR);
 		Month = c.get(Calendar.MONTH);
 		Day = c.get(Calendar.DAY_OF_MONTH);
+		date1 = new IDate(Year, Month + 1, 1); // start of this month
+		if (Year > 1)
+			date3 = new IDate(Year, Month, 1); // start of last month
+		else
+			date3 = new IDate(Year - 1, 12, 1);
 
 		updateDisplay(R.id.pickDateFrom); // default-receipts from today
 		updateDisplay(R.id.pickDateTo); // default-receipts from today
+
+		for (int i = 0; i < idan.rec_arr.size(); i++) {
+			date2 = idan.rec_arr.get(i).getRdate();
+			if (date1.compareTo(date2) >= 0) // rec.date > start of this month
+				total1 += idan.rec_arr.get(i).getTotal();
+			else if (date3.compareTo(date2) >= 0) // re.date < start of this
+													// month and > start of last
+													// month
+				total2 += idan.rec_arr.get(i).getTotal();
+		}
+		totalThisMonth.setText(Double.toString(total1));
+		totalLastMonth.setText(Double.toString(total2));
 	}
 
 	private void updateDisplay(int id) {
-		if (id == R.id.pickDateFrom)
-			fromPickDate.setText(new StringBuilder().append("From:")
-					.append(Month + 1).append("-").append(Day).append("-")
-					.append(Year).append(" "));
-		if (id == R.id.pickDateTo)
-			toPickDate.setText(new StringBuilder().append("To:")
-					.append(Month + 1).append("-").append(Day).append("-")
-					.append(Year).append(" "));
+		if (id == R.id.pickDateFrom) {
+			if ((Month>9) && (Day>9))
+				fromPickDate.setText(new StringBuilder().append("From:")
+						.append(Month + 1).append("-").append(Day).append("-")
+						.append(Year).append(" "));
+			if ((Month>9) && (Day<10))
+				fromPickDate.setText(new StringBuilder().append("From:")
+						.append(Month + 1).append("-").append("0"+Day).append("-")
+						.append(Year).append(" "));
+			if ((Month<10) && (Day>10))
+				fromPickDate.setText(new StringBuilder().append("From:")
+						.append("0"+(Month + 1)).append("-").append(Day).append("-")
+						.append(Year).append(" "));
+			if ((Month<10) && (Day<10))
+				fromPickDate.setText(new StringBuilder().append("From:")
+						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
+						.append(Year).append(" "));
+		}
+		if (id == R.id.pickDateTo) {
+			if ((Month>9) && (Day>9))
+				toPickDate.setText(new StringBuilder().append("To:")
+						.append(Month + 1).append("-").append(Day).append("-")
+						.append(Year).append(" "));
+			if ((Month>9) && (Day<10))
+				toPickDate.setText(new StringBuilder().append("To:")
+						.append(Month + 1).append("-").append("0"+Day).append("-")
+						.append(Year).append(" "));
+			if ((Month<10) && (Day>10))
+				toPickDate.setText(new StringBuilder().append("To:")
+						.append("0"+(Month + 1)).append("-").append(Day).append("-")
+						.append(Year).append(" "));
+			if ((Month<10) && (Day<10))
+				toPickDate.setText(new StringBuilder().append("To:")
+						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
+						.append(Year).append(" "));
+		}
+	}
+
+	public void totalFromTo() {
+
+		int year, month, day, check;
+		Double totalFromTo = 0.0;
+		String str1, str2;
+		IDate dateFrom, dateTo, date4;
+
+		str1 = fromPickDate.getText().toString();
+		str2 = toPickDate.getText().toString();
+
+		month = Integer.parseInt(str1.substring(5, 7));
+		day = Integer.parseInt(str1.substring(8, 10));
+		year = Integer.parseInt(str1.substring(11, 15));
+
+		dateFrom = new IDate(year, month, day);
+
+		month = Integer.parseInt(str2.substring(3, 5));
+		day = Integer.parseInt(str2.substring(6, 8));
+		year = Integer.parseInt(str2.substring(9, 13));
+
+		dateTo = new IDate(year, month, day);
+
+		if (dateTo.compareTo(dateFrom) > 0)
+			showTotalFromTo.setText("invalid dates, please check again"); // dateFrom
+																			// >
+																			// dateTo
+		else {
+			totalFromTo = 0.0;
+			for (int i = 0; i < idan.rec_arr.size(); i++) {
+				date4 = idan.rec_arr.get(i).getRdate();
+				if ((date4.compareTo(dateTo) >= 0)
+						&& (dateFrom.compareTo(date4) >= 0))
+					totalFromTo += idan.rec_arr.get(i).getTotal();
+			}
+			showTotalFromTo.setText("" + totalFromTo);
+		}
 	}
 
 	private DatePickerDialog.OnDateSetListener toDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -60,6 +151,7 @@ public class statistics extends Activity {
 			Month = monthOfYear;
 			Day = dayOfMonth;
 			updateDisplay(R.id.pickDateTo);
+			totalFromTo();
 		}
 	};
 	private DatePickerDialog.OnDateSetListener fromDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -69,6 +161,7 @@ public class statistics extends Activity {
 			Month = monthOfYear;
 			Day = dayOfMonth;
 			updateDisplay(R.id.pickDateFrom);
+			totalFromTo();
 		}
 	};
 

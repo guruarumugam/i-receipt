@@ -5,16 +5,16 @@
 
 	<LinearLayout android:id="@+id/LinearLayout10"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<EditText android:numeric="decimal" android:layout_height="50sp" android:layout_width="200sp" android:id="@+id/EditText01DialogPrice"></EditText>
+		<EditText android:numeric="decimal" android:layout_height="50sp"
+			android:layout_width="200sp" android:id="@+id/EditText01DialogPrice"></EditText>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/LinearLayout20"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<Button android:text="Set" android:layout_height="50sp" android:layout_width="100sp" android:id="@+id/Button01Dialogprice"></Button>
-		<Button android:layout_height="50sp" android:text="Cancel" android:layout_width="100sp" android:id="@+id/Button02Dialogprice"></Button>
+		<Button android:text="Set" android:layout_height="50sp"
+			android:layout_width="100sp" android:id="@+id/Button01Dialogprice"></Button>
+		<Button android:layout_height="50sp" android:text="Cancel"
+			android:layout_width="100sp" android:id="@+id/Button02Dialogprice"></Button>
 	</LinearLayout>
-
-
-
 
 </LinearLayout>

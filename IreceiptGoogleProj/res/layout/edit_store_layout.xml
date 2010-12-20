@@ -5,16 +5,19 @@
 
 	<LinearLayout android:id="@+id/LinearLayoutStore"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<EditText android:layout_height="50sp" android:layout_width="200sp" android:id="@+id/EditTextStore01"></EditText>
+		<AutoCompleteTextView android:id="@+id/AutoCompleteBusiness"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:width="240px" android:maxLines="14"/>
+		<EditText android:layout_height="50sp" android:layout_width="200sp"
+			android:id="@+id/EditTextStore01" android:maxLines="14"></EditText>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/LinearLayout20"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<Button android:text="Set" android:layout_height="50sp" android:layout_width="100sp" android:id="@+id/ButtonStore01"></Button>
-		<Button android:layout_height="50sp" android:text="Cancel" android:layout_width="100sp" android:id="@+id/ButtonStore02"></Button>
+		<Button android:text="Set" android:layout_height="50sp"
+			android:layout_width="100sp" android:id="@+id/ButtonStore01"></Button>
+		<Button android:layout_height="50sp" android:text="Cancel"
+			android:layout_width="100sp" android:id="@+id/ButtonStore02"></Button>
 	</LinearLayout>
-
-
-
 
 </LinearLayout>

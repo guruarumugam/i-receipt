@@ -5,17 +5,17 @@
 
 	<LinearLayout android:id="@+id/LinearLayoutCat"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<EditText android:layout_height="50sp" android:layout_width="200sp" android:id="@+id/EditTextCat01"></EditText>
+		<EditText android:layout_height="50sp" android:layout_width="200sp"
+			android:id="@+id/EditTextCat01"></EditText>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/LinearLayout20"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<Button android:text="Set" android:layout_height="50sp" android:layout_width="100sp" android:id="@+id/ButtonCat01"></Button>
-		<Button android:layout_height="50sp" android:text="Cancel" android:layout_width="100sp" android:id="@+id/ButtonCat02"></Button>
+		<Button android:text="Set" android:layout_height="50sp"
+			android:layout_width="100sp" android:id="@+id/ButtonCat01"></Button>
+		<Button android:layout_height="50sp" android:text="Cancel"
+			android:layout_width="100sp" android:id="@+id/ButtonCat02"></Button>
 	</LinearLayout>
-
-
-
 
 </LinearLayout>
 

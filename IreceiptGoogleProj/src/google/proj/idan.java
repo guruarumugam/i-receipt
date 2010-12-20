@@ -23,7 +23,7 @@ public class idan extends Activity {
 	public static List<iReceipt> rec_arr;
 
 	// private ImageButton new_scan, manual, receipts, stats;
-	//nothing
+	// nothing
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -31,27 +31,36 @@ public class idan extends Activity {
 		// if (rec_arr==null)//-------------------------------------
 		rec_arr = new ArrayList<iReceipt>();
 
-		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 3), "AppleStore",
+		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 1), "AppleStore",
 				1.99, "Travel", true, true, "", "/data/4.jpg"));
 		iReceipt rec2 = (new iReceipt(new IDate(2010, 10, 16), "BP-Gass", 19.92,
 				"Car", false, true, "", "/data/2.jpg"));
 		iReceipt rec3 = (new iReceipt(new IDate(2010, 11, 18), "Chang-Mai ",
-				15.00, "Thai food", false, true, "", "/data/5.jpg"));
+				15.00, "Dining", false, true, "", "/data/5.jpg"));
 		iReceipt rec4 = (new iReceipt(new IDate(2010, 11, 19), "Target", 3.00,
 				"Shopping", false, true, "", "/data/6.jpg"));
 		iReceipt rec5 = (new iReceipt(new IDate(2010, 12, 4), "Sony", 99.99,
 				"Shopping", true, true, "", "/data/3.jpg"));
-		//iReceipt rec6 = (new iReceipt(new IDate(2010, 12, 5), " ", -1, " ",
-		//		false, false, "", "/data/111.jpg"));
-		//iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 6), " ", -1, " ",
-		//		false, false, "", "/data/1.jpg")); // ------- to test
+		iReceipt rec6 = (new iReceipt(new IDate(2001, 11, 16), "Fieldpine", 4.50, "Dining", false, true, "really good!", "/data/111.jpg"));
+		iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 9), "BODY SHOP", 40.47, "Shopping", false, true, "wow it worth it!", "/data/1.jpg"));
+		iReceipt rec8 = (new iReceipt(new IDate(2010, 9, 25), "Macys", 71.54, "Shopping", true, true, "Nautica & Hilfinger", "/data/1.jpg"));		
+		iReceipt rec9 = (new iReceipt(new IDate(2010, 9, 23), "H&M", 11.90, "Shopping", false, true, "", "/data/1.jpg"));
+		iReceipt rec10 = (new iReceipt(new IDate(2010, 12, 9), "adidas", 165.08, "Shopping", false, true, "", "/data/1.jpg"));
+		iReceipt rec11 = (new iReceipt(new IDate(2010, 12, 9), "Celebrate Today", 10.30, "Dining", false, true, "at the disney", "/data/1.jpg"));
+		iReceipt rec12 = (new iReceipt(new IDate(2010, 12, 7), "MK Churro Wagon", 6.50, "Dining", false, true, "", "/data/1.jpg"));
+		
 		rec_arr.add(rec1);
 		rec_arr.add(rec2);
 		rec_arr.add(rec3);
 		rec_arr.add(rec4);
 		rec_arr.add(rec5);
-		//rec_arr.add(rec6);
-		//rec_arr.add(rec7);
+		rec_arr.add(rec6);
+		rec_arr.add(rec7);
+		rec_arr.add(rec8);
+		rec_arr.add(rec9);
+		rec_arr.add(rec10);
+		rec_arr.add(rec11);
+		rec_arr.add(rec12);
 	}
 
 	/*
@@ -90,12 +99,11 @@ public class idan extends Activity {
 		i.setFlags(index);
 		startActivityForResult(i, index);
 	}
-	
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// in case we cancel in compute_receipt
-		if (resultCode==0){
+		if (resultCode == 0) {
 			rec_arr.remove(requestCode);
 		}
 	}
