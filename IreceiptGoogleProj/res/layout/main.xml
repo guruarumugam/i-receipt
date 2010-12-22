@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_gravity="fill_vertical|fill_horizontal" android:layout_height="match_parent" android:layout_width="match_parent" android:background="@drawable/newfirst">
-	<Button android:id="@+id/Button01" android:onClick="@string/new_scan_handler" android:background="@android:color/transparent" android:layout_marginLeft="8sp" android:layout_width="305sp" android:layout_height="88sp" android:layout_marginTop="7sp"></Button>
-	<Button android:id="@+id/Button02" android:background="@android:color/transparent" android:onClick="@string/manual_scan_handler" android:layout_marginLeft="7sp" android:layout_width="305sp" android:layout_marginTop="4sp" android:layout_height="84sp"></Button>
-	<Button android:id="@+id/Button03" android:background="@android:color/transparent" android:onClick="@string/receipts_handler" android:layout_marginLeft="9sp" android:layout_width="305sp" android:layout_height="84sp" android:layout_marginTop="5sp"></Button>
-	<Button android:id="@+id/Button04" android:background="@android:color/transparent" android:onClick="@string/statistics_handler" android:layout_width="305sp" android:layout_height="84sp" android:layout_marginLeft="6sp" android:layout_marginTop="6sp"></Button>
-	
-	
+	android:orientation="vertical" android:layout_gravity="fill_vertical|fill_horizontal"
+	android:layout_height="match_parent" android:layout_width="match_parent"
+	android:background="@drawable/newfirst">
+	<Button android:id="@+id/Button01" android:onClick="@string/new_scan_handler"
+		android:background="@android:color/transparent"
+		android:layout_marginLeft="8sp" android:layout_width="305sp"
+		android:layout_height="88sp" android:layout_marginTop="7sp"></Button>
+	<Button android:id="@+id/Button02" android:background="@android:color/transparent"
+		android:onClick="@string/manual_scan_handler"
+		android:layout_marginLeft="7sp" android:layout_width="305sp"
+		android:layout_marginTop="4sp" android:layout_height="84sp"></Button>
+	<Button android:id="@+id/Button03" android:background="@android:color/transparent"
+		android:onClick="@string/receipts_handler" android:layout_marginLeft="9sp"
+		android:layout_width="305sp" android:layout_height="84sp"
+		android:layout_marginTop="5sp"></Button>
+	<Button android:id="@+id/Button04" android:background="@android:color/transparent"
+		android:onClick="@string/statistics_handler" android:layout_width="305sp"
+		android:layout_height="84sp" android:layout_marginLeft="6sp"
+		android:layout_marginTop="6sp"></Button>
 
-	
-
-	
-
-	
-
-
-
-
-
+<Button android:layout_marginLeft="100sp" android:layout_width="120sp" android:layout_height="60sp" android:layout_marginTop="20sp" android:background="@android:color/transparent" android:id="@+id/sync" android:clickable="true" android:onClick="@string/sync"></Button>
 </LinearLayout>

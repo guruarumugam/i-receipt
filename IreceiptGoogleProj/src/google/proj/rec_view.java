@@ -41,9 +41,9 @@ public class rec_view extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
-		ImageView image = (ImageView) findViewById(R.id.Image01);
+		/*ImageView image = (ImageView) findViewById(R.id.Image01);
 		if (rec.getFilepath() != null)
-			image.setImageResource(R.drawable.receipt);
+			image.setImageResource(R.drawable.receipt);*/
 
 		// capture our View elements
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);

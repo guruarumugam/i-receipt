@@ -9,8 +9,7 @@
 		android:layout_height="wrap_content" android:layout_marginTop="5sp">
 
 		<Button android:onClick="onClick" android:id="@+id/Backbut01"
-			android:clickable="true" android:layout_height="30sp"
-			android:layout_width="50sp" android:background="@drawable/back1"></Button>
+			android:clickable="true" android:layout_width="50sp" android:background="@drawable/back0" android:layout_height="22sp"></Button>
 	</LinearLayout>
 	<ImageView android:id="@+id/ImageBig"
 		android:layout_marginTop="5sp" android:layout_height="wrap_content"

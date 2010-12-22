@@ -26,4 +26,5 @@
 <string name="onClickPic">onClickPic</string>
 <string name="save_rec_handler">save_rec_handler</string>
 <string name="EditRecNote">EditRecNote</string>
+<string name="sync">sync</string>
 </resources>
