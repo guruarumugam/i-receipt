@@ -333,15 +333,16 @@ public class compute_receipt extends Activity {
 			final EditText textstore = (EditText) dialog3
 					.findViewById(R.id.EditTextStore01);
 
-			// //////////////////////////////////////////////
-			final String store_names[] = new String[idan.rec_arr.size()];
+			// ///////////////////////// AutoComplete Business ////
+			
+			/*final String store_names[] = new String[idan.rec_arr.size()];
 			for (int k = 0; k < idan.rec_arr.size(); k++) {
 				store_names[k] = idan.rec_arr.get(k).getStoreName();
 			}
 			ArrayAdapter<String> arrAdapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_dropdown_item_1line, store_names);
 			AutoCompleteTextView Business = (AutoCompleteTextView) findViewById(R.id.AutoCompleteBusiness);
-			Business.setAdapter(arrAdapter);
+			Business.setAdapter(arrAdapter);*/
 
 			// //////////////////////////////////////////////
 
