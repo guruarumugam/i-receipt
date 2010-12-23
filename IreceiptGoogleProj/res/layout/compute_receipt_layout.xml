@@ -89,13 +89,10 @@
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="10sp">
 			<TextView android:id="@+id/TextView02" android:layout_width="87sp"
-				android:gravity="left|center_vertical|center_horizontal"
 				android:text="Notes:" android:textColor="@color/black"
-				android:textSize="20sp" android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+				android:textSize="20sp" android:layout_height="wrap_content" android:gravity="left|center_vertical"></TextView>
 			<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:minWidth="80sp"
-				android:maxWidth="250sp" android:maxLength="120"></EditText>
+				android:layout_height="wrap_content" android:maxLength="120" android:minWidth="150sp" android:maxWidth="200sp"></EditText>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayout01"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
