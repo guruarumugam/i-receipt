@@ -6,11 +6,11 @@
 	<LinearLayout android:layout_width="fill_parent"
 		android:gravity="center_vertical|center_horizontal|center"
 		android:layout_gravity="center" android:id="@+id/LayoutPic"
-		android:layout_marginTop="5sp" android:layout_height="22sp">
+		android:layout_marginTop="5sp" android:layout_height="wrap_content">
 
 		<Button android:onClick="onClick" android:id="@+id/Backbut01"
 			android:clickable="true" android:layout_width="50sp" android:background="@drawable/back0" android:layout_height="22sp" android:visibility="invisible"></Button>
 	</LinearLayout>
 	
-<ScrollView android:id="@+id/ScrollView01" android:layout_height="fill_parent" android:layout_width="fill_parent" android:padding="8dip" android:layout_gravity="top"><ImageView android:id="@+id/ImageBig" android:minHeight="350sp" android:minWidth="230sp" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_gravity="top"></ImageView></ScrollView>
+<ScrollView android:id="@+id/ScrollView01" android:layout_height="fill_parent" android:layout_width="fill_parent" android:padding="8dip" android:layout_gravity="top"><ImageView android:id="@+id/ImageBig" android:minHeight="350sp" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="top|center_horizontal" android:minWidth="220sp"></ImageView></ScrollView>
 </LinearLayout>

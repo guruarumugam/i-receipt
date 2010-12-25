@@ -129,7 +129,7 @@ public class rec_view extends Activity {
 		// i.putExtra("image_id", bMap);
 		// i.putExtra("image_id","/data/rec2.jpg");
 		// i.putExtra("image_id",R.drawable.receipt);
-		startActivity(i);
+		//startActivity(i);
 	}
 
 	public void onClick(View view) {

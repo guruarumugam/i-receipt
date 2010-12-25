@@ -69,37 +69,37 @@ public class statistics extends Activity {
 
 	private void updateDisplay(int id) {
 		if (id == R.id.pickDateFrom) {
-			if ((Month>9) && (Day>9))
+			if ((Month>8) && (Day>9))
 				fromPickDate.setText(new StringBuilder().append("From:")
 						.append(Month + 1).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month>9) && (Day<10))
+			if ((Month>8) && (Day<10))
 				fromPickDate.setText(new StringBuilder().append("From:")
 						.append(Month + 1).append("-").append("0"+Day).append("-")
 						.append(Year).append(" "));
-			if ((Month<10) && (Day>10))
+			if ((Month<9) && (Day>10))
 				fromPickDate.setText(new StringBuilder().append("From:")
 						.append("0"+(Month + 1)).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month<10) && (Day<10))
+			if ((Month<9) && (Day<10))
 				fromPickDate.setText(new StringBuilder().append("From:")
 						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
 						.append(Year).append(" "));
 		}
 		if (id == R.id.pickDateTo) {
-			if ((Month>9) && (Day>9))
+			if ((Month>8) && (Day>9))
 				toPickDate.setText(new StringBuilder().append("To:")
 						.append(Month + 1).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month>9) && (Day<10))
+			if ((Month>8) && (Day<10))
 				toPickDate.setText(new StringBuilder().append("To:")
 						.append(Month + 1).append("-").append("0"+Day).append("-")
 						.append(Year).append(" "));
-			if ((Month<10) && (Day>10))
+			if ((Month<9) && (Day>10))
 				toPickDate.setText(new StringBuilder().append("To:")
 						.append("0"+(Month + 1)).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month<10) && (Day<10))
+			if ((Month<9) && (Day<10))
 				toPickDate.setText(new StringBuilder().append("To:")
 						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
 						.append(Year).append(" "));
