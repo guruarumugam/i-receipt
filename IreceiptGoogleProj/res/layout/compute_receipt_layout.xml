@@ -10,15 +10,14 @@
 			android:layout_width="fill_parent" android:paddingLeft="10sp"
 			android:layout_height="58sp">
 			<Button android:id="@+id/CancelBut" android:onClick="onClick2"
-				android:layout_width="70sp" android:layout_marginLeft="30sp" android:layout_height="22sp" android:background="@drawable/cancel0"></Button>
+				android:layout_width="95sp" android:background="@drawable/cancel" android:layout_height="35sp" android:layout_marginLeft="10sp" android:layout_marginTop="20sp"></Button>
 
 			<CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content"
 				android:clickable="true" android:layout_gravity="bottom"
 				android:layout_marginLeft="35sp" android:layout_height="35sp"></CheckBox>
 			<Button android:id="@+id/Button01saveandreturn"
 				android:onClick="onClick" android:gravity="center_vertical|center_horizontal"
-				android:layout_width="50sp"
-				android:layout_marginLeft="35sp" android:layout_height="22sp" android:background="@drawable/save0"></Button>
+				android:layout_marginLeft="35sp" android:background="@drawable/save" android:layout_width="70sp" android:layout_height="35sp" android:layout_marginTop="20sp"></Button>
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout01Spinner1" android:paddingLeft="10sp"

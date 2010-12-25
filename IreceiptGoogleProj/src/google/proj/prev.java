@@ -5,6 +5,7 @@ package google.proj;
  * in the comment marks needs to be added in
  */
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
@@ -46,7 +47,7 @@ public class prev extends Activity {
 				@Override
 				public void onClick(View v) {
 					// mCamera.takePicture(null, null, null, null);
-					toast.setText("please wait for the OCR result...");
+					//toast.setText("please wait for the OCR result...");
 					mCamera.release();
 					Intent i = new Intent(prev.this, compute_receipt.class);
 					Receipt rec = idan.rec_arr.get(getIntent().getFlags());

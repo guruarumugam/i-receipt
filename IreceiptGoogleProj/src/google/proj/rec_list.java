@@ -30,24 +30,6 @@ public class rec_list extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reclist);
 		myListView = (ListView) findViewById(R.id.ListView01);
-		// rec_arr=new ArrayList<iReceipt>();
-		/*
-		 * idan.rec_arr.add(new iReceipt(new Date(2009, 2, 12), "Sporty's",
-		 * 39.99, "Electronics", false, false,
-		 * "","hobot",idan.getnewplaceforsave())); idan.rec_arr.add(new
-		 * iReceipt(new Date(2010, 8, 25), "MCdonalds", 29.99, "Food", true,
-		 * true, "", "bodner",idan.getnewplaceforsave())); idan.rec_arr.add(new
-		 * iReceipt(new Date(2010, 8, 16), "BestBuy", 129.99, "Pilot Supplies",
-		 * true, true, "", "noiman",idan.getnewplaceforsave()));
-		 * idan.rec_arr.add(new iReceipt(new Date(2010, 12, 2), "Tronics",
-		 * 329.99, "Computers", true, true, "",
-		 * "singer",idan.getnewplaceforsave())); idan.rec_arr.add(new
-		 * iReceipt(new Date(2010, 12, 1), "Office Depot", 19.99,
-		 * "Office Supplys",true, true, "", "cohen",idan.getnewplaceforsave()));
-		 * idan.rec_arr.add(new iReceipt(new Date(2010, 10, 13), "El Al",
-		 * 999.99, "Airliner", true, true, "",
-		 * "levi",idan.getnewplaceforsave()));
-		 */
 		// if we open from compute Receipt
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -118,34 +100,6 @@ public class rec_list extends Activity {
 		adapter.notifyDataSetChanged();
 	}
 
-	/*
-	 * iReceipt new_r; switch (resultCode){ case 10:{
-	 * 
-	 * new_r=(iReceipt)data.getExtras().get("Receipt");
-	 * adapter.remove(adapter.getItem(adapter.getPosition(globalR)));
-	 * adapter.add(new_r); adapter.notifyDataSetChanged();
-	 * myListView.refreshDrawableState(); globalR=null; //need to write the new
-	 * reciept to disk //saveR(new_r);
-	 * //idan.mylistname.add(new_r.getplaceofsave()); //need to write mylistname
-	 * to Disk //();
-	 * 
-	 * return;
-	 * 
-	 * } case 5:{ new_r=(iReceipt)data.getExtras().get("Receipt");
-	 * adapter.remove(adapter.getItem(adapter.getPosition(globalR)));
-	 * adapter.add(new_r); adapter.notifyDataSetChanged();
-	 * myListView.refreshDrawableState(); globalR=null; //need to write the new
-	 * reciept to disk //saveR(new_r);
-	 * //idan.mylistname.add(new_r.getplaceofsave()); //need to write mylistname
-	 * to Disk //saveList(); return;
-	 * 
-	 * } case 15: finish();
-	 * 
-	 * }
-	 * 
-	 * 
-	 * }
-	 */
 
 	class DateComparator implements Comparator<Receipt> {
 
@@ -200,18 +154,5 @@ public class rec_list extends Activity {
 		}
 	}
 
-	/*
-	 * public void saveList(){
-	 * 
-	 * try{ ObjectOutputStream outputStream = new
-	 * ObjectOutputStream(openFileOutput("arrayList.tmp",
-	 * Context.MODE_PRIVATE)); outputStream.writeObject(idan.mylistname);
-	 * outputStream.close();
-	 * 
-	 * } catch (IOException ex) { ex.printStackTrace(); }
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	
 }

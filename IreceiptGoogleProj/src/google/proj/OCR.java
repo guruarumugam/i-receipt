@@ -36,7 +36,7 @@ public class OCR {
 	private String password;
 	return_entry[] total;
 	IDate[] date=null;
-	return_entry[] store_name;
+	return_entry[] store_name=null;
 
 	public OCR(String filePath,String username,String password) {
 		this.filepath=new String(filePath);
@@ -214,7 +214,56 @@ public class OCR {
 			j++;
 		}
 		return ret_arr;
+		
 	}
+	
+	public return_entry[] getStoreName(){
+		if (this.store_name!=null)
+			return this.store_name;
+		return_entry ret[]=new return_entry[4];
+		for (int i = 0; i < ret.length; i++)
+			ret[i]=new return_entry();
+	    if (ocr_return==null){
+	    	this.store_name=ret;
+			return ret;
+	    }
+	    if(ocr_return.length==1){
+	    	ret[0].entry=ocr_return[0];
+	    	ret[0].priority=1;
+	    }else{
+	    	if (ocr_return.length==2){
+	    	    ret[0].entry=ocr_return[0]+" "+ocr_return[1];
+	    	    ret[0].priority=1;
+	    	    ret[1].entry=ocr_return[0];
+	    	    ret[1].priority=1;
+	    	}else{
+	    		if (ocr_return.length==3){
+		    	    ret[0].entry=ocr_return[0]+" "+ocr_return[1];
+		    	    ret[0].priority=1;
+		    	    ret[1].entry=ocr_return[0]+" "+ocr_return[1]+" "+ocr_return[2];
+		    	    ret[1].priority=1;
+		    	    ret[2].entry=ocr_return[0];
+		    	    ret[2].priority=1;
+		    	    
+	    		}else{
+	    			if(ocr_return.length>3){
+			    	    ret[0].entry=ocr_return[0]+" "+ocr_return[1];
+			    	    ret[0].priority=1;
+			    	    ret[1].entry=ocr_return[0]+" "+ocr_return[1]+" "+ocr_return[2];
+			    	    ret[1].priority=1;
+			    	    ret[2].entry=ocr_return[0];
+			    	    ret[2].priority=1;
+			    	    ret[3].entry=ocr_return[0]+" "+ocr_return[1]+" "+ocr_return[2]+" "+ocr_return[3];
+			    	    ret[3].priority=1;
+	    			}
+	    		}		
+	    	}
+	    }	    
+    	this.store_name=ret;
+		return ret;    
+	}
+	
+	
 	public return_entry[] get_total(){
 		if (this.total==null)
 			this.total=get_totalr();

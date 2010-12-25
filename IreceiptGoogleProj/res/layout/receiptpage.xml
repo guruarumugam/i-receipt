@@ -11,13 +11,10 @@
 			android:layout_width="fill_parent" android:paddingLeft="10sp"
 			android:layout_height="100sp">
 
-			<Button android:id="@+id/Button01" android:layout_width="70sp"
-				android:layout_height="22sp" android:layout_marginLeft="20sp" android:layout_marginTop="5sp" android:background="@drawable/cancel0"></Button>
-			<ImageView android:id="@+id/Image01" android:clickable="true" android:onClick="@string/onClickPic"
-				android:layout_height="100sp" android:layout_width="115sp" android:layout_marginLeft="5sp" android:background="@drawable/showreceipt2"></ImageView>
+			<Button android:id="@+id/Button01" android:background="@drawable/cancel" android:layout_height="35sp" android:layout_width="95sp" android:layout_marginLeft="10sp" android:layout_marginTop="30sp"></Button>
+			
 
-			<Button android:id="@+id/B01" android:layout_width="50sp"
-				android:onClick="onClick" android:layout_height="22sp" android:layout_marginTop="5sp" android:layout_marginLeft="5sp" android:background="@drawable/save0"></Button>
+			<ImageView android:id="@+id/Image01" android:clickable="true" android:onClick="@string/onClickPic" android:layout_width="115sp" android:background="@drawable/showreceipt2" android:layout_gravity="bottom" android:layout_height="fill_parent" android:layout_marginLeft="-25sp"></ImageView><Button android:id="@+id/B01" android:onClick="onClick" android:background="@drawable/save" android:layout_height="35sp" android:layout_width="70sp" android:layout_marginTop="30sp" android:layout_marginLeft="5sp"></Button>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout01RP"
 			android:layout_width="fill_parent" android:layout_height="45sp"
