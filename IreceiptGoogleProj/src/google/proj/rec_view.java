@@ -33,7 +33,7 @@ public class rec_view extends Activity {
 	private iReceipt rec;
 	private EditText text[] = new EditText[4];
 	private CheckBox check;
-	//private EditText NotesEditText;
+	// private EditText NotesEditText;
 	private TextView show_notes;
 
 	@Override
@@ -41,17 +41,18 @@ public class rec_view extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
-		/*ImageView image = (ImageView) findViewById(R.id.Image01);
-		if (rec.getFilepath() != null)
-			image.setImageResource(R.drawable.receipt);*/
+		/*
+		 * ImageView image = (ImageView) findViewById(R.id.Image01); if
+		 * (rec.getFilepath() != null)
+		 * image.setImageResource(R.drawable.receipt);
+		 */
 
 		// capture our View elements
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
 		mPickDate = (TextView) findViewById(R.id.TextView01);
 		check = (CheckBox) findViewById(R.id.CheckBox01);
-		//NotesEditText = (EditText) findViewById(R.id.EditText01);
+		// NotesEditText = (EditText) findViewById(R.id.EditText01);
 		show_notes = (TextView) findViewById(R.id.show_note);
-		
 		// add a click listener to the button
 		mPickDate.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -72,8 +73,11 @@ public class rec_view extends Activity {
 		text[1].setText(((Double) rec.getTotal()).toString());
 		text[2].setText(rec.getCategory());
 		check.setChecked(rec.isFlaged());
-		//NotesEditText.setText(rec.getNotes());
-		show_notes.setText(rec.getNotes());
+		// NotesEditText.setText(rec.getNotes());
+		if ((rec.getNotes() == null) || (rec.getNotes() == ""))
+			show_notes.setText("Click here to add note");
+		else
+			show_notes.setText(rec.getNotes());
 		/*
 		 * if (rec.isFlaged()) text[3].setText("Yes"); else
 		 * text[3].setText("No");
@@ -116,20 +120,18 @@ public class rec_view extends Activity {
 		}
 		return null;
 	}
-	
+
 	public void onClickPic(View view) {
 		Intent i = new Intent(rec_view.this, bigPic.class);
 		i.setFlags(idan.rec_arr.indexOf(rec));
 		startActivityForResult(i, idan.rec_arr.indexOf(rec));
-		//Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
-		//i.putExtra("image_id", bMap);
+		// Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
+		// i.putExtra("image_id", bMap);
 		// i.putExtra("image_id","/data/rec2.jpg");
 		// i.putExtra("image_id",R.drawable.receipt);
 		startActivity(i);
 	}
-	
 
-	
 	public void onClick(View view) {
 		IDate d;
 		d = new IDate(mYear, mDay, mMonth + 1);
@@ -142,8 +144,9 @@ public class rec_view extends Activity {
 		saveList();
 		finish();
 	}
+
 	public void EditRecNote(View view) {
-		//final TextView show_notes = (TextView) findViewById(R.id.show_note);
+		// final TextView show_notes = (TextView) findViewById(R.id.show_note);
 		final Dialog EditNoteDialog = new Dialog(this);
 		EditNoteDialog.setContentView(R.layout.editnote);
 		EditNoteDialog.setTitle("Edit note for current receipt");
@@ -156,16 +159,17 @@ public class rec_view extends Activity {
 
 			public void onClick(View v) {
 				String new_note = note.getText().toString();
-				//stores[3] = store_new;
-				//spinner_s.setSelection(3);
-				//spinner_s.refreshDrawableState();
+				// stores[3] = store_new;
+				// spinner_s.setSelection(3);
+				// spinner_s.refreshDrawableState();
 				rec.setNotes(new_note);
 				show_notes.setText(note.getText().toString());
 				EditNoteDialog.dismiss();
 			}
 		});
 		// b2 is cancel button
-		Button b1CancelNote = (Button) EditNoteDialog.findViewById(R.id.CancelNote);
+		Button b1CancelNote = (Button) EditNoteDialog
+				.findViewById(R.id.CancelNote);
 		b1CancelNote.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
