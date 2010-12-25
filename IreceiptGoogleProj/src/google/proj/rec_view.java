@@ -116,9 +116,15 @@ public class rec_view extends Activity {
 		}
 		return null;
 	}
-	public void onClickPic (View view){
-		Intent i = new Intent(this, bigPic.class);
-		i.putExtra("image_id",R.drawable.receipt);
+	
+	public void onClickPic(View view) {
+		Intent i = new Intent(rec_view.this, bigPic.class);
+		i.setFlags(idan.rec_arr.indexOf(rec));
+		startActivityForResult(i, idan.rec_arr.indexOf(rec));
+		//Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
+		//i.putExtra("image_id", bMap);
+		// i.putExtra("image_id","/data/rec2.jpg");
+		// i.putExtra("image_id",R.drawable.receipt);
 		startActivity(i);
 	}
 	
