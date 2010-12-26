@@ -54,14 +54,14 @@ public class prev extends Activity {
 					Intent i = new Intent(prev.this, compute_receipt.class);
 					Receipt rec = idan.rec_arr.get(getIntent().getFlags());
 					if (BMcamera.t==0) {//first
-					rec.setFilepath("/data/MK.jpg");// hard code the path for the
+					rec.setFilepath("/data/receipts_prev/MK.jpg");// hard code the path for the
 					}
 													// emulator
 					if (BMcamera.t==1){// second
-						rec.setFilepath("/data/HM.JPG");
+						rec.setFilepath("/data/receipts_prev/HM.JPG");
 						}
 					if (BMcamera.t==2){//third
-						rec.setFilepath("/data/JIKO.JPG");
+						rec.setFilepath("/data/receipts_prev/JIKO.JPG");
 						}
 					int index = idan.rec_arr.indexOf(rec);
 					i.setFlags(index);
@@ -76,18 +76,18 @@ public class prev extends Activity {
 			public void onPictureTaken(byte[] imageData, Camera c) {
 
 				/*
-				 * if (imageData != null) {
-				 * 
-				 * Intent mIntent = new Intent();
-				 * 
-				 * FileUtilities.StoreByteImage(mContext, imageData, 50,
-				 * "ImageName"); mCamera.startPreview();
-				 * 
-				 * setResult(FOTO_MODE,mIntent); finish();
-				 * 
-				 * 
-				 * }
-				 */}
+				* if (imageData != null) {
+				* 
+				* Intent mIntent = new Intent();
+				* 
+				* FileUtilities.StoreByteImage(mContext, imageData, 50,
+				* "ImageName"); mCamera.startPreview();
+				* 
+				* setResult(FOTO_MODE,mIntent); finish();
+				* 
+				* 
+				* }
+				*/}
 		};
 	}
 

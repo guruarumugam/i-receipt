@@ -27,10 +27,12 @@ public class bigPic extends Activity {
 		// iSwitcher.setFactory(this);
 		index = getIntent().getFlags();
 		rec = (iReceipt) idan.rec_arr.get(index);
-		Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
+		BitmapFactory.Options options=new BitmapFactory.Options();
+		options.inSampleSize=3;
+		Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath(),options);
 		// int theID = getIntent().getExtras().getInt("image_id");
 		ImageView bigImage = (ImageView) findViewById(R.id.ImageBig);
-		bigImage.setScaleType(ImageView.ScaleType.FIT_XY);
+		bigImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		bigImage.setLayoutParams(new ImageSwitcher.LayoutParams(
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		bigImage.setBackgroundColor(0xFF000000);
