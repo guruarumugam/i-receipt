@@ -30,7 +30,7 @@ public class idan extends Activity {
 		rec_arr = loadList();
 		// if (rec_arr==null)//-------------------------------------
 		rec_arr = new ArrayList<iReceipt>();
-
+		
 		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
 				498.29, "Shopping", true, true, "", "/data/receipts_prev/IMG_7953.JPG"));
 		iReceipt rec2 = (new iReceipt(new IDate(2010, 12, 10), "L'OCCITANE",

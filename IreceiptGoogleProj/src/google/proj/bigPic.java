@@ -32,7 +32,7 @@ public class bigPic extends Activity {
 		Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath(),options);
 		// int theID = getIntent().getExtras().getInt("image_id");
 		ImageView bigImage = (ImageView) findViewById(R.id.ImageBig);
-		bigImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		bigImage.setScaleType(ImageView.ScaleType.FIT_START);
 		bigImage.setLayoutParams(new ImageSwitcher.LayoutParams(
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		bigImage.setBackgroundColor(0xFF000000);

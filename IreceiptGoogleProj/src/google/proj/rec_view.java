@@ -40,6 +40,8 @@ public class rec_view extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
+		ImageView myImage = (ImageView) findViewById(R.id.Image01);////////
+		if (rec.getFilepath()==null) myImage.setVisibility(View.INVISIBLE);/////////////
 		/*
 		 * ImageView image = (ImageView) findViewById(R.id.Image01); if
 		 * (rec.getFilepath() != null)
