@@ -7,15 +7,7 @@
 		android:orientation="vertical" android:padding="5dip"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
 		android:minHeight="400sp" android:background="@drawable/recpage5">
-		<LinearLayout android:id="@+id/Layout06RP"
-			android:layout_width="fill_parent" android:paddingLeft="10sp"
-			android:layout_height="100sp">
-
-			
-			
-
-			<ImageView android:id="@+id/Image01" android:clickable="true" android:onClick="@string/onClickPic" android:layout_width="115sp" android:background="@drawable/showreceipt2" android:layout_gravity="bottom" android:layout_height="fill_parent" android:layout_marginLeft="-25sp"></ImageView><Button android:id="@+id/B01" android:onClick="onClick" android:background="@drawable/save" android:layout_height="35sp" android:layout_width="70sp" android:layout_marginTop="30sp" android:layout_marginLeft="25sp"></Button>
-		<CheckBox android:id="@+id/CheckBox01" android:layout_height="40sp" android:layout_width="40sp" android:layout_gravity="center_vertical" android:layout_marginLeft="50sp"></CheckBox></LinearLayout>
+		
 		<LinearLayout android:id="@+id/Layout01RP"
 			android:layout_width="fill_parent" android:layout_height="45sp"
 			android:paddingLeft="10sp">
@@ -85,6 +77,12 @@
 				android:clickable="true" android:layout_height="100sp"
 				android:layout_marginLeft="10sp" android:layout_width="190sp" android:textSize="16sp" android:layout_marginTop="5sp" android:textColor="@color/darkGray"></TextView>
 			
-		</LinearLayout>
+		</LinearLayout><LinearLayout android:id="@+id/Layout06RP" android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="100sp">
+
+			
+			
+
+			<ImageView android:id="@+id/Image01" android:clickable="true" android:onClick="@string/onClickPic" android:layout_width="115sp" android:background="@drawable/showreceipt2" android:layout_gravity="bottom" android:layout_height="fill_parent" android:layout_marginLeft="-25sp"></ImageView><Button android:id="@+id/B01" android:onClick="onClick" android:background="@drawable/save" android:layout_height="35sp" android:layout_width="70sp" android:layout_marginTop="30sp" android:layout_marginLeft="25sp"></Button>
+		<CheckBox android:id="@+id/CheckBox01" android:layout_height="40sp" android:layout_width="40sp" android:layout_gravity="center_vertical" android:layout_marginLeft="50sp"></CheckBox></LinearLayout>
 	</LinearLayout>
 </LinearLayout>

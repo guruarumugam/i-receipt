@@ -25,10 +25,6 @@ import org.apache.http.params.HttpParams;
 
 public class OCR {
 
-	/**
-	 * @param args
-	 */
-
 	private String ocr_return[]=null;
 	private String ocr_res;
 	private String filepath;
@@ -66,7 +62,6 @@ public class OCR {
 		this.ocr_return = Convert_to_arr(ocr_res);
 		return 1;
 	}
-
 
 
 	//this method gets a file path to a picture file.
@@ -721,103 +716,6 @@ public class OCR {
 
 		return ret;
 	}
-	
-	// the functuon return array size 4 that inclucde up to four diffrent dates
-	// if there is no valid date it ret null
-	/*
-	public IDate[] getDater() {
-		IDate ret[] = new IDate[4];
-		int p;
-		for (p = 0; p < 4; p++) {
-			ret[p] = null;
-		}
-		if (ocr_return==null)
-			return ret;
-		int months[] = new int[5];
-		int t;
-		int t2;
-		int year = 0;
-		int day = 0;
-		String year_s;
-		String month_s;
-		String day_s;
-		for (int i = 0; i < ocr_return.length; i++) {
-			if (date_typeA(ocr_return[i])) { // date is type of month/day/year
-				t = ocr_return[i].indexOf('/');
-				t2 = ocr_return[i].indexOf('/', t + 1);
-				month_s = ocr_return[i].substring(0, t);// get the month from the string
-				day_s = ocr_return[i].substring(t + 1, t2);// get the day from the string
-				year_s = ocr_return[i].substring(t2 + 1, ocr_return[i].length());// get the year from the string
-				year = is_aYear(year_s);
-				day = is_aDay(day_s);
-				if (year != -1 && day != -1 && is_aMonth(month_s, months)) { // succeed to get the date
-					for (int j = 0; j < months[0]; j++) {
-						ret[j] = ret[j] = new IDate(year - 1900,
-								months[j + 1] - 1, day);
-					}
-					return ret;
-				}
-			}
-			if (date_typeB(ocr_return[i])) { // date is type of month-day-year
-				t = ocr_return[i].indexOf('-');
-				t2 = ocr_return[i].indexOf('-', t + 1);
-				month_s = ocr_return[i].substring(0, t);// get the month from the string
-				day_s = ocr_return[i].substring(t + 1, t2);// get the day from the string
-				year_s = ocr_return[i].substring(t2 + 1, ocr_return[i].length());// get the year from the string
-				year = is_aYear(year_s);
-				day = is_aDay(day_s);
-				if (year != -1 && day != -1 && is_aMonth(month_s, months)) { // succeed to get the date
-					for (int j = 0; j < months[0]; j++) {
-						ret[j] = new IDate(year - 1900, months[j + 1] - 1, day);
-					}
-					return ret;
-				}
-			}
-			if (date_typeC(ocr_return[i])) { // date is type of 12-NOV-10
-				t = ocr_return[i].indexOf('-');
-				t2 = ocr_return[i].indexOf('-', t + 1);
-				day_s = ocr_return[i].substring(0, t); // get the day from the string
-				month_s = ocr_return[i].substring(t + 1, t2); // get the month from the string
-				year_s = ocr_return[i].substring(t2 + 1, ocr_return[i].length());// get the year from the string
-				year = is_aYear(year_s);
-				day = is_aDay(day_s);
-				if (year != -1 && day != -1 && is_aMonth(month_s, months)) { // succeed to get the date
-					for (int j = 0; j < months[0]; j++) {
-						ret[j] = new IDate(year - 1900, months[j + 1] - 1, day);
-					}
-					return ret;
-				}
-			}
-			year = 0;
-			day = 0;
-			for (p = 0; p < 5; p++) {
-				months[p] = 0;
-			}
-		}
-
-		return ret;
-	}
-
-	private static int is_aDay(String day) {
-		int sum = 0;
-		int tmp;
-		if (day.length() != 1 && day.length() != 2)
-			return -1;
-		tmp = right_char(day.charAt(0));
-		if (tmp == -1)
-			return -1;
-		sum = tmp;
-		tmp = right_char(day.charAt(1));
-		if (tmp == -1)
-			return -1;
-		sum = sum * 10 + tmp;
-		if (sum > 0 && sum < 32)
-			return sum;
-		else
-			return -1;
-	}
-*/
-// get char and convert it to int
 
 	private static int is_aYear(String year) {
 
@@ -839,13 +737,48 @@ public class OCR {
 			return sum;
 		return -1;
 	}
+	
+	private static int is_help(String month){
+        if (month.equals("01")|| month.equals("1"))
+                return 1;
+        if (month.equals("02")|| month.equals("2"))
+                return 2;
+        if (month.equals("03")|| month.equals("3"))
+                return 1;
+        if (month.equals("04")|| month.equals("4"))
+                return 4;
+        if (month.equals("05")|| month.equals("5"))
+                return 5;
+        if (month.equals("06")|| month.equals("6"))
+                return 6;
+        if (month.equals("07")|| month.equals("7"))
+                return 7;
+        if (month.equals("08")|| month.equals("8"))
+                return 8;
+        if (month.equals("09")|| month.equals("9"))
+                return 9;
+        if (month.equals("10"))
+                return 10;
+        if (month.equals("11"))
+                return 11;
+        if (month.equals("12"))
+                return 12;
+        else return 0;
+}
+
 
 	// this function check if the string is a month or not
 	// in first place is how many options do we have $ret[0]<=4
 	private static boolean is_aMonth(String month, int months_arr[]) {
 		int index = 1;
-		months_arr[0] = 0;
-
+        int tmp= is_help(month);
+        months_arr[0] = 0;
+        if (tmp!=0){
+                months_arr[0] = 1;
+                months_arr[1] = tmp;
+                index++;
+        }
+		
 		if (is_jan(month)) {
 			months_arr[index] = 1;
 			months_arr[0]++;

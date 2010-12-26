@@ -51,7 +51,7 @@ public class prev extends Activity {
 					mCamera.release();
 					Intent i = new Intent(prev.this, compute_receipt.class);
 					Receipt rec = idan.rec_arr.get(getIntent().getFlags());
-					rec.setFilepath("/data/1.jpg");// hard code the path for the
+					rec.setFilepath("/data/good1.jpg");// hard code the path for the
 													// emulator
 					int index = idan.rec_arr.indexOf(rec);
 					i.setFlags(index);
