@@ -5,11 +5,11 @@
 	<LinearLayout android:id="@+id/LinearLayoutComputeUP"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_marginBottom="10sp" android:orientation="vertical"
-		android:background="@drawable/recpage2" android:padding="5dip">
-		
+		android:padding="5dip" android:background="@drawable/recpage8">
+
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout01Spinner1" android:paddingLeft="10sp"
-			android:layout_height="40sp" android:layout_marginTop="15sp">
+			android:layout_height="40sp" android:layout_marginTop="18sp">
 			<TextView android:id="@+id/TextViewStoreName_computeR"
 				android:gravity="left|center_vertical|center_horizontal"
 				android:text="Business:" android:textSize="20sp" android:textColor="@color/black"
@@ -24,9 +24,10 @@
 				android:layout_height="20sp" android:layout_marginLeft="25sp"
 				android:layout_width="12sp" android:background="@drawable/editnext3"></TextView>
 		</LinearLayout>
-		<LinearLayout android:layout_width="fill_parent" android:orientation="horizontal"
-			android:id="@+id/LinearLayout02Spinner2" android:paddingLeft="10sp"
-			android:layout_height="43sp" android:layout_marginTop="2sp" >
+		<LinearLayout android:layout_width="fill_parent"
+			android:orientation="horizontal" android:id="@+id/LinearLayout02Spinner2"
+			android:paddingLeft="10sp" android:layout_height="43sp"
+			android:layout_marginTop="2sp">
 			<TextView android:text="Date:" android:id="@+id/TextView02Date_computeR"
 				android:gravity="left|center_vertical|center_horizontal"
 				android:textSize="20sp" android:textColor="@color/black"
@@ -42,7 +43,7 @@
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout03Spinner3" android:paddingLeft="10sp"
-			android:layout_height="45sp">
+			android:layout_height="45sp" android:layout_marginTop="3sp">
 			<TextView android:text="Price:" android:id="@+id/TextView03PriceComputeR"
 				android:gravity="left|center_vertical|center_horizontal"
 				android:textSize="20sp" android:textColor="@color/black"
@@ -58,7 +59,7 @@
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout04Spinner4" android:paddingLeft="10sp"
-			android:layout_height="45sp">
+			android:layout_height="45sp" android:layout_marginTop="3sp">
 			<TextView android:id="@+id/TextView03CatComputeR"
 				android:gravity="left|center_vertical|center_horizontal"
 				android:text="Category:" android:textSize="20sp" android:textColor="@color/black"
@@ -73,22 +74,41 @@
 				android:background="@drawable/editnext3" android:layout_width="12sp"></TextView>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutNotes"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:paddingLeft="10sp">
-			<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:id="@+id/LinearLayout022" android:orientation="vertical">
-	<TextView android:id="@+id/TextView02" android:layout_width="87sp"
-		android:text="Notes:" android:textColor="@color/black"
-		android:textSize="20sp" android:layout_height="wrap_content"
-		android:gravity="left|center_vertical"></TextView><CheckBox android:id="@+id/CheckBox01" android:layout_width="wrap_content" android:clickable="true" android:layout_gravity="bottom" android:layout_marginLeft="35sp" android:layout_height="35sp" android:layout_marginTop="20sp"></CheckBox></LinearLayout>
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="160sp">
+			<LinearLayout android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/LinearLayout022"
+				android:orientation="vertical">
+				<TextView android:id="@+id/TextView02"
+					android:layout_width="87sp" android:text="Notes:"
+					android:textColor="@color/black" android:textSize="20sp"
+					android:layout_height="wrap_content" android:gravity="left|center_vertical"
+					android:paddingTop="10sp"></TextView>
+				<CheckBox android:id="@+id/CheckBox01"
+					android:layout_width="wrap_content" android:clickable="true"
+					android:layout_height="35sp" android:layout_marginTop="20sp"
+					android:layout_gravity="bottom|right" android:layout_marginRight="30sp"></CheckBox>
+			</LinearLayout>
 			<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:maxLength="120" android:minWidth="150sp" android:maxWidth="200sp"></EditText>
-		
-</LinearLayout><LinearLayout android:id="@+id/LinearLayoutFlaged" android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="58sp" android:layout_marginTop="75sp">
-			<Button android:id="@+id/CancelBut" android:onClick="onClick2" android:layout_width="95sp" android:background="@drawable/cancel" android:layout_height="35sp" android:layout_marginLeft="10sp" android:layout_marginTop="20sp"></Button>
+				android:layout_height="wrap_content" android:maxLength="120"
+				android:minWidth="150sp" android:maxWidth="200sp"
+				android:layout_marginTop="6sp"></EditText>
 
-			
-			<Button android:id="@+id/Button01saveandreturn" android:onClick="onClick" android:gravity="center_vertical|center_horizontal" android:background="@drawable/save" android:layout_width="70sp" android:layout_height="35sp" android:layout_marginTop="20sp" android:layout_marginLeft="100sp"></Button>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayoutFlaged"
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="58sp" android:layout_marginTop="-5sp">
+			<Button android:id="@+id/CancelBut" android:onClick="onClick2"
+				android:layout_width="95sp" android:background="@drawable/cancel"
+				android:layout_height="35sp" android:layout_marginLeft="10sp"
+				android:layout_marginTop="15sp"></Button>
+
+
+			<Button android:id="@+id/Button01saveandreturn"
+				android:onClick="onClick" android:gravity="center_vertical|center_horizontal"
+				android:background="@drawable/save" android:layout_width="70sp"
+				android:layout_height="35sp" android:layout_marginLeft="100sp"
+				android:layout_marginTop="15sp"></Button>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayout01"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"

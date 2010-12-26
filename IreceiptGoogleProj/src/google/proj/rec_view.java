@@ -5,7 +5,6 @@ import java.io.ObjectOutputStream;
 import java.net.URI;
 
 import google.proj.R;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -124,12 +123,12 @@ public class rec_view extends Activity {
 	public void onClickPic(View view) {
 		Intent i = new Intent(rec_view.this, bigPic.class);
 		i.setFlags(idan.rec_arr.indexOf(rec));
-		startActivityForResult(i, idan.rec_arr.indexOf(rec));
+		startActivity(i);
+		// startActivityForResult(i, idan.rec_arr.indexOf(rec));
 		// Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
 		// i.putExtra("image_id", bMap);
 		// i.putExtra("image_id","/data/rec2.jpg");
 		// i.putExtra("image_id",R.drawable.receipt);
-		//startActivity(i);
 	}
 
 	public void onClick(View view) {
@@ -140,7 +139,10 @@ public class rec_view extends Activity {
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
 		rec.setCategory(text[2].getText().toString());
 		rec.setFlaged(check.isChecked());
-		rec.setNotes(show_notes.getText().toString());
+		if (show_notes.getText() == "Click here to add note")
+			rec.setNotes("");
+		else
+			rec.setNotes(show_notes.getText().toString());
 		saveList();
 		finish();
 	}
@@ -152,7 +154,10 @@ public class rec_view extends Activity {
 		EditNoteDialog.setTitle("Edit note for current receipt");
 		final EditText note = (EditText) EditNoteDialog
 				.findViewById(R.id.EditNote01);
-		note.setText(show_notes.getText());
+		if (show_notes.getText().equals("Click here to add note"))
+			note.setText("");
+		else
+			note.setText(show_notes.getText());
 		// b1 is ok button
 		Button b1Note = (Button) EditNoteDialog.findViewById(R.id.SetNote);
 		b1Note.setOnClickListener(new OnClickListener() {

@@ -117,7 +117,6 @@ public class compute_receipt extends Activity {
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
-
 		}
 	}
 

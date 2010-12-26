@@ -42,9 +42,10 @@ public class bigPic extends Activity {
 		// iSwitcher.setImageResource(pics[arg2]);
 	}
 
-	public void onClick(View view) {
+	public void onClick(View view) { // BACK button
+		/*setResult(1);
 		Intent i = new Intent(bigPic.this, rec_view.class);
 		i.setFlags(idan.rec_arr.indexOf(rec));
-		startActivityForResult(i, idan.rec_arr.indexOf(rec));
+		startActivityForResult(i, idan.rec_arr.indexOf(rec));*/
 	}
 }

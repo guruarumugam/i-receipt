@@ -86,7 +86,8 @@ public class listview extends Activity {
 				;
 				i.setFlags(idan.rec_arr.indexOf(r));
 				if (r.isProcessed()) {
-					startActivityForResult(i, idan.rec_arr.indexOf(r));
+					startActivity(i);
+					//startActivityForResult(i, idan.rec_arr.indexOf(r));
 				} else {
 					i.setClass(listview.this, compute_receipt.class);
 					startActivityForResult(i, idan.rec_arr.indexOf(r));

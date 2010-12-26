@@ -31,33 +31,56 @@ public class idan extends Activity {
 		// if (rec_arr==null)//-------------------------------------
 		rec_arr = new ArrayList<iReceipt>();
 
-		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 1), "AppleStore",
-				1.99, "Travel", true, true, "", "/data/rec2.jpg"));
-		iReceipt rec2 = (new iReceipt(new IDate(2010, 10, 16), "BP-Gass",
-				19.92, "Car", false, true, "", "/data/rec2.jpg"));
-		iReceipt rec3 = (new iReceipt(new IDate(2010, 11, 18), "Chang-Mai ",
-				15.00, "Dining", false, true, "", "/data/rec5.jpg"));
-		iReceipt rec4 = (new iReceipt(new IDate(2010, 11, 19), "Target", 3.00,
-				"Shopping", false, true, "", "/data/rec6.jpg"));
-		iReceipt rec5 = (new iReceipt(new IDate(2010, 12, 4), "Sony", 99.99,
-				"Shopping", true, true, "", "/data/rec3.jpg"));
-		iReceipt rec6 = (new iReceipt(new IDate(2001, 11, 16), "Fieldpine",
-				4.50, "Dining", false, true, "really good!", "/data/111.jpg"));
-		iReceipt rec7 = (new iReceipt(new IDate(2010, 12, 9), "BODY SHOP",
-				40.47, "Shopping", false, true, "wow it worth it!",
-				"/data/1.jpg"));
+		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
+				498.29, "Shopping", true, true, "", "/data/IMG_7953.JPG"));
+		iReceipt rec2 = (new iReceipt(new IDate(2010, 12, 10), "L'OCCITANE",
+				49.22, "Shopping", false, true, "", "/data/IMG_7949.JPG"));
+		iReceipt rec3 = (new iReceipt(new IDate(2010, 12, 10),
+				"QUIZNO'S Food Court", 10.63, "Dining", false, true, "",
+				"/data/IMG_7950.JPG"));
+		iReceipt rec4 = (new iReceipt(new IDate(2010, 12, 9),
+				"Celebrate Today", 10.30, "Dining", false, true, "",
+				"/data/IMG_7937.JPG"));
+		iReceipt rec5 = (new iReceipt(new IDate(2010, 12, 9), "Reebok", 95.40,
+				"Shopping", true, true, "", "/data/IMG_7941.JPG"));
+		iReceipt rec6 = (new iReceipt(new IDate(2001, 11, 5), "DUFRITAL SPA",
+				21.10, "Shopping", false, true, "", "/data/IMG_7942.JPG"));
+		iReceipt rec7 = (new iReceipt(new IDate(2010, 9, 26), "AMERICAN EAGLE",
+				39.50, "Shopping", false, true, "Great store!", "/data/IMG_7944.JPG"));
 		iReceipt rec8 = (new iReceipt(new IDate(2010, 9, 25), "Macys", 71.54,
-				"Shopping", true, true, "Nautica & Hilfinger", "/data/1.jpg"));
+				"Shopping", true, true, "", "/data/IMG_7945.JPG"));
 		iReceipt rec9 = (new iReceipt(new IDate(2010, 9, 23), "H&M", 11.90,
-				"Shopping", false, true, "", "/data/1.jpg"));
-		iReceipt rec10 = (new iReceipt(new IDate(2010, 12, 9), "adidas",
-				165.08, "Shopping", false, true, "", "/data/rec6.jpg"));
-		iReceipt rec11 = (new iReceipt(new IDate(2010, 12, 9),
-				"Celebrate Today", 10.30, "Dining", false, true,
-				"at the disney", "/data/rec8.jpg"));
-		iReceipt rec12 = (new iReceipt(new IDate(2010, 12, 7),
-				"MK Churro Wagon", 6.50, "Dining", false, true, "",
-				"/data/rec9.jpg"));
+				"Shopping", false, true, "2 shirts", "/data/IMG_7948.JPG"));
+		iReceipt rec10 = (new iReceipt(new IDate(2010, 12, 9), "THE BODY SHOP",
+				40.47, "Shopping", false, true, "", "/data/IMG_7933.JPG"));
+		iReceipt rec11 = (new iReceipt(new IDate(2008, 2, 11), "GETGO", 47.27,
+				"car", false, true, "", "/data/rec1.JPG"));
+		iReceipt rec12 = (new iReceipt(new IDate(2010, 12, 9), "adidas",
+				165.08, "Shopping", false, true, "Orlando, FL 32809", "/data/IMG_7936.JPG"));
+		iReceipt rec13 = (new iReceipt(new IDate(2010, 11, 16), "Fieldpine",
+				4.50, "Dining", false, true, "", "/data/rec111.JPG"));
+		iReceipt rec14 = (new iReceipt(new IDate(2010, 12, 7),
+				"MK MS Bev Wagon", 4.50, "Dining", false, true, "",
+				"/data/IMG_7932.JPG"));
+		iReceipt rec15 = (new iReceipt(new IDate(2010, 12, 10),
+				"Orlando Airport O Store", 4.50, "Shopping", false, true, "",
+				"/data/IMG_7940.JPG"));
+		iReceipt rec16 = (new iReceipt(new IDate(2010, 12, 5),
+				"Duty Free Israel", 340.60, "Shopping", false, true, "",
+				"/data/IMG_7951.JPG"));
+		iReceipt rec17 = (new iReceipt(new IDate(2010, 12, 7), "Boma", 40.45,
+				"Dining", false, true, "", "/data/IMG_7955.JPG"));
+		iReceipt rec18 = (new iReceipt(new IDate(2010, 12, 6), "BBVA Bancomer",
+				500.00, "Shopping", false, true, "", "/data/IMG_7956.JPG"));
+		iReceipt rec19 = (new iReceipt(new IDate(2010, 12, 7), "Jiko", 500.00,
+				"Dining", false, true, "", "/data/IMG_7957.JPG"));
+		iReceipt rec20 = (new iReceipt(new IDate(2010, 12, 2), "PIZZA ROLANDI",
+				1607.10, "Dining", false, true, "", "/data/IMG_7960.JPG"));
+		iReceipt rec21 = (new iReceipt(new IDate(2010, 12, 6),
+				"HOT DOGS ALL DRESSED", 47.00, "Dining", false, true, "",
+				"/data/IMG_7961.JPG"));
+		iReceipt rec22 = (new iReceipt(new IDate(2010, 12, 10), "ZAZA", 3.63,
+				"Dining", false, true, "", "/data/IMG_7928.JPG"));
 
 		rec_arr.add(rec1);
 		rec_arr.add(rec2);
@@ -71,6 +94,16 @@ public class idan extends Activity {
 		rec_arr.add(rec10);
 		rec_arr.add(rec11);
 		rec_arr.add(rec12);
+		rec_arr.add(rec13);
+		rec_arr.add(rec14);
+		rec_arr.add(rec15);
+		rec_arr.add(rec16);
+		rec_arr.add(rec17);
+		rec_arr.add(rec18);
+		rec_arr.add(rec19);
+		rec_arr.add(rec20);
+		rec_arr.add(rec21);
+		rec_arr.add(rec22);
 	}
 
 	/*
@@ -129,7 +162,7 @@ public class idan extends Activity {
 	}
 
 	public void sync(View view) {
-		// ///////////////////////////////////////////////////////////////
+		// //////////////////////////// הוספת פונקציית סינכרון
 	}
 
 	/*
