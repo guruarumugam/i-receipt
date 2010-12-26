@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ public class bigPic extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.rec_pic);
 		// ImageSwitcher iSwitcher = (ImageSwitcher)
 		// findViewById(R.id.ImageBig);

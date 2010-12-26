@@ -6,16 +6,28 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import google.proj.R;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
+import android.os.Message;
+
 
 public class idan extends Activity {
 
+	static final int PROGRESS_DIALOG = 0;
+	 ProgressThread progressThread;
+	    ProgressDialog progressDialog;
 	// private static int receitnumber=1;
 	// public static List<String> mylistname=new ArrayList<String>();//list of
 	// places in memory
@@ -26,7 +38,16 @@ public class idan extends Activity {
 	// nothing
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
+		
+		Button button= (Button) findViewById(R.id.sync);
+		button.setOnClickListener(new OnClickListener(){
+            public void onClick(View v) {
+                showDialog(PROGRESS_DIALOG);
+            }
+        }); 
+		
 		rec_arr = loadList();
 		// if (rec_arr==null)//-------------------------------------
 		rec_arr = new ArrayList<iReceipt>();
@@ -212,6 +233,68 @@ public class idan extends Activity {
 	 * } catch (IOException ex) { ex.printStackTrace(); } }
 	 */
 
+	 protected Dialog onCreateDialog(int id) {
+	        switch(id) {
+	        case PROGRESS_DIALOG:
+	            progressDialog = new ProgressDialog(idan.this);
+	            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+	            progressDialog.setMessage("Sync with web app...");
+	            progressThread = new ProgressThread(handler);
+	            progressThread.start();
+	            return progressDialog;
+	        default:
+	            return null;
+	        }
+	    }
+	 // Define the Handler that receives messages from the thread and update the progress
+	    final Handler handler = new Handler() {
+	        public void handleMessage(Message msg) {
+	            int total = msg.getData().getInt("total");
+	            progressDialog.setProgress(total);
+	            if (total >= 100){
+	                dismissDialog(PROGRESS_DIALOG);
+	                progressThread.setState(ProgressThread.STATE_DONE);
+	            }
+	        }
+	    };
+
+	    /** Nested class that performs progress calculations (counting) */
+	    private class ProgressThread extends Thread {
+	        Handler mHandler;
+	        final static int STATE_DONE = 0;
+	        final static int STATE_RUNNING = 1;
+	        int mState;
+	        int total;
+	       
+	        ProgressThread(Handler h) {
+	            mHandler = h;
+	        }
+	       
+	        public void run() {
+	            mState = STATE_RUNNING;   
+	            total = 0;
+	            while (mState == STATE_RUNNING) {
+	                try {
+	                    Thread.sleep(100);
+	                } catch (InterruptedException e) {
+	                    Log.e("ERROR", "Thread Interrupted");
+	                }
+	                Message msg = mHandler.obtainMessage();
+	                Bundle b = new Bundle();
+	                b.putInt("total", total);
+	                msg.setData(b);
+	                mHandler.sendMessage(msg);
+	                total++;
+	            }
+	        }
+	        
+	        /* sets the current state for the thread,
+	         * used to stop the thread */
+	        public void setState(int state) {
+	            mState = state;
+	        }
+	    }
+	
 	public ArrayList<iReceipt> loadList() {
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(

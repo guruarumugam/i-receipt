@@ -17,6 +17,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Browser.BookmarkColumns;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -72,6 +73,7 @@ public class compute_receipt extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.compute_receipt_layout);
 		myCheckBox = (CheckBox) findViewById(R.id.CheckBox1);
 		myEditText = (EditText) findViewById(R.id.EditNotesManual);
