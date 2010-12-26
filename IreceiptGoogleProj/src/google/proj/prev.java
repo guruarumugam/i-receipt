@@ -38,6 +38,8 @@ public class prev extends Activity {
 		toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL,
 				0, 0);
 		toast.show();
+		BMcamera.t=(BMcamera.t+1)%3;
+		
 		// Create our Preview view and set it as the content of our activity.
 		try {
 			mPreview = new Preview(this);
@@ -51,8 +53,16 @@ public class prev extends Activity {
 					mCamera.release();
 					Intent i = new Intent(prev.this, compute_receipt.class);
 					Receipt rec = idan.rec_arr.get(getIntent().getFlags());
-					rec.setFilepath("/data/good1.jpg");// hard code the path for the
+					if (BMcamera.t==0) {//first
+					rec.setFilepath("/data/MK.jpg");// hard code the path for the
+					}
 													// emulator
+					if (BMcamera.t==1){// second
+						rec.setFilepath("/data/HM.JPG");
+						}
+					if (BMcamera.t==2){//third
+						rec.setFilepath("/data/JIKO.JPG");
+						}
 					int index = idan.rec_arr.indexOf(rec);
 					i.setFlags(index);
 					startActivityForResult(i, index);

@@ -16,11 +16,13 @@ public class BMcamera {
  
  private static final String LOG_TAG = "SocketCamera:";
  
+ public static int t=-1;
+ 
  static private BMcamera bmcamera;
  private CameraCapture capture;
  private Camera parametersCamera;
  private SurfaceHolder surfaceHolder;
- private String bmFilePath[]=new String[30];
+ private static String bmFilePath[]=new String[30];
  
  private final boolean preserveAspectRatio = true;
  private final Paint paint = new Paint();
@@ -33,17 +35,36 @@ public class BMcamera {
  private BMcamera() {
   //Just used so that we can pass Camera.Paramters in getters and setters
   parametersCamera = Camera.open();
-  for (int i = 0; i < bmFilePath.length; i++) {
-	  bmFilePath[i]="/data/receits_for_live_preview/"+(1+i)+".JPG";
-}
+  // first "movie"
+
  }
  
  static public BMcamera open()
  {
-  if (bmcamera == null) {
-   bmcamera = new BMcamera();
-  }
+	 if (bmcamera==null){
   
+   bmcamera = new BMcamera();}
+	  if ( t==0){
+		  for (int i = 0; i < bmFilePath.length; i++) {
+			  bmFilePath[i]="/data/receipts_prev/0/"+(1+i)+".JPG";
+		}
+		 
+	  }
+	  //second movie
+	  if ( t==1){
+		  for (int i = 0; i < bmFilePath.length; i++) {
+			  bmFilePath[i]="/data/receipts_prev/1/"+(1+i)+".JPG";
+		}
+		  
+	  }
+	  //third movie
+	  if ( t==2){
+		  for (int i = 0; i < bmFilePath.length; i++) {
+			  bmFilePath[i]="/data/receipts_prev/2/"+(1+i)+".JPG";
+		}
+
+	 }
+	 
   Log.i(LOG_TAG, "Creating Socket Camera");
   return bmcamera;
  }
