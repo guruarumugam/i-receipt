@@ -84,15 +84,14 @@
 					android:textColor="@color/black" android:textSize="20sp"
 					android:layout_height="wrap_content" android:gravity="left|center_vertical"
 					android:paddingTop="10sp"></TextView>
-				<CheckBox android:id="@+id/CheckBox01"
-					android:layout_width="wrap_content" android:clickable="true"
+				<CheckBox android:layout_width="wrap_content" android:clickable="true"
 					android:layout_height="35sp" android:layout_marginTop="20sp"
-					android:layout_gravity="bottom|right" android:layout_marginRight="30sp"></CheckBox>
+					android:layout_gravity="bottom|right" android:layout_marginRight="30sp" android:id="@+id/CheckBox1"></CheckBox>
 			</LinearLayout>
-			<EditText android:id="@+id/EditText01" android:layout_width="wrap_content"
+			<EditText android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:maxLength="120"
 				android:minWidth="150sp" android:maxWidth="200sp"
-				android:layout_marginTop="6sp"></EditText>
+				android:layout_marginTop="6sp" android:id="@+id/EditNotesManual"></EditText>
 
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutFlaged"
