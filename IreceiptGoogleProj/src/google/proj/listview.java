@@ -2,20 +2,28 @@ package google.proj;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.SweepGradient;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +34,9 @@ public class listview extends Activity {
 	iReceipt globalR;
 	ListView myListView;
 	EfficientAdapter EA;
+	String search = null;
+	public static List<iReceipt> search_rec_arr;
+	static int switcher;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +44,7 @@ public class listview extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.listview2);
 		ListView myListView = (ListView) findViewById(R.id.ListView01);
-		//
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			idan.rec_arr.add((iReceipt) extras.get("Receipt"));
@@ -42,6 +53,8 @@ public class listview extends Activity {
 				finish();
 			}
 		}
+		switcher = 0;
+		search_rec_arr = new ArrayList<iReceipt>();
 		EA = new EfficientAdapter(this);
 		myListView.setAdapter(EA);
 		String[] items = new String[] { "Date", "Total", "Business", "Flaged" };
@@ -55,20 +68,32 @@ public class listview extends Activity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int pos, long id) {
 				if (pos == 0) {
-					Collections.sort(idan.rec_arr, new DateComparator());
-					EA.notifyDataSetChanged();
+					if (switcher == 0)
+						Collections.sort(idan.rec_arr, new DateComparator());
+					else
+						Collections.sort(search_rec_arr, new DateComparator());
+					// EA.notifyDataSetChanged();
 				}
 				if (pos == 1) {
-					Collections.sort(idan.rec_arr, new TotaltComparator());
-					EA.notifyDataSetChanged();
+					if (switcher == 0)
+						Collections.sort(idan.rec_arr, new TotaltComparator());
+					else
+						Collections.sort(search_rec_arr, new DateComparator());
+					// EA.notifyDataSetChanged();
 				}
 				if (pos == 2) {
-					Collections.sort(idan.rec_arr, new NameComparator());
-					EA.notifyDataSetChanged();
+					if (switcher == 0)
+						Collections.sort(idan.rec_arr, new NameComparator());
+					else
+						Collections.sort(search_rec_arr, new DateComparator());
+					// EA.notifyDataSetChanged();
 				}
 				if (pos == 3) {
-					Collections.sort(idan.rec_arr, new FlagedComparetor());
-					EA.notifyDataSetChanged();
+					if (switcher == 0)
+						Collections.sort(idan.rec_arr, new FlagedComparetor());
+					else
+						Collections.sort(search_rec_arr, new DateComparator());
+					// EA.notifyDataSetChanged();
 				}
 			}
 
@@ -89,7 +114,7 @@ public class listview extends Activity {
 				i.setFlags(idan.rec_arr.indexOf(r));
 				if (r.isProcessed()) {
 					startActivity(i);
-					//startActivityForResult(i, idan.rec_arr.indexOf(r));
+					// startActivityForResult(i, idan.rec_arr.indexOf(r));
 				} else {
 					i.setClass(listview.this, compute_receipt.class);
 					startActivityForResult(i, idan.rec_arr.indexOf(r));
@@ -161,7 +186,10 @@ public class listview extends Activity {
 		}
 
 		public int getCount() {
-			return idan.rec_arr.size();
+			if (switcher == 0)
+				return idan.rec_arr.size();
+			else
+				return search_rec_arr.size();
 
 		}
 
@@ -192,14 +220,26 @@ public class listview extends Activity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-
-			holder.text1.setText(idan.rec_arr.get(position).getStoreName());
-			holder.text2.setText(Double.toString(idan.rec_arr.get(position)
-					.getTotal()));
-			holder.text3.setText(idan.rec_arr.get(position).getCategory());
-			holder.text4.setText(idan.rec_arr.get(position).getRdate()
-					.toString());
-			holder.text5.setChecked(idan.rec_arr.get(position).isFlaged());
+			if (switcher == 0) {
+				holder.text1.setText(idan.rec_arr.get(position).getStoreName());
+				holder.text2.setText(Double.toString(idan.rec_arr.get(position)
+						.getTotal()));
+				holder.text3.setText(idan.rec_arr.get(position).getCategory());
+				holder.text4.setText(idan.rec_arr.get(position).getRdate()
+						.toString());
+				holder.text5.setChecked(idan.rec_arr.get(position).isFlaged());
+			} else {
+				holder.text1.setText(search_rec_arr.get(position)
+						.getStoreName());
+				holder.text2.setText(Double.toString(search_rec_arr.get(
+						position).getTotal()));
+				holder.text3
+						.setText(search_rec_arr.get(position).getCategory());
+				holder.text4.setText(search_rec_arr.get(position).getRdate()
+						.toString());
+				holder.text5
+						.setChecked(search_rec_arr.get(position).isFlaged());
+			}
 
 			return convertView;
 		}
@@ -211,5 +251,58 @@ public class listview extends Activity {
 			TextView text4;
 			CheckedTextView text5;
 		}
+	}
+
+	public void search(View view) {
+		final Dialog dialog1 = new Dialog(this);
+		dialog1.setContentView(R.layout.search);
+		dialog1.setTitle("Search receipt:");
+		dialog1.show();
+
+		final EditText text = (EditText) dialog1.findViewById(R.id.Editsearch);
+
+		// b1 is search button
+		Button b1 = (Button) dialog1.findViewById(R.id.ButtonSearch);
+		b1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				search_rec_arr.clear();
+				search = text.getText().toString();
+				// Search function!!!!!!!!!!!!!!!!!!!!!!
+				for (int j = 0; j < idan.rec_arr.size(); j++) {
+					if ((idan.rec_arr.get(j).getStoreName().indexOf(search) != -1)
+							|| (idan.rec_arr.get(j).getCategory()
+									.indexOf(search) != -1)
+							|| (idan.rec_arr.get(j).getNotes().indexOf(search) != -1)
+							|| Double.toString(idan.rec_arr.get(j).getTotal())
+									.indexOf(search) != -1)
+						// add Idate compare & search
+						search_rec_arr.add(idan.rec_arr.get(j));
+				}
+				dialog1.dismiss();
+				switcher = 1;
+				listChange();
+			}
+		});
+		// b1 is AdvanceSearch button
+		Button b2 = (Button) dialog1.findViewById(R.id.ButtonAdvanceSearch);
+		b2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				search_rec_arr.clear();
+				search = text.getText().toString();
+				dialog1.dismiss();
+				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
+				switcher = 1;
+				listChange();
+			}
+		});
+		// return search_rec_arr;
+	}
+
+	public void listChange() {
+		// EA = new EfficientAdapter(listview.this);
+		// myListView.setAdapter(EA);
+		EA.notifyDataSetChanged();
 	}
 }

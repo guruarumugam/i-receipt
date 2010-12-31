@@ -3,8 +3,8 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@color/black">
 	<ListView android:id="@+id/ListView01" android:layout_width="fill_parent" android:padding="10dip" android:layout_height="390sp">
-	</ListView><LinearLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/LinearLayout03listofR" android:background="@color/white" android:layout_width="fill_parent" android:layout_gravity="bottom">
-			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="8pt" android:text="Sort by:  " android:textColor="@color/black" android:layout_gravity="center_vertical|center_horizontal|center" android:layout_marginLeft="72sp" android:id="@+id/TextView01list"></TextView>
-			<Spinner android:layout_width="wrap_content" android:layout_height="40sp" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/Spinner01list"></Spinner>
+	</ListView><LinearLayout android:layout_alignParentBottom="true" android:id="@+id/LinearLayout03listofR" android:background="@color/white" android:layout_width="fill_parent" android:layout_gravity="bottom" android:layout_height="40sp">
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/black" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/TextView01list" android:textSize="10pt" android:layout_marginLeft="6sp" android:text="Sort by:"></TextView>
+			<Spinner android:layout_height="40sp" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/Spinner01list" android:layout_marginTop="2sp" android:layout_width="120sp" android:layout_marginLeft="4sp"></Spinner><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/black" android:id="@+id/search" android:text="Search" android:textSize="10pt" android:layout_gravity="right|center_vertical" android:layout_marginLeft="15sp" android:clickable="true" android:onClick="@string/search"></TextView>
 		</LinearLayout>
 </LinearLayout>

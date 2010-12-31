@@ -28,4 +28,5 @@
 <string name="EditRecNote">EditRecNote</string>
 <string name="sync">sync</string>
 <color name="darkGray">#838b83</color>
+<string name="search">search</string>
 </resources>
