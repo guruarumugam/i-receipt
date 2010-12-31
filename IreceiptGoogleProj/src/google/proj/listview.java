@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.SweepGradient;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +33,9 @@ import android.widget.Toast;
 public class listview extends Activity {
 	iReceipt globalR;
 	ListView myListView;
-	EfficientAdapter EA;
+	public static EfficientAdapter EA;
 	String search = null;
+	IDate date;
 	public static List<iReceipt> search_rec_arr;
 	static int switcher;
 
@@ -48,7 +49,7 @@ public class listview extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			idan.rec_arr.add((iReceipt) extras.get("Receipt"));
-			if (extras.getBoolean("man")) {// comes from manual{
+			if (extras.getBoolean("man")) {// comes from manual
 				setResult(30);
 				finish();
 			}
@@ -72,28 +73,30 @@ public class listview extends Activity {
 						Collections.sort(idan.rec_arr, new DateComparator());
 					else
 						Collections.sort(search_rec_arr, new DateComparator());
-					// EA.notifyDataSetChanged();
+					EA.notifyDataSetChanged();
 				}
 				if (pos == 1) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new TotaltComparator());
 					else
-						Collections.sort(search_rec_arr, new DateComparator());
-					// EA.notifyDataSetChanged();
+						Collections
+								.sort(search_rec_arr, new TotaltComparator());
+					EA.notifyDataSetChanged();
 				}
 				if (pos == 2) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new NameComparator());
 					else
-						Collections.sort(search_rec_arr, new DateComparator());
-					// EA.notifyDataSetChanged();
+						Collections.sort(search_rec_arr, new NameComparator());
+					EA.notifyDataSetChanged();
 				}
 				if (pos == 3) {
 					if (switcher == 0)
-						Collections.sort(idan.rec_arr, new FlagedComparetor());
+						Collections.sort(idan.rec_arr, new FlagedComparator());
 					else
-						Collections.sort(search_rec_arr, new DateComparator());
-					// EA.notifyDataSetChanged();
+						Collections
+								.sort(search_rec_arr, new FlagedComparator());
+					EA.notifyDataSetChanged();
 				}
 			}
 
@@ -108,9 +111,15 @@ public class listview extends Activity {
 				 * Toast.makeText(getBaseContext(), " "+arg2+" "+arg3,
 				 * Toast.LENGTH_LONG) .show();
 				 */
+				iReceipt r;
 				Intent i = new Intent(listview.this, rec_view.class);
-				iReceipt r = (iReceipt) idan.rec_arr.get(arg2);
-				;
+				if (switcher == 0) {
+					r = (iReceipt) idan.rec_arr.get(arg2);
+					;
+				} else {
+					r = (iReceipt) search_rec_arr.get(arg2);
+					;
+				}
 				i.setFlags(idan.rec_arr.indexOf(r));
 				if (r.isProcessed()) {
 					startActivity(i);
@@ -133,7 +142,7 @@ public class listview extends Activity {
 		}
 	}
 
-	class FlagedComparetor implements Comparator<Receipt> {
+	class FlagedComparator implements Comparator<Receipt> {
 		public int compare(Receipt object1, Receipt object2) {
 			if (((object1.isFlaged()) && (object2.isFlaged()))
 					|| ((!object1.isFlaged()) && (!object2.isFlaged())))
@@ -148,9 +157,9 @@ public class listview extends Activity {
 	class TotaltComparator implements Comparator<Receipt> {
 		public int compare(Receipt object1, Receipt object2) {
 			if (object1.getTotal() > object2.getTotal())
-				return 1;
-			else if (object1.getTotal() < object2.getTotal())
 				return -1;
+			else if (object1.getTotal() < object2.getTotal())
+				return 1;
 			else
 				return 0;
 		}
@@ -267,21 +276,40 @@ public class listview extends Activity {
 			@Override
 			public void onClick(View v) {
 				search_rec_arr.clear();
-				search = text.getText().toString();
+				search = text.getText().toString().toLowerCase();
+				date = getDate(search);
 				// Search function!!!!!!!!!!!!!!!!!!!!!!
 				for (int j = 0; j < idan.rec_arr.size(); j++) {
-					if ((idan.rec_arr.get(j).getStoreName().indexOf(search) != -1)
-							|| (idan.rec_arr.get(j).getCategory()
+					if ((idan.rec_arr.get(j).getStoreName().toLowerCase()
+							.indexOf(search) != -1)
+							|| (idan.rec_arr.get(j).getCategory().toLowerCase()
 									.indexOf(search) != -1)
-							|| (idan.rec_arr.get(j).getNotes().indexOf(search) != -1)
+							|| (idan.rec_arr.get(j).getNotes().toLowerCase()
+									.indexOf(search) != -1)
 							|| Double.toString(idan.rec_arr.get(j).getTotal())
 									.indexOf(search) != -1)
-						// add Idate compare & search
 						search_rec_arr.add(idan.rec_arr.get(j));
+					if (date != null) {
+						if (idan.rec_arr.get(j).getRdate().compareTo(date) == 0)
+							search_rec_arr.add(idan.rec_arr.get(j));
+					}
 				}
 				dialog1.dismiss();
 				switcher = 1;
-				listChange();
+				EA.notifyDataSetChanged();
+				if (search_rec_arr.size() == 0) {
+					LayoutInflater inflater = getLayoutInflater();
+					View layout = inflater.inflate(R.layout.toast_layout,
+							(ViewGroup) findViewById(R.id.toast_layout_root));
+					TextView text2 = (TextView) layout.findViewById(R.id.text);
+					text2.setText("Sorry, No receipt includes: \"" + search
+							+ "\"");
+					Toast toast2 = new Toast(getApplicationContext());
+					toast2.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+					toast2.setDuration(Toast.LENGTH_LONG);
+					toast2.setView(layout);
+					toast2.show();
+				}
 			}
 		});
 		// b1 is AdvanceSearch button
@@ -294,15 +322,49 @@ public class listview extends Activity {
 				dialog1.dismiss();
 				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
 				switcher = 1;
-				listChange();
+				EA.notifyDataSetChanged();
 			}
 		});
 		// return search_rec_arr;
 	}
 
-	public void listChange() {
-		// EA = new EfficientAdapter(listview.this);
-		// myListView.setAdapter(EA);
-		EA.notifyDataSetChanged();
+	public IDate getDate(String str) { // 0-9 or "-" or "/"
+
+		char[] ch = str.toCharArray();
+		int len = ch.length;
+		if (len != 10)
+			return null; // gets only "27-12-2010" or "07/02/2011", or not a
+							// date.
+		if (((ch[0] > 47) && (ch[0] < 58) && (ch[1] > 47) && (ch[1] < 58)))
+			;
+		else
+			return null;
+		if ((ch[2] == 45) || (ch[2] == 47))
+			;
+		else
+			return null;
+		if (((ch[3] > 47) && (ch[3] < 58) && (ch[4] > 47) && (ch[4] < 58)))
+			;
+		else
+			return null;
+		if ((ch[5] == 45) || (ch[5] == 47))
+			;
+		else
+			return null;
+		if (((ch[6] > 47) && (ch[6] < 58) && (ch[7] > 47) && (ch[8] < 58)))
+			;
+		else
+			return null;
+		if (((ch[8] > 47) && (ch[8] < 58) && (ch[9] > 47) && (ch[9] < 58)))
+			;
+		else
+			return null;
+
+		int month = (ch[0] - 48) * 10 + (ch[1] - 48);
+		int day = (ch[3] - 48) * 10 + (ch[4] - 48);
+		int year = (ch[6] - 48) * 1000 + (ch[7] - 48) * 100 + (ch[8] - 48) * 10
+				+ (ch[9] - 48);
+		IDate newDate = new IDate(year, month, day);
+		return newDate;
 	}
 }
