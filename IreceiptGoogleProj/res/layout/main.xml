@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_gravity="fill_vertical|fill_horizontal"
+	android:layout_height="match_parent" android:layout_width="match_parent"
+	android:background="@drawable/newfirst">
+	<Button android:id="@+id/Button01" android:onClick="@string/new_scan_handler"
+		android:layout_width="305sp"
+		android:layout_marginTop="7sp" android:layout_marginLeft="6sp" android:layout_height="105sp" android:background="@android:color/transparent"></Button>
+	<Button android:id="@+id/Button02" android:onClick="@string/manual_scan_handler"
+		android:layout_width="305sp" android:layout_marginLeft="6sp" android:layout_height="105sp" android:background="@android:color/transparent"></Button>
+	<Button android:id="@+id/Button03" android:onClick="@string/receipts_handler" android:layout_width="305sp" android:layout_marginLeft="6sp" android:layout_height="105sp" android:background="@android:color/transparent"></Button>
+	<Button android:id="@+id/Button04" android:onClick="@string/statistics_handler" android:layout_width="305sp"
+		android:layout_marginLeft="6sp" android:layout_height="105sp" android:background="@android:color/transparent"></Button>
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<Button android:layout_marginLeft="100sp" android:layout_width="120sp"
+			android:layout_height="60sp" android:id="@+id/sync"
+			android:clickable="true" android:onClick="@string/sync" android:layout_marginTop="10sp"></Button>
+		<Button android:layout_height="60sp" android:clickable="true"
+			android:id="@+id/search" android:layout_width="100sp" android:layout_marginTop="10sp"></Button>
+
+	</LinearLayout>
+</LinearLayout>

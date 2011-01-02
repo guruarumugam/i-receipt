@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@color/black">
+	<ListView android:id="@+id/ListView01" android:layout_width="fill_parent" android:padding="5dip" android:layout_height="470sp">
+	</ListView><LinearLayout android:layout_alignParentBottom="true" android:id="@+id/LinearLayout03listofR" android:background="@color/white" android:layout_width="fill_parent" android:layout_gravity="bottom" android:layout_height="37sp">
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/black" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/TextView01list" android:textSize="10pt" android:text="Sort by:" android:layout_marginLeft="10sp"></TextView>
+			<Spinner android:layout_height="40sp" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/Spinner01list" android:layout_marginTop="2sp" android:layout_width="120sp" android:layout_marginLeft="4sp"></Spinner><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/black" android:id="@+id/search" android:text="Search" android:textSize="10pt" android:layout_gravity="right|center_vertical" android:clickable="true" android:onClick="@string/search" android:layout_marginLeft="16sp"></TextView>
+		</LinearLayout>
+</LinearLayout>
