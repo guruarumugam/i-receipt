@@ -48,9 +48,10 @@ public class idan extends Activity {
 		});
 
 		rec_arr = loadList();
-		// if (rec_arr==null)//-------------------------------------
-		rec_arr = new ArrayList<iReceipt>();
-
+		if (rec_arr==null)
+				rec_arr = new ArrayList<iReceipt>();
+	}
+/*
 		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
 				498.29, "Shopping", true, true, "",
 				"/data/receipts_prev/IMG_7953.JPG"));
@@ -141,7 +142,7 @@ public class idan extends Activity {
 		rec_arr.add(rec23);
 		rec_arr.add(rec24);
 	}
-
+*/
 	/*
 	 * String tmp=loadHandler(); if (tmp==null){//never write before;
 	 * 
@@ -158,7 +159,8 @@ public class idan extends Activity {
 
 	public void new_scan_handler(View view) {
 		iReceipt r = new iReceipt();
-		Intent i = new Intent(idan.this, prev.class);
+		//Intent i = new Intent(idan.this, prev.class);
+		Intent i = new Intent(idan.this, CameraPreview.class);
 		rec_arr.add(r);
 		int index = rec_arr.indexOf(r);
 		i.setFlags(index);

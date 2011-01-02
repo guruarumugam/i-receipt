@@ -308,13 +308,13 @@ public class compute_receipt extends Activity {
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(myEditText.getText().toString());
-		int f = listview.search_rec_arr.indexOf(rec); // -1 => does not exist.
+		/*int f = listview.search_rec_arr.indexOf(rec); // -1 => does not exist.
 		if (f != -1) {
 			listview.search_rec_arr.get(f).setFlaged(myCheckBox.isChecked());
 			listview.search_rec_arr.get(f).setNotes(
 					myEditText.getText().toString());
 
-		}
+		}*/
 		saveList();
 		finish();
 	}
