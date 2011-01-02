@@ -29,4 +29,5 @@
 <string name="sync">sync</string>
 <color name="darkGray">#838b83</color>
 <string name="search">search</string>
+<string name="advance">advance</string>
 </resources>
