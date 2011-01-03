@@ -30,4 +30,7 @@
 <color name="darkGray">#838b83</color>
 <string name="search">search</string>
 <string name="advance">advance</string>
+<string name="menu_zoom">Zoom</string>
+<string name="menu_pan">Pan</string>
+<string name="menu_reset">Reset</string>
 </resources>

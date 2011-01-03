@@ -115,7 +115,7 @@ public class idan extends Activity {
 		iReceipt rec24 = (new iReceipt(new IDate(2009, 04, 23), "Fastfuel",
 				24.36, "Car", false, true, "Car & gas Shop",
 				"/data/receipts_prev/3.jpg"));
-
+		
 		rec_arr.add(rec1);
 		rec_arr.add(rec2);
 		rec_arr.add(rec3);
