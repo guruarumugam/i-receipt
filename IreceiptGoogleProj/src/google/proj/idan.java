@@ -10,6 +10,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,14 +21,18 @@ import android.widget.Button;
 import google.proj.R;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 
 public class idan extends Activity {
-
+	private static int TAKE_PICTURE = 1;
 	static final int PROGRESS_DIALOG = 0;
 	ProgressThread progressThread;
 	ProgressDialog progressDialog;
+	int index=0;
 	// private static int receitnumber=1;
 	// public static List<String> mylistname=new ArrayList<String>();//list of
 	// places in memory
@@ -49,8 +55,8 @@ public class idan extends Activity {
 
 		rec_arr = loadList();
 		if (rec_arr == null)
-			rec_arr = new ArrayList<iReceipt>();
-
+			rec_arr = new ArrayList<iReceipt>();}
+/*
 		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
 				498.29, "Shopping", true, true, "",
 				"/data/receipts_prev/IMG_7953.JPG"));
@@ -140,7 +146,7 @@ public class idan extends Activity {
 		rec_arr.add(rec22);
 		rec_arr.add(rec23);
 		rec_arr.add(rec24);
-	}
+	}*/
 
 	/*
 	 * String tmp=loadHandler(); if (tmp==null){//never write before;
@@ -155,7 +161,7 @@ public class idan extends Activity {
 	 * // loop that read al receipt and add them to list for (int i=0;
 	 * i<mylistname.size();i++){ rec_arr.add(loadR(mylistname.get(i))); } }
 	 */
-
+/*
 	public void new_scan_handler(View view) {
 		iReceipt r = new iReceipt();
 		// Intent i = new Intent(idan.this, prev.class);
@@ -165,6 +171,24 @@ public class idan extends Activity {
 		i.setFlags(index);
 		startActivityForResult(i, index);
 	}
+	*/
+	
+	
+	public void new_scan_handler(View view) {
+		  iReceipt r = new iReceipt();
+		  rec_arr.add(r);
+		  index=rec_arr.indexOf(r);
+		  Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		    File photo = new File(Environment.getExternalStorageDirectory(), (idan.rec_arr.indexOf(r)+3)+ "ieceipt.jpg");
+		    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+		            Uri.fromFile(photo));
+		    r.setFilepath(photo.toString());
+		    intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		    startActivityForResult(intent, TAKE_PICTURE);
+		}
+	
+	
+	
 
 	public void manual_scan_handler(View view) {
 		// saveHandler();
@@ -183,7 +207,18 @@ public class idan extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// in case we cancel in compute_receipt
-		if (resultCode == 0) {
+		if (requestCode==TAKE_PICTURE)
+			if(resultCode!=Activity.RESULT_OK){
+				rec_arr.remove(requestCode);
+				return;
+			}
+			else{
+				Intent i = new Intent(idan.this, compute_receipt.class);
+				i.setFlags(index);
+				startActivityForResult(i, index);
+			}
+				
+		if (resultCode ==0){
 			rec_arr.remove(requestCode);
 		}
 	}

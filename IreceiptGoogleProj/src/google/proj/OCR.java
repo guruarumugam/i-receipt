@@ -181,7 +181,7 @@ public class OCR {
 	private static String[] Convert_to_arr(String src) {
 		int n = How_many_words(src);
 		String str_arr[] = new String[n];
-		String ret_arr[] = new String[n - 35];
+		String ret_arr[] = new String[n - 34];
 		int j = 0;
 		char c;
 		boolean t = false;

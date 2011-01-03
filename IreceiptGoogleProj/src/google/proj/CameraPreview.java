@@ -190,6 +190,8 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
       //  parameters.set("flash-mode", "auto");
         //parameters.set("rotation", 90);
         //parameters.set("orientation", "portrait");
+        parameters.setFlashMode("auto");
+        parameters.setFocusMode("auto");
         mCamera.setDisplayOrientation(90);
         mCamera.setParameters(parameters);
         mCamera.startPreview();
