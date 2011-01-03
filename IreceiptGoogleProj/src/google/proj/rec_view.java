@@ -1,5 +1,6 @@
 package google.proj;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URI;
@@ -124,7 +125,7 @@ public class rec_view extends Activity {
 		return null;
 	}
 
-	public void onClickPic(View view) {
+	/*public void onClickPic(View view) {
 		Intent i = new Intent(rec_view.this, bigPic.class);
 		i.setFlags(idan.rec_arr.indexOf(rec));
 		startActivity(i);
@@ -133,6 +134,12 @@ public class rec_view extends Activity {
 		// i.putExtra("image_id", bMap);
 		// i.putExtra("image_id","/data/rec2.jpg");
 		// i.putExtra("image_id",R.drawable.receipt);
+	}*/
+	public void onClickPic(View view) {
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File(rec.getFilepath())), "image/jpg");
+        startActivity(intent);
 	}
 
 	public void onClick(View view) {
