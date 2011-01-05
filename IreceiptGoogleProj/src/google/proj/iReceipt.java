@@ -1,5 +1,12 @@
 package google.proj;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
 public class iReceipt implements Receipt, java.io.Serializable {
 
 	/**
@@ -149,5 +156,27 @@ public class iReceipt implements Receipt, java.io.Serializable {
 
 	public String getplaceofsave() {
 		return receitname;
+	}
+	
+	public byte[] toByteArray() throws IOException{
+    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	ObjectOutputStream oos = new ObjectOutputStream(baos);
+    	oos.writeObject(this);
+    	return baos.toByteArray();
+	}
+	
+	public void fromByteArray(byte[] in) throws StreamCorruptedException, IOException, ClassNotFoundException{
+		ByteArrayInputStream bais = new ByteArrayInputStream(in);
+		ObjectInputStream ois = new ObjectInputStream(bais);
+		iReceipt myObject = (iReceipt) ois.readObject();
+		this.Category=myObject.getCategory();
+		this.filepath=myObject.getFilepath();
+		this.Flaged=myObject.isFlaged();
+		this.Notes=myObject.getNotes();
+		this.processed=myObject.isProcessed();
+		this.Rdate=myObject.getRdate();
+		this.StoreName=myObject.getStoreName();
+		this.Total=myObject.getTotal();
+		
 	}
 }

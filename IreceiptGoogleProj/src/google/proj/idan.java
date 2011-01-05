@@ -22,6 +22,8 @@ import google.proj.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import sync.tset;
+
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +35,8 @@ public class idan extends Activity {
 	ProgressThread progressThread;
 	ProgressDialog progressDialog;
 	int index=0;
+	
+	
 	// private static int receitnumber=1;
 	// public static List<String> mylistname=new ArrayList<String>();//list of
 	// places in memory
@@ -42,6 +46,7 @@ public class idan extends Activity {
 	// private ImageButton new_scan, manual, receipts, stats;
 	// nothing
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);

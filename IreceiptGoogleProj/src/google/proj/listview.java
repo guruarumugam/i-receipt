@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import sync.tset;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -42,6 +44,11 @@ public class listview extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		tset.main1();
+		
+		
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.listview2);
 		ListView myListView = (ListView) findViewById(R.id.ListView01);

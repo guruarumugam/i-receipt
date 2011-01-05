@@ -29,6 +29,7 @@ public class rec_list extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.reclist);
 		myListView = (ListView) findViewById(R.id.ListView01);
