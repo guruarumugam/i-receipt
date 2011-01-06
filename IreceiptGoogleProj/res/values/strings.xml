@@ -33,4 +33,13 @@
 <string name="menu_zoom">Zoom</string>
 <string name="menu_pan">Pan</string>
 <string name="menu_reset">Reset</string>
+<color name="darkGray2">#8b8878</color>
+<color name="lightBlue">#00ced1</color>
+
+<color name="brown">#8b4513</color>
+<color name="darkgreen2">#228b22</color>
+<color name="yellow">#ffffff00</color>
+<color name="green2">#ff00ff00</color>
+<color name="lightGray">#cdc8b1</color>
+<string name="pieChart">pieChart</string>
 </resources>

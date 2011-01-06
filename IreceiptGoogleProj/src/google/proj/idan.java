@@ -34,9 +34,7 @@ public class idan extends Activity {
 	static final int PROGRESS_DIALOG = 0;
 	ProgressThread progressThread;
 	ProgressDialog progressDialog;
-	int index=0;
-	
-	
+	int index = 0;
 	// private static int receitnumber=1;
 	// public static List<String> mylistname=new ArrayList<String>();//list of
 	// places in memory
@@ -46,22 +44,20 @@ public class idan extends Activity {
 	// private ImageButton new_scan, manual, receipts, stats;
 	// nothing
 	public void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 
-		Button button = (Button) findViewById(R.id.sync);
-		button.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				showDialog(PROGRESS_DIALOG);
-			}
-		});
+		/*
+		 * Button button = (Button) findViewById(R.id.sync);
+		 * button.setOnClickListener(new OnClickListener() { public void
+		 * onClick(View v) { showDialog(PROGRESS_DIALOG); } });
+		 */
 
 		rec_arr = loadList();
 		if (rec_arr == null)
-			rec_arr = new ArrayList<iReceipt>();}
-/*
+			rec_arr = new ArrayList<iReceipt>();
+
 		iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
 				498.29, "Shopping", true, true, "",
 				"/data/receipts_prev/IMG_7953.JPG"));
@@ -126,7 +122,7 @@ public class idan extends Activity {
 		iReceipt rec24 = (new iReceipt(new IDate(2009, 04, 23), "Fastfuel",
 				24.36, "Car", false, true, "Car & gas Shop",
 				"/data/receipts_prev/3.jpg"));
-		
+
 		rec_arr.add(rec1);
 		rec_arr.add(rec2);
 		rec_arr.add(rec3);
@@ -151,7 +147,7 @@ public class idan extends Activity {
 		rec_arr.add(rec22);
 		rec_arr.add(rec23);
 		rec_arr.add(rec24);
-	}*/
+	}
 
 	/*
 	 * String tmp=loadHandler(); if (tmp==null){//never write before;
@@ -166,34 +162,27 @@ public class idan extends Activity {
 	 * // loop that read al receipt and add them to list for (int i=0;
 	 * i<mylistname.size();i++){ rec_arr.add(loadR(mylistname.get(i))); } }
 	 */
-/*
+	/*
+	 * public void new_scan_handler(View view) { iReceipt r = new iReceipt(); //
+	 * Intent i = new Intent(idan.this, prev.class); Intent i = new
+	 * Intent(idan.this, CameraPreview.class); rec_arr.add(r); int index =
+	 * rec_arr.indexOf(r); i.setFlags(index); startActivityForResult(i, index);
+	 * }
+	 */
+
 	public void new_scan_handler(View view) {
 		iReceipt r = new iReceipt();
-		// Intent i = new Intent(idan.this, prev.class);
-		Intent i = new Intent(idan.this, CameraPreview.class);
 		rec_arr.add(r);
-		int index = rec_arr.indexOf(r);
-		i.setFlags(index);
-		startActivityForResult(i, index);
+		index = rec_arr.indexOf(r);
+		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		File photo = new File(Environment.getExternalStorageDirectory(),
+				(idan.rec_arr.indexOf(r) + 3) + "ieceipt.jpg");
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+		r.setFilepath(photo.toString());
+		intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		startActivityForResult(intent, TAKE_PICTURE);
 	}
-	*/
-	
-	
-	public void new_scan_handler(View view) {
-		  iReceipt r = new iReceipt();
-		  rec_arr.add(r);
-		  index=rec_arr.indexOf(r);
-		  Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-		    File photo = new File(Environment.getExternalStorageDirectory(), (idan.rec_arr.indexOf(r)+3)+ "ieceipt.jpg");
-		    intent.putExtra(MediaStore.EXTRA_OUTPUT,
-		            Uri.fromFile(photo));
-		    r.setFilepath(photo.toString());
-		    intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		    startActivityForResult(intent, TAKE_PICTURE);
-		}
-	
-	
-	
 
 	public void manual_scan_handler(View view) {
 		// saveHandler();
@@ -212,18 +201,17 @@ public class idan extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// in case we cancel in compute_receipt
-		if (requestCode==TAKE_PICTURE)
-			if(resultCode!=Activity.RESULT_OK){
+		if (requestCode == TAKE_PICTURE)
+			if (resultCode != Activity.RESULT_OK) {
 				rec_arr.remove(requestCode);
 				return;
-			}
-			else{
+			} else {
 				Intent i = new Intent(idan.this, compute_receipt.class);
 				i.setFlags(index);
 				startActivityForResult(i, index);
 			}
-				
-		if (resultCode ==0){
+
+		if (resultCode == 0) {
 			rec_arr.remove(requestCode);
 		}
 	}

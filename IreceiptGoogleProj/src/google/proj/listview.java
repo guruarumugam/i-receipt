@@ -45,9 +45,7 @@ public class listview extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		tset.main1();
-		
-		
+		tset.main1(); //        ********************************************************מזה????? הרשימת קבלות לא עובדת עם השורה הזו***********
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.listview2);

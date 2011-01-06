@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -180,5 +181,10 @@ public class statistics extends Activity {
 			return Date2;
 		}
 		return null;
+	}
+	
+	public void pieChart(View view) {
+		Intent i = new Intent(statistics.this, MainActivity.class);
+		startActivity(i);
 	}
 }
