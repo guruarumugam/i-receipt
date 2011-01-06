@@ -43,8 +43,9 @@ public class rec_view extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
-		ImageView myImage = (ImageView) findViewById(R.id.Image01);////////
-		if (rec.getFilepath()==null) myImage.setVisibility(View.INVISIBLE);/////////////
+		ImageView myImage = (ImageView) findViewById(R.id.Image01);// //////
+		if (rec.getFilepath() == null)
+			myImage.setVisibility(View.INVISIBLE);// ///////////
 		/*
 		 * ImageView image = (ImageView) findViewById(R.id.Image01); if
 		 * (rec.getFilepath() != null)
@@ -78,14 +79,11 @@ public class rec_view extends Activity {
 		text[2].setText(rec.getCategory());
 		check.setChecked(rec.isFlaged());
 		// NotesEditText.setText(rec.getNotes());
-		if ((rec.getNotes() == null) || (rec.getNotes() == ""))
+		if ((rec.getNotes() == null) || (rec.getNotes() == "")
+				|| (rec.getNotes().length() == 0))
 			show_notes.setText("Click here to add note");
 		else
 			show_notes.setText(rec.getNotes());
-		/*
-		 * if (rec.isFlaged()) text[3].setText("Yes"); else
-		 * text[3].setText("No");
-		 */
 
 		// get the current date
 		mYear = rec.getRdate().getYear();
@@ -125,23 +123,20 @@ public class rec_view extends Activity {
 		return null;
 	}
 
-/*	public void onClickPic(View view) {
-		Intent i = new Intent(rec_view.this, bigPic.class);
-		i.setFlags(idan.rec_arr.indexOf(rec));
-		startActivity(i);
-		// startActivityForResult(i, idan.rec_arr.indexOf(rec));
-		// Bitmap bMap = BitmapFactory.decodeFile(rec.getFilepath());
-		// i.putExtra("image_id", bMap);
-		// i.putExtra("image_id","/data/rec2.jpg");
-		// i.putExtra("image_id",R.drawable.receipt);
-	}*/
-	
+	/*
+	 * public void onClickPic(View view) { Intent i = new Intent(rec_view.this,
+	 * bigPic.class); i.setFlags(idan.rec_arr.indexOf(rec)); startActivity(i);
+	 * // startActivityForResult(i, idan.rec_arr.indexOf(rec)); // Bitmap bMap =
+	 * BitmapFactory.decodeFile(rec.getFilepath()); // i.putExtra("image_id",
+	 * bMap); // i.putExtra("image_id","/data/rec2.jpg"); //
+	 * i.putExtra("image_id",R.drawable.receipt); }
+	 */
 	public void onClickPic(View view) {
 		Intent intent = new Intent();
 		intent.setAction(android.content.Intent.ACTION_VIEW);
-		intent.setDataAndType(Uri.fromFile(new File(rec.getFilepath())), "image/jpg");
+		intent.setDataAndType(Uri.fromFile(new File(rec.getFilepath())),
+				"image/jpg");
 		startActivity(intent);
-	
 	}
 
 	public void onClick(View view) {
@@ -177,12 +172,13 @@ public class rec_view extends Activity {
 
 			public void onClick(View v) {
 				String new_note = note.getText().toString();
-				// stores[3] = store_new;
-				// spinner_s.setSelection(3);
-				// spinner_s.refreshDrawableState();
 				rec.setNotes(new_note);
-				show_notes.setText(note.getText().toString());
+				String str = note.getText().toString();
 				EditNoteDialog.dismiss();
+				if ((str == null) || (str == "") || (str.length() == 0))
+					show_notes.setText("Click here to add note");
+				else
+					show_notes.setText(str);
 			}
 		});
 		// b2 is cancel button

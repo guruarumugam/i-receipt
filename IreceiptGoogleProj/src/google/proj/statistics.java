@@ -49,7 +49,7 @@ public class statistics extends Activity {
 		Month = c.get(Calendar.MONTH);
 		Day = c.get(Calendar.DAY_OF_MONTH);
 		date1 = new IDate(Year, Month + 1, 1); // start of this month
-		if (Year > 1)
+		if (Month > 0)
 			date3 = new IDate(Year, Month, 1); // start of last month
 		else
 			date3 = new IDate(Year - 1, 12, 1);
@@ -72,40 +72,44 @@ public class statistics extends Activity {
 
 	private void updateDisplay(int id) {
 		if (id == R.id.pickDateFrom) {
-			if ((Month>8) && (Day>9))
+			if ((Month > 8) && (Day > 9))
 				fromPickDate.setText(new StringBuilder().append("From:")
 						.append(Month + 1).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month>8) && (Day<10))
+			if ((Month > 8) && (Day < 10))
 				fromPickDate.setText(new StringBuilder().append("From:")
-						.append(Month + 1).append("-").append("0"+Day).append("-")
-						.append(Year).append(" "));
-			if ((Month<9) && (Day>10))
+						.append(Month + 1).append("-").append("0" + Day)
+						.append("-").append(Year).append(" "));
+			if ((Month < 9) && (Day > 10))
 				fromPickDate.setText(new StringBuilder().append("From:")
-						.append("0"+(Month + 1)).append("-").append(Day).append("-")
-						.append(Year).append(" "));
-			if ((Month<9) && (Day<10))
-				fromPickDate.setText(new StringBuilder().append("From:")
-						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
-						.append(Year).append(" "));
+						.append("0" + (Month + 1)).append("-").append(Day)
+						.append("-").append(Year).append(" "));
+			if ((Month < 9) && (Day < 10))
+				fromPickDate
+						.setText(new StringBuilder().append("From:")
+								.append("0" + (Month + 1)).append("-")
+								.append("0" + Day).append("-").append(Year)
+								.append(" "));
 		}
 		if (id == R.id.pickDateTo) {
-			if ((Month>8) && (Day>9))
+			if ((Month > 8) && (Day > 9))
 				toPickDate.setText(new StringBuilder().append("To:")
 						.append(Month + 1).append("-").append(Day).append("-")
 						.append(Year).append(" "));
-			if ((Month>8) && (Day<10))
+			if ((Month > 8) && (Day < 10))
 				toPickDate.setText(new StringBuilder().append("To:")
-						.append(Month + 1).append("-").append("0"+Day).append("-")
-						.append(Year).append(" "));
-			if ((Month<9) && (Day>10))
+						.append(Month + 1).append("-").append("0" + Day)
+						.append("-").append(Year).append(" "));
+			if ((Month < 9) && (Day > 10))
 				toPickDate.setText(new StringBuilder().append("To:")
-						.append("0"+(Month + 1)).append("-").append(Day).append("-")
-						.append(Year).append(" "));
-			if ((Month<9) && (Day<10))
-				toPickDate.setText(new StringBuilder().append("To:")
-						.append("0"+(Month + 1)).append("-").append("0"+Day).append("-")
-						.append(Year).append(" "));
+						.append("0" + (Month + 1)).append("-").append(Day)
+						.append("-").append(Year).append(" "));
+			if ((Month < 9) && (Day < 10))
+				toPickDate
+						.setText(new StringBuilder().append("To:")
+								.append("0" + (Month + 1)).append("-")
+								.append("0" + Day).append("-").append(Year)
+								.append(" "));
 		}
 	}
 
@@ -133,8 +137,8 @@ public class statistics extends Activity {
 
 		if (dateTo.compareTo(dateFrom) > 0)
 			showTotalFromTo.setText("invalid dates..."); // dateFrom
-																			// >
-																			// dateTo
+															// >
+															// dateTo
 		else {
 			totalFromTo = 0.0;
 			for (int i = 0; i < idan.rec_arr.size(); i++) {
@@ -182,7 +186,7 @@ public class statistics extends Activity {
 		}
 		return null;
 	}
-	
+
 	public void pieChart(View view) {
 		Intent i = new Intent(statistics.this, MainActivity.class);
 		startActivity(i);

@@ -44,9 +44,6 @@ public class listview extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		tset.main1(); //        ********************************************************מזה????? הרשימת קבלות לא עובדת עם השורה הזו***********
-		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.listview2);
 		ListView myListView = (ListView) findViewById(R.id.ListView01);
@@ -327,11 +324,13 @@ public class listview extends Activity {
 				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
 				switcher = 1;
 				Intent i = new Intent(listview.this, searchReceipt.class);
-				/*final Dialog dialog5 = new Dialog(listview.this);
-				dialog5.setContentView(R.layout.searchreceipt);
-				dialog5.requestWindowFeature(dialog5.getWindow().FEATURE_NO_TITLE);
-				dialog5.show();*/
-				//EA.notifyDataSetChanged();
+				/*
+				 * final Dialog dialog5 = new Dialog(listview.this);
+				 * dialog5.setContentView(R.layout.searchreceipt);
+				 * dialog5.requestWindowFeature
+				 * (dialog5.getWindow().FEATURE_NO_TITLE); dialog5.show();
+				 */
+				// EA.notifyDataSetChanged();
 			}
 		});
 		// return search_rec_arr;
