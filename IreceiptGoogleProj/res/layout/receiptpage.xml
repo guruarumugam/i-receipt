@@ -5,7 +5,8 @@
 
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="vertical" android:padding="5dip"
-		android:minHeight="400sp" android:background="@drawable/recpage8" android:layout_height="fill_parent" android:layout_width="fill_parent">
+		android:minHeight="400sp" android:background="@drawable/recpage8"
+		android:layout_height="fill_parent" android:layout_width="fill_parent">
 
 		<LinearLayout android:id="@+id/Layout01RP"
 			android:layout_width="fill_parent" android:layout_height="45sp"
@@ -16,11 +17,13 @@
 				android:layout_width="100sp" android:textColor="@color/black"></TextView>
 			<TextView android:id="@+id/dateDisplay"
 				android:layout_height="wrap_content" android:text=""
-				android:textSize="20sp" android:layout_marginLeft="35sp" android:textColor="@color/darkGreen"
-				android:layout_gravity="left|center_vertical" android:gravity="left|center_vertical" android:layout_width="110sp"/>
-			<TextView android:id="@+id/TextView01"
-				android:clickable="true"
-				android:onClick="@string/EditStoreName" android:layout_height="40sp" android:layout_width="40sp" android:layout_marginLeft="10sp" android:background="@drawable/edit0" android:layout_marginTop="-7sp"></TextView>
+				android:textSize="20sp" android:layout_marginLeft="35sp"
+				android:textColor="@color/darkGreen" android:layout_gravity="left|center_vertical"
+				android:gravity="left|center_vertical" android:layout_width="110sp" />
+			<TextView android:id="@+id/TextView01" android:clickable="true"
+				android:onClick="@string/EditStoreName" android:layout_height="15sp"
+				android:layout_width="20sp" android:layout_marginTop="15sp"
+				android:layout_marginLeft="2sp" android:background="@drawable/calendaricon"></TextView>
 		</LinearLayout>
 
 		<LinearLayout android:id="@+id/Layout04RP"
@@ -90,12 +93,12 @@
 
 			<ImageView android:id="@+id/Image01" android:clickable="true"
 				android:onClick="@string/onClickPic" android:layout_width="115sp"
-				android:layout_gravity="bottom"
-				android:layout_height="fill_parent" android:background="@drawable/showrec0" android:layout_marginLeft="25sp"></ImageView>
+				android:layout_gravity="bottom" android:layout_height="fill_parent"
+				android:background="@drawable/showrec0" android:layout_marginLeft="25sp"></ImageView>
 			<Button android:id="@+id/B01" android:onClick="onClick"
-				android:background="@drawable/save" android:layout_height="35sp"
+				android:layout_height="35sp"
 				android:layout_width="70sp" android:layout_marginTop="50sp"
-				android:layout_marginLeft="40sp"></Button>
+				android:layout_marginLeft="40sp" android:background="@drawable/save9"></Button>
 
 		</LinearLayout>
 	</LinearLayout>
