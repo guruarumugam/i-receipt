@@ -55,6 +55,9 @@ public class idan extends Activity {
 		 */
 
 		rec_arr = loadList();
+		rec_arr.clear(); // ///////////להוריד לפני שמעלים לנקסוס1, טוב רק
+							// לאפליקציה
+							// במחשב*******************************************
 		if (rec_arr == null)
 			rec_arr = new ArrayList<iReceipt>();
 
