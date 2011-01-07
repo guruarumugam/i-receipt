@@ -1,6 +1,8 @@
 package google.proj;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.graphics.Color;
 import java.util.List;
 import android.app.Activity;
@@ -13,19 +15,24 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	String[] cat = { "Dining", "Car", "Travel", "Shopping", "Rent",
-			"Groceries", "Presents", "Entertainment", "Household goods",
-			"Other" };
+	public static String[] cat = { "Dining", "Car", "Travel", "Shopping",
+			"Rent", "Groceries", "Presents", "Entertainment",
+			"Household goods", "Other" };
 	int[] colors = new int[] { Color.BLUE, Color.GREEN,
 			Color.parseColor("#8b8878"), Color.YELLOW,
 			Color.parseColor("#00ced1"), Color.RED, Color.LTGRAY, Color.BLACK,
 			Color.parseColor("#8b4513"), Color.parseColor("#228b22") };
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
+	// //////////////////////
+	int period = 0; // 0 => last week, 1=> last month, 2=>last year
+	public static List<iReceipt> pie_rec_arr = new ArrayList<iReceipt>();
+	private int Year, Month, Day;
 
-	// public static List<iReceipt> rec_arr;
+	// //////////////////////
 
 	/** Called when the activity is first created. */
 	@Override
@@ -43,6 +50,9 @@ public class MainActivity extends Activity {
 		TextView t8 = (TextView) findViewById(R.id.TextView10);
 		TextView t9 = (TextView) findViewById(R.id.TextView13);
 		TextView t10 = (TextView) findViewById(R.id.TextView14);
+		RadioButton r1 = (RadioButton) findViewById(R.id.RadioButton01);
+		RadioButton r2 = (RadioButton) findViewById(R.id.RadioButton02);
+		RadioButton r3 = (RadioButton) findViewById(R.id.RadioButton03);
 		// ------------------------------------------------------------------------------------------
 		// Used vars declaration
 		// ------------------------------------------------------------------------------------------
@@ -50,6 +60,22 @@ public class MainActivity extends Activity {
 		int mNumGen = 10;
 		int MaxPieItems = cat.length;
 		Double MaxCount = 0.0;
+
+		// ///////////////////////////////////////////////////////////////
+		final Calendar c = Calendar.getInstance();
+		Year = c.get(Calendar.YEAR);
+		Month = c.get(Calendar.MONTH + 1);
+		Day = c.get(Calendar.DAY_OF_MONTH);
+		IDate dateToday = new IDate(Year, Month, Day);// today
+		IDate date = new IDate();
+		date = getDateFrom(dateToday, period);
+		// last week
+
+		// last month
+
+		// last year
+
+		// ///////////////////////////////////////////////////////////////
 
 		Double sumPerCat[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		for (iReceipt rec : idan.rec_arr) {
@@ -145,4 +171,11 @@ public class MainActivity extends Activity {
 		LinearLayout TargetPieView = (LinearLayout) findViewById(R.id.pie_container);
 		TargetPieView.addView(mImageView);
 	}
+
+	// //////////////////////////////////
+	public IDate getDateFrom(IDate date, int period) {
+
+		return null;
+	}
+	// //////////////////////////////////
 }

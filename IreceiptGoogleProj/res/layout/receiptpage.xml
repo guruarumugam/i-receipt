@@ -96,9 +96,9 @@
 				android:layout_gravity="bottom" android:layout_height="fill_parent"
 				android:background="@drawable/showrec0" android:layout_marginLeft="25sp"></ImageView>
 			<Button android:id="@+id/B01" android:onClick="onClick"
-				android:layout_height="35sp"
-				android:layout_width="70sp" android:layout_marginTop="50sp"
-				android:layout_marginLeft="40sp" android:background="@drawable/save9"></Button>
+				android:layout_height="35sp" android:layout_width="70sp"
+				android:layout_marginTop="50sp" android:layout_marginLeft="40sp"
+				android:background="@drawable/save9"></Button>
 
 		</LinearLayout>
 	</LinearLayout>

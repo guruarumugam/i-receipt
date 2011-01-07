@@ -5,15 +5,19 @@
 
 	<LinearLayout android:id="@+id/LinearLayoutCat"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<EditText android:layout_height="50sp" android:layout_width="200sp" android:id="@+id/Editsearch"></EditText>
+		<EditText android:layout_height="50sp" android:layout_width="200sp"
+			android:id="@+id/Editsearch"></EditText>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/LinearLayout20"
 		android:layout_height="wrap_content" android:layout_width="fill_parent">
-		<Button android:layout_height="50sp"
-			android:layout_width="100sp" android:text="Search!" android:layout_gravity="center_vertical|center_horizontal|center" android:id="@+id/ButtonSearch"></Button><Button android:layout_height="50sp"
-			android:layout_width="100sp" android:layout_gravity="center_vertical|center_horizontal|center" android:text="Advance" android:id="@+id/ButtonAdvanceSearch" android:onClick="@string/advance"></Button>
-		
-	</LinearLayout>
+		<Button android:layout_height="50sp" android:layout_width="100sp"
+			android:text="Search!" android:layout_gravity="center_vertical|center_horizontal|center"
+			android:id="@+id/ButtonSearch"></Button>
+		<Button android:layout_height="50sp" android:layout_width="100sp"
+			android:layout_gravity="center_vertical|center_horizontal|center"
+			android:text="Advance" android:id="@+id/ButtonAdvanceSearch"
+			android:onClick="@string/advance"></Button>
 
+	</LinearLayout>
 </LinearLayout>

@@ -3,10 +3,29 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:background="@color/white" android:layout_height="wrap_content">
 
+	<LinearLayout android:id="@+id/LinearLayout12"
+		android:layout_width="fill_parent"
+		android:layout_marginTop="5sp" android:layout_height="40sp">
+		<TextView android:id="@+id/TextView15" android:layout_width="fill_parent" android:text="Payments per category" android:textSize="25sp" android:textColor="@color/black" android:gravity="top|center_horizontal" android:layout_height="40sp"></TextView>
+
+</LinearLayout>
+	<RadioGroup android:id="@+id/RadioGroup01" android:orientation="horizontal"
+		android:layout_height="35sp" android:layout_width="fill_parent">
+		<RadioButton android:id="@+id/RadioButton01"
+			android:layout_height="wrap_content" android:textColor="@color/black" android:layout_width="wrap_content" android:gravity="center_vertical|center_horizontal|center" android:textSize="25sp" android:layout_marginLeft="3sp" android:text="Week"></RadioButton>
+		<RadioButton android:id="@+id/RadioButton02"
+			android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Month" android:textColor="@color/black" android:gravity="center_vertical|center_horizontal|center" android:textSize="25sp" android:layout_marginLeft="6sp"></RadioButton>
+		<RadioButton android:id="@+id/RadioButton03"
+			android:layout_height="wrap_content" android:text="Year" android:layout_width="wrap_content" android:textColor="@color/black" android:gravity="center_vertical" android:textSize="25sp" android:layout_marginLeft="6sp"></RadioButton>
+	</RadioGroup>
 	<LinearLayout android:id="@+id/pie_container"
 		android:layout_width="fill_parent" android:orientation="vertical"
-		android:background="@color/white" android:gravity="center_vertical|center_horizontal|center" android:layout_height="230px">
-	</LinearLayout>
+		android:background="@color/white" android:gravity="center_vertical|center_horizontal|center"
+		android:layout_height="230px">
+	
+
+
+</LinearLayout>
 
 	<ScrollView android:id="@+id/ScrollView01"
 		android:layout_height="wrap_content" android:layout_width="fill_parent">

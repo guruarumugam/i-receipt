@@ -34,7 +34,7 @@ public class searchReceipt extends Activity {
 	private Button searchButton;
 	private Spinner spinner_c;
 	private ArrayAdapter<String> adapter_c;
-	public static String cat[] = new String[10];
+	// public static String cat[] = new String[10];
 	public String str_cat;
 	public int mYear, mDay, mMonth;
 	public IDate date1, date2;
@@ -98,7 +98,7 @@ public class searchReceipt extends Activity {
 		});
 
 		spinner_c = (Spinner) findViewById(R.id.Spinner01);
-		cat[0] = "Dining";
+		/*cat[0] = "Dining";
 		cat[1] = "Car";
 		cat[2] = "Travel";
 		cat[3] = "Shopping";
@@ -107,9 +107,9 @@ public class searchReceipt extends Activity {
 		cat[6] = "Presents";
 		cat[7] = "Entertainment";
 		cat[8] = "Household goods";
-		cat[9] = "Other";
+		cat[9] = "Other";*/
 		adapter_c = new ArrayAdapter<String>(searchReceipt.this,
-				android.R.layout.simple_spinner_item, cat);
+				android.R.layout.simple_spinner_item, MainActivity.cat);
 		adapter_c
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_c.setAdapter(adapter_c);
@@ -239,4 +239,10 @@ public class searchReceipt extends Activity {
 					.append(" "));
 		}
 	}
+
+	public void advance(View view) {
+		Intent i = new Intent(searchReceipt.this, listview.class);
+		startActivity(i);
+	}
+
 }

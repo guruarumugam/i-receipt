@@ -3,28 +3,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent" android:layout_width="fill_parent"
 	android:orientation="vertical" android:background="@color/white">
+
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" android:layout_height="60sp"
+		android:layout_marginTop="5sp">
+		<TextView android:id="@+id/payments" android:text="Payments:"
+			android:textColor="@color/darkGreen" android:gravity="center_vertical|center_horizontal"
+			android:layout_height="fill_parent" android:layout_width="fill_parent"
+			android:textSize="32sp"></TextView>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout02"
+		android:layout_width="fill_parent" android:layout_height="30sp"
+		android:layout_marginTop="20sp">
+		<TextView android:layout_height="30sp"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:text="This month:" android:textSize="20sp" android:textColor="@color/black"
+			android:layout_width="110sp" android:id="@+id/ThisMonth" android:layout_marginLeft="15sp"></TextView>
+		<TextView android:textSize="25sp" android:layout_height="30sp"
+			android:numeric="decimal" android:id="@+id/totalThisMonth"
+			android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical"
+			android:layout_width="150sp" android:textColor="@color/darkGreen"
+			android:layout_marginTop="-4sp"></TextView>
+		<ImageButton android:id="@+id/dollar1"
+			android:layout_centerHorizontal="true" android:layout_margin="3dp"
+			android:background="@drawable/dollar" android:scaleType="center"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:layout_height="24sp" android:layout_width="24sp">
+		</ImageButton>
+
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout03"
+		android:layout_width="fill_parent" android:layout_height="30sp"
+		android:layout_marginTop="20sp">
+		<TextView android:layout_height="30sp"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:textSize="20sp" android:textColor="@color/black"
+			android:layout_width="110sp" android:text="Last month:" android:id="@+id/LastMonth" android:layout_marginLeft="15sp"></TextView>
+		<TextView android:numeric="decimal" android:layout_height="30sp"
+			android:id="@+id/totalLastMonth" android:textSize="25sp"
+			android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical"
+			android:layout_width="150sp" android:textColor="@color/darkGreen"
+			android:layout_marginTop="-4sp"></TextView>
+		<ImageButton android:id="@+id/dollar1"
+			android:layout_centerHorizontal="true" android:layout_margin="3dp"
+			android:background="@drawable/dollar" android:scaleType="center"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:layout_height="24sp" android:layout_width="24sp">
+		</ImageButton>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout05"
+		android:layout_height="50sp" android:layout_width="fill_parent"
+		android:layout_marginTop="30sp">
+		<TextView android:id="@+id/payments" android:textColor="@color/darkGreen"
+			android:gravity="center_vertical|center_horizontal"
+			android:layout_height="fill_parent" android:layout_width="fill_parent"
+			android:textSize="32sp" android:text="Choose dates:"></TextView>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout1"
+		android:layout_width="fill_parent" android:orientation="horizontal"
+		android:layout_marginTop="20sp" android:layout_height="40sp">
+		<TextView android:id="@+id/pickDateFrom" android:text="From:"
+			android:clickable="true" android:textColor="@color/black"
+			android:background="@drawable/graybutton" android:gravity="center_vertical"
+			android:paddingLeft="8sp" android:layout_height="36sp" android:layout_marginLeft="8sp" android:layout_width="150sp" android:textSize="17sp"/>
+		<TextView android:id="@+id/pickDateTo" android:text="To:"
+			android:clickable="true" android:textColor="@color/black"
+			android:paddingLeft="10sp" android:background="@drawable/graybutton"
+			android:gravity="center_vertical" android:layout_height="36sp" android:layout_width="132sp" android:layout_marginLeft="23sp" android:textSize="17sp"/>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent"
+		android:id="@+id/LinearLayout04" android:layout_marginTop="20sp"
+		android:layout_height="35sp">
+		<TextView android:numeric="decimal" android:layout_height="30sp"
+			android:textSize="25sp" android:id="@+id/totalFromTo"
+			android:layout_gravity="right|center_vertical"
+			android:layout_marginLeft="10sp" android:gravity="right|center_vertical"
+			android:textColor="@color/darkGreen" android:layout_marginTop="-4sp"
+			android:layout_width="260sp"></TextView>
+		<ImageButton android:id="@+id/dollar1"
+			android:layout_centerHorizontal="true" android:layout_margin="3dp"
+			android:background="@drawable/dollar" android:scaleType="center"
+			android:layout_gravity="bottom" android:layout_height="24sp"
+			android:layout_width="24sp">
+		</ImageButton>
+	</LinearLayout><LinearLayout android:id="@+id/LinearLayout06" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:text="Pie Chart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:layout_marginLeft="40sp"/><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:text="XY Chart" android:layout_marginLeft="30sp"/></LinearLayout>
 	
-	<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="60sp" android:layout_marginTop="5sp"><TextView android:id="@+id/payments" android:text="Payments:" android:textColor="@color/darkGreen" android:gravity="center_vertical|center_horizontal" android:layout_height="fill_parent" android:layout_width="fill_parent" android:textSize="32sp"></TextView></LinearLayout><LinearLayout android:id="@+id/LinearLayout02" android:layout_width="fill_parent" android:layout_height="30sp" android:layout_marginTop="20sp">
-			<TextView android:layout_height="30sp" android:layout_gravity="center_vertical|center_horizontal" android:text="This month:" android:textSize="20sp" android:textColor="@color/black" android:layout_width="110sp" android:layout_marginLeft="10sp" android:id="@+id/ThisMonth"></TextView><TextView android:textSize="25sp" android:layout_height="30sp" android:numeric="decimal" android:id="@+id/totalThisMonth" android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical" android:layout_width="150sp" android:textColor="@color/darkGreen" android:layout_marginTop="-4sp"></TextView>
-			<ImageButton android:id="@+id/dollar1" android:layout_centerHorizontal="true" android:layout_margin="3dp" android:background="@drawable/dollar" android:scaleType="center" android:layout_gravity="center_vertical|center_horizontal" android:layout_height="24sp" android:layout_width="24sp">
-			</ImageButton>
-		
-</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayout03" android:layout_width="fill_parent" android:layout_height="30sp" android:layout_marginTop="20sp"><TextView android:layout_height="30sp" android:layout_gravity="center_vertical|center_horizontal" android:textSize="20sp" android:textColor="@color/black" android:layout_width="110sp" android:layout_marginLeft="10sp" android:text="Last month:" android:id="@+id/LastMonth"></TextView><TextView android:numeric="decimal" android:layout_height="30sp" android:id="@+id/totalLastMonth" android:textSize="25sp" android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical" android:layout_width="150sp" android:textColor="@color/darkGreen" android:layout_marginTop="-4sp"></TextView><ImageButton android:id="@+id/dollar1"
-				android:layout_centerHorizontal="true" android:layout_margin="3dp"
-				android:background="@drawable/dollar" android:scaleType="center"
-				android:layout_gravity="center_vertical|center_horizontal" android:layout_height="24sp" android:layout_width="24sp">
-			</ImageButton>
-</LinearLayout><LinearLayout android:id="@+id/LinearLayout05" android:layout_height="50sp" android:layout_width="fill_parent" android:layout_marginTop="30sp"><TextView android:id="@+id/payments" android:textColor="@color/darkGreen" android:gravity="center_vertical|center_horizontal" android:layout_height="fill_parent" android:layout_width="fill_parent" android:textSize="32sp" android:text="Choose dates:"></TextView>
-</LinearLayout><LinearLayout android:id="@+id/LinearLayout1" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_marginTop="20sp" android:layout_height="40sp">
-		<TextView android:id="@+id/pickDateFrom" android:text="From:" android:clickable="true" android:textColor="@color/black" android:background="@drawable/graybutton" android:gravity="center_vertical" android:paddingLeft="8sp" android:textSize="16sp" android:layout_height="36sp" android:layout_width="145sp" android:layout_marginLeft="8sp"/>
-		<TextView android:id="@+id/pickDateTo" android:text="To:" android:clickable="true" android:textColor="@color/black" android:paddingLeft="10sp" android:background="@drawable/graybutton" android:gravity="center_vertical" android:textSize="16sp" android:layout_height="36sp" android:layout_width="125sp" android:layout_marginLeft="30sp"/>
-	</LinearLayout><LinearLayout android:layout_width="fill_parent" android:id="@+id/LinearLayout04" android:layout_marginTop="20sp" android:layout_height="35sp"><TextView android:numeric="decimal" android:layout_height="30sp" android:textSize="25sp" android:id="@+id/totalFromTo" android:layout_gravity="right|center_vertical" android:layout_marginLeft="10sp" android:gravity="right|center_vertical" android:textColor="@color/darkGreen" android:layout_marginTop="-4sp" android:layout_width="260sp"></TextView><ImageButton android:id="@+id/dollar1" android:layout_centerHorizontal="true" android:layout_margin="3dp" android:background="@drawable/dollar" android:scaleType="center" android:layout_gravity="bottom" android:layout_height="24sp" android:layout_width="24sp">
-			</ImageButton>
-</LinearLayout><Button android:id="@+id/Button01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:clickable="true" android:onClick="@string/pieChart" android:text="Pie chart"></Button>
-	
-	
-	
+
+
+
+
 
 
 

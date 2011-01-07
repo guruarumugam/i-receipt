@@ -5,7 +5,7 @@
 
 	<LinearLayout android:id="@+id/LinearLayoutStore"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		
+
 		<EditText android:layout_height="50sp" android:layout_width="200sp"
 			android:id="@+id/EditTextStore01" android:maxLines="14"></EditText>
 	</LinearLayout>
@@ -17,5 +17,4 @@
 		<Button android:layout_height="50sp" android:text="Cancel"
 			android:layout_width="100sp" android:id="@+id/ButtonStore02"></Button>
 	</LinearLayout>
-
 </LinearLayout>

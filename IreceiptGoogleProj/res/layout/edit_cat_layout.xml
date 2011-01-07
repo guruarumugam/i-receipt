@@ -16,7 +16,4 @@
 		<Button android:layout_height="50sp" android:text="Cancel"
 			android:layout_width="100sp" android:id="@+id/ButtonCat02"></Button>
 	</LinearLayout>
-
 </LinearLayout>
-
-

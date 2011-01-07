@@ -4,12 +4,15 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<LinearLayout android:background="@color/col"
 		android:layout_width="fill_parent" android:gravity="center_vertical|center_horizontal|center"
-		android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/Layout02list">
+		android:layout_height="wrap_content" android:layout_gravity="center"
+		android:id="@+id/Layout02list">
 		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textColor="@color/Tex" android:textStyle="bold" android:id="@+id/Tex01" android:textSize="10pt" android:layout_marginLeft="70sp" android:text="List of Receipts"></TextView>
-		<Button android:text="Back"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:id="@+id/But01" android:onClick="onClick2" android:layout_marginLeft="10sp"></Button>
+			android:layout_height="wrap_content" android:textColor="@color/Tex"
+			android:textStyle="bold" android:id="@+id/Tex01" android:textSize="10pt"
+			android:layout_marginLeft="70sp" android:text="List of Receipts"></TextView>
+		<Button android:text="Back" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/But01"
+			android:onClick="onClick2" android:layout_marginLeft="10sp"></Button>
 	</LinearLayout>
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
