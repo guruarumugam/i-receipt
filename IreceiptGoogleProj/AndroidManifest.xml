@@ -23,6 +23,8 @@
 		</activity>
 		<activity android:name=".MainActivity" android:label="Payments per category by Pie Chart ">
 		</activity>
+		<activity android:name=".searchReceipt" android:label="Advance search">
+		</activity>
 		<!--	
 		<activity android:name=".prev" android:label="Camera Preview">
 		</activity>

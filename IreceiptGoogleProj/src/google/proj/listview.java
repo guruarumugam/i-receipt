@@ -300,12 +300,13 @@ public class listview extends Activity {
 				switcher = 1;
 				EA.notifyDataSetChanged();
 				if (search_rec_arr.size() == 0) {
+					/*CustomizeDialog customizeDialog = new CustomizeDialog(this, "Sorry, No match for: \"" + search + "\"");
+					customizeDialog.show();*/
 					LayoutInflater inflater = getLayoutInflater();
 					View layout = inflater.inflate(R.layout.toast_layout,
 							(ViewGroup) findViewById(R.id.toast_layout_root));
 					TextView text2 = (TextView) layout.findViewById(R.id.text);
-					text2.setText("Sorry, No receipt includes: \"" + search
-							+ "\"");
+					text2.setText("Sorry, No match for: \"" + search + "\"");
 					Toast toast2 = new Toast(getApplicationContext());
 					toast2.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 					toast2.setDuration(Toast.LENGTH_LONG);
@@ -324,6 +325,7 @@ public class listview extends Activity {
 				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
 				switcher = 1;
 				Intent i = new Intent(listview.this, searchReceipt.class);
+				startActivity(i);
 				/*
 				 * final Dialog dialog5 = new Dialog(listview.this);
 				 * dialog5.setContentView(R.layout.searchreceipt);

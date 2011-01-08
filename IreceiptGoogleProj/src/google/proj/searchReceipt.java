@@ -9,7 +9,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -34,7 +36,6 @@ public class searchReceipt extends Activity {
 	private Button searchButton;
 	private Spinner spinner_c;
 	private ArrayAdapter<String> adapter_c;
-	// public static String cat[] = new String[10];
 	public String str_cat;
 	public int mYear, mDay, mMonth;
 	public IDate date1, date2;
@@ -77,6 +78,8 @@ public class searchReceipt extends Activity {
 		DateFrom = (TextView) findViewById(R.id.pickDateFrom);
 		DateTo = (TextView) findViewById(R.id.pickDateTo);
 
+		radioDate.setChecked(true);
+
 		DateTo.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Calendar c = Calendar.getInstance();
@@ -98,16 +101,6 @@ public class searchReceipt extends Activity {
 		});
 
 		spinner_c = (Spinner) findViewById(R.id.Spinner01);
-		/*cat[0] = "Dining";
-		cat[1] = "Car";
-		cat[2] = "Travel";
-		cat[3] = "Shopping";
-		cat[4] = "Rent";
-		cat[5] = "Groceries";
-		cat[6] = "Presents";
-		cat[7] = "Entertainment";
-		cat[8] = "Household goods";
-		cat[9] = "Other";*/
 		adapter_c = new ArrayAdapter<String>(searchReceipt.this,
 				android.R.layout.simple_spinner_item, MainActivity.cat);
 		adapter_c
@@ -157,19 +150,10 @@ public class searchReceipt extends Activity {
 
 	public void DateHandler() {
 		IDate date0; // only for debuging!!
-		if (date1.compareTo(date2) < 0) {// error!!!
-			// לעשות דיאלוג שמודיע שהתאריכים לא טובים..
-			final Dialog dialog2 = new Dialog(this);
-			dialog2.setContentView(R.layout.error_price_date);
-			Button ok = (Button) findViewById(R.id.OkButtonErrorPrice);
-			TextView text = (TextView) findViewById(R.id.error_massage);
-			text.setText("Invalid dates.");
-			ok.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialog2.dismiss();
-				}
-			});
+		if ((date1 == null) || (date2 == null) || (date1.compareTo(date2) < 0)) {// error!!!
+			CustomizeDialog customizeDialog = new CustomizeDialog(this,
+					"Invalid dates");
+			customizeDialog.show();
 		} else {
 			for (int i = 0; i < idan.rec_arr.size(); i++) {
 				date0 = idan.rec_arr.get(i).getRdate(); // only for debuging!!
@@ -181,23 +165,25 @@ public class searchReceipt extends Activity {
 	}
 
 	public void PriceHandler() {
-		Double price1, price2;
+		int price1, price2;
 		Double price; // only for debug!!!
-		price1 = Double.parseDouble(PriceFrom.getText().toString());
-		price2 = Double.parseDouble(PriceTo.getText().toString());
-		if (price1 > price2) {
-			final Dialog dialog1 = new Dialog(this);
-			dialog1.setContentView(R.layout.error_price_date);
-			Button ok = (Button) findViewById(R.id.OkButtonErrorPrice);
-			TextView text = (TextView) findViewById(R.id.error_massage);
-			text.setText("Invalid prices.");
-			ok.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialog1.dismiss();
-				}
-			});
+		price1 = Integer.parseInt(PriceFrom.getText().toString());
+		price2 = Integer.parseInt(PriceTo.getText().toString());
+		if ((price1 > price2) || (price1 < 0)) {
+			CustomizeDialog customizeDialog = new CustomizeDialog(this,
+					"Invalid prices");
+			customizeDialog.show();
 		}
+		/*
+		 * final Dialog dialog1 = new Dialog(this);
+		 * dialog1.setContentView(R.layout.error_price_date); Button ok =
+		 * (Button) findViewById(R.id.OkButtonErrorPrice); TextView text =
+		 * (TextView) findViewById(R.id.error_massage);
+		 * text.setText("Invalid prices"); ok.setOnClickListener(new
+		 * OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { dialog1.dismiss(); } }); }
+		 */
 		for (int i = 0; i < idan.rec_arr.size(); i++) {
 			price = idan.rec_arr.get(i).getTotal(); // only for the debuging!!!
 			if ((idan.rec_arr.get(i).getTotal() >= price1)
@@ -229,14 +215,40 @@ public class searchReceipt extends Activity {
 
 	private void updateDisplay(int id) {
 		if (id == R.id.pickDateFrom) {
-			DateFrom.setText(new StringBuilder().append("From:")
-					.append(mMonth + 1).append("-").append(mDay).append("-")
-					.append(mYear).append(" "));
+			if ((mMonth > 8) && (mDay > 8))
+				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+						.append("-").append(mDay).append("-").append(mYear)
+						.append(" "));
+			if ((mMonth < 9) && (mDay < 9))
+				DateFrom.setText(new StringBuilder().append("0")
+						.append(mMonth + 1).append("-").append("0")
+						.append(mDay).append("-").append(mYear).append(" "));
+			if ((mMonth < 9) && (mDay > 8))
+				DateFrom.setText(new StringBuilder().append("0")
+						.append(mMonth + 1).append("-").append(mDay)
+						.append("-").append(mYear).append(" "));
+			if ((mMonth > 8) && (mDay < 9))
+				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+						.append("-").append("0").append(mDay).append("-")
+						.append(mYear).append(" "));
 		}
 		if (id == R.id.pickDateTo) {
-			DateTo.setText(new StringBuilder().append("To:").append(mMonth + 1)
-					.append("-").append(mDay).append("-").append(mYear)
-					.append(" "));
+			if ((mMonth > 8) && (mDay > 8))
+				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+						.append("-").append(mDay).append("-").append(mYear)
+						.append(" "));
+			if ((mMonth < 9) && (mDay < 9))
+				DateFrom.setText(new StringBuilder().append("0")
+						.append(mMonth + 1).append("-").append("0")
+						.append(mDay).append("-").append(mYear).append(" "));
+			if ((mMonth < 9) && (mDay > 8))
+				DateFrom.setText(new StringBuilder().append("0")
+						.append(mMonth + 1).append("-").append(mDay)
+						.append("-").append(mYear).append(" "));
+			if ((mMonth > 8) && (mDay < 9))
+				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+						.append("-").append("0").append(mDay).append("-")
+						.append(mYear).append(" "));
 		}
 	}
 

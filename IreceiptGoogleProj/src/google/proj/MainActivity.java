@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 			Color.parseColor("#8b4513"), Color.parseColor("#228b22") };
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
 	// //////////////////////
-	public static int period = 3; // 0 => last week, 1=> last month, 2=>last
+	public static int period; // 0 => last week, 1=> last month, 2=>last
 									// year 3=>not initialized yet
 	public static List<iReceipt> pie_rec_arr = new ArrayList<iReceipt>();
 	private int Year, Month, Day;
@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.piechart);
+		period=3;
 		t1 = (TextView) findViewById(R.id.TextView03);
 		t2 = (TextView) findViewById(R.id.TextView04);
 		t3 = (TextView) findViewById(R.id.TextView05);
@@ -62,14 +63,6 @@ public class MainActivity extends Activity {
 		// ------------------------------------------------------------------------------------------
 		// Used vars declaration
 		// ------------------------------------------------------------------------------------------
-		if (period == 3)
-			r1.setChecked(true);
-		if (r1.isChecked())
-			period = 0;
-		if (r2.isChecked())
-			period = 1;
-		if (r3.isChecked())
-			period = 2;
 		rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 			public void onCheckedChanged(RadioGroup arg0, int arg1) {
 				int id = arg1;
@@ -82,7 +75,15 @@ public class MainActivity extends Activity {
 				makePie(period);
 			}
 		});
-		makePie(period);
+		if (period == 3)
+			r1.setChecked(true);
+		if (r1.isChecked())
+			period = 0;
+		if (r2.isChecked())
+			period = 1;
+		if (r3.isChecked())
+			period = 2;
+//		makePie(period);
 	}
 
 	public void makePie(int period) {

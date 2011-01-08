@@ -99,7 +99,7 @@ public class idan extends Activity {
 		iReceipt rec14 = (new iReceipt(new IDate(2010, 12, 7),
 				"MK MS Bev Wagon", 5.25, "Dining", false, true, "",
 				"/data/receipts_prev/IMG_7932.JPG"));
-		iReceipt rec15 = (new iReceipt(new IDate(2010, 12, 10),
+		iReceipt rec15 = (new iReceipt(new IDate(2010, 12, 11),
 				"Orlando Airport O Store", 21.30, "Shopping", false, true,
 				"i came with the Car", "/data/receipts_prev/IMG_7940.JPG"));
 		iReceipt rec16 = (new iReceipt(new IDate(2010, 12, 5),
@@ -227,10 +227,6 @@ public class idan extends Activity {
 	public void statistics_handler(View view) {
 		Intent i = new Intent(idan.this, statistics.class);
 		startActivity(i);
-	}
-
-	public void sync(View view) {
-		// //////////////////////////// הוספת פונקציית סינכרון
 	}
 
 	/*

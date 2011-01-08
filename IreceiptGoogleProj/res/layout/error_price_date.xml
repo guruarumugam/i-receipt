@@ -4,21 +4,7 @@
 	android:layout_height="wrap_content" android:background="@color/white"
 	android:layout_width="180sp">
 
-	<LinearLayout android:id="@+id/LinearLayoutCat"
-		android:layout_height="wrap_content" android:background="@color/white"
-		android:layout_width="wrap_content">
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25sp" android:textColor="@color/black" android:id="@+id/error_massage" android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical|center_horizontal|center"></TextView>
 
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="25sp"
-			android:textColor="@color/black" android:id="@+id/error_massage"></TextView>
-	</LinearLayout>
-
-	<LinearLayout android:id="@+id/LinearLayout20"
-		android:layout_height="wrap_content" android:background="@color/white"
-		android:layout_marginTop="10sp" android:layout_width="fill_parent">
-		<Button android:text="OK" android:layout_height="35sp"
-			android:id="@+id/OkButtonErrorPrice" android:layout_gravity="center_horizontal"
-			android:layout_width="60sp"></Button>
-
-	</LinearLayout>
+	<Button android:text="OK" android:layout_height="35sp" android:id="@+id/OkButtonErrorPrice" android:layout_gravity="center_horizontal" android:layout_width="60sp" android:layout_marginTop="10sp"></Button>
 </LinearLayout>
