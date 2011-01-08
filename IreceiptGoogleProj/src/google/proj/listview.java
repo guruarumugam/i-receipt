@@ -57,6 +57,9 @@ public class listview extends Activity {
 			}
 		}
 		switcher = 0;
+		int index = getIntent().getFlags();
+		if (index == 5) // back from advance search
+			switcher = 2;
 		search_rec_arr = new ArrayList<iReceipt>();
 		EA = new EfficientAdapter(this);
 		myListView.setAdapter(EA);
@@ -73,16 +76,30 @@ public class listview extends Activity {
 				if (pos == 0) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new DateComparator());
-					else
-						Collections.sort(search_rec_arr, new DateComparator());
+					else {
+						if (switcher == 1)
+							Collections.sort(search_rec_arr,
+									new DateComparator());
+						else
+							// switcher == 2
+							Collections.sort(searchReceipt.rec_arr_search,
+									new DateComparator());
+					}
 					EA.notifyDataSetChanged();
 				}
 				if (pos == 1) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new TotaltComparator());
-					else
-						Collections
-								.sort(search_rec_arr, new TotaltComparator());
+					else {
+						if (switcher == 1)
+							Collections.sort(search_rec_arr,
+									new TotaltComparator());
+						else
+							// switcher == 2
+							Collections.sort(searchReceipt.rec_arr_search,
+									new TotaltComparator());
+					}
+
 					EA.notifyDataSetChanged();
 				}
 				if (pos == 2) {
@@ -199,9 +216,13 @@ public class listview extends Activity {
 		public int getCount() {
 			if (switcher == 0)
 				return idan.rec_arr.size();
-			else
-				return search_rec_arr.size();
-
+			else {
+				if (switcher == 1)
+					return search_rec_arr.size();
+				else
+					// switcher == 2
+					return searchReceipt.rec_arr_search.size();
+			}
 		}
 
 		public Object getItem(int position) {
@@ -240,18 +261,31 @@ public class listview extends Activity {
 						.toString());
 				holder.text5.setChecked(idan.rec_arr.get(position).isFlaged());
 			} else {
-				holder.text1.setText(search_rec_arr.get(position)
-						.getStoreName());
-				holder.text2.setText(Double.toString(search_rec_arr.get(
-						position).getTotal()));
-				holder.text3
-						.setText(search_rec_arr.get(position).getCategory());
-				holder.text4.setText(search_rec_arr.get(position).getRdate()
-						.toString());
-				holder.text5
-						.setChecked(search_rec_arr.get(position).isFlaged());
+				if (switcher == 1) {
+					holder.text1.setText(search_rec_arr.get(position)
+							.getStoreName());
+					holder.text2.setText(Double.toString(search_rec_arr.get(
+							position).getTotal()));
+					holder.text3.setText(search_rec_arr.get(position)
+							.getCategory());
+					holder.text4.setText(search_rec_arr.get(position)
+							.getRdate().toString());
+					holder.text5.setChecked(search_rec_arr.get(position)
+							.isFlaged());
+				} else {
+					holder.text1.setText(searchReceipt.rec_arr_search.get(
+							position).getStoreName());
+					holder.text2.setText(Double
+							.toString(searchReceipt.rec_arr_search
+									.get(position).getTotal()));
+					holder.text3.setText(searchReceipt.rec_arr_search.get(
+							position).getCategory());
+					holder.text4.setText(searchReceipt.rec_arr_search
+							.get(position).getRdate().toString());
+					holder.text5.setChecked(searchReceipt.rec_arr_search.get(
+							position).isFlaged());
+				}
 			}
-
 			return convertView;
 		}
 
@@ -300,8 +334,11 @@ public class listview extends Activity {
 				switcher = 1;
 				EA.notifyDataSetChanged();
 				if (search_rec_arr.size() == 0) {
-					/*CustomizeDialog customizeDialog = new CustomizeDialog(this, "Sorry, No match for: \"" + search + "\"");
-					customizeDialog.show();*/
+					/*
+					 * CustomizeDialog customizeDialog = new
+					 * CustomizeDialog(this, "Sorry, No match for: \"" + search
+					 * + "\""); customizeDialog.show();
+					 */
 					LayoutInflater inflater = getLayoutInflater();
 					View layout = inflater.inflate(R.layout.toast_layout,
 							(ViewGroup) findViewById(R.id.toast_layout_root));

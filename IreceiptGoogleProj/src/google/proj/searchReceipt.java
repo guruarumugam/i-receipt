@@ -37,9 +37,10 @@ public class searchReceipt extends Activity {
 	private Spinner spinner_c;
 	private ArrayAdapter<String> adapter_c;
 	public String str_cat;
-	public int mYear, mDay, mMonth;
+	public int mYear, mDay, mMonth, wait = 0;
 	public IDate date1, date2;
 	private TextView DateFrom, DateTo;
+	private iReceipt rec;
 
 	DatePickerDialog.OnDateSetListener fromDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -67,9 +68,7 @@ public class searchReceipt extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.searchreceipt);
-		// rec_arr_search = new ArrayList<iReceipt>();///////////
 		searchButton = (Button) findViewById(R.id.searchButton);
-		// Business = (EditText) findViewById(R.id.EditText01);
 		PriceFrom = (EditText) findViewById(R.id.EditText05);
 		PriceTo = (EditText) findViewById(R.id.EditText06);
 		radioDate = (RadioButton) findViewById(R.id.RadioButton01);
@@ -77,7 +76,7 @@ public class searchReceipt extends Activity {
 		radioCategory = (RadioButton) findViewById(R.id.RadioButton03);
 		DateFrom = (TextView) findViewById(R.id.pickDateFrom);
 		DateTo = (TextView) findViewById(R.id.pickDateTo);
-
+		rec_arr_search = new ArrayList<iReceipt>();
 		radioDate.setChecked(true);
 
 		DateTo.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +123,17 @@ public class searchReceipt extends Activity {
 	}
 
 	public void search(View view) {
-		// if (radioBusiness.isChecked())
-		// BusinessHandler();
 		if (radioDate.isChecked())
 			DateHandler();
 		if (radioPrice.isChecked())
 			PriceHandler();
 		if (radioCategory.isChecked())
 			CategoryHandler();
+		if (wait == 0) {
+			Intent i = new Intent(searchReceipt.this, listview.class);
+			i.setFlags(5);
+			startActivity(i);
+		}
 	}
 
 	/*
@@ -149,53 +151,50 @@ public class searchReceipt extends Activity {
 	 */
 
 	public void DateHandler() {
+		rec_arr_search.clear();
 		IDate date0; // only for debuging!!
 		if ((date1 == null) || (date2 == null) || (date1.compareTo(date2) < 0)) {// error!!!
+			wait = 1;
 			CustomizeDialog customizeDialog = new CustomizeDialog(this,
 					"Invalid dates");
 			customizeDialog.show();
 		} else {
-			for (int i = 0; i < idan.rec_arr.size(); i++) {
-				date0 = idan.rec_arr.get(i).getRdate(); // only for debuging!!
+			wait = 0;
+			for (iReceipt rec : idan.rec_arr) {
+				date0 = rec.getRdate(); // only for debuging!!
 				if ((date0.compareTo(date1) <= 0)
 						&& (date0.compareTo(date2) >= 0))
-					rec_arr_search.add(idan.rec_arr.get(i));
+					rec_arr_search.add(rec);
 			}
 		}
 	}
 
 	public void PriceHandler() {
+		rec_arr_search.clear();
 		int price1, price2;
-		Double price; // only for debug!!!
+		Double price = 0.0; // only for debug!!!
 		price1 = Integer.parseInt(PriceFrom.getText().toString());
 		price2 = Integer.parseInt(PriceTo.getText().toString());
 		if ((price1 > price2) || (price1 < 0)) {
+			wait = 1;
 			CustomizeDialog customizeDialog = new CustomizeDialog(this,
 					"Invalid prices");
 			customizeDialog.show();
-		}
-		/*
-		 * final Dialog dialog1 = new Dialog(this);
-		 * dialog1.setContentView(R.layout.error_price_date); Button ok =
-		 * (Button) findViewById(R.id.OkButtonErrorPrice); TextView text =
-		 * (TextView) findViewById(R.id.error_massage);
-		 * text.setText("Invalid prices"); ok.setOnClickListener(new
-		 * OnClickListener() {
-		 * 
-		 * @Override public void onClick(View v) { dialog1.dismiss(); } }); }
-		 */
-		for (int i = 0; i < idan.rec_arr.size(); i++) {
-			price = idan.rec_arr.get(i).getTotal(); // only for the debuging!!!
-			if ((idan.rec_arr.get(i).getTotal() >= price1)
-					&& (idan.rec_arr.get(i).getTotal() <= price2))
-				rec_arr_search.add(idan.rec_arr.get(i));
+		} else {
+			wait = 0;
+			for (iReceipt rec : idan.rec_arr) {
+				price = rec.getTotal(); // only for the debuging!!!
+				if ((rec.getTotal() >= price1) && (rec.getTotal() <= price2))
+					rec_arr_search.add(rec);
+			}
 		}
 	}
 
 	public void CategoryHandler() {
-		for (int i = 0; i < idan.rec_arr.size(); i++) {
-			if (idan.rec_arr.get(i).getCategory().equals(str_cat))
-				rec_arr_search.add(idan.rec_arr.get(i));
+		rec_arr_search.clear();
+		for (iReceipt rec : idan.rec_arr) {
+			if (rec.getCategory().equals(str_cat))
+				rec_arr_search.add(rec);
 		}
 	}
 
@@ -234,19 +233,19 @@ public class searchReceipt extends Activity {
 		}
 		if (id == R.id.pickDateTo) {
 			if ((mMonth > 8) && (mDay > 8))
-				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+				DateTo.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append(mDay).append("-").append(mYear)
 						.append(" "));
 			if ((mMonth < 9) && (mDay < 9))
-				DateFrom.setText(new StringBuilder().append("0")
+				DateTo.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append("0")
 						.append(mDay).append("-").append(mYear).append(" "));
 			if ((mMonth < 9) && (mDay > 8))
-				DateFrom.setText(new StringBuilder().append("0")
+				DateTo.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append(mDay)
 						.append("-").append(mYear).append(" "));
 			if ((mMonth > 8) && (mDay < 9))
-				DateFrom.setText(new StringBuilder().append(mMonth + 1)
+				DateTo.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append("0").append(mDay).append("-")
 						.append(mYear).append(" "));
 		}
@@ -256,5 +255,4 @@ public class searchReceipt extends Activity {
 		Intent i = new Intent(searchReceipt.this, listview.class);
 		startActivity(i);
 	}
-
 }
