@@ -14,6 +14,8 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -21,7 +23,6 @@ import android.widget.Button;
 import google.proj.R;
 import java.util.ArrayList;
 import java.util.List;
-
 import sync.tset;
 
 import android.os.Environment;
@@ -32,6 +33,7 @@ import android.provider.MediaStore;
 public class idan extends Activity {
 	private static int TAKE_PICTURE = 1;
 	static final int PROGRESS_DIALOG = 0;
+	private static final int SETTINGS = 0;
 	ProgressThread progressThread;
 	ProgressDialog progressDialog;
 	int index = 0;
@@ -358,5 +360,21 @@ public class idan extends Activity {
 			return null;
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(Menu.NONE, SETTINGS, 0, "Settings");
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case SETTINGS:
+			Intent i = new Intent(idan.this, settings.class);
+			startActivity(i);
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

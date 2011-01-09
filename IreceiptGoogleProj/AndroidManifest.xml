@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="google.proj" android:versionCode="1" android:versionName="1.0">
-	<application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
-		<activity android:name=".idan" android:label="@string/app_name" android:screenOrientation="portrait">
+	<application android:icon="@drawable/icon" android:label="@string/app_name"
+		android:debuggable="true">
+		<activity android:name=".idan" android:label="@string/app_name"
+			android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -25,15 +27,14 @@
 		</activity>
 		<activity android:name=".searchReceipt" android:label="Advance search">
 		</activity>
-		<!--	
-		<activity android:name=".prev" android:label="Camera Preview">
+		<activity android:name=".settings" android:label="settings">
 		</activity>
-		-->
+		<!-- <activity android:name=".prev" android:label="Camera Preview"> </activity> -->
 		<activity android:name=".CameraPreview" android:label="Camera Preview">
 		</activity>
 	</application>
- 	 <uses-feature android:name="android.hardware.camera" />
-     <uses-feature android:name="android.hardware.camera.autofocus" />
-	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-	 <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+	<uses-feature android:name="android.hardware.camera" />
+	<uses-feature android:name="android.hardware.camera.autofocus" />
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	<uses-permission android:name="android.permission.CAMERA"></uses-permission>
 </manifest> 
