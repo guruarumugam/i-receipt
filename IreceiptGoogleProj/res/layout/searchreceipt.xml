@@ -117,10 +117,9 @@
 
 
 
-	<Button android:background="@drawable/searchbutton"
-		android:layout_height="40sp" android:layout_width="40sp" android:id="@+id/searchButton"
+	<Button android:id="@+id/searchButton"
 		android:onClick="@string/search" android:layout_gravity="bottom|center_horizontal"
-		android:layout_marginTop="50sp"></Button>
+		android:layout_marginTop="50sp" android:text="Search" android:background="@drawable/searchbutton1" android:textSize="25sp" android:gravity="top|left" android:layout_height="30sp" android:layout_width="130sp" android:paddingLeft="18sp"></Button>
 
 
 

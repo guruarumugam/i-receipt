@@ -17,13 +17,13 @@
 		android:layout_marginTop="20sp">
 		<TextView android:layout_height="30sp"
 			android:layout_gravity="center_vertical|center_horizontal"
-			android:text="This month:" android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="110sp" android:id="@+id/ThisMonth" android:layout_marginLeft="15sp"></TextView>
+			android:text="This month:" android:textColor="@color/black"
+			android:id="@+id/ThisMonth" android:textSize="25sp" android:layout_width="135sp" android:layout_marginLeft="8sp"></TextView>
 		<TextView android:textSize="25sp" android:layout_height="30sp"
 			android:numeric="decimal" android:id="@+id/totalThisMonth"
 			android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical"
-			android:layout_width="150sp" android:textColor="@color/darkGreen"
-			android:layout_marginTop="-4sp"></TextView>
+			android:textColor="@color/darkGreen"
+			android:layout_width="140sp" android:layout_marginTop="-3sp"></TextView>
 		<ImageButton android:id="@+id/dollar1"
 			android:layout_centerHorizontal="true" android:layout_margin="3dp"
 			android:background="@drawable/dollar" android:scaleType="center"
@@ -37,13 +37,13 @@
 		android:layout_marginTop="20sp">
 		<TextView android:layout_height="30sp"
 			android:layout_gravity="center_vertical|center_horizontal"
-			android:textSize="20sp" android:textColor="@color/black"
-			android:layout_width="110sp" android:text="Last month:" android:id="@+id/LastMonth" android:layout_marginLeft="15sp"></TextView>
+			android:textColor="@color/black"
+			android:text="Last month:" android:id="@+id/LastMonth" android:textSize="25sp" android:layout_width="135sp" android:layout_marginLeft="8sp"></TextView>
 		<TextView android:numeric="decimal" android:layout_height="30sp"
 			android:id="@+id/totalLastMonth" android:textSize="25sp"
 			android:layout_gravity="right|center_vertical" android:gravity="right|center_vertical"
-			android:layout_width="150sp" android:textColor="@color/darkGreen"
-			android:layout_marginTop="-4sp"></TextView>
+			android:textColor="@color/darkGreen"
+			android:layout_width="140sp" android:layout_marginTop="-3sp"></TextView>
 		<ImageButton android:id="@+id/dollar1"
 			android:layout_centerHorizontal="true" android:layout_margin="3dp"
 			android:background="@drawable/dollar" android:scaleType="center"
@@ -86,7 +86,7 @@
 			android:layout_gravity="bottom" android:layout_height="24sp"
 			android:layout_width="24sp">
 		</ImageButton>
-	</LinearLayout><LinearLayout android:id="@+id/LinearLayout06" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:text="Pie Chart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:layout_marginLeft="40sp"/><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:text="XY Chart" android:layout_marginLeft="30sp"/></LinearLayout>
+	</LinearLayout><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:text="Pie Chart" android:gravity="center_vertical|center_horizontal" android:layout_gravity="center_horizontal" android:background="@drawable/piechart2" android:layout_height="35sp" android:layout_marginTop="30sp" android:textSize="25sp" android:paddingLeft="40sp" android:layout_width="145sp"/><LinearLayout android:id="@+id/LinearLayout06" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:text="XY Chart" android:layout_marginLeft="30sp" android:visibility="invisible"/></LinearLayout>
 	
 
 

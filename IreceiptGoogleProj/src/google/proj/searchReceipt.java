@@ -134,6 +134,7 @@ public class searchReceipt extends Activity {
 			i.setFlags(5);
 			startActivity(i);
 		}
+		wait = 0;
 	}
 
 	/*
@@ -214,37 +215,37 @@ public class searchReceipt extends Activity {
 
 	private void updateDisplay(int id) {
 		if (id == R.id.pickDateFrom) {
-			if ((mMonth > 8) && (mDay > 8))
+			if ((mMonth > 8) && (mDay > 9))
 				DateFrom.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append(mDay).append("-").append(mYear)
 						.append(" "));
-			if ((mMonth < 9) && (mDay < 9))
+			if ((mMonth < 9) && (mDay < 10))
 				DateFrom.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append("0")
 						.append(mDay).append("-").append(mYear).append(" "));
-			if ((mMonth < 9) && (mDay > 8))
+			if ((mMonth < 9) && (mDay > 9))
 				DateFrom.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append(mDay)
 						.append("-").append(mYear).append(" "));
-			if ((mMonth > 8) && (mDay < 9))
+			if ((mMonth > 8) && (mDay < 10))
 				DateFrom.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append("0").append(mDay).append("-")
 						.append(mYear).append(" "));
 		}
 		if (id == R.id.pickDateTo) {
-			if ((mMonth > 8) && (mDay > 8))
+			if ((mMonth > 8) && (mDay > 9))
 				DateTo.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append(mDay).append("-").append(mYear)
 						.append(" "));
-			if ((mMonth < 9) && (mDay < 9))
+			if ((mMonth < 9) && (mDay < 10))
 				DateTo.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append("0")
 						.append(mDay).append("-").append(mYear).append(" "));
-			if ((mMonth < 9) && (mDay > 8))
+			if ((mMonth < 9) && (mDay > 9))
 				DateTo.setText(new StringBuilder().append("0")
 						.append(mMonth + 1).append("-").append(mDay)
 						.append("-").append(mYear).append(" "));
-			if ((mMonth > 8) && (mDay < 9))
+			if ((mMonth > 8) && (mDay < 10))
 				DateTo.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append("0").append(mDay).append("-")
 						.append(mYear).append(" "));
