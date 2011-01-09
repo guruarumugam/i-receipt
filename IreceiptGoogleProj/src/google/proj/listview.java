@@ -99,22 +99,34 @@ public class listview extends Activity {
 							Collections.sort(searchReceipt.rec_arr_search,
 									new TotaltComparator());
 					}
-
 					EA.notifyDataSetChanged();
 				}
 				if (pos == 2) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new NameComparator());
-					else
-						Collections.sort(search_rec_arr, new NameComparator());
+					else {
+						if (switcher == 1)
+							Collections.sort(search_rec_arr,
+									new NameComparator());
+						else
+							// switcher == 2
+							Collections.sort(searchReceipt.rec_arr_search,
+									new TotaltComparator());
+					}
 					EA.notifyDataSetChanged();
 				}
 				if (pos == 3) {
 					if (switcher == 0)
 						Collections.sort(idan.rec_arr, new FlagedComparator());
-					else
-						Collections
-								.sort(search_rec_arr, new FlagedComparator());
+					else {
+						if (switcher == 1)
+							Collections.sort(search_rec_arr,
+									new FlagedComparator());
+						else
+							// switcher == 2
+							Collections.sort(searchReceipt.rec_arr_search,
+									new TotaltComparator());
+					}
 					EA.notifyDataSetChanged();
 				}
 			}
@@ -136,8 +148,13 @@ public class listview extends Activity {
 					r = (iReceipt) idan.rec_arr.get(arg2);
 					;
 				} else {
-					r = (iReceipt) search_rec_arr.get(arg2);
-					;
+					if (switcher == 1) {
+						r = (iReceipt) search_rec_arr.get(arg2);
+						;
+					} else { // switcher==2
+						r = (iReceipt) searchReceipt.rec_arr_search.get(arg2);
+						;
+					}
 				}
 				i.setFlags(idan.rec_arr.indexOf(r));
 				if (r.isProcessed()) {

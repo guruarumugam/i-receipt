@@ -9,8 +9,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -21,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import google.proj.IDate;
 import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner04;
@@ -49,6 +52,7 @@ public class searchReceipt extends Activity {
 			mMonth = monthOfYear;
 			mDay = dayOfMonth;
 			date1 = new IDate(year, monthOfYear + 1, dayOfMonth);
+			radioDate.setChecked(true);
 			updateDisplay(R.id.pickDateFrom);
 		}
 	};
@@ -59,6 +63,7 @@ public class searchReceipt extends Activity {
 			mMonth = monthOfYear;
 			mDay = dayOfMonth;
 			date2 = new IDate(year, monthOfYear + 1, dayOfMonth);
+			radioDate.setChecked(true);
 			updateDisplay(R.id.pickDateTo);
 		}
 	};
@@ -77,7 +82,7 @@ public class searchReceipt extends Activity {
 		DateFrom = (TextView) findViewById(R.id.pickDateFrom);
 		DateTo = (TextView) findViewById(R.id.pickDateTo);
 		rec_arr_search = new ArrayList<iReceipt>();
-		radioDate.setChecked(true);
+		updateDisplay(0);
 
 		DateTo.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -107,6 +112,39 @@ public class searchReceipt extends Activity {
 		spinner_c.setAdapter(adapter_c);
 		spinner_c
 				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
+		// ///////////////////////////////////////////////////////////
+		/*
+		 * PriceTo.setOnClickListener(new OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { radioPrice.setChecked(true);
+		 * } }); PriceFrom.setOnClickListener(new OnClickListener() {
+		 * 
+		 * @Override public void onClick(View v) { radioPrice.setChecked(true);
+		 * } });
+		 */
+		/*
+		 * PriceFrom.setOnEditorActionListener(new OnEditorActionListener() {
+		 * 
+		 * @Override public boolean onEditorAction(TextView v, int actionId,
+		 * KeyEvent event) { radioPrice.setChecked(true); return false; } });
+		 * PriceTo.setOnEditorActionListener(new OnEditorActionListener() {
+		 * 
+		 * @Override public boolean onEditorAction(TextView v, int actionId,
+		 * KeyEvent event) { radioPrice.setChecked(true); return false; } });
+		 */
+		PriceTo.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				radioPrice.setChecked(true);
+			}
+		});
+		PriceFrom.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				radioPrice.setChecked(true);
+			}
+		});
+		// //////////////////////////////////////////////////////////
 	}
 
 	@Override
@@ -206,6 +244,7 @@ public class searchReceipt extends Activity {
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
 			Object item = parent.getItemAtPosition(pos);
+			radioCategory.setChecked(true);
 			str_cat = (String) item;
 		}
 
@@ -249,6 +288,25 @@ public class searchReceipt extends Activity {
 				DateTo.setText(new StringBuilder().append(mMonth + 1)
 						.append("-").append("0").append(mDay).append("-")
 						.append(mYear).append(" "));
+		}
+		if (id == 0) {
+			final Calendar c = Calendar.getInstance();
+			mYear = c.get(Calendar.YEAR);
+			mMonth = c.get(Calendar.MONTH);
+			mDay = c.get(Calendar.DAY_OF_MONTH);
+			if (mDay > 28)
+				mDay = 28;
+			if (mMonth > 0)
+				mMonth -= 1;
+			else {
+				mMonth = 11; // =>12
+				mYear -= 1;
+			}
+			updateDisplay(R.id.pickDateFrom);
+			mMonth = c.get(Calendar.MONTH);
+			mYear = c.get(Calendar.YEAR);
+			mDay = c.get(Calendar.DAY_OF_MONTH);
+			updateDisplay(R.id.pickDateTo);
 		}
 	}
 
