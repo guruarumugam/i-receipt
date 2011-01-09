@@ -9,8 +9,7 @@
 		android:textSize="30sp" android:text="Advance Search:"
 		android:layout_marginTop="6sp"></TextView>
 	<LinearLayout android:id="@+id/LinearLayout07"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="325sp">
+		android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="340sp" android:background="@drawable/advancesearch">
 		<RadioGroup android:id="@+id/RadioGroup01"
 			android:orientation="vertical" android:layout_width="40sp"
 			android:layout_height="wrap_content" android:layout_marginTop="10sp" android:layout_marginLeft="10sp">
@@ -18,16 +17,14 @@
 			<RadioButton android:id="@+id/RadioButton01"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 			<RadioButton android:id="@+id/RadioButton02"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_marginTop="80sp"></RadioButton>
+				android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="89sp"></RadioButton>
 			<RadioButton android:id="@+id/RadioButton03"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:layout_marginTop="100sp"></RadioButton>
 
 		</RadioGroup>
 		<LinearLayout android:id="@+id/LinearLayout06"
-			android:orientation="vertical" android:layout_width="fill_parent"
-			android:layout_height="325sp">
+			android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="340sp">
 
 			<LinearLayout android:id="@+id/LinearLayout04"
 				android:layout_height="40sp" android:layout_marginLeft="100sp"
@@ -68,7 +65,7 @@
 			</LinearLayout>
 			<LinearLayout android:id="@+id/LinearLayout05"
 				android:layout_height="40sp" android:layout_width="wrap_content"
-				android:layout_marginLeft="100sp" android:layout_marginTop="6sp">
+				android:layout_marginLeft="100sp" android:layout_marginTop="15sp">
 				<TextView android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:textColor="@color/black"
 					android:textSize="20sp" android:id="@+id/TextView03" android:text="Price:"

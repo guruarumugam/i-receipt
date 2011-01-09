@@ -111,7 +111,7 @@ public class listview extends Activity {
 						else
 							// switcher == 2
 							Collections.sort(searchReceipt.rec_arr_search,
-									new TotaltComparator());
+									new NameComparator());
 					}
 					EA.notifyDataSetChanged();
 				}
@@ -125,7 +125,7 @@ public class listview extends Activity {
 						else
 							// switcher == 2
 							Collections.sort(searchReceipt.rec_arr_search,
-									new TotaltComparator());
+									new FlagedComparator());
 					}
 					EA.notifyDataSetChanged();
 				}

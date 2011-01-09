@@ -83,6 +83,8 @@ public class searchReceipt extends Activity {
 		DateTo = (TextView) findViewById(R.id.pickDateTo);
 		rec_arr_search = new ArrayList<iReceipt>();
 		updateDisplay(0);
+		PriceFrom.setText("0");
+		PriceTo.setText("100");
 
 		DateTo.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
