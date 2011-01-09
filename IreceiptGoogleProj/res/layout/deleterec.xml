@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:padding="10dip"
+	android:layout_height="wrap_content" android:background="@color/white" android:layout_width="260sp">
+
+	<TextView android:layout_height="wrap_content" android:textSize="25sp"
+		android:textColor="@color/black" android:id="@+id/error_massage"
+		android:layout_gravity="center_vertical|center_horizontal"
+		android:gravity="center_vertical|center_horizontal|center" android:layout_width="fill_parent"></TextView>
+
+	<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_marginTop="20sp" android:layout_height="50sp"><Button android:layout_gravity="center_horizontal" android:layout_marginTop="10sp" android:id="@+id/OkDelete" android:text="Delete" android:gravity="center_vertical|center_horizontal|center" android:textSize="20sp" android:layout_width="90sp" android:layout_height="45sp" android:layout_marginLeft="20sp"></Button><Button android:layout_gravity="center_horizontal" android:layout_marginTop="10sp" android:id="@+id/cancelDelete" android:text="Cancel" android:gravity="center_vertical|center_horizontal|center" android:layout_marginLeft="15sp" android:textSize="20sp" android:layout_width="90sp" android:layout_height="45sp"></Button></LinearLayout>
+
+</LinearLayout>

@@ -42,4 +42,5 @@
 <color name="green2">#ff00ff00</color>
 <color name="lightGray">#cdc8b1</color>
 <string name="pieChart">pieChart</string>
+<string name="deleteRec">deleteRec</string>
 </resources>

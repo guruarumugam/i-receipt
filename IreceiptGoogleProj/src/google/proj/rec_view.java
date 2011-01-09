@@ -155,6 +155,12 @@ public class rec_view extends Activity {
 		finish();
 	}
 
+	public void deleteRec(View view) {
+		DeleteReceiptDialog delteReceiptDialog = new DeleteReceiptDialog(this,
+				"Delete " + "\"" + rec.getStoreName() + "\"" + " receipt?");
+		delteReceiptDialog.show();
+	}
+
 	public void EditRecNote(View view) {
 		// final TextView show_notes = (TextView) findViewById(R.id.show_note);
 		final Dialog EditNoteDialog = new Dialog(this);

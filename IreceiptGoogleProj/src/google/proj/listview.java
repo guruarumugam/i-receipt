@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import sync.tset;
 import android.app.Activity;
 import android.app.Dialog;
@@ -40,6 +39,7 @@ public class listview extends Activity {
 	IDate date;
 	public static List<iReceipt> search_rec_arr;
 	static int switcher;
+	public static int refresh;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
