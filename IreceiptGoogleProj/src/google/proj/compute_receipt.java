@@ -32,13 +32,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class compute_receipt extends Activity {
-	/** Called when the activity is first created. */
 	// public static DocsService client= new DocsService("My new Application");
-
 	private TextView PickDate;
-	private int mYear;
-	private int mMonth;
-	private int mDay;
+	private int mYear, mMonth, mDay;
 	protected String prices[] = new String[4];
 	private String dates[] = new String[4];
 	private String stores[] = new String[4];
@@ -97,7 +93,6 @@ public class compute_receipt extends Activity {
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
-
 		}
 	}
 
@@ -138,7 +133,6 @@ public class compute_receipt extends Activity {
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
-
 		}
 	}
 
@@ -154,7 +148,6 @@ public class compute_receipt extends Activity {
 		}
 
 		public void onNothingSelected(AdapterView<?> parent) {
-
 		}
 	}
 
@@ -199,7 +192,6 @@ public class compute_receipt extends Activity {
 					spinner_p.setSelection(3);
 					rec.setTotal(Double.valueOf(price_new));
 					dialog5.dismiss();
-
 				}
 			});
 			// b2 is cancel button
@@ -246,7 +238,6 @@ public class compute_receipt extends Activity {
 					spinner_s.refreshDrawableState();
 					rec.setStoreName(store_new);
 					dialog3.dismiss();
-
 				}
 			});
 			// b2 is cancel button
@@ -292,7 +283,6 @@ public class compute_receipt extends Activity {
 				@Override
 				public void onClick(View v) {
 					dialog7.dismiss();
-
 				}
 			});
 			dialog7.show();
@@ -300,7 +290,6 @@ public class compute_receipt extends Activity {
 		}
 		}
 		return null;
-
 	}
 
 	public void onClick(View view) {
@@ -360,7 +349,6 @@ public class compute_receipt extends Activity {
 					stores[i] = "";
 				else
 					stores[i] = new String(ocr_obj.getStoreName()[i].getEntry());
-
 			}
 			return true;
 		}
@@ -461,10 +449,7 @@ public class compute_receipt extends Activity {
 			mYear = c.get(Calendar.YEAR);
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
-
 			progressDialog.dismiss();
 		}
-
 	}
-
 }

@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
 	// //////////////////////
 	public static int period; // 0 => last week, 1=> last month, 2=>last
-									// year 3=>not initialized yet
+								// year 3=>not initialized yet
 	public static List<iReceipt> pie_rec_arr = new ArrayList<iReceipt>();
 	private int Year, Month, Day;
 	TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.piechart);
-		period=3;
+		period = 3;
 		t1 = (TextView) findViewById(R.id.TextView03);
 		t2 = (TextView) findViewById(R.id.TextView04);
 		t3 = (TextView) findViewById(R.id.TextView05);
@@ -75,15 +75,17 @@ public class MainActivity extends Activity {
 				makePie(period);
 			}
 		});
-		if (period == 3)
+		if (period == 3) {
+			period = 0;
 			r1.setChecked(true);
+		}
 		if (r1.isChecked())
 			period = 0;
 		if (r2.isChecked())
 			period = 1;
 		if (r3.isChecked())
 			period = 2;
-//		makePie(period);
+		// makePie(period);
 	}
 
 	public void makePie(int period) {
@@ -190,24 +192,29 @@ public class MainActivity extends Activity {
 		// Create a new ImageView to add to main layout
 		// ------------------------------------------------------------------------------------------
 		ImageView mImageView = (ImageView) findViewById(R.id.piecontainer);
-		//ImageView mImageView = new ImageView(this);
-		/*mImageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT));*/
+		// ImageView mImageView = new ImageView(this);
+		/*
+		 * mImageView.setLayoutParams(new
+		 * LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		 */
 		mImageView.setBackgroundColor(BgColor);
-		mImageView.setImageBitmap(mBackgroundImage);		
+		mImageView.setImageBitmap(mBackgroundImage);
 		// ------------------------------------------------------------------------------------------
 		// Finaly add Image View to target view !!!
 		// ------------------------------------------------------------------------------------------
-		/*LinearLayout TargetPieView = (LinearLayout) findViewById(R.id.pie_container);
-		TargetPieView.addView(mImageView);*/
+		/*
+		 * LinearLayout TargetPieView = (LinearLayout)
+		 * findViewById(R.id.pie_container); TargetPieView.addView(mImageView);
+		 */
 	}
 
 	// //////////////////////////////////
 	public IDate getDateFrom(IDate date, int period) {
 		int year, month, day, i = 0;
-		year = date.getYear();
-		month = date.getMonth();
-		day = date.getDay();
+		final Calendar c = Calendar.getInstance();
+		year = c.get(Calendar.YEAR);
+		month = c.get(Calendar.MONTH + 1);
+		day = c.get(Calendar.DAY_OF_MONTH);
 
 		if (period == 0) { // week
 			if (day > 7)

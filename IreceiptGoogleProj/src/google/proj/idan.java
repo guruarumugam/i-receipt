@@ -34,6 +34,7 @@ public class idan extends Activity {
 	private static int TAKE_PICTURE = 1;
 	static final int PROGRESS_DIALOG = 0;
 	private static final int SETTINGS = 0;
+	private static final int ABOUT_IRECEIPT = 1;
 	ProgressThread progressThread;
 	ProgressDialog progressDialog;
 	int index = 0;
@@ -190,36 +191,26 @@ public class idan extends Activity {
 	}
 
 	public void manual_scan_handler(View view) {
-		// saveHandler();
-		iReceipt r = new iReceipt();
-		// mylistname.add(r.getplaceofsave());
-		// ----------->r.setFilepath("");
-		Intent i = new Intent(idan.this, compute_receipt.class);
-		// i.putExtra("Receipt", r);
-		// i.putExtra("man",true);
-		rec_arr.add(r);
-		int index = rec_arr.indexOf(r);
-		i.setFlags(index);
-		startActivityForResult(i, index);
+		// iReceipt r = new iReceipt();
+		Intent i = new Intent(idan.this, manual_scan.class);
+		// Intent i = new Intent(idan.this, compute_receipt.class);
+		// rec_arr.add(r);
+		// int index = rec_arr.indexOf(r);
+		// i.setFlags(index);
+		startActivity(i);
+		// startActivityForResult(i, index);
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// in case we cancel in compute_receipt
-		if (requestCode == TAKE_PICTURE)
-			if (resultCode != Activity.RESULT_OK) {
-				rec_arr.remove(requestCode);
-				return;
-			} else {
-				Intent i = new Intent(idan.this, compute_receipt.class);
-				i.setFlags(index);
-				startActivityForResult(i, index);
-			}
-
-		if (resultCode == 0) {
-			rec_arr.remove(requestCode);
-		}
-	}
+	/*
+	 * @Override protected void onActivityResult(int requestCode, int
+	 * resultCode, Intent data) { // in case we cancel in compute_receipt if
+	 * (requestCode == TAKE_PICTURE) if (resultCode != Activity.RESULT_OK) {
+	 * rec_arr.remove(requestCode); return; } else { Intent i = new
+	 * Intent(idan.this, compute_receipt.class); i.setFlags(index);
+	 * startActivityForResult(i, index); }
+	 * 
+	 * if (resultCode == 0) { rec_arr.remove(requestCode); } }
+	 */
 
 	public void receipts_handler(View view) {
 		Intent i = new Intent(idan.this, listview.class);
@@ -365,15 +356,22 @@ public class idan extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, SETTINGS, 0, "Settings");
+		menu.add(Menu.NONE, ABOUT_IRECEIPT, 1, "About iReceipt");
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent i;
 		switch (item.getItemId()) {
 		case SETTINGS:
-			Intent i = new Intent(idan.this, settings.class);
+			i = new Intent(idan.this, settings.class);
 			startActivity(i);
+			break;
+		case ABOUT_IRECEIPT:
+			i = new Intent(idan.this, aboutireceipt.class);
+			startActivity(i);
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

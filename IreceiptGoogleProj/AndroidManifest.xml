@@ -29,6 +29,10 @@
 		</activity>
 		<activity android:name=".settings" android:label="settings">
 		</activity>
+		<activity android:name=".aboutireceipt" android:label="About iReceipt">
+		</activity>
+		<activity android:name=".manual_scan" android:label="Manual scan">
+		</activity>
 		<!-- <activity android:name=".prev" android:label="Camera Preview"> </activity> -->
 		<activity android:name=".CameraPreview" android:label="Camera Preview">
 		</activity>

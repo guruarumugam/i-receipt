@@ -40,7 +40,7 @@
 				android:layout_gravity="center_vertical|center_horizontal|center"
 				android:gravity="right" android:clickable="true" android:id="@+id/EditDate"
 				android:layout_height="40sp" android:layout_width="40sp"
-				android:background="@drawable/edit" android:layout_marginLeft="10sp"></TextView>
+				android:layout_marginLeft="10sp" android:background="@drawable/calendaricon2"></TextView>
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout03Spinner3" android:paddingLeft="10sp"
@@ -72,7 +72,7 @@
 			<TextView android:onClick="@string/CatEdit" android:id="@+id/Button04EditCat"
 				android:clickable="true" android:layout_gravity="right|center_vertical|center_horizontal|center"
 				android:layout_height="40sp" android:layout_marginLeft="10sp"
-				android:layout_width="40sp" android:background="@drawable/edit"></TextView>
+				android:layout_width="40sp" android:background="@drawable/edit" android:visibility="invisible"></TextView>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutNotes"
 			android:layout_width="fill_parent" android:paddingLeft="10sp"

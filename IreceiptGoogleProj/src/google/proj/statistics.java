@@ -73,43 +73,41 @@ public class statistics extends Activity {
 	private void updateDisplay(int id) {
 		if (id == R.id.pickDateFrom) {
 			if ((Month > 8) && (Day > 9))
-				fromPickDate.setText(new StringBuilder().append("From:")
-						.append(Month + 1).append("-").append(Day).append("-")
-						.append(Year).append(" "));
+				fromPickDate.setText(new StringBuilder().append(Month + 1)
+						.append("-").append(Day).append("-").append(Year)
+						.append(" "));
 			if ((Month > 8) && (Day < 10))
-				fromPickDate.setText(new StringBuilder().append("From:")
-						.append(Month + 1).append("-").append("0" + Day)
-						.append("-").append(Year).append(" "));
-			if ((Month < 9) && (Day > 10))
-				fromPickDate.setText(new StringBuilder().append("From:")
+				fromPickDate.setText(new StringBuilder().append(Month + 1)
+						.append("-").append("0" + Day).append("-").append(Year)
+						.append(" "));
+			if ((Month < 9) && (Day > 9))
+				fromPickDate.setText(new StringBuilder()
 						.append("0" + (Month + 1)).append("-").append(Day)
 						.append("-").append(Year).append(" "));
 			if ((Month < 9) && (Day < 10))
 				fromPickDate
-						.setText(new StringBuilder().append("From:")
-								.append("0" + (Month + 1)).append("-")
-								.append("0" + Day).append("-").append(Year)
-								.append(" "));
+						.setText(new StringBuilder().append("0" + (Month + 1))
+								.append("-").append("0" + Day).append("-")
+								.append(Year).append(" "));
 		}
 		if (id == R.id.pickDateTo) {
 			if ((Month > 8) && (Day > 9))
-				toPickDate.setText(new StringBuilder().append("To:")
-						.append(Month + 1).append("-").append(Day).append("-")
-						.append(Year).append(" "));
+				toPickDate.setText(new StringBuilder().append(Month + 1)
+						.append("-").append(Day).append("-").append(Year)
+						.append(" "));
 			if ((Month > 8) && (Day < 10))
-				toPickDate.setText(new StringBuilder().append("To:")
-						.append(Month + 1).append("-").append("0" + Day)
-						.append("-").append(Year).append(" "));
-			if ((Month < 9) && (Day > 10))
-				toPickDate.setText(new StringBuilder().append("To:")
+				toPickDate.setText(new StringBuilder().append(Month + 1)
+						.append("-").append("0" + Day).append("-").append(Year)
+						.append(" "));
+			if ((Month < 9) && (Day > 9))
+				toPickDate.setText(new StringBuilder()
 						.append("0" + (Month + 1)).append("-").append(Day)
 						.append("-").append(Year).append(" "));
 			if ((Month < 9) && (Day < 10))
 				toPickDate
-						.setText(new StringBuilder().append("To:")
-								.append("0" + (Month + 1)).append("-")
-								.append("0" + Day).append("-").append(Year)
-								.append(" "));
+						.setText(new StringBuilder().append("0" + (Month + 1))
+								.append("-").append("0" + Day).append("-")
+								.append(Year).append(" "));
 		}
 	}
 
@@ -123,15 +121,15 @@ public class statistics extends Activity {
 		str1 = fromPickDate.getText().toString();
 		str2 = toPickDate.getText().toString();
 
-		month = Integer.parseInt(str1.substring(5, 7));
-		day = Integer.parseInt(str1.substring(8, 10));
-		year = Integer.parseInt(str1.substring(11, 15));
+		month = Integer.parseInt(str1.substring(0, 2));
+		day = Integer.parseInt(str1.substring(3, 5));
+		year = Integer.parseInt(str1.substring(6, 10));
 
 		dateFrom = new IDate(year, month, day);
 
-		month = Integer.parseInt(str2.substring(3, 5));
-		day = Integer.parseInt(str2.substring(6, 8));
-		year = Integer.parseInt(str2.substring(9, 13));
+		month = Integer.parseInt(str2.substring(0, 2));
+		day = Integer.parseInt(str2.substring(3, 5));
+		year = Integer.parseInt(str2.substring(6, 10));
 
 		dateTo = new IDate(year, month, day);
 

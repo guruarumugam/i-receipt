@@ -66,8 +66,7 @@
 				android:layout_width="160sp" android:textColor="@color/darkGreen"></EditText>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout05RP"
-			android:layout_width="fill_parent" android:paddingLeft="10sp"
-			android:layout_height="120sp">
+			android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="140sp">
 			<LinearLayout android:layout_width="wrap_content"
 				android:orientation="vertical" android:layout_height="wrap_content"
 				android:id="@+id/LinearLayout022">
@@ -89,7 +88,7 @@
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout06RP"
 			android:layout_width="fill_parent" android:paddingLeft="10sp"
-			android:layout_height="100sp" android:layout_marginTop="18sp">
+			android:layout_height="100sp">
 
 			<Button android:id="@+id/deleteButton" android:layout_height="35sp" android:background="@drawable/delete" android:layout_marginTop="35sp" android:layout_width="100sp" android:onClick="@string/deleteRec"></Button><ImageView android:id="@+id/Image01" android:clickable="true"
 				android:onClick="@string/onClickPic" android:layout_gravity="bottom" android:layout_height="fill_parent"
@@ -100,5 +99,6 @@
 
 		
 </LinearLayout>
-	</LinearLayout>
+	
+</LinearLayout>
 </LinearLayout>

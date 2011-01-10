@@ -43,4 +43,6 @@
 <color name="lightGray">#cdc8b1</color>
 <string name="pieChart">pieChart</string>
 <string name="deleteRec">deleteRec</string>
+<string name="onClick3">onClick3</string>
+<string name="onClick4">onClick4</string>
 </resources>
