@@ -51,14 +51,14 @@
 			android:layout_height="24sp" android:layout_width="24sp">
 		</ImageButton>
 	</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayout07" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_marginTop="50sp"><TextView android:id="@+id/TextView01" android:layout_height="wrap_content" android:textColor="@color/black" android:textSize="23sp" android:text="From date:" android:layout_marginLeft="14sp" android:layout_width="120sp"></TextView><TextView android:id="@+id/pickDateFrom" android:clickable="true" android:textColor="@color/black" android:layout_width="150sp" android:background="@drawable/calendaricon3" android:layout_height="30sp" android:gravity="right|center_vertical" android:paddingRight="20sp" android:textSize="23sp" android:layout_marginLeft="12sp"/>
+	<TextView android:textColor="@color/darkGreen" android:gravity="center_vertical|center_horizontal" android:layout_width="fill_parent" android:textSize="32sp" android:layout_height="35sp" android:id="@+id/chooseDates" android:text="Choose dates:" android:layout_marginTop="45sp"></TextView><LinearLayout android:id="@+id/LinearLayout07" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_marginTop="25sp"><TextView android:id="@+id/TextView01" android:layout_height="wrap_content" android:textColor="@color/black" android:text="From date:" android:textSize="25sp" android:layout_width="130sp" android:layout_marginLeft="20sp"></TextView><TextView android:id="@+id/pickDateFrom" android:clickable="true" android:textColor="@color/black" android:layout_width="150sp" android:background="@drawable/calendaricon3" android:layout_height="30sp" android:gravity="right|center_vertical" android:paddingRight="20sp" android:textSize="23sp"/>
 </LinearLayout>
 	<LinearLayout android:id="@+id/LinearLayout1"
 		android:layout_width="fill_parent" android:orientation="horizontal"
-		android:layout_height="40sp" android:layout_marginTop="10sp"><TextView android:id="@+id/TextView02" android:layout_height="wrap_content" android:textColor="@color/black" android:textSize="23sp" android:text="To date:" android:layout_marginLeft="14sp" android:layout_width="120sp"></TextView>
+		android:layout_height="40sp" android:layout_marginTop="10sp"><TextView android:id="@+id/TextView02" android:layout_height="wrap_content" android:textColor="@color/black" android:text="To date:" android:textSize="25sp" android:layout_width="130sp" android:layout_marginLeft="20sp"></TextView>
 		
 		<TextView android:id="@+id/pickDateTo" android:clickable="true" android:textColor="@color/black"
-			android:layout_width="150sp" android:background="@drawable/calendaricon3" android:layout_height="30sp" android:gravity="right|center_vertical" android:paddingRight="20sp" android:textSize="23sp" android:layout_marginLeft="12sp"/>
+			android:layout_width="150sp" android:background="@drawable/calendaricon3" android:layout_height="30sp" android:gravity="right|center_vertical" android:paddingRight="20sp" android:textSize="23sp"/>
 	
 </LinearLayout>
 	<LinearLayout android:layout_width="fill_parent"
@@ -75,7 +75,7 @@
 			android:layout_gravity="bottom" android:layout_height="24sp"
 			android:layout_width="24sp">
 		</ImageButton>
-	</LinearLayout><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:text="Pie Chart" android:gravity="center_vertical|center_horizontal" android:layout_gravity="center_horizontal" android:background="@drawable/piechart2" android:layout_height="35sp" android:textSize="25sp" android:paddingLeft="40sp" android:layout_width="145sp" android:layout_marginTop="40sp"/><LinearLayout android:id="@+id/LinearLayout06" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:text="XY Chart" android:layout_marginLeft="30sp" android:visibility="invisible"/></LinearLayout>
+	</LinearLayout><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:text="Pie Chart" android:gravity="center_vertical|center_horizontal" android:layout_gravity="center_horizontal" android:background="@drawable/piechart2" android:layout_height="35sp" android:textSize="25sp" android:paddingLeft="40sp" android:layout_width="145sp" android:layout_marginTop="30sp"/><LinearLayout android:id="@+id/LinearLayout06" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:clickable="true" android:textColor="@color/black" android:id="@+id/pieChart" android:onClick="@string/pieChart" android:textSize="20sp" android:gravity="center_vertical|center_horizontal" android:layout_marginTop="60sp" android:layout_width="100sp" android:layout_height="40sp" android:text="XY Chart" android:layout_marginLeft="30sp" android:visibility="invisible"/></LinearLayout>
 	
 
 

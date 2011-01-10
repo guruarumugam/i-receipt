@@ -1,7 +1,6 @@
 package google.proj;
 
 import android.app.Activity;
-import java.lang.Number;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ public class statistics extends Activity {
 	private TextView fromPickDate;
 	private TextView toPickDate;
 	private TextView totalThisMonth, totalLastMonth, showTotalFromTo;
-	private int Year, Month, Day;
+	public static int Year, Month, Day;
 	private double total1 = 0;
 	private double total2 = 0;
 	private IDate date1, date2, date3;
@@ -68,6 +67,7 @@ public class statistics extends Activity {
 		}
 		totalThisMonth.setText(Double.toString(total1));
 		totalLastMonth.setText(Double.toString(total2));
+		totalFromTo();
 	}
 
 	private void updateDisplay(int id) {
@@ -113,24 +113,21 @@ public class statistics extends Activity {
 
 	public void totalFromTo() {
 
-		int year, month, day, check;
+		int year, month, day;
 		Double totalFromTo = 0.0;
 		String str1, str2;
 		IDate dateFrom, dateTo, date4;
-
 		str1 = fromPickDate.getText().toString();
 		str2 = toPickDate.getText().toString();
 
 		month = Integer.parseInt(str1.substring(0, 2));
 		day = Integer.parseInt(str1.substring(3, 5));
 		year = Integer.parseInt(str1.substring(6, 10));
-
 		dateFrom = new IDate(year, month, day);
 
 		month = Integer.parseInt(str2.substring(0, 2));
 		day = Integer.parseInt(str2.substring(3, 5));
 		year = Integer.parseInt(str2.substring(6, 10));
-
 		dateTo = new IDate(year, month, day);
 
 		if (dateTo.compareTo(dateFrom) > 0)

@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -29,12 +30,16 @@ public class MainActivity extends Activity {
 			Color.parseColor("#00ced1"), Color.RED, Color.LTGRAY, Color.BLACK,
 			Color.parseColor("#8b4513"), Color.parseColor("#228b22") };
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
+	Double total_period;
 	// //////////////////////
 	public static int period; // 0 => last week, 1=> last month, 2=>last
 								// year 3=>not initialized yet
 	public static List<iReceipt> pie_rec_arr = new ArrayList<iReceipt>();
-	private int Year, Month, Day;
-	TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
+	TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, total_this_period, total;
+	LinearLayout lin1, lin2, lin3, lin4, lin5, lin6, lin7, lin8, lin9, lin10;
+	RadioGroup rg;
+	RadioButton r1, r2, r3;
+	private int myYear, myMonth, myDay;
 
 	// //////////////////////
 
@@ -44,7 +49,25 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.piechart);
+		/*
+		 * final Calendar c2 = Calendar.getInstance(); myYear =
+		 * c2.get(Calendar.YEAR); myMonth = c2.get(Calendar.MONTH + 1); myDay =
+		 * c2.get(Calendar.DAY_OF_MONTH);
+		 */
+		myYear = statistics.Year;
+		myMonth = statistics.Month + 1;
+		myDay = statistics.Day;
 		period = 3;
+		lin1 = (LinearLayout) findViewById(R.id.LinearLayout02);
+		lin2 = (LinearLayout) findViewById(R.id.LinearLayout07);
+		lin3 = (LinearLayout) findViewById(R.id.LinearLayout04);
+		lin4 = (LinearLayout) findViewById(R.id.LinearLayout03);
+		lin5 = (LinearLayout) findViewById(R.id.LinearLayout08);
+		lin6 = (LinearLayout) findViewById(R.id.LinearLayout09);
+		lin7 = (LinearLayout) findViewById(R.id.LinearLayout05);
+		lin8 = (LinearLayout) findViewById(R.id.LinearLayout10);
+		lin9 = (LinearLayout) findViewById(R.id.LinearLayout11);
+		lin10 = (LinearLayout) findViewById(R.id.LinearLayout06);
 		t1 = (TextView) findViewById(R.id.TextView03);
 		t2 = (TextView) findViewById(R.id.TextView04);
 		t3 = (TextView) findViewById(R.id.TextView05);
@@ -55,22 +78,21 @@ public class MainActivity extends Activity {
 		t8 = (TextView) findViewById(R.id.TextView10);
 		t9 = (TextView) findViewById(R.id.TextView13);
 		t10 = (TextView) findViewById(R.id.TextView14);
-		RadioGroup rg = (RadioGroup) findViewById(R.id.RadioGroup01);
-		RadioButton r1 = (RadioButton) findViewById(R.id.RadioButton01);
-		RadioButton r2 = (RadioButton) findViewById(R.id.RadioButton02);
-		RadioButton r3 = (RadioButton) findViewById(R.id.RadioButton03);
+		total_this_period = (TextView) findViewById(R.id.TextView17);
+		total = (TextView) findViewById(R.id.TextView16);
+		rg = (RadioGroup) findViewById(R.id.RadioGroup01);
+		r1 = (RadioButton) findViewById(R.id.RadioWeek);
+		r2 = (RadioButton) findViewById(R.id.RadioMonth);
+		r3 = (RadioButton) findViewById(R.id.RadioYear);
 
-		// ------------------------------------------------------------------------------------------
-		// Used vars declaration
-		// ------------------------------------------------------------------------------------------
 		rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 			public void onCheckedChanged(RadioGroup arg0, int arg1) {
 				int id = arg1;
-				if (id == 2131099710)
+				if (id == R.id.RadioWeek)
 					period = 0;
-				if (id == 2131099711)
+				if (id == R.id.RadioMonth)
 					period = 1;
-				if (id == 2131099712)
+				if (id == R.id.RadioYear)
 					period = 2;
 				makePie(period);
 			}
@@ -94,11 +116,7 @@ public class MainActivity extends Activity {
 		int MaxPieItems = cat.length;
 		Double MaxCount = 0.0;
 		// ///////////////////////////////////////////////////////////////
-		final Calendar c = Calendar.getInstance();
-		Year = c.get(Calendar.YEAR);
-		Month = c.get(Calendar.MONTH + 1);
-		Day = c.get(Calendar.DAY_OF_MONTH);
-		IDate dateToday = new IDate(Year, Month, Day);// today
+		IDate dateToday = new IDate(myYear, myMonth, myDay);// today
 		IDate date = new IDate();
 		date = getDateFrom(dateToday, period);
 		IDate rec_date = new IDate();
@@ -133,16 +151,66 @@ public class MainActivity extends Activity {
 			if (rec.getCategory() == "Other")
 				sumPerCat[9] += rec.getTotal();
 		}
-		t1.setText("" + sumPerCat[0]);
-		t2.setText("" + sumPerCat[3]);
-		t3.setText("" + sumPerCat[1]);
-		t4.setText("" + sumPerCat[2]);
-		t5.setText("" + sumPerCat[5]);
-		t6.setText("" + sumPerCat[8]);
-		t7.setText("" + sumPerCat[4]);
-		t8.setText("" + sumPerCat[7]);
-		t9.setText("" + sumPerCat[6]);
-		t10.setText("" + sumPerCat[9]);
+		total_period = 0.0 + sumPerCat[1] + sumPerCat[2] + sumPerCat[3]
+				+ sumPerCat[4] + sumPerCat[5] + sumPerCat[6] + sumPerCat[7]
+				+ sumPerCat[8] + sumPerCat[9] + sumPerCat[0];
+		total_this_period.setText(total_period.toString()); // ***********************
+		if (period == 0)
+			total.setText("Total this week:");
+		if (period == 1)
+			total.setText("Total this month:");
+		if (period == 2)
+			total.setText("Total this year:");
+		if (sumPerCat[0] != 0) {
+			lin1.setVisibility(View.VISIBLE);
+			t1.setText("" + sumPerCat[0]);
+		} else
+			lin1.setVisibility(View.GONE);
+		if (sumPerCat[1] != 0) {
+			lin3.setVisibility(View.VISIBLE);
+			t3.setText("" + sumPerCat[1]);
+		} else
+			lin3.setVisibility(View.GONE);
+		if (sumPerCat[2] != 0) {
+			lin4.setVisibility(View.VISIBLE);
+			t4.setText("" + sumPerCat[2]);
+		} else
+			lin4.setVisibility(View.GONE);
+		if (sumPerCat[3] != 0) {
+			lin2.setVisibility(View.VISIBLE);
+			t2.setText("" + sumPerCat[3]);
+		} else
+			lin2.setVisibility(View.GONE);
+		if (sumPerCat[4] != 0) {
+			lin7.setVisibility(View.VISIBLE);
+			t7.setText("" + sumPerCat[4]);
+		} else
+			lin7.setVisibility(View.GONE);
+		if (sumPerCat[5] != 0) {
+			lin5.setVisibility(View.VISIBLE);
+			t5.setText("" + sumPerCat[5]);
+		} else
+			lin5.setVisibility(View.GONE);
+		if (sumPerCat[6] != 0) {
+			lin9.setVisibility(View.VISIBLE);
+			t9.setText("" + sumPerCat[6]);
+		} else
+			lin9.setVisibility(View.GONE);
+		if (sumPerCat[7] != 0) {
+			lin8.setVisibility(View.VISIBLE);
+			t8.setText("" + sumPerCat[7]);
+		} else
+			lin8.setVisibility(View.GONE);
+		if (sumPerCat[8] != 0) {
+			lin6.setVisibility(View.VISIBLE);
+			t6.setText("" + sumPerCat[8]);
+		} else
+			lin6.setVisibility(View.GONE);
+		if (sumPerCat[9] != 0) {
+			lin10.setVisibility(View.VISIBLE);
+			t10.setText("" + sumPerCat[9]);
+		} else
+			lin10.setVisibility(View.GONE);
 		// ------------------------------------------------------------------------------------------
 		// Generating data by a random loop
 		// ------------------------------------------------------------------------------------------
@@ -211,10 +279,10 @@ public class MainActivity extends Activity {
 	// //////////////////////////////////
 	public IDate getDateFrom(IDate date, int period) {
 		int year, month, day, i = 0;
-		final Calendar c = Calendar.getInstance();
-		year = c.get(Calendar.YEAR);
-		month = c.get(Calendar.MONTH + 1);
-		day = c.get(Calendar.DAY_OF_MONTH);
+		// final Calendar c = Calendar.getInstance();
+		year = date.getYear();
+		month = date.getMonth();
+		day = date.getDay();
 
 		if (period == 0) { // week
 			if (day > 7)
