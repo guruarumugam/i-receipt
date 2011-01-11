@@ -163,8 +163,9 @@ public class searchReceipt extends Activity {
 	}
 
 	public void search(View view) {
-		if (radioDate.isChecked())
+		if (radioDate.isChecked()) {
 			DateHandler();
+		}
 		if (radioPrice.isChecked())
 			PriceHandler();
 		if (radioCategory.isChecked())
@@ -213,7 +214,7 @@ public class searchReceipt extends Activity {
 	public void PriceHandler() {
 		rec_arr_search.clear();
 		int price1, price2;
-		Double price = 0.0; // only for debug!!!
+		// Double price = 0.0; // only for debug!!!
 		price1 = Integer.parseInt(PriceFrom.getText().toString());
 		price2 = Integer.parseInt(PriceTo.getText().toString());
 		if ((price1 > price2) || (price1 < 0)) {
@@ -224,7 +225,7 @@ public class searchReceipt extends Activity {
 		} else {
 			wait = 0;
 			for (iReceipt rec : idan.rec_arr) {
-				price = rec.getTotal(); // only for the debuging!!!
+				// price = rec.getTotal(); // only for the debuging!!!
 				if ((rec.getTotal() >= price1) && (rec.getTotal() <= price2))
 					rec_arr_search.add(rec);
 			}
@@ -296,6 +297,8 @@ public class searchReceipt extends Activity {
 			mYear = c.get(Calendar.YEAR);
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
+			updateDisplay(R.id.pickDateTo);
+			date2 = new IDate(mYear, mMonth + 1, mDay);
 			if (mDay > 28)
 				mDay = 28;
 			if (mMonth > 0)
@@ -304,11 +307,12 @@ public class searchReceipt extends Activity {
 				mMonth = 11; // =>12
 				mYear -= 1;
 			}
+			date1 = new IDate(mYear, mMonth + 1, mDay);
 			updateDisplay(R.id.pickDateFrom);
-			mMonth = c.get(Calendar.MONTH);
-			mYear = c.get(Calendar.YEAR);
-			mDay = c.get(Calendar.DAY_OF_MONTH);
-			updateDisplay(R.id.pickDateTo);
+			/*
+			 * mMonth = c.get(Calendar.MONTH); mYear = c.get(Calendar.YEAR);
+			 * mDay = c.get(Calendar.DAY_OF_MONTH);
+			 */
 		}
 	}
 

@@ -43,22 +43,19 @@ public class rec_view extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.receiptpage);
 		rec = idan.rec_arr.get(getIntent().getFlags());
-		ImageView myImage = (ImageView) findViewById(R.id.Image01);// //////
+		ImageView myImage = (ImageView) findViewById(R.id.Image01);
 		if (rec.getFilepath() == null)
-			myImage.setVisibility(View.INVISIBLE);// ///////////
+			myImage.setVisibility(View.INVISIBLE);
 		/*
 		 * ImageView image = (ImageView) findViewById(R.id.Image01); if
 		 * (rec.getFilepath() != null)
 		 * image.setImageResource(R.drawable.receipt);
 		 */
-
-		// capture our View elements
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
 		mPickDate = (TextView) findViewById(R.id.TextView01);
 		check = (CheckBox) findViewById(R.id.CheckBox01);
 		// NotesEditText = (EditText) findViewById(R.id.EditText01);
 		show_notes = (TextView) findViewById(R.id.show_note);
-		// add a click listener to the button
 		mPickDate.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
@@ -152,6 +149,7 @@ public class rec_view extends Activity {
 		else
 			rec.setNotes(show_notes.getText().toString());
 		saveList();
+		setResult(1);
 		finish();
 	}
 
