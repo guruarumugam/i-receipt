@@ -3,7 +3,8 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@color/black">
 	<ListView android:id="@+id/ListView01" android:layout_width="fill_parent"
-		android:padding="5dip" android:layout_height="470sp">
+		android:padding="5dip" android:layout_height="100dip"
+		android:layout_weight="1">
 	</ListView>
 	<LinearLayout android:layout_alignParentBottom="true"
 		android:id="@+id/LinearLayout03listofR" android:background="@color/white"
