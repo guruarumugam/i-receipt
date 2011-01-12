@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@color/black">
+	<LinearLayout android:id="@+id/LinearLayoutComputeUP"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginBottom="10dip" android:orientation="vertical"
+		android:padding="5dip" android:background="@drawable/recpage8">
+
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout01Spinner1" android:layout_height="40dip"
+			android:layout_marginTop="25dip" android:paddingLeft="10dip">
+			<TextView android:id="@+id/TextViewStoreName_computeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:text="Business:" android:textColor="@color/black"
+				android:layout_height="wrap_content" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:layout_width="87dip" android:textSize="20dip">
+			</TextView>
+			<EditText android:id="@+id/EditText01" android:textColor="@color/black"
+				android:layout_height="42dip" android:layout_marginTop="3dip"
+				android:layout_marginLeft="10dip" android:layout_width="160dip"
+				android:textSize="20dip"></EditText>
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:orientation="horizontal" android:id="@+id/LinearLayout02Spinner2"
+			android:paddingLeft="10dip" android:layout_marginTop="9dip"
+			android:layout_height="40dip">
+			<TextView android:text="Date:" android:id="@+id/TextView02Date_computeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:textColor="@color/black" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"
+				android:layout_width="87dip" android:textSize="20dip"></TextView>
+			<TextView android:background="@drawable/calendaricon3"
+				android:layout_height="30dip" android:layout_marginTop="5dip"
+				android:clickable="true" android:id="@+id/dateView"
+				android:textColor="@color/black" android:gravity="right|center_vertical"
+				android:layout_marginLeft="10dip" android:layout_width="160dip"
+				android:paddingRight="25dip" android:textSize="20dip"></TextView>
+
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout03Spinner3" android:paddingLeft="10dip"
+			android:layout_height="40dip" android:layout_marginTop="12dip">
+			<TextView android:text="Price:"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:textColor="@color/black" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|center_horizontal|center"
+				android:id="@+id/priceComputeR" android:layout_width="87dip"
+				android:textSize="20dip"></TextView>
+			<EditText android:id="@+id/EditText02" android:textColor="@color/black"
+				android:numeric="decimal" android:layout_marginLeft="10dip"
+				android:layout_width="160dip" android:textSize="20dip"
+				android:layout_height="42dip" android:layout_marginTop="3dip"></EditText>
+
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent"
+			android:id="@+id/LinearLayout04Spinner4" android:paddingLeft="10dip"
+			android:layout_height="40dip" android:layout_marginTop="13dip">
+			<TextView android:id="@+id/TextView03CatComputeR"
+				android:gravity="left|center_vertical|center_horizontal"
+				android:text="Category:" android:textColor="@color/black"
+				android:layout_height="wrap_content" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:layout_width="87dip" android:textSize="20dip"></TextView>
+			<Spinner android:id="@+id/Spinner04" android:clipChildren="true"
+				android:clipToPadding="true" android:layout_marginLeft="10dip"
+				android:layout_width="160dip" android:layout_height="40dip"
+				android:layout_marginTop="3dip"></Spinner>
+
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayout02"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayoutNotes"
+			android:layout_width="fill_parent" android:paddingLeft="10dip"
+			android:layout_marginTop="2dip" android:layout_height="130dip">
+			<LinearLayout android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/LinearLayout022"
+				android:orientation="vertical">
+				<TextView android:id="@+id/TextView02" android:text="Notes:"
+					android:textColor="@color/black" android:layout_height="wrap_content"
+					android:gravity="left|center_vertical" android:paddingTop="10dip"
+					android:layout_width="87dip" android:textSize="20dip"></TextView>
+				<CheckBox android:layout_width="wrap_content"
+					android:clickable="true" android:layout_gravity="bottom|right"
+					android:id="@+id/CheckBox1" android:layout_marginTop="20dip"
+					android:layout_marginRight="30dip" android:layout_height="35dip"></CheckBox>
+			</LinearLayout>
+			<EditText android:layout_height="wrap_content"
+				android:maxLength="120" android:id="@+id/EditNotesManual"
+				android:layout_marginLeft="10dip" android:layout_width="160dip"
+				android:maxWidth="190dip" android:minWidth="160dip"
+				android:layout_marginTop="6dip"></EditText>
+
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayout01"
+			android:layout_width="fill_parent" android:layout_height="40dip">
+		</LinearLayout>
+		<LinearLayout android:id="@+id/LinearLayoutFlaged"
+			android:layout_width="fill_parent" android:paddingLeft="10dip"
+			android:layout_height="58dip">
+			<Button android:id="@+id/CancelBut" android:background="@drawable/cancel9"
+				android:onClick="onClick4" android:layout_height="35dip"
+				android:layout_marginLeft="10dip" android:layout_marginTop="15dip"
+				android:layout_width="95dip"></Button>
+			<Button android:id="@+id/Button01saveandreturn"
+				android:gravity="center_vertical|center_horizontal"
+				android:background="@drawable/save9" android:onClick="onClick3"
+				android:layout_height="35dip" android:layout_marginLeft="100dip"
+				android:layout_marginTop="15dip" android:layout_width="70dip"></Button>
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
