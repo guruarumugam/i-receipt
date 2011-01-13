@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Administrator/My Documents/Downloads/google-api-client-1.2.1-alpha.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Administrator/My Documents/Downloads/google-api-client-1.2.1-alpha-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Administrator/My Documents/Downloads/google-api-client-1.2.1-alpha-sources.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/androidAuth/google-api-client-1.2.1-alpha.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/androidAuth/google-api-client-1.2.1-alpha-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/androidAuth/google-api-client-1.2.1-alpha-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

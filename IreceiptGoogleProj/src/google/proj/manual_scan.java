@@ -2,7 +2,9 @@ package google.proj;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner01;
 import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner04;
@@ -13,16 +15,20 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -30,7 +36,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class manual_scan extends Activity {
+public class manual_scan extends Activity implements OnClickListener  {
 
 	EditText business, price, notes;
 	TextView date;
@@ -45,9 +51,35 @@ public class manual_scan extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.manualscan);
-		idan.receiptUniqueIndex++;
-		rec = new iReceipt(idan.receiptUniqueIndex);
-		// rec = new iReceipt();
+		
+		//speak
+
+		Button speakButton1 = (Button) findViewById(R.id.voice1);
+		Button speakButton2 = (Button) findViewById(R.id.voice2);
+		Button speakButton3 = (Button) findViewById(R.id.voice3);
+		// Check to see if a recognition activity is present
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> activities = pm.queryIntentActivities(
+				new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		if (activities.size() != 0) {
+			speakButton1.setOnClickListener(this);
+			speakButton2.setOnClickListener(this);
+			speakButton3.setOnClickListener(this);
+		} else {
+			speakButton1.setEnabled(false);
+			speakButton2.setEnabled(false);
+			speakButton3.setEnabled(false);
+		}
+
+
+
+		int index = getIntent().getFlags();
+		rec = (iReceipt) idan.rec_arr.get(index);
+		
+		
+		
+		rec = idan.rec_arr.get(index);
+
 		rec.setCategory("Dining");
 		business = (EditText) findViewById(R.id.EditText01);
 		price = (EditText) findViewById(R.id.EditText02);
@@ -58,10 +90,10 @@ public class manual_scan extends Activity {
 		adapter_cat = new ArrayAdapter<String>(manual_scan.this,
 				android.R.layout.simple_spinner_item, MainActivity.cat);
 		adapter_cat
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_cat.setAdapter(adapter_cat);
 		spinner_cat
-				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
+		.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
 		final Calendar c = Calendar.getInstance();
 		Year = c.get(Calendar.YEAR);
 		Month = c.get(Calendar.MONTH);
@@ -74,8 +106,38 @@ public class manual_scan extends Activity {
 		});
 	}
 
+
+	public void onClick(View v) {
+		if (v.getId() == R.id.voice1) 
+			startVoiceRecognitionActivity(11);
+		if (v.getId() == R.id.voice2) 
+			startVoiceRecognitionActivity(22);
+		if (v.getId() == R.id.voice3) 
+			startVoiceRecognitionActivity(33);
+
+	}
+
+	/**
+	 * Fire an intent to start the speech recognition activity.
+	 */
+	private void startVoiceRecognitionActivity(int code) {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		String str=" ";
+		if(code==11)
+			str="Say business name:";
+		else if (code==22)
+			str="Say price:";
+			else if (code==33)
+				str="Say Notes:";
+		
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,str );
+		startActivityForResult(intent, code);
+	}
+
 	public class MyOnItemSelectedListenerSpinner04 implements
-			OnItemSelectedListener {
+	OnItemSelectedListener {
 
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
@@ -144,12 +206,12 @@ public class manual_scan extends Activity {
 		(new save()).execute(null);
 		//setResult(100);
 		// saveList2();
-		finish();
+		//finish();
 	}
 
 	public void onClick4(View view) {
 		//setResult(100);
-		idan.receiptUniqueIndex--;
+		setResult(0);
 		finish();
 	}
 
@@ -197,7 +259,7 @@ public class manual_scan extends Activity {
 			}
 		}
 
-		if (connected) {
+		//if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 
 				if (rec_view.notSync(tmprr)) {
@@ -212,7 +274,7 @@ public class manual_scan extends Activity {
 			// tmprr.setSync();
 			// }
 			idan.sync.deleteupdatelist();
-		}
+		//}
 
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
@@ -229,7 +291,45 @@ public class manual_scan extends Activity {
 		}
 	}
 
+	String onlyNumbers(String str){
+		String ret="";
+		boolean point=false;
+		if (str==null)
+			return null;
+		for (int i = 0; i < str.length(); i++) {
+			if((str.charAt(i)>='0')&&(str.charAt(i)<='9'))
+				ret+=str.charAt(i);
+			if(str.charAt(i)=='.' &&!point){
+				if(ret.length()==0)
+					ret+="0.";
+				else
+					ret+=".";
+				point=true;
+			}
+		}
+		if (ret.charAt(ret.length()-1)=='.')
+			ret+='0';
+		return ret;
+	}
+
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (((requestCode == 11)||(requestCode == 22)||(requestCode == 33)) && resultCode == RESULT_OK) {
+			ArrayList<String> matches = data.getStringArrayListExtra(
+					RecognizerIntent.EXTRA_RESULTS);
+			String res="";
+			for (String string : matches) {
+				res=res+" "+string;
+			}
+			if (requestCode == 11)
+				business.setText(res);
+			if(requestCode == 22)
+				price.setText(onlyNumbers(res));
+			if (requestCode == 33)
+				notes.setText(res);
+			return;
+		}
+
 		finish();
 	}
 

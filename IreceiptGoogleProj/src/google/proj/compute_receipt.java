@@ -6,6 +6,7 @@ import google.proj.R;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import android.app.Activity;
@@ -15,11 +16,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Browser.BookmarkColumns;
+import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
@@ -48,10 +52,10 @@ public class compute_receipt extends Activity {
 	private String stores[] = new String[4];
 	public static String cat[] = new String[10];
 	static final int DATE_DIALOG_ID = 0;
-	private Spinner spinner_d;
-	private Spinner spinner_p;
-	private Spinner spinner_s;
-	private Spinner spinner_c;
+	private Spinner spinner_d; //date
+	private Spinner spinner_p; //price
+	private Spinner spinner_s; //store
+	private Spinner spinner_c; //category
 	private ArrayAdapter<String> adapter_d;
 	private ArrayAdapter<String> adapter_p;
 	private ArrayAdapter<String> adapter_s;
@@ -79,6 +83,36 @@ public class compute_receipt extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.compute_receipt_layout);
+		
+		
+		//speack
+		
+		Button speakButton = (Button) findViewById(R.id.speachButton1);
+		// Check to see if a recognition activity is present
+	    PackageManager pm = getPackageManager();
+	    List<ResolveInfo> activities = pm.queryIntentActivities(
+	            new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+	    if (activities.size() != 0) {
+	        speakButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+				    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+				    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speech recognition demo");
+				    startActivityForResult(intent, 1234);
+					
+				}
+			});
+	    } else {
+	        speakButton.setEnabled(false);
+	    }
+		
+		
+		
+		
+	
 		myCheckBox = (CheckBox) findViewById(R.id.CheckBox1);
 		myEditText = (EditText) findViewById(R.id.EditNotesManual);
 		int index = getIntent().getFlags();
@@ -384,6 +418,21 @@ public class compute_receipt extends Activity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1234 && resultCode == RESULT_OK) {
+			ArrayList<String> matches = data.getStringArrayListExtra(
+	                RecognizerIntent.EXTRA_RESULTS);
+			String res="";
+			for (String string : matches) {
+				res=res+" "+string;
+			}
+			stores[3]=res;
+			spinner_s.setSelection(3);
+			adapter_s.notifyDataSetChanged();
+			return;
+			}
+		
+		
+		
 		finish();
 	}
 
@@ -550,5 +599,9 @@ public class compute_receipt extends Activity {
 		}
 
 	}
+	
+	//voice recognition
+	
+	
 
 }

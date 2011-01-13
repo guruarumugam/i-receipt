@@ -175,15 +175,12 @@ public class idan extends Activity {
 
 	public void manual_scan_handler(View view) {
 		receiptUniqueIndex++;
-		// iReceipt r = new iReceipt(receiptUniqueIndex);
-		// iReceipt r = new iReceipt();
+		iReceipt r = new iReceipt(receiptUniqueIndex);
 		Intent i = new Intent(idan.this, manual_scan.class);
-		/*
-		 * rec_arr.add(r); index = rec_arr.indexOf(r);
-		 * System.err.println(rec_arr.size()); i.setFlags(index);
-		 * startActivityForResult(i, index);
-		 */
-		startActivity(i);
+		rec_arr.add(r); 
+		index = rec_arr.indexOf(r);
+		 i.setFlags(index);
+		 startActivityForResult(i, index);
 	}
 
 	@Override
