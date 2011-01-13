@@ -19,9 +19,12 @@
 			<EditText android:id="@+id/EditText01" android:textColor="@color/black"
 				android:layout_height="42dip" android:layout_marginTop="3dip"
 				android:layout_marginLeft="10dip" android:layout_width="160dip"
-				android:textSize="20dip" android:isScrollContainer="true" android:maxLines="1" android:scrollHorizontally="true"></EditText>
-		<Button android:layout_width="wrap_content" android:drawableBottom="@drawable/mic" android:layout_height="42dip" android:layout_marginTop="-3dip" android:id="@+id/voice1"></Button>
-</LinearLayout>
+				android:textSize="20dip" android:isScrollContainer="true"
+				android:maxLines="1" android:scrollHorizontally="true"></EditText>
+			<Button android:layout_width="wrap_content"
+				android:drawableBottom="@drawable/mic" android:layout_height="42dip"
+				android:layout_marginTop="-3dip" android:id="@+id/voice1"></Button>
+		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:orientation="horizontal" android:id="@+id/LinearLayout02Spinner2"
 			android:paddingLeft="10dip" android:layout_marginTop="9dip"
@@ -51,10 +54,14 @@
 			<EditText android:id="@+id/EditText02" android:textColor="@color/black"
 				android:numeric="decimal" android:layout_marginLeft="10dip"
 				android:layout_width="160dip" android:textSize="20dip"
-				android:layout_height="42dip" android:layout_marginTop="3dip" android:maxLines="1" android:isScrollContainer="true" android:scrollHorizontally="true"></EditText>
+				android:layout_height="42dip" android:layout_marginTop="3dip"
+				android:maxLines="1" android:isScrollContainer="true"
+				android:scrollHorizontally="true"></EditText>
 
-		<Button android:layout_width="wrap_content" android:drawableBottom="@drawable/mic" android:layout_height="42dip" android:layout_marginTop="-3dip" android:id="@+id/voice2"></Button>
-</LinearLayout>
+			<Button android:layout_width="wrap_content"
+				android:drawableBottom="@drawable/mic" android:layout_height="42dip"
+				android:layout_marginTop="-3dip" android:id="@+id/voice2"></Button>
+		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout04Spinner4" android:paddingLeft="10dip"
 			android:layout_height="40dip" android:layout_marginTop="13dip">
@@ -92,10 +99,19 @@
 				android:maxWidth="190dip" android:minWidth="160dip"
 				android:layout_marginTop="6dip"></EditText>
 
-		<Button android:layout_width="wrap_content" android:drawableBottom="@drawable/mic" android:layout_height="43dip" android:id="@+id/voice3"></Button>
-</LinearLayout>
+			<Button android:layout_width="wrap_content"
+				android:drawableBottom="@drawable/mic" android:layout_height="43dip"
+				android:id="@+id/voice3"></Button>
+		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayout01"
 			android:layout_width="fill_parent" android:layout_height="40dip">
+			<Button android:layout_width="wrap_content"
+				android:layout_height="35dip" android:text="Add Image" android:id="@+id/AddImage"
+				android:gravity="top|center_horizontal" android:layout_gravity="top|center_horizontal"></Button>
+			<TextView android:layout_height="35dip"
+				android:layout_width="fill_parent" android:layout_gravity="center_vertical"
+				android:textColor="@color/black" android:id="@+id/uri"
+				android:textSize="15sp"></TextView>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutFlaged"
 			android:layout_width="fill_parent" android:paddingLeft="10dip"

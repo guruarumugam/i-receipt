@@ -52,10 +52,10 @@ public class compute_receipt extends Activity {
 	private String stores[] = new String[4];
 	public static String cat[] = new String[10];
 	static final int DATE_DIALOG_ID = 0;
-	private Spinner spinner_d; //date
-	private Spinner spinner_p; //price
-	private Spinner spinner_s; //store
-	private Spinner spinner_c; //category
+	private Spinner spinner_d; // date
+	private Spinner spinner_p; // price
+	private Spinner spinner_s; // store
+	private Spinner spinner_c; // category
 	private ArrayAdapter<String> adapter_d;
 	private ArrayAdapter<String> adapter_p;
 	private ArrayAdapter<String> adapter_s;
@@ -78,41 +78,35 @@ public class compute_receipt extends Activity {
 		}
 	};
 
-	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.compute_receipt_layout);
-		
-		
-		//speack
-		
+
+		// speack
 		Button speakButton = (Button) findViewById(R.id.speachButton1);
 		// Check to see if a recognition activity is present
-	    PackageManager pm = getPackageManager();
-	    List<ResolveInfo> activities = pm.queryIntentActivities(
-	            new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-	    if (activities.size() != 0) {
-	        speakButton.setOnClickListener(new OnClickListener() {
-				
-				
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(
+				RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		if (activities.size() != 0) {
+			speakButton.setOnClickListener(new OnClickListener() {
+
 				public void onClick(View v) {
-				    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-				    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-				            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-				    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speech recognition demo");
-				    startActivityForResult(intent, 1234);
-					
+					Intent intent = new Intent(
+							RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+					intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+							RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+					intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+							"Speech recognition demo");
+					startActivityForResult(intent, 1234);
+
 				}
 			});
-	    } else {
-	        speakButton.setEnabled(false);
-	    }
-		
-		
-		
-		
-	
+		} else {
+			speakButton.setEnabled(false);
+		}
+
 		myCheckBox = (CheckBox) findViewById(R.id.CheckBox1);
 		myEditText = (EditText) findViewById(R.id.EditNotesManual);
 		int index = getIntent().getFlags();
@@ -227,7 +221,6 @@ public class compute_receipt extends Activity {
 			Button b1 = (Button) dialog5.findViewById(R.id.Button01Dialogprice);
 			b1.setOnClickListener(new OnClickListener() {
 
-				
 				public void onClick(View v) {
 					String price_new = text.getText().toString();
 					prices[3] = price_new;
@@ -239,7 +232,7 @@ public class compute_receipt extends Activity {
 			// b2 is cancel button
 			Button b2 = (Button) dialog5.findViewById(R.id.Button02Dialogprice);
 			b2.setOnClickListener(new OnClickListener() {
-				
+
 				public void onClick(View v) {
 					dialog5.dismiss();
 				}
@@ -286,7 +279,6 @@ public class compute_receipt extends Activity {
 			Button b2store = (Button) dialog3.findViewById(R.id.ButtonStore02);
 			b2store.setOnClickListener(new OnClickListener() {
 
-				
 				public void onClick(View v) {
 					dialog3.dismiss();
 				}
@@ -322,7 +314,6 @@ public class compute_receipt extends Activity {
 			Button b2cat = (Button) dialog7.findViewById(R.id.ButtonCat02);
 			b2cat.setOnClickListener(new OnClickListener() {
 
-				
 				public void onClick(View v) {
 					dialog7.dismiss();
 				}
@@ -351,92 +342,86 @@ public class compute_receipt extends Activity {
 
 	public void saveList() {
 
-		//  ConnectivityManager conMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);  
-		  rec.setUpdate();
-		  
-	/*	  boolean connected = (   conMgr.getActiveNetworkInfo() != null &&
-		            conMgr.getActiveNetworkInfo().isAvailable() &&
-		            conMgr.getActiveNetworkInfo().isConnected()   );*/
-			// add rec to update rec list
+		// ConnectivityManager conMgr =
+		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		rec.setUpdate();
 
-			// check if the device is connected 
-		  
-		  boolean connected=false;
-		    ConnectivityManager mConnectivity =(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE); 
-		    TelephonyManager mTelephony= (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		    NetworkInfo info = mConnectivity.getActiveNetworkInfo();
-		    
-		    if (info == null ||
-		            !mConnectivity.getBackgroundDataSetting()) 
-		        connected= false;
-		    else {
-		    int netType = info.getType();
-		    int netSubtype = info.getSubtype();
-		    if (netType == ConnectivityManager.TYPE_WIFI) {
-		        connected= info.isConnected();
-		    }
-		    if (!connected &&netType == ConnectivityManager.TYPE_MOBILE
-		            && netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-		            && !mTelephony.isNetworkRoaming()) {
-		        connected= info.isConnected();
-		    }
-		    }
-			
-			if (connected){
-				for (iReceipt tmprr: idan.rec_arr){
-				
-					if (rec_view.notSync(tmprr)){
-						tmprr.setSync();
-						idan.sync.addtoUpdateList(tmprr);
-					}
-				}
-				
-				idan.sync.sendSync(loginpage.accountname);
-				// need to check if the sync run ok 
-				//for (iReceipt tmprr: idan.sync.getUpdateList()){
-					//tmprr.setSync();
-				//}
-				idan.sync.deleteupdatelist();
+		/*
+		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
+		 * conMgr.getActiveNetworkInfo().isAvailable() &&
+		 * conMgr.getActiveNetworkInfo().isConnected() );
+		 */
+		// add rec to update rec list
+
+		// check if the device is connected
+
+		boolean connected = false;
+		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		TelephonyManager mTelephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
+
+		if (info == null || !mConnectivity.getBackgroundDataSetting())
+			connected = false;
+		else {
+			int netType = info.getType();
+			int netSubtype = info.getSubtype();
+			if (netType == ConnectivityManager.TYPE_WIFI) {
+				connected = info.isConnected();
 			}
-		  
-		  
-		  
-		  
+			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
+					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
+					&& !mTelephony.isNetworkRoaming()) {
+				connected = info.isConnected();
+			}
+		}
+
+		if (connected) {
+			for (iReceipt tmprr : idan.rec_arr) {
+
+				if (rec_view.notSync(tmprr)) {
+					tmprr.setSync();
+					idan.sync.addtoUpdateList(tmprr);
+				}
+			}
+
+			idan.sync.sendSync(loginpage.accountname);
+			// need to check if the sync run ok
+			// for (iReceipt tmprr: idan.sync.getUpdateList()){
+			// tmprr.setSync();
+			// }
+			idan.sync.deleteupdatelist();
+		}
+
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
 					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
 			outputStream.writeObject(idan.rec_arr);
 			outputStream.close();
-			outputStream=new ObjectOutputStream(openFileOutput("recIndexsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject((Integer)idan.receiptUniqueIndex);
+			outputStream = new ObjectOutputStream(openFileOutput(
+					"recIndexsave.tmp", Context.MODE_PRIVATE));
+			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
 			outputStream.close();
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
-		
-		
 
-		}
-	
+	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1234 && resultCode == RESULT_OK) {
-			ArrayList<String> matches = data.getStringArrayListExtra(
-	                RecognizerIntent.EXTRA_RESULTS);
-			String res="";
+			ArrayList<String> matches = data
+					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			String res = "";
 			for (String string : matches) {
-				res=res+" "+string;
+				res = res + " " + string;
 			}
-			stores[3]=res;
+			stores[3] = res;
 			spinner_s.setSelection(3);
 			adapter_s.notifyDataSetChanged();
 			return;
-			}
-		
-		
-		
+		}
+
 		finish();
 	}
 
@@ -444,7 +429,6 @@ public class compute_receipt extends Activity {
 
 		protected ProgressDialog progressDialog;
 
-		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = ProgressDialog.show(compute_receipt.this,
@@ -456,7 +440,6 @@ public class compute_receipt extends Activity {
 			return null;
 		}
 
-		
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(null);
 			progressDialog.dismiss();
@@ -503,7 +486,6 @@ public class compute_receipt extends Activity {
 
 		protected ProgressDialog progressDialog;
 
-		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = ProgressDialog
@@ -545,7 +527,6 @@ public class compute_receipt extends Activity {
 			return null;
 		}
 
-		
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(null);
 
@@ -603,9 +584,7 @@ public class compute_receipt extends Activity {
 		}
 
 	}
-	
-	//voice recognition
-	
-	
+
+	// voice recognition
 
 }
