@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>InitializeServlet</servlet-name>
+		<servlet-class>singer.InitializeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitializeServlet</servlet-name>
+		<url-pattern>/initializer</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>InitializeServlet1</servlet-name>
+		<servlet-class>singer.InitializeServlet1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitializeServlet1</servlet-name>
+		<url-pattern>/initializer-second</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>UpdateReceiptEntryServlet</servlet-name>
+		<servlet-class>singer.UpdateReceiptEntryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateReceiptEntryServlet</servlet-name>
+		<url-pattern>/UpdateReceiptEntryServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Sync</servlet-name>
+		<servlet-class>google.proj.SyncServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Sync</servlet-name>
+		<url-pattern>/sync</url-pattern>
+	</servlet-mapping>
+		<servlet>
+		<servlet-name>GetImage</servlet-name>
+		<servlet-class>google.proj.GetImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetImage</servlet-name>
+		<url-pattern>/getimage</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
