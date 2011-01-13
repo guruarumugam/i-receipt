@@ -26,7 +26,7 @@ public class rec_list extends Activity {
 	public ArrayAdapter<iReceipt> adapter;
 
 	/** Called when the activity is first created. */
-	@Override
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -76,7 +76,7 @@ public class rec_list extends Activity {
 
 		myListView.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
+			
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent i = new Intent(rec_list.this, rec_view.class);
@@ -106,7 +106,7 @@ public class rec_list extends Activity {
 
 	class DateComparator implements Comparator<Receipt> {
 
-		@Override
+		
 		public int compare(Receipt object1, Receipt object2) {
 			return object1.getRdate().compareTo(object2.getRdate());
 		}
@@ -115,7 +115,7 @@ public class rec_list extends Activity {
 
 	class TotaltComparator implements Comparator<Receipt> {
 
-		@Override
+		
 		public int compare(Receipt object1, Receipt object2) {
 			if (object1.getTotal() > object2.getTotal())
 				return 1;
@@ -128,7 +128,7 @@ public class rec_list extends Activity {
 	}
 
 	class NameComparator implements Comparator<Receipt> {
-		@Override
+		
 		public int compare(Receipt object1, Receipt object2) {
 			return (object1.getStoreName().compareTo(object2.getStoreName()));
 		}

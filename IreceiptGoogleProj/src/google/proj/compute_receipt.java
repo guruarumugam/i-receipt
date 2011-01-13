@@ -78,7 +78,7 @@ public class compute_receipt extends Activity {
 		}
 	};
 
-	@Override
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -95,7 +95,7 @@ public class compute_receipt extends Activity {
 	    if (activities.size() != 0) {
 	        speakButton.setOnClickListener(new OnClickListener() {
 				
-				@Override
+				
 				public void onClick(View v) {
 				    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 				    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -227,7 +227,7 @@ public class compute_receipt extends Activity {
 			Button b1 = (Button) dialog5.findViewById(R.id.Button01Dialogprice);
 			b1.setOnClickListener(new OnClickListener() {
 
-				@Override
+				
 				public void onClick(View v) {
 					String price_new = text.getText().toString();
 					prices[3] = price_new;
@@ -239,7 +239,7 @@ public class compute_receipt extends Activity {
 			// b2 is cancel button
 			Button b2 = (Button) dialog5.findViewById(R.id.Button02Dialogprice);
 			b2.setOnClickListener(new OnClickListener() {
-				@Override
+				
 				public void onClick(View v) {
 					dialog5.dismiss();
 				}
@@ -286,7 +286,7 @@ public class compute_receipt extends Activity {
 			Button b2store = (Button) dialog3.findViewById(R.id.ButtonStore02);
 			b2store.setOnClickListener(new OnClickListener() {
 
-				@Override
+				
 				public void onClick(View v) {
 					dialog3.dismiss();
 				}
@@ -322,7 +322,7 @@ public class compute_receipt extends Activity {
 			Button b2cat = (Button) dialog7.findViewById(R.id.ButtonCat02);
 			b2cat.setOnClickListener(new OnClickListener() {
 
-				@Override
+				
 				public void onClick(View v) {
 					dialog7.dismiss();
 				}
@@ -351,71 +351,75 @@ public class compute_receipt extends Activity {
 
 	public void saveList() {
 
-		// ConnectivityManager conMgr =
-		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-		rec.setUpdate();
+		//  ConnectivityManager conMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);  
+		  rec.setUpdate();
+		  
+	/*	  boolean connected = (   conMgr.getActiveNetworkInfo() != null &&
+		            conMgr.getActiveNetworkInfo().isAvailable() &&
+		            conMgr.getActiveNetworkInfo().isConnected()   );*/
+			// add rec to update rec list
 
-		/*
-		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
-		 * conMgr.getActiveNetworkInfo().isAvailable() &&
-		 * conMgr.getActiveNetworkInfo().isConnected() );
-		 */
-		// add rec to update rec list
-
-		// check if the device is connected
-
-		boolean connected = false;
-		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
-
-		if (info == null || !mConnectivity.getBackgroundDataSetting())
-			connected = false;
-		else {
-			int netType = info.getType();
-			int netSubtype = info.getSubtype();
-			if (netType == ConnectivityManager.TYPE_WIFI) {
-				connected = info.isConnected();
-			} else if (netType == ConnectivityManager.TYPE_MOBILE
-					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-					&& !mTelephony.isNetworkRoaming()) {
-				connected = info.isConnected();
-			} else {
-				connected = false;
-			}
-		}
-
-		if (connected) {
-			for (iReceipt tmprr : idan.rec_arr) {
-
-				if (rec_view.notSync(tmprr)) {
-					tmprr.setSync();
-					idan.sync.addtoUpdateList(tmprr);
+			// check if the device is connected 
+		  
+		  boolean connected=false;
+		    ConnectivityManager mConnectivity =(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE); 
+		    TelephonyManager mTelephony= (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		    NetworkInfo info = mConnectivity.getActiveNetworkInfo();
+		    
+		    if (info == null ||
+		            !mConnectivity.getBackgroundDataSetting()) 
+		        connected= false;
+		    else {
+		    int netType = info.getType();
+		    int netSubtype = info.getSubtype();
+		    if (netType == ConnectivityManager.TYPE_WIFI) {
+		        connected= info.isConnected();
+		    }
+		    if (!connected &&netType == ConnectivityManager.TYPE_MOBILE
+		            && netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
+		            && !mTelephony.isNetworkRoaming()) {
+		        connected= info.isConnected();
+		    }
+		    }
+			
+			if (connected){
+				for (iReceipt tmprr: idan.rec_arr){
+				
+					if (rec_view.notSync(tmprr)){
+						tmprr.setSync();
+						idan.sync.addtoUpdateList(tmprr);
+					}
 				}
+				
+				idan.sync.sendSync(loginpage.accountname);
+				// need to check if the sync run ok 
+				//for (iReceipt tmprr: idan.sync.getUpdateList()){
+					//tmprr.setSync();
+				//}
+				idan.sync.deleteupdatelist();
 			}
-
-			idan.sync.sendSync(loginpage.accountname);
-			// need to check if the sync run ok
-			// for (iReceipt tmprr: idan.sync.getUpdateList()){
-			// tmprr.setSync();
-			// }
-			idan.sync.deleteupdatelist();
-		}
-
+		  
+		  
+		  
+		  
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
 					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
 			outputStream.writeObject(idan.rec_arr);
 			outputStream.close();
-			outputStream = new ObjectOutputStream(openFileOutput(
-					"recIndexsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
+			outputStream=new ObjectOutputStream(openFileOutput("recIndexsave.tmp", Context.MODE_PRIVATE));
+			outputStream.writeObject((Integer)idan.receiptUniqueIndex);
 			outputStream.close();
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
+		
+		
+		
+
+		}
+	
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1234 && resultCode == RESULT_OK) {
@@ -440,7 +444,7 @@ public class compute_receipt extends Activity {
 
 		protected ProgressDialog progressDialog;
 
-		@Override
+		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = ProgressDialog.show(compute_receipt.this,
@@ -452,7 +456,7 @@ public class compute_receipt extends Activity {
 			return null;
 		}
 
-		@Override
+		
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(null);
 			progressDialog.dismiss();
@@ -499,7 +503,7 @@ public class compute_receipt extends Activity {
 
 		protected ProgressDialog progressDialog;
 
-		@Override
+		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = ProgressDialog
@@ -541,7 +545,7 @@ public class compute_receipt extends Activity {
 			return null;
 		}
 
-		@Override
+		
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(null);
 

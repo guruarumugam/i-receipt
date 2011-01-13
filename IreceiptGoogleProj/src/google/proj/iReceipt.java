@@ -190,11 +190,17 @@ public class iReceipt implements Receipt, java.io.Serializable {
     	oos.writeObject(this);
     	return baos.toByteArray();
 	}
-	protected void setUpdate(){
+	public void setUpdate(){
 		update=new Date();
 	}
-	protected void setSync(){
+	public void setUpdate(Date date){
+		update=date;
+	}
+	public void setSync(){
 		syncdate=new Date();
+	}
+	public void setSync(Date date){
+		syncdate=date;
 	}
 	public Date getUpdate(){
 		return update;
@@ -215,6 +221,9 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		this.Rdate=myObject.getRdate();
 		this.StoreName=myObject.getStoreName();
 		this.Total=myObject.getTotal();
+		this.receiptuniqueindex=myObject.getUniqueIndex();
+		this.update=myObject.getUpdate();
+		this.syncdate=myObject.getSyncdate();
 		
 	}
 }

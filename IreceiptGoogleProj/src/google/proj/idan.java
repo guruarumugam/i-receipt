@@ -64,8 +64,11 @@ public class idan extends Activity {
 		// במחשב*******************************************
 		if (rec_arr == null)
 			rec_arr = new ArrayList<iReceipt>();
-		if (sync == null)
-			sync = new Syncer();
+			if (sync==null){
+				sync=new Syncer();
+			sync.sendSync(loginpage.accountname);
+			
+		}
 		
 		/*
 		 * iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",

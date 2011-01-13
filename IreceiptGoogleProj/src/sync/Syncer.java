@@ -1,6 +1,7 @@
 package sync;
-
+ 
 import google.proj.iReceipt;
+import google.proj.idan;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -33,13 +34,15 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 public class Syncer {
-
-	Date lastsync;
+	
+	boolean alreadysync=false;
+	public Date lastsync;
 	List<iReceipt> update_rec_list;
 
 	public Syncer(){
 
 		update_rec_list=new ArrayList<iReceipt>();
+		lastsync=new Date(100,5,5);
 	}
 
 	public void sendSync(String account){
@@ -51,7 +54,7 @@ public class Syncer {
 		// Create a new HttpClient and Post Header
 
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://receipt1234.appspot.com/sync");
+		HttpPost httppost = new HttpPost("http://192.168.1.2:8888/sync");
 
 		// Add your data
 		if(list==null)
@@ -88,7 +91,41 @@ public class Syncer {
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			// Execute HTTP Post Request
 			HttpResponse response = httpclient.execute(httppost);
+			///////////////////////////////////////////////////////////////
+			int size=Integer.parseInt(response.getHeaders("size")[0].getValue());
+			
+			for (int j = 0; j < size; j++) {
+				String in=response.getHeaders(j+"")[0].getValue();
+				if(in==null){
+					//response.sendError(404);
+					return;}
+				byte[] decoded = Base64.decode(in.getBytes("ASCII"),Base64.DEFAULT);
+				iReceipt rec=new iReceipt();
+				rec.fromByteArray(decoded);
+				for (iReceipt rr:idan.rec_arr){
+					
+					if (rr.getUniqueIndex()==rec.getUniqueIndex()){ //same receipt\
+						
+					if (rec.getUpdate().after(rr.getUpdate())){
+						rr.setCategory(rec.getCategory());
+						rr.setFlaged(rec.isFlaged());
+						rr.setNotes(rec.getNotes());
+						rr.setProcessed(rec.isProcessed());
+						rr.setRdate(rec.getRdate());
+						rr.setStoreName(rec.getStoreName());
+						rr.setTotal(rec.getTotal());
+						rr.setUpdate(rec.getUpdate());
+						rr.setSync(rec.getSyncdate());
+					}
+						
+					}
+				}
+			}
+
+			////////////////////////////////////
+
 			lastsync=new Date();
+			alreadysync=true;
 
 
 		} catch (ClientProtocolException e) {
@@ -101,7 +138,10 @@ public class Syncer {
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();}
+			e1.printStackTrace();} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 	}
@@ -114,6 +154,22 @@ public class Syncer {
 
 	public void deleteupdatelist(){
 		update_rec_list.clear();
+	}
+	
+	
+	public boolean needtoSync(){
+		
+	
+		
+		Date d1 = new Date();
+		long l1=d1.getTime();
+		long l2 =lastsync.getTime();
+		if ((l1- l2) >= 86400000 ){
+			lastsync=new Date();
+			return true;
+		}
+		else return false;
+		
 	}
 
 

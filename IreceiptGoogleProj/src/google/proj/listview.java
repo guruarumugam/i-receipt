@@ -167,6 +167,11 @@ public class listview extends Activity {
 				}
 			}
 		});
+		
+		if (idan.sync.needtoSync())
+			idan.sync.sendSync(loginpage.accountname);
+		
+		
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -327,7 +332,7 @@ public class listview extends Activity {
 		// b1 is search button
 		Button b1 = (Button) dialog1.findViewById(R.id.ButtonSearch);
 		b1.setOnClickListener(new OnClickListener() {
-			@Override
+			
 			public void onClick(View v) {
 				search_rec_arr.clear();
 				search = text.getText().toString().toLowerCase();
@@ -373,7 +378,7 @@ public class listview extends Activity {
 		// b1 is AdvanceSearch button
 		Button b2 = (Button) dialog1.findViewById(R.id.ButtonAdvanceSearch);
 		b2.setOnClickListener(new OnClickListener() {
-			@Override
+			
 			public void onClick(View v) {
 				dialog1.dismiss();
 				search_rec_arr.clear();

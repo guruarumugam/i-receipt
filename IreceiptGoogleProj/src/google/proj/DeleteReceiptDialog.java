@@ -23,7 +23,7 @@ public class DeleteReceiptDialog extends Dialog implements OnClickListener {
 		cancelButton.setOnClickListener(this);
 	}
 
-	@Override
+	
 	public void onClick(View v) {
 		if (v == deleteButton) {
 			dismiss();

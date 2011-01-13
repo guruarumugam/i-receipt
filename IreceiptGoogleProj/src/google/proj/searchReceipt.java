@@ -135,13 +135,13 @@ public class searchReceipt extends Activity {
 		 * KeyEvent event) { radioPrice.setChecked(true); return false; } });
 		 */
 		PriceTo.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
+			
 			public void onFocusChange(View v, boolean hasFocus) {
 				radioPrice.setChecked(true);
 			}
 		});
 		PriceFrom.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
+			
 			public void onFocusChange(View v, boolean hasFocus) {
 				radioPrice.setChecked(true);
 			}
