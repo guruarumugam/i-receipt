@@ -20,6 +20,7 @@ public class Misc {
 
 	}
 
+	//important: this method deletes the receipt from both the server and yhe device
 	public static void deleteReceipt(iReceipt rec){
 		deleteReceipt_helper(rec,Settings.deleteOnServer());
 		idan.sync.sendSync();
@@ -30,7 +31,7 @@ public class Misc {
 		if (deleteOnServer){
 			idan.sync.addToDeleteList(recIndex+"");
 		}
-		if (rec.getFilepath()!=null){
+		if (rec.getFilepath()!=null&&rec.getFilepath()!=""){
 			File file=new File(rec.getFilepath());
 			file.delete();
 		}
