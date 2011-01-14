@@ -6,11 +6,16 @@ import java.io.ObjectOutputStream;
 import java.net.URI;
 import sync.Syncer;
 import google.proj.R;
+import google.proj.R.id;
+import google.proj.R.layout;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -45,6 +50,7 @@ public class rec_view extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.receiptpage);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		rec = idan.rec_arr.get(getIntent().getFlags());
 		ImageView myImage = (ImageView) findViewById(R.id.Image01);
 		if (rec.getFilepath() == null)
@@ -141,7 +147,7 @@ public class rec_view extends Activity {
 
 	public void onClick(View view) {
 		IDate d;
-		d = new IDate(mYear, mMonth + 1, mDay);
+		d = new IDate(mYear,mMonth + 1, mDay );
 		rec.setRdate((IDate) d);
 		rec.setStoreName(text[0].getText().toString());
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
@@ -157,9 +163,22 @@ public class rec_view extends Activity {
 	}
 
 	public void deleteRec(View view) {
-		DeleteReceiptDialog delteReceiptDialog = new DeleteReceiptDialog(this,
-				"Delete " + "\"" + rec.getStoreName() + "\"" + " receipt?");
-		delteReceiptDialog.show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to delete this receipt?")
+		       .setCancelable(false)
+		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	    misc.Misc.deleteReceipt(rec);
+		        	    finish();
+		           }
+		       })
+		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	public void EditRecNote(View view) {
@@ -242,12 +261,12 @@ public class rec_view extends Activity {
 				}
 			}
 
-			idan.sync.sendSync(loginpage.accountname);
+			idan.sync.sendSync();
 			// need to check if the sync run ok
 			// for (iReceipt tmprr: idan.sync.getUpdateList()){
 			// tmprr.setSync();
 			// }
-			idan.sync.deleteupdatelist();
+			idan.sync.clearUpdateList();
 		}
 
 		try {

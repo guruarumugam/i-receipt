@@ -1,20 +1,18 @@
 package google.proj;
 
-import java.io.File;
+import google.proj.R;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner01;
-import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner04;
-import google.proj.compute_receipt.save;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -51,14 +49,13 @@ public class manual_scan extends Activity implements OnClickListener {
 	private static final int SELECT_PICTURE = 1;
 	private String selectedImagePath;
 	private String filemanagerstring;
-	public static int limit = 600;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.manualscan);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		// speak
 		Button speakButton1 = (Button) findViewById(R.id.voice1);
 		Button speakButton2 = (Button) findViewById(R.id.voice2);
@@ -217,7 +214,6 @@ public class manual_scan extends Activity implements OnClickListener {
 		rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
 		saveList();
-		checkLimitException(limit);
 		setResult(100);
 		finish();
 	}
@@ -280,12 +276,12 @@ public class manual_scan extends Activity implements OnClickListener {
 				}
 			}
 
-			idan.sync.sendSync(loginpage.accountname);
+			idan.sync.sendSync();
 			// need to check if the sync run ok
 			// for (iReceipt tmprr: idan.sync.getUpdateList()){
 			// tmprr.setSync();
 			// }
-			idan.sync.deleteupdatelist();
+			idan.sync.clearUpdateList();
 		}
 
 		try {
@@ -301,6 +297,7 @@ public class manual_scan extends Activity implements OnClickListener {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
 	String onlyNumbers(String str) {
@@ -417,30 +414,6 @@ public class manual_scan extends Activity implements OnClickListener {
 			super.onPostExecute(null);
 			progressDialog.dismiss();
 			finish();
-		}
-	}
-
-	public void checkLimitException(int limit) {
-		int calYear, calMonth;
-		Double total = 0.0;
-		// int calDay;
-		IDate date;
-		final Calendar cal = Calendar.getInstance();
-		calYear = cal.get(Calendar.YEAR);
-		calMonth = cal.get(Calendar.MONTH);
-		// calDay = cal.get(Calendar.DAY_OF_MONTH);
-		date = new IDate(calYear, calMonth + 1, 1); // start of this month
-		// if (price.getText() != null)
-		// total = Double.parseDouble(price.getText().toString());
-		for (iReceipt rec : idan.rec_arr) {
-			if (rec.getRdate().compareTo(date) <= 0)
-				total += rec.getTotal();
-		}
-		if (total > limit) {
-			CustomizeDialog customizeDialog = new CustomizeDialog(this,
-					"Your expenditures this month passed your limit - \""
-							+ limit + "\"");
-			customizeDialog.show();
 		}
 	}
 }

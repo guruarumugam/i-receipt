@@ -1,5 +1,7 @@
 package google.proj;
 
+import google.proj.R;
+import google.proj.R.layout;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -35,7 +37,6 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 
-@SuppressWarnings("unused")
 public class loginpage extends Activity {
 	
 	private static final String PREF = "MyPrefs";
@@ -44,7 +45,7 @@ public class loginpage extends Activity {
 	private static final String AUTH_TOKEN_TYPE="mail";
 	//private GoogleTransport transport; *****************************************************
 	private static final int REQUEST_AUTHENTICATE = 0;
-	protected static String  accountname;
+	public static String  accountname;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

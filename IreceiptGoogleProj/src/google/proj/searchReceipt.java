@@ -1,5 +1,6 @@
 package google.proj;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -25,7 +27,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
-import google.proj.IDate;
+import google.proj.R;
+import google.proj.R.id;
+import google.proj.R.layout;
 import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner04;
 import android.widget.RadioButton;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -73,6 +77,7 @@ public class searchReceipt extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.searchreceipt);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		searchButton = (Button) findViewById(R.id.searchButton);
 		PriceFrom = (EditText) findViewById(R.id.EditText05);
 		PriceTo = (EditText) findViewById(R.id.EditText06);

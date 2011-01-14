@@ -1,5 +1,10 @@
 package google.proj;
 
+import google.proj.R;
+import google.proj.R.drawable;
+import google.proj.R.id;
+import google.proj.R.layout;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 

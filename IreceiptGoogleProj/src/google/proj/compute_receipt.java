@@ -1,10 +1,8 @@
 package google.proj;
 
-import google.proj.*;
 import java.io.FileNotFoundException;
 import google.proj.R;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,7 +12,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -22,7 +19,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Browser.BookmarkColumns;
 import android.speech.RecognizerIntent;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -31,12 +27,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -98,7 +92,7 @@ public class compute_receipt extends Activity {
 					intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
 							RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 					intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-							"Speech recognition demo");
+					"Speech recognition demo");
 					startActivityForResult(intent, 1234);
 
 				}
@@ -116,7 +110,7 @@ public class compute_receipt extends Activity {
 
 	// handler for spinner 03
 	public class MyOnItemSelectedListenerSpinner03 implements
-			OnItemSelectedListener {
+	OnItemSelectedListener {
 
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
@@ -134,7 +128,7 @@ public class compute_receipt extends Activity {
 
 	// handler for spinner 02
 	public class MyOnItemSelectedListenerSpinner02 implements
-			OnItemSelectedListener {
+	OnItemSelectedListener {
 
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
@@ -159,7 +153,7 @@ public class compute_receipt extends Activity {
 
 	// handler for spinner 01
 	public class MyOnItemSelectedListenerSpinner01 implements
-			OnItemSelectedListener {
+	OnItemSelectedListener {
 
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
@@ -174,7 +168,7 @@ public class compute_receipt extends Activity {
 
 	// handler for spinner 04
 	public class MyOnItemSelectedListenerSpinner04 implements
-			OnItemSelectedListener {
+	OnItemSelectedListener {
 
 		public void onItemSelected(AdapterView<?> parent, View view, int pos,
 				long id) {
@@ -215,7 +209,7 @@ public class compute_receipt extends Activity {
 			dialog5.setTitle("Edit your price");
 
 			final EditText text = (EditText) dialog5
-					.findViewById(R.id.EditText01DialogPrice);
+			.findViewById(R.id.EditText01DialogPrice);
 
 			// b1 is ok button
 			Button b1 = (Button) dialog5.findViewById(R.id.Button01Dialogprice);
@@ -245,22 +239,8 @@ public class compute_receipt extends Activity {
 			dialog3.setContentView(R.layout.edit_store_layout);
 			dialog3.setTitle("Edit your Store");
 			final EditText textstore = (EditText) dialog3
-					.findViewById(R.id.EditTextStore01);
+			.findViewById(R.id.EditTextStore01);
 
-			// ///////////////////////// AutoComplete Business ////
-
-			/*
-			 * final String store_names[] = new String[idan.rec_arr.size()]; for
-			 * (int k = 0; k < idan.rec_arr.size(); k++) { store_names[k] =
-			 * idan.rec_arr.get(k).getStoreName(); } ArrayAdapter<String>
-			 * arrAdapter = new ArrayAdapter<String>(this,
-			 * android.R.layout.simple_dropdown_item_1line, store_names);
-			 * AutoCompleteTextView Business = (AutoCompleteTextView)
-			 * findViewById(R.id.AutoCompleteBusiness);
-			 * Business.setAdapter(arrAdapter);
-			 */
-
-			// //////////////////////////////////////////////
 
 			// b1 is ok button
 			Button b1store = (Button) dialog3.findViewById(R.id.ButtonStore01);
@@ -294,7 +274,7 @@ public class compute_receipt extends Activity {
 			dialog7.setTitle("Edit your Category");
 
 			final EditText textCat = (EditText) dialog7
-					.findViewById(R.id.EditTextCat01);
+			.findViewById(R.id.EditTextCat01);
 
 			// b1 is ok button
 			Button b1cat = (Button) dialog7.findViewById(R.id.ButtonCat01);
@@ -343,17 +323,7 @@ public class compute_receipt extends Activity {
 
 	public void saveList() {
 
-		// ConnectivityManager conMgr =
-		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		rec.setUpdate();
-		/*
-		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
-		 * conMgr.getActiveNetworkInfo().isAvailable() &&
-		 * conMgr.getActiveNetworkInfo().isConnected() );
-		 */
-		// add rec to update rec list
-
-		// check if the device is connected
 
 		boolean connected = false;
 		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -382,12 +352,10 @@ public class compute_receipt extends Activity {
 					idan.sync.addtoUpdateList(tmprr);
 				}
 			}
-			idan.sync.sendSync(loginpage.accountname);
+			idan.sync.sendSync();
 			// need to check if the sync run ok
-			// for (iReceipt tmprr: idan.sync.getUpdateList()){
-			// tmprr.setSync();
-			// }
-			idan.sync.deleteupdatelist();
+
+			idan.sync.clearUpdateList();
 		}
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
@@ -406,7 +374,7 @@ public class compute_receipt extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1234 && resultCode == RESULT_OK) {
 			ArrayList<String> matches = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			String res = "";
 			for (String string : matches) {
 				res = res + " " + string;
@@ -448,7 +416,7 @@ public class compute_receipt extends Activity {
 
 		private boolean preform_ocr(iReceipt r) {
 			OCR ocr_obj = new OCR(r.getFilepath(), "google_username",
-					"google_password");
+			"google_password");
 			int ret = 0;
 			try {
 				ret = ocr_obj.preformOCR();
@@ -484,10 +452,10 @@ public class compute_receipt extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			progressDialog = ProgressDialog
-					.show(compute_receipt.this, "Ireceipt",
-							"Extracting the data from the receipt."
-									+ "\n\n(Press the back key to skip...)",
-							true, true);
+			.show(compute_receipt.this, "Ireceipt",
+					"Extracting the data from the receipt."
+					+ "\n\n(Press the back key to skip...)",
+					true, true);
 
 		}
 
@@ -529,37 +497,37 @@ public class compute_receipt extends Activity {
 			adapter_s = new ArrayAdapter<String>(compute_receipt.this,
 					android.R.layout.simple_spinner_item, stores);
 			adapter_s
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_s.setAdapter(adapter_s);
 			spinner_s
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
+			.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
 
 			spinner_d = (Spinner) findViewById(R.id.Spinner02);
 			adapter_d = new ArrayAdapter<String>(compute_receipt.this,
 					android.R.layout.simple_spinner_item, dates);
 			adapter_d
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_d.setAdapter(adapter_d);
 			spinner_d
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
+			.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
 
 			spinner_p = (Spinner) findViewById(R.id.Spinner03);
 			adapter_p = new ArrayAdapter<String>(compute_receipt.this,
 					android.R.layout.simple_spinner_item, prices);
 			adapter_p
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_p.setAdapter(adapter_p);
 			spinner_p
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
+			.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
 
 			spinner_c = (Spinner) findViewById(R.id.Spinner04);
 			adapter_c = new ArrayAdapter<String>(compute_receipt.this,
 					android.R.layout.simple_spinner_item, cat);
 			adapter_c
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner_c.setAdapter(adapter_c);
 			spinner_c
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
+			.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
 
 			PickDate = (TextView) findViewById(R.id.EditDate);
 

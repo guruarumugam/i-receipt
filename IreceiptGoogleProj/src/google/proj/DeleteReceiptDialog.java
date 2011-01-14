@@ -26,9 +26,9 @@ public class DeleteReceiptDialog extends Dialog implements OnClickListener {
 	
 	public void onClick(View v) {
 		if (v == deleteButton) {
+			
+			
 			dismiss();
-			// *************** return to the rec_view and should add
-			// deleteFunc();
 		}
 		if (v == cancelButton)
 			dismiss();

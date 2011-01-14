@@ -1,18 +1,21 @@
 package google.proj;
 
+import google.proj.R;
+import google.proj.R.id;
+import google.proj.R.layout;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import sync.tset;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.SweepGradient;
+import android.content.pm.ActivityInfo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +31,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class listview extends Activity {
@@ -46,9 +48,10 @@ public class listview extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.listview2);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		ListView myListView = (ListView) findViewById(R.id.ListView01);
 		if (idan.sync.needtoSync())
-			idan.sync.sendSync(loginpage.accountname);
+			idan.sync.sendSync();
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			idan.rec_arr.add((iReceipt) extras.get("Receipt"));

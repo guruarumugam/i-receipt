@@ -36,20 +36,25 @@ import android.util.Base64;
 public class Syncer {
 
 	boolean alreadysync = false;
-	public Date lastsync;
+	private Date lastsync;
 	List<iReceipt> update_rec_list;
+	private String account=null;
+	private List<String> delete_rec_list;
+	
 
-	public Syncer() {
+	public Syncer(String account) {
 		update_rec_list = new ArrayList<iReceipt>();
+		delete_rec_list = new ArrayList<String>();
 		lastsync = new Date(100, 5, 5);
+		this.setAccount(account);
 	}
 
-	public void sendSync(String account) {
-		sendSync(this.update_rec_list, account);
+	public void sendSync() {
+		sendSync(this.update_rec_list);
 
 	}
 
-	public void sendSync(List<iReceipt> list, String account) {
+	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://192.168.1.4:8888/sync");
@@ -57,8 +62,8 @@ public class Syncer {
 		// Add your data
 		if (list == null)
 			return;
-		if (list.isEmpty())
-			return;
+		//if (list.isEmpty()&&this.delete_rec_list.isEmpty())
+			//return;
 		try {
 			int i = 0;
 			BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
@@ -87,6 +92,12 @@ public class Syncer {
 					baos.close();
 				}
 				i++;
+			}
+			if (!this.delete_rec_list.isEmpty()){
+				nameValuePairs.add(new BasicNameValuePair("delete", this.delete_rec_list.size()+""));
+				for (int j = 0; j < this.delete_rec_list.size(); j++) {
+					nameValuePairs.add(new BasicNameValuePair("delete"+j, this.delete_rec_list.get(j)));	
+				}
 			}
 			nameValuePairs.add(new BasicNameValuePair("account", String
 					.valueOf(account)));
@@ -130,6 +141,8 @@ public class Syncer {
 			}
 			// //////////////////////////////////
 			lastsync = new Date();
+			this.clearDelete_rec_list();
+			this.clearUpdateList();
 			alreadysync = true;
 
 		} catch (ClientProtocolException e) {
@@ -156,7 +169,7 @@ public class Syncer {
 		return update_rec_list;
 	}
 
-	public void deleteupdatelist() {
+	public void clearUpdateList() {
 		update_rec_list.clear();
 	}
 
@@ -170,4 +183,37 @@ public class Syncer {
 		} else
 			return false;
 	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+	public Date getLastsync() {
+		return lastsync;
+	}
+
+	public void setLastsync(Date lastsync) {
+		this.lastsync = lastsync;
+	}
+
+	public void setDelete_rec_list(List<String> delete_rec_list) {
+		this.delete_rec_list = delete_rec_list;
+	}
+
+	public List<String> getDelete_rec_list() {
+		return delete_rec_list;
+	}
+	
+	public void clearDelete_rec_list() {
+		this.delete_rec_list.clear();
+	}
+
+	public void addToDeleteList(String id) {
+		delete_rec_list.add(id);
+		
+	}
+	
 }

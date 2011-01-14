@@ -8,10 +8,13 @@ import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import google.proj.R;
+import google.proj.R.id;
+import google.proj.R.layout;
 
 public class statistics extends Activity {
 
@@ -28,8 +31,9 @@ public class statistics extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.stats);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		if (idan.sync.needtoSync())
-			idan.sync.sendSync(loginpage.accountname);
+			idan.sync.sendSync();
 
 		fromPickDate = (TextView) findViewById(R.id.pickDateFrom);
 		toPickDate = (TextView) findViewById(R.id.pickDateTo);
