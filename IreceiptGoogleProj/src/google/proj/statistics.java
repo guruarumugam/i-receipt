@@ -30,8 +30,7 @@ public class statistics extends Activity {
 		setContentView(R.layout.stats);
 		if (idan.sync.needtoSync())
 			idan.sync.sendSync(loginpage.accountname);
-		
-		
+
 		fromPickDate = (TextView) findViewById(R.id.pickDateFrom);
 		toPickDate = (TextView) findViewById(R.id.pickDateTo);
 		totalThisMonth = (TextView) findViewById(R.id.totalThisMonth);

@@ -330,9 +330,10 @@ public class compute_receipt extends Activity {
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(myEditText.getText().toString());
-		// saveList();
-		(new save()).execute(null);
+		saveList();
+		// (new save()).execute(null);
 		setResult(100);
+		finish();
 	}
 
 	public void onClick2(View view) {
@@ -345,7 +346,6 @@ public class compute_receipt extends Activity {
 		// ConnectivityManager conMgr =
 		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		rec.setUpdate();
-
 		/*
 		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
 		 * conMgr.getActiveNetworkInfo().isAvailable() &&
@@ -374,7 +374,6 @@ public class compute_receipt extends Activity {
 				connected = info.isConnected();
 			}
 		}
-
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 
@@ -383,7 +382,6 @@ public class compute_receipt extends Activity {
 					idan.sync.addtoUpdateList(tmprr);
 				}
 			}
-
 			idan.sync.sendSync(loginpage.accountname);
 			// need to check if the sync run ok
 			// for (iReceipt tmprr: idan.sync.getUpdateList()){
@@ -391,7 +389,6 @@ public class compute_receipt extends Activity {
 			// }
 			idan.sync.deleteupdatelist();
 		}
-
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
 					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
@@ -401,11 +398,9 @@ public class compute_receipt extends Activity {
 					"recIndexsave.tmp", Context.MODE_PRIVATE));
 			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
 			outputStream.close();
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

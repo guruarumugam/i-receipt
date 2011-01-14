@@ -215,13 +215,9 @@ public class manual_scan extends Activity implements OnClickListener {
 		rec.setStoreName(business.getText().toString());
 		rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
-		idan.rec_arr.add(rec);
 		saveList();
+		setResult(100);
 		finish();
-		// (new save()).execute(null);
-		// setResult(100);
-		// saveList2();
-		// finish();
 	}
 
 	public void onClick4(View view) {

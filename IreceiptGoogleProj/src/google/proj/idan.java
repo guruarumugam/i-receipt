@@ -64,12 +64,10 @@ public class idan extends Activity {
 		// במחשב*******************************************
 		if (rec_arr == null)
 			rec_arr = new ArrayList<iReceipt>();
-			if (sync==null){
-				sync=new Syncer();
-			sync.sendSync(loginpage.accountname);
-			
-		}
-		
+		if (sync == null)
+			sync = new Syncer();
+		sync.sendSync(loginpage.accountname);
+
 		/*
 		 * iReceipt rec1 = (new iReceipt(new IDate(2010, 12, 8), "LACOSTE",
 		 * 498.29, "Shopping", true, true, "",
@@ -180,10 +178,10 @@ public class idan extends Activity {
 		receiptUniqueIndex++;
 		iReceipt r = new iReceipt(receiptUniqueIndex);
 		Intent i = new Intent(idan.this, manual_scan.class);
-		rec_arr.add(r); 
+		rec_arr.add(r);
 		index = rec_arr.indexOf(r);
-		 i.setFlags(index);
-		 startActivityForResult(i, index);
+		i.setFlags(index);
+		startActivityForResult(i, index);
 	}
 
 	@Override

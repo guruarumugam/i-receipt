@@ -9,9 +9,7 @@ import java.io.StreamCorruptedException;
 import java.util.Date;
 
 public class iReceipt implements Receipt, java.io.Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private IDate Rdate;
 	private String StoreName;
@@ -22,7 +20,7 @@ public class iReceipt implements Receipt, java.io.Serializable {
 	private String Notes;
 	private String filepath;
 	private final String receitname;
-	private int receiptuniqueindex=-1;
+	private int receiptuniqueindex = -1;
 	private Date update;
 	private Date syncdate;
 
@@ -38,10 +36,11 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		Notes = notes;
 		this.filepath = filepath;
 		receitname = rname;
-		receiptuniqueindex=unique;
-		syncdate=null;
+		receiptuniqueindex = unique;
+		syncdate = null;
 	}
-	public iReceipt(int unique){
+
+	public iReceipt(int unique) {
 		Rdate = null;
 		StoreName = null;
 		Total = -1;
@@ -51,14 +50,14 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		Notes = null;
 		this.filepath = null;
 		receitname = null;
-		receiptuniqueindex=unique;
-		syncdate=null;
-		
+		receiptuniqueindex = unique;
+		syncdate = null;
+
 	}
 
 	public iReceipt(IDate rdate, String storeName, double total,
 			String category, boolean flaged, boolean processed, String notes,
-			String filepath,int unique) {
+			String filepath, int unique) {
 		Rdate = rdate;
 		StoreName = storeName;
 		Total = total;
@@ -68,8 +67,8 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		Notes = notes;
 		this.filepath = filepath;
 		receitname = null;
-		receiptuniqueindex=unique;
-		syncdate=null;
+		receiptuniqueindex = unique;
+		syncdate = null;
 	}
 
 	public iReceipt(String rname) {
@@ -82,7 +81,7 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		Notes = null;
 		this.filepath = null;
 		receitname = rname;
-		syncdate=null;
+		syncdate = null;
 	}
 
 	public iReceipt() {
@@ -95,7 +94,7 @@ public class iReceipt implements Receipt, java.io.Serializable {
 		Notes = null;
 		this.filepath = null;
 		receitname = null;
-		syncdate=null;
+		syncdate = null;
 	}
 
 	/*
@@ -140,7 +139,8 @@ public class iReceipt implements Receipt, java.io.Serializable {
 	public void setFlaged(boolean flaged) {
 		Flaged = flaged;
 	}
-	public int getUniqueIndex(){
+
+	public int getUniqueIndex() {
 		return receiptuniqueindex;
 	}
 
@@ -183,47 +183,53 @@ public class iReceipt implements Receipt, java.io.Serializable {
 	public String getplaceofsave() {
 		return receitname;
 	}
-	
-	public byte[] toByteArray() throws IOException{
-    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    	ObjectOutputStream oos = new ObjectOutputStream(baos);
-    	oos.writeObject(this);
-    	return baos.toByteArray();
+
+	public byte[] toByteArray() throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(this);
+		return baos.toByteArray();
 	}
-	public void setUpdate(){
-		update=new Date();
+
+	public void setUpdate() {
+		update = new Date();
 	}
-	public void setUpdate(Date date){
-		update=date;
+
+	public void setUpdate(Date date) {
+		update = date;
 	}
-	public void setSync(){
-		syncdate=new Date();
+
+	public void setSync() {
+		syncdate = new Date();
 	}
-	public void setSync(Date date){
-		syncdate=date;
+
+	public void setSync(Date date) {
+		syncdate = date;
 	}
-	public Date getUpdate(){
+
+	public Date getUpdate() {
 		return update;
 	}
-	public Date getSyncdate(){
+
+	public Date getSyncdate() {
 		return syncdate;
 	}
-	
-	public void fromByteArray(byte[] in) throws StreamCorruptedException, IOException, ClassNotFoundException{
+
+	public void fromByteArray(byte[] in) throws StreamCorruptedException,
+			IOException, ClassNotFoundException {
 		ByteArrayInputStream bais = new ByteArrayInputStream(in);
 		ObjectInputStream ois = new ObjectInputStream(bais);
 		iReceipt myObject = (iReceipt) ois.readObject();
-		this.Category=myObject.getCategory();
-		this.filepath=myObject.getFilepath();
-		this.Flaged=myObject.isFlaged();
-		this.Notes=myObject.getNotes();
-		this.processed=myObject.isProcessed();
-		this.Rdate=myObject.getRdate();
-		this.StoreName=myObject.getStoreName();
-		this.Total=myObject.getTotal();
-		this.receiptuniqueindex=myObject.getUniqueIndex();
-		this.update=myObject.getUpdate();
-		this.syncdate=myObject.getSyncdate();
-		
+		this.Category = myObject.getCategory();
+		this.filepath = myObject.getFilepath();
+		this.Flaged = myObject.isFlaged();
+		this.Notes = myObject.getNotes();
+		this.processed = myObject.isProcessed();
+		this.Rdate = myObject.getRdate();
+		this.StoreName = myObject.getStoreName();
+		this.Total = myObject.getTotal();
+		this.receiptuniqueindex = myObject.getUniqueIndex();
+		this.update = myObject.getUpdate();
+		this.syncdate = myObject.getSyncdate();
 	}
 }
