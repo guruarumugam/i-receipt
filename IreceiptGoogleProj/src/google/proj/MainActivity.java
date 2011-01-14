@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
 			period = 1;
 		if (r3.isChecked())
 			period = 2;
-		// makePie(period);
+		makePie(period);
 	}
 
 	public void makePie(int period) {
@@ -130,25 +130,25 @@ public class MainActivity extends Activity {
 		// ///////////////////////////////////////////////////////////////
 		Double sumPerCat[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		for (iReceipt rec : pie_rec_arr) {
-			if (rec.getCategory() == "Dining")
+			if (rec.getCategory().equals("Dining"))
 				sumPerCat[0] += rec.getTotal();
-			if (rec.getCategory() == "Car")
+			if (rec.getCategory().equals("Car"))
 				sumPerCat[1] += rec.getTotal();
-			if (rec.getCategory() == "Travel")
+			if (rec.getCategory().equals("Travel"))
 				sumPerCat[2] += rec.getTotal();
-			if (rec.getCategory() == "Shopping")
+			if (rec.getCategory().equals("Shopping"))
 				sumPerCat[3] += rec.getTotal();
-			if (rec.getCategory() == "Rent")
+			if (rec.getCategory().equals("Rent"))
 				sumPerCat[4] += rec.getTotal();
-			if (rec.getCategory() == "Groceries")
+			if (rec.getCategory().equals("Groceries"))
 				sumPerCat[5] += rec.getTotal();
-			if (rec.getCategory() == "Presents")
+			if (rec.getCategory().equals("Presents"))
 				sumPerCat[6] += rec.getTotal();
-			if (rec.getCategory() == "Entertainment")
+			if (rec.getCategory().equals("Entertainment"))
 				sumPerCat[7] += rec.getTotal();
-			if (rec.getCategory() == "Household goods")
+			if (rec.getCategory().equals("Household goods"))
 				sumPerCat[8] += rec.getTotal();
-			if (rec.getCategory() == "Other")
+			if (rec.getCategory().equals("Other"))
 				sumPerCat[9] += rec.getTotal();
 		}
 		total_period = 0.0 + sumPerCat[1] + sumPerCat[2] + sumPerCat[3]
