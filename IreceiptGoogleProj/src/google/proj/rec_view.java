@@ -141,7 +141,7 @@ public class rec_view extends Activity {
 
 	public void onClick(View view) {
 		IDate d;
-		d = new IDate(mYear, mDay, mMonth + 1);
+		d = new IDate(mYear, mMonth + 1, mDay);
 		rec.setRdate((IDate) d);
 		rec.setStoreName(text[0].getText().toString());
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));

@@ -62,8 +62,8 @@ public class idan extends Activity {
 		// rec_arr.clear(); // ///////////להוריד לפני שמעלים לנקסוס1, טוב רק
 		// לאפליקציה
 		// במחשב*******************************************
-		if (rec_arr == null)
-			rec_arr = new ArrayList<iReceipt>();
+		// if (rec_arr == null)
+		rec_arr = new ArrayList<iReceipt>();
 		if (sync == null)
 			sync = new Syncer();
 		sync.sendSync(loginpage.accountname);

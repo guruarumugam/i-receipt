@@ -21,7 +21,6 @@ public class CustomizeDialog extends Dialog implements OnClickListener {
 		okButton.setOnClickListener(this);
 	}
 
-
 	public void onClick(View v) {
 		if (v == okButton)
 			dismiss();
