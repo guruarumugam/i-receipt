@@ -213,7 +213,7 @@ public class manual_scan extends Activity implements OnClickListener {
 		year = Integer.parseInt(str1.substring(6, 10));
 		rec.setRdate(new IDate(year, month, day));
 		rec.setStoreName(business.getText().toString());
-		if(price.getText().toString().length()==0)
+		if (price.getText().toString().length() == 0)
 			rec.setTotal(0);
 		else
 			rec.setTotal(Double.parseDouble(price.getText().toString()));
@@ -428,6 +428,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public int checkLimitException(int limit) {
 		int calYear, calMonth;
+		total = 0.0;
 		// int calDay;
 		IDate date;
 		final Calendar cal = Calendar.getInstance();
