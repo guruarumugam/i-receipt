@@ -44,8 +44,9 @@ public class idan extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		rec_arr = loadList();
-		if (sync == null){
+		if (rec_arr==null)
 			rec_arr = new ArrayList<iReceipt>();
+		if (sync == null){
 			sync = new Syncer(google.proj.loginpage.accountname);}
 		sync.sendSync();
 	}
