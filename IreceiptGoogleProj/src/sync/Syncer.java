@@ -46,7 +46,7 @@ public class Syncer {
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://87.69.168.154:8888/sync");
+		HttpPost httppost = new HttpPost("http://http://ireceipt.assaf.in/sync");
 
 		// Add your data
 		if (list == null)
@@ -60,7 +60,7 @@ public class Syncer {
 			// send the size of the list
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs
-			.add(new BasicNameValuePair("size", list.size() + ""));
+					.add(new BasicNameValuePair("size", list.size() + ""));
 			for (iReceipt ireceipt : list) {
 				// add the receipt
 				byte[] by = ireceipt.toByteArray();
@@ -78,7 +78,7 @@ public class Syncer {
 					encoded = Base64.encode(b, Base64.DEFAULT);
 					str = new String(encoded, "ASCII");
 					nameValuePairs
-					.add(new BasicNameValuePair(i + "_image", str));
+							.add(new BasicNameValuePair(i + "_image", str));
 					baos.close();
 				}
 				i++;
@@ -98,90 +98,77 @@ public class Syncer {
 			HttpResponse response = httpclient.execute(httppost);
 			// /////////////////////////////////////////////////////////////
 			int size = 0;
-			if (response.getHeaders("size") != null&&response.getHeaders("size").length!=0) {
+			if (response.getHeaders("size") != null
+					&& response.getHeaders("size").length != 0) {
 				size = Integer.parseInt(response.getHeaders("size")[0]
-				                                                    .getValue());
+						.getValue());
 			}
 			int delete;
-			if(response.getHeaders("delete").length==0||response.getHeaders("delete")[0]
-			                                 .getValue()==null)
-				delete=0;
+			if (response.getHeaders("delete").length == 0
+					|| response.getHeaders("delete")[0].getValue() == null)
+				delete = 0;
 			else
-				delete= Integer.parseInt(response.getHeaders("delete")[0]
-				                                                       .getValue());
-			int delete_counter=0;
-			for (int j = 0; j < Math.max(size,delete); j++) {
+				delete = Integer.parseInt(response.getHeaders("delete")[0]
+						.getValue());
+			int delete_counter = 0;
+			for (int j = 0; j < Math.max(size, delete); j++) {
 				String in;
-				if (response.getHeaders(j + "").length==0)
-					in=null;
+				if (response.getHeaders(j + "").length == 0)
+					in = null;
 				else
 					in = response.getHeaders(j + "")[0].getValue();
-				
-				iReceipt rec=null;
+
+				iReceipt rec = null;
 				if (in != null) {
-				byte[] decoded = Base64.decode(in.getBytes("ASCII"),
-						Base64.DEFAULT);
-				rec = new iReceipt();
-				rec.fromByteArray(decoded);
+					byte[] decoded = Base64.decode(in.getBytes("ASCII"),
+							Base64.DEFAULT);
+					rec = new iReceipt();
+					rec.fromByteArray(decoded);
 				}
 				String delete_in;
-				if (response.getHeaders("delete" + delete_counter).length==0)
-					delete_in=null;
+				if (response.getHeaders("delete" + delete_counter).length == 0)
+					delete_in = null;
 				else
-					delete_in=response.getHeaders("delete" + delete_counter)[0].getValue();
+					delete_in = response.getHeaders("delete" + delete_counter)[0]
+							.getValue();
 				for (iReceipt rr : idan.rec_arr) {
-					if (rec!=null){
-					if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
-						// receipt\
-						if (rec.getUpdate().after(rr.getUpdate())) {
-							rr.setCategory(rec.getCategory());
-							rr.setFlaged(rec.isFlaged());
-							rr.setNotes(rec.getNotes());
-							rr.setProcessed(rec.isProcessed());
-							rr.setRdate(rec.getRdate());
-							rr.setStoreName(rec.getStoreName());
-							rr.setTotal(rec.getTotal());
-							rr.setUpdate(rec.getUpdate());
-							rr.setSync(rec.getSyncdate());
+					if (rec != null) {
+						if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
+							// receipt\
+							if (rec.getUpdate().after(rr.getUpdate())) {
+								rr.setCategory(rec.getCategory());
+								rr.setFlaged(rec.isFlaged());
+								rr.setNotes(rec.getNotes());
+								rr.setProcessed(rec.isProcessed());
+								rr.setRdate(rec.getRdate());
+								rr.setStoreName(rec.getStoreName());
+								rr.setTotal(rec.getTotal());
+								rr.setUpdate(rec.getUpdate());
+								rr.setSync(rec.getSyncdate());
+							}
+						}
+
+					}
+					if (delete_in != null) {
+						if ((rr.getUniqueIndex() + "").equals(delete_in)) {
+							idan.rec_arr.remove(rr);
+							delete_counter++;
 						}
 					}
-					
-					}
-					if (delete_in!=null){
-						if ((rr.getUniqueIndex()+"").equals(delete_in)){
-								idan.rec_arr.remove(rr);
-								delete_counter++;}
 				}
 			}
-			}
 			// //////////////////////////////////
-			//delete receipts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			// delete receipts
 
 			lastsync = new Date();
 			this.clearDelete_rec_list();
 			this.clearUpdateList();
 			alreadysync = true;
 
-		} catch (SocketException e){
+		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (ClientProtocolException e) {
+		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
