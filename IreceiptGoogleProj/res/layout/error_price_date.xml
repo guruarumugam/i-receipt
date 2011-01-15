@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:padding="10dip"
+	android:layout_height="wrap_content" android:background="@color/white"
+	android:layout_width="wrap_content" android:maxWidth="320sp">
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textSize="25sp"
+		android:textColor="@color/black" android:id="@+id/error_massage"
+		android:layout_gravity="center_vertical|center_horizontal"
+		android:gravity="center_vertical|center_horizontal|center"></TextView>
+
+	<Button android:text="OK" android:layout_height="35sp"
+		android:id="@+id/OkButtonErrorPrice" android:layout_gravity="center_horizontal"
+		android:layout_width="60sp" android:layout_marginTop="10sp"></Button>
+</LinearLayout>
