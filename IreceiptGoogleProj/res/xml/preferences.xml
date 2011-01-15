@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="User settings"><EditTextPreference android:key="username" android:summary="please enter user name" android:title="User Name"></EditTextPreference>
-<EditTextPreference android:key="password" android:summary="please enter your password" android:title="Password"></EditTextPreference>
-</PreferenceScreen>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	
+
+	
+<ListPreference android:dialogTitle="Save receipts duration" android:summary="After that period - auto delete" android:title="Save receipts duration" android:entries="@array/saveRecDuration" android:entryValues="@array/saveRecDurationValues" android:defaultValue="4"></ListPreference>
+<CheckBoxPreference android:summaryOff="Deletion on Android - does NOT delete on web" android:title="Deletion sync" android:summary="Deletion on Android - delete on web?" android:summaryOn="Deletion on Android - DOES delete on web"></CheckBoxPreference>
+<CheckBoxPreference android:title="Payments Limit Alert" android:summary="Alerts when you passes your defined limit"></CheckBoxPreference><EditTextPreference android:dialogTitle="Payments Limit Alert" android:dialogLayout="@layout/edittextpreferences" android:summary="define your payments limit " android:title="Payments Limit"></EditTextPreference>
+
 </PreferenceScreen>
