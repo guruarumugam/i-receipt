@@ -2,10 +2,12 @@ package sync;
 
 import google.proj.iReceipt;
 import google.proj.idan;
+import google.proj.rec_view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,7 @@ public class Syncer {
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://192.168.2.111:8888/sync");
+		HttpPost httppost = new HttpPost("http://87.69.168.154:8888/sync");
 
 		// Add your data
 		if (list == null)
@@ -58,7 +60,7 @@ public class Syncer {
 			// send the size of the list
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs
-					.add(new BasicNameValuePair("size", list.size() + ""));
+			.add(new BasicNameValuePair("size", list.size() + ""));
 			for (iReceipt ireceipt : list) {
 				// add the receipt
 				byte[] by = ireceipt.toByteArray();
@@ -67,7 +69,7 @@ public class Syncer {
 				nameValuePairs.add(new BasicNameValuePair(i + "", str));
 				// add receipt image
 				if (ireceipt.getFilepath() != null
-						&& ireceipt.getFilepath() != "") {
+						&& !ireceipt.getFilepath().equals("")) {
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					Bitmap bam = BitmapFactory.decodeFile(
 							ireceipt.getFilepath(), bitmapOptions);
@@ -76,7 +78,7 @@ public class Syncer {
 					encoded = Base64.encode(b, Base64.DEFAULT);
 					str = new String(encoded, "ASCII");
 					nameValuePairs
-							.add(new BasicNameValuePair(i + "_image", str));
+					.add(new BasicNameValuePair(i + "_image", str));
 					baos.close();
 				}
 				i++;
@@ -96,25 +98,41 @@ public class Syncer {
 			HttpResponse response = httpclient.execute(httppost);
 			// /////////////////////////////////////////////////////////////
 			int size = 0;
-			if (response.getHeaders("size") != null) {
+			if (response.getHeaders("size") != null&&response.getHeaders("size").length!=0) {
 				size = Integer.parseInt(response.getHeaders("size")[0]
-						.getValue());
+				                                                    .getValue());
 			}
-
-			for (int j = 0; j < size; j++) {
-				String in = response.getHeaders(j + "")[0].getValue();
-				if (in == null) {
-					// response.sendError(404);
-					return;
-				}
+			int delete;
+			if(response.getHeaders("delete").length==0||response.getHeaders("delete")[0]
+			                                 .getValue()==null)
+				delete=0;
+			else
+				delete= Integer.parseInt(response.getHeaders("delete")[0]
+				                                                       .getValue());
+			int delete_counter=0;
+			for (int j = 0; j < Math.max(size,delete); j++) {
+				String in;
+				if (response.getHeaders(j + "").length==0)
+					in=null;
+				else
+					in = response.getHeaders(j + "")[0].getValue();
+				
+				iReceipt rec=null;
+				if (in != null) {
 				byte[] decoded = Base64.decode(in.getBytes("ASCII"),
 						Base64.DEFAULT);
-				iReceipt rec = new iReceipt();
+				rec = new iReceipt();
 				rec.fromByteArray(decoded);
+				}
+				String delete_in;
+				if (response.getHeaders("delete" + delete_counter).length==0)
+					delete_in=null;
+				else
+					delete_in=response.getHeaders("delete" + delete_counter)[0].getValue();
 				for (iReceipt rr : idan.rec_arr) {
-
+					if (rec!=null){
 					if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
-																		// receipt\
+						// receipt\
 						if (rec.getUpdate().after(rr.getUpdate())) {
 							rr.setCategory(rec.getCategory());
 							rr.setFlaged(rec.isFlaged());
@@ -127,15 +145,43 @@ public class Syncer {
 							rr.setSync(rec.getSyncdate());
 						}
 					}
+					
+					}
+					if (delete_in!=null){
+						if ((rr.getUniqueIndex()+"").equals(delete_in)){
+								idan.rec_arr.remove(rr);
+								delete_counter++;}
 				}
 			}
+			}
 			// //////////////////////////////////
+			//delete receipts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			lastsync = new Date();
 			this.clearDelete_rec_list();
 			this.clearUpdateList();
 			alreadysync = true;
 
-		} catch (ClientProtocolException e) {
+		} catch (SocketException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
