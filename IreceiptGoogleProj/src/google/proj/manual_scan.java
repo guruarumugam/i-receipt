@@ -213,7 +213,10 @@ public class manual_scan extends Activity implements OnClickListener {
 		year = Integer.parseInt(str1.substring(6, 10));
 		rec.setRdate(new IDate(year, month, day));
 		rec.setStoreName(business.getText().toString());
-		rec.setTotal(Double.parseDouble(price.getText().toString()));
+		if(price.getText().toString().length()==0)
+			rec.setTotal(0);
+		else
+			rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
 		saveList();
 		i = checkLimitException(limit);
