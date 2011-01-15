@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class Preferences extends PreferenceActivity {
@@ -54,8 +55,31 @@ public class Preferences extends PreferenceActivity {
 	}
 
 	public void onBackPressed() {
-		//idan.delete_sync = preferences.getBoolean("delete_sync", false);
-		setResult(555);
+		boolean delete_sync = preferences.getBoolean("delete_sync", false);
+		boolean payment_alert = preferences.getBoolean("payment_alert", false);
+		String duration2 = preferences.getString("duration", null);
+		int duration = Integer.parseInt(duration2);
+		if (duration == 1) // week
+			;
+		if (duration == 2)// month
+			;
+		if (duration == 3)// year
+			;
+		if (duration == 4)// forever
+			;
+		String limit = preferences.getString("limit", "0").toString();
+		int limit2 = Integer.parseInt(limit);
+		/*
+		 * EditText limit2 = (EditText) findViewById(R.id.limit); String limit3
+		 * = limit2.getText().toString(); לא עובד!!!
+		 */
+		// int limit2 = preferences.getInt("limit", 0); לא עובד!!
+		// int duration = preferences.getInt("duration", 4); לא עובד!!
+
+		// Float limit3 = preferences.getFloat("limit", 0); לא עובד!!
+
+		// String limit = preferences.getString("limit", "0");
+		// setResult(555);
 		finish();
 	}
 

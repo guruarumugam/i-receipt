@@ -4,8 +4,8 @@
 	android:layout_width="wrap_content" android:layout_height="wrap_content"
 	android:padding="5dip" android:orientation="vertical" android:id="@+id/edittext_container">
 
-	<EditText android:id="@+id/EditText01" android:layout_height="50sp"
+	<EditText android:layout_height="50sp"
 		android:textColor="@color/black" android:textSize="25sp"
 		android:layout_width="fill_parent" android:singleLine="true"
-		android:numeric="integer|decimal"></EditText>
+		android:numeric="integer|decimal" android:id="@+id/limit"></EditText>
 </LinearLayout>

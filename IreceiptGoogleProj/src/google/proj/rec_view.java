@@ -147,7 +147,7 @@ public class rec_view extends Activity {
 
 	public void onClick(View view) {
 		IDate d;
-		d = new IDate(mYear,mMonth + 1, mDay );
+		d = new IDate(mYear, mMonth + 1, mDay);
 		rec.setRdate((IDate) d);
 		rec.setStoreName(text[0].getText().toString());
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
@@ -165,18 +165,20 @@ public class rec_view extends Activity {
 	public void deleteRec(View view) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Are you sure you want to delete this receipt?")
-		       .setCancelable(false)
-		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	    misc.Misc.deleteReceipt(rec);
-		        	    finish();
-		           }
-		       })
-		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		                dialog.cancel();
-		           }
-		       });
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								misc.Misc.deleteReceipt(rec);
+								setResult(1); // EA.notifyDataSetChanged();
+								finish();
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
