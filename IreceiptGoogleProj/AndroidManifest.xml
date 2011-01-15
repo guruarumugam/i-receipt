@@ -34,6 +34,10 @@
 		</activity>
 		<activity android:name=".manual_scan" android:label="Manual scan">
 		</activity>
+		<activity android:name=".Preferences" android:label="Preferences">
+		</activity>
+		<activity android:name=".HelloPreferences" android:label="Preferences">
+		</activity>
 		<!-- <activity android:name=".prev" android:label="Camera Preview"> </activity> -->
 		<activity android:name=".CameraPreview" android:label="Camera Preview">
 		</activity>

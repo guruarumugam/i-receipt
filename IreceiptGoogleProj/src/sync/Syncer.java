@@ -38,9 +38,8 @@ public class Syncer {
 	boolean alreadysync = false;
 	private Date lastsync;
 	List<iReceipt> update_rec_list;
-	private String account=null;
+	private String account = null;
 	private List<String> delete_rec_list;
-	
 
 	public Syncer(String account) {
 		update_rec_list = new ArrayList<iReceipt>();
@@ -51,19 +50,18 @@ public class Syncer {
 
 	public void sendSync() {
 		sendSync(this.update_rec_list);
-
 	}
 
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://192.168.1.4:8888/sync");
+		HttpPost httppost = new HttpPost("http://192.168.2.111:8888/sync");
 
 		// Add your data
 		if (list == null)
 			return;
-		//if (list.isEmpty()&&this.delete_rec_list.isEmpty())
-			//return;
+		// if (list.isEmpty()&&this.delete_rec_list.isEmpty())
+		// return;
 		try {
 			int i = 0;
 			BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
@@ -79,7 +77,8 @@ public class Syncer {
 				String str = new String(encoded, "ASCII");
 				nameValuePairs.add(new BasicNameValuePair(i + "", str));
 				// add receipt image
-				if (ireceipt.getFilepath() != null&& ireceipt.getFilepath()!="") {
+				if (ireceipt.getFilepath() != null
+						&& ireceipt.getFilepath() != "") {
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					Bitmap bam = BitmapFactory.decodeFile(
 							ireceipt.getFilepath(), bitmapOptions);
@@ -93,10 +92,12 @@ public class Syncer {
 				}
 				i++;
 			}
-			if (!this.delete_rec_list.isEmpty()){
-				nameValuePairs.add(new BasicNameValuePair("delete", this.delete_rec_list.size()+""));
+			if (!this.delete_rec_list.isEmpty()) {
+				nameValuePairs.add(new BasicNameValuePair("delete",
+						this.delete_rec_list.size() + ""));
 				for (int j = 0; j < this.delete_rec_list.size(); j++) {
-					nameValuePairs.add(new BasicNameValuePair("delete"+j, this.delete_rec_list.get(j)));	
+					nameValuePairs.add(new BasicNameValuePair("delete" + j,
+							this.delete_rec_list.get(j)));
 				}
 			}
 			nameValuePairs.add(new BasicNameValuePair("account", String
@@ -191,6 +192,7 @@ public class Syncer {
 	public String getAccount() {
 		return account;
 	}
+
 	public Date getLastsync() {
 		return lastsync;
 	}
@@ -206,14 +208,12 @@ public class Syncer {
 	public List<String> getDelete_rec_list() {
 		return delete_rec_list;
 	}
-	
+
 	public void clearDelete_rec_list() {
 		this.delete_rec_list.clear();
 	}
 
 	public void addToDeleteList(String id) {
 		delete_rec_list.add(id);
-		
 	}
-	
 }

@@ -184,7 +184,7 @@ public class idan extends Activity {
 		Intent i;
 		switch (item.getItemId()) {
 		case SETTINGS:
-			i = new Intent(idan.this, settings.class);
+			i = new Intent(idan.this, HelloPreferences.class);
 			startActivity(i);
 			break;
 		case ABOUT_IRECEIPT:
