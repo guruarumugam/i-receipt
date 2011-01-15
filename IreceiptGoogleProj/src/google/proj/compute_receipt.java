@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import misc.Misc;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -323,29 +325,9 @@ public class compute_receipt extends Activity {
 	public void saveList() {
 
 		rec.setUpdate();
-
-		boolean connected = false;
-		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
-
-		if (info == null || !mConnectivity.getBackgroundDataSetting())
-			connected = false;
-		else {
-			int netType = info.getType();
-			int netSubtype = info.getSubtype();
-			if (netType == ConnectivityManager.TYPE_WIFI) {
-				connected = info.isConnected();
-			}
-			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
-					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-					&& !mTelephony.isNetworkRoaming()) {
-				connected = info.isConnected();
-			}
-		}
+		boolean connected = Misc.chekConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
-
 				if (rec_view.notSync(tmprr)) {
 					tmprr.setSync();
 					idan.sync.addtoUpdateList(tmprr);
@@ -353,21 +335,10 @@ public class compute_receipt extends Activity {
 			}
 			idan.sync.sendSync();
 			// need to check if the sync run ok
-
 			idan.sync.clearUpdateList();
 		}
-		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(
-					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject(idan.rec_arr);
-			outputStream.close();
-			outputStream = new ObjectOutputStream(openFileOutput(
-					"recIndexsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
-			outputStream.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		Misc.saveList(this);
+
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

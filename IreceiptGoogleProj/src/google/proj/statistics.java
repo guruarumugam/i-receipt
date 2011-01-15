@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import java.util.Calendar;
+
+import misc.Misc;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -34,6 +36,10 @@ public class statistics extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		if (idan.sync.needtoSync())
 			idan.sync.sendSync();
+		if (Misc.needToCheckDelete()) {
+			Misc.makeDelete();
+			Misc.saveList(this);
+		}
 
 		fromPickDate = (TextView) findViewById(R.id.pickDateFrom);
 		toPickDate = (TextView) findViewById(R.id.pickDateTo);

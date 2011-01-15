@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import misc.Misc;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -52,6 +54,10 @@ public class listview extends Activity {
 		ListView myListView = (ListView) findViewById(R.id.ListView01);
 		if (idan.sync.needtoSync())
 			idan.sync.sendSync();
+		if (Misc.needToCheckDelete()) {
+			Misc.makeDelete();
+			Misc.saveList(this);
+		}
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			idan.rec_arr.add((iReceipt) extras.get("Receipt"));
@@ -173,6 +179,8 @@ public class listview extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		EA.notifyDataSetChanged();
+		if (resultCode == 30)
+			Misc.saveList(this);
 	}
 
 	class DateComparator implements Comparator<Receipt> {

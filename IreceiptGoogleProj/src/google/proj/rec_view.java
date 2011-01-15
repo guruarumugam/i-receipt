@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URI;
+
+import misc.Misc;
 import sync.Syncer;
 import google.proj.R;
 import google.proj.R.id;
@@ -191,7 +193,7 @@ public class rec_view extends Activity {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								misc.Misc.deleteReceipt(rec);
-								setResult(1); // EA.notifyDataSetChanged();
+								setResult(30); // EA.notifyDataSetChanged();
 								finish();
 							}
 						})
@@ -244,38 +246,8 @@ public class rec_view extends Activity {
 
 	public void saveList() {
 
-		// ConnectivityManager conMgr =
-		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		rec.setUpdate();
-		/*
-		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
-		 * conMgr.getActiveNetworkInfo().isAvailable() &&
-		 * conMgr.getActiveNetworkInfo().isConnected() );
-		 */
-		// add rec to update rec list
-
-		// check if the device is connected
-
-		boolean connected = false;
-		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
-
-		if (info == null || !mConnectivity.getBackgroundDataSetting())
-			connected = false;
-		else {
-			int netType = info.getType();
-			int netSubtype = info.getSubtype();
-			if (netType == ConnectivityManager.TYPE_WIFI) {
-				connected = info.isConnected();
-			}
-			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
-					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-					&& !mTelephony.isNetworkRoaming()) {
-				connected = info.isConnected();
-			}
-		}
-
+		boolean connected = Misc.chekConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {
@@ -283,7 +255,6 @@ public class rec_view extends Activity {
 					idan.sync.addtoUpdateList(tmprr);
 				}
 			}
-
 			idan.sync.sendSync();
 			// need to check if the sync run ok
 			// for (iReceipt tmprr: idan.sync.getUpdateList()){
@@ -291,20 +262,7 @@ public class rec_view extends Activity {
 			// }
 			idan.sync.clearUpdateList();
 		}
-
-		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(
-					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject(idan.rec_arr);
-			outputStream.close();
-			outputStream = new ObjectOutputStream(openFileOutput(
-					"recIndexsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
-			outputStream.close();
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		Misc.saveList(this);
 	}
 
 	static boolean notSync(iReceipt tmprr) {
