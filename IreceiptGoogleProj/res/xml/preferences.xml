@@ -7,4 +7,6 @@
 <CheckBoxPreference android:summaryOff="Deletion on Android - does NOT delete on web" android:title="Deletion sync" android:summary="Deletion on Android - delete on web?" android:summaryOn="Deletion on Android - DOES delete on web"></CheckBoxPreference>
 <CheckBoxPreference android:title="Payments Limit Alert" android:summary="Alerts when you passes your defined limit"></CheckBoxPreference><EditTextPreference android:dialogTitle="Payments Limit Alert" android:dialogLayout="@layout/edittextpreferences" android:summary="define your payments limit " android:title="Payments Limit"></EditTextPreference>
 
+<PreferenceScreen android:title="Delete receipts" android:summary="delete all receipts from the android"><EditTextPreference android:title="Delete all receipts" android:dialogLayout="@layout/delete_all_receipts" android:dialogTitle="Delete receipts"></EditTextPreference>
+</PreferenceScreen>
 </PreferenceScreen>
