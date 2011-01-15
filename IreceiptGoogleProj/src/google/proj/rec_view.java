@@ -8,6 +8,7 @@ import sync.Syncer;
 import google.proj.R;
 import google.proj.R.id;
 import google.proj.R.layout;
+import google.proj.compute_receipt.MyOnItemSelectedListenerSpinner04;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -24,12 +25,16 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class rec_view extends Activity {
 	/** Called when the activity is first created. */
@@ -38,12 +43,15 @@ public class rec_view extends Activity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
+	private String category;
 	static final int DATE_DIALOG_ID = 0;
 	private iReceipt rec;
 	private EditText text[] = new EditText[4];
 	private CheckBox check;
 	// private EditText NotesEditText;
 	private TextView show_notes;
+	private Spinner spinner_c; // category
+	private ArrayAdapter<String> adapter_c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,17 @@ public class rec_view extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		rec = idan.rec_arr.get(getIntent().getFlags());
 		ImageView myImage = (ImageView) findViewById(R.id.Image01);
+		spinner_c = (Spinner) findViewById(R.id.Spinner01);
+		adapter_c = new ArrayAdapter<String>(rec_view.this,
+				android.R.layout.simple_spinner_item, MainActivity.cat);
+		adapter_c
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_c.setAdapter(adapter_c);
+		spinner_c
+				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
+		int cat_index = get_cat_index(rec.getCategory());
+		spinner_c.setSelection(cat_index);
+		category = rec.getCategory();
 		if (rec.getFilepath() == null)
 			myImage.setVisibility(View.INVISIBLE);
 		/*
@@ -151,7 +170,9 @@ public class rec_view extends Activity {
 		rec.setRdate((IDate) d);
 		rec.setStoreName(text[0].getText().toString());
 		rec.setTotal(Double.parseDouble(text[1].getText().toString()));
-		rec.setCategory(text[2].getText().toString());
+		// rec.setCategory(text[2].getText().toString());
+		if (!(rec.getCategory().equals(category)))
+			rec.setCategory(category);
 		rec.setFlaged(check.isChecked());
 		if (show_notes.getText() == "Click here to add note")
 			rec.setNotes("");
@@ -291,5 +312,28 @@ public class rec_view extends Activity {
 			return true;
 		else
 			return (tmprr.getUpdate().after(tmprr.getSyncdate()));
+	}
+
+	private int get_cat_index(String category) {
+		int cat_index = 0;
+		for (String cat : MainActivity.cat) {
+			if (cat.equals(category))
+				return cat_index;
+			cat_index++;
+		}
+		return 1;
+	}
+
+	public class MyOnItemSelectedListenerSpinner01 implements
+			OnItemSelectedListener {
+
+		public void onItemSelected(AdapterView<?> parent, View view, int pos,
+				long id) {
+			Object item = parent.getItemAtPosition(pos);
+			category = (String) item;
+		}
+
+		public void onNothingSelected(AdapterView<?> parent) {
+		}
 	}
 }

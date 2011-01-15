@@ -51,12 +51,13 @@
 				android:id="@+id/Text05" android:text="Category:"
 				android:layout_gravity="center_vertical|center_horizontal|center"
 				android:layout_width="100sp" android:textColor="@color/black" android:textSize="20dip"></TextView>
-			<EditText android:layout_height="wrap_content"
+			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp" android:layout_marginTop="5sp" android:layout_width="150sp" android:layout_marginLeft="30sp"></Spinner><EditText android:layout_height="wrap_content"
 				android:id="@+id/EText03"
 				android:layout_gravity="center_vertical|center_horizontal|center"
 				android:background="@android:color/transparent"
-				android:textColor="@color/darkGreen" android:layout_marginLeft="35dip" android:layout_width="160dip"></EditText>
-		</LinearLayout>
+				android:textColor="@color/darkGreen" android:layout_marginLeft="35dip" android:layout_width="160dip" android:visibility="invisible"></EditText>
+		
+</LinearLayout>
 		<LinearLayout android:id="@+id/Layout05RP"
 			android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="140dip" android:layout_weight="1">
 			<LinearLayout android:layout_width="wrap_content"
