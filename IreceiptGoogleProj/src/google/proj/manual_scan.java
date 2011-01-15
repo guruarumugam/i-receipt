@@ -49,6 +49,8 @@ public class manual_scan extends Activity implements OnClickListener {
 	private static final int SELECT_PICTURE = 1;
 	private String selectedImagePath;
 	private String filemanagerstring;
+	public static int limit = 600;
+	private static Double total = 0.0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -200,7 +202,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public void onClick3(View view) {
 		String str1;
-		int month, day, year;
+		int month, day, year, i;
 		// setResult(1);
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
@@ -214,7 +216,11 @@ public class manual_scan extends Activity implements OnClickListener {
 		rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
 		saveList();
-		setResult(100);
+		i = checkLimitException(limit);
+		if (i == 1) // over limit
+			setResult(100);
+		else
+			setResult(2);
 		finish();
 	}
 
@@ -415,5 +421,31 @@ public class manual_scan extends Activity implements OnClickListener {
 			progressDialog.dismiss();
 			finish();
 		}
+	}
+
+	public int checkLimitException(int limit) {
+		int calYear, calMonth;
+		// int calDay;
+		IDate date;
+		final Calendar cal = Calendar.getInstance();
+		calYear = cal.get(Calendar.YEAR);
+		calMonth = cal.get(Calendar.MONTH);
+		// calDay = cal.get(Calendar.DAY_OF_MONTH);
+		date = new IDate(calYear, calMonth + 1, 1); // start of this month
+		// if (price.getText() != null)
+		// total = Double.parseDouble(price.getText().toString());
+		for (iReceipt rec : idan.rec_arr) {
+			if (rec.getRdate().compareTo(date) <= 0)
+				total += rec.getTotal();
+		}
+		if (total > limit) {
+			/*
+			 * CustomizeDialog customizeDialog = new CustomizeDialog(this,
+			 * "Your expenditures this month passed your limit - \"" + limit +
+			 * "\""); customizeDialog.show();
+			 */
+			return 1;
+		}
+		return 0;
 	}
 }

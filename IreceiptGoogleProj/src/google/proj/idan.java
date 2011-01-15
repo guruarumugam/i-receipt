@@ -1,6 +1,5 @@
 package google.proj;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,15 +43,12 @@ public class idan extends Activity {
 		setContentView(R.layout.main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
 		rec_arr = loadList();
 		rec_arr = new ArrayList<iReceipt>();
 		if (sync == null)
 			sync = new Syncer(google.proj.loginpage.accountname);
 		sync.sendSync();
 	}
-
-
 
 	public void new_scan_handler(View view) {
 		receiptUniqueIndex++;
@@ -85,9 +81,15 @@ public class idan extends Activity {
 		// in case we cancel in compute_receipt
 
 		if (resultCode == 100) { // return after save from compute receipt
+			CustomizeDialog customizeDialog = new CustomizeDialog(this,
+					"Your expenditures this month passed your limit - \""
+							+ manual_scan.limit + "\"");
+			customizeDialog.show();
+			// return;
+		}
+		if (resultCode == 2) {
 			return;
 		}
-
 		if (requestCode == TAKE_PICTURE)
 			if (resultCode != Activity.RESULT_OK) {
 				rec_arr.remove(index);
@@ -140,15 +142,13 @@ public class idan extends Activity {
 		startActivity(i);
 	}
 
-
-
 	public ArrayList<iReceipt> loadList() {
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(
 					openFileInput("RecListsave.tmp"));
 			@SuppressWarnings("unchecked")
 			ArrayList<iReceipt> rec_arr_tmp = (ArrayList<iReceipt>) inputStream
-			.readObject();
+					.readObject();
 			inputStream.close();
 
 			inputStream = new ObjectInputStream(
