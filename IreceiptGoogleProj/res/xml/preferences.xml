@@ -16,7 +16,7 @@
 		android:summary="define your payments limit "
 		android:title="Payments Limit" android:key="limit"></EditTextPreference>
 
-	<PreferenceScreen android:key="period_alert" android:title="Period limit alert" android:summary="define your period to check"><CheckBoxPreference android:key="limit_from_to" android:summary="define your period to check" android:title="Payments Limit Alert"></CheckBoxPreference><EditTextPreference android:key="fromDate" android:summary="enter start date" android:title="Choosen dates limit alert" android:dialogTitle="Choose date to start" android:dialogMessage="date form - mm/dd/yyyy (01/30/2011)"></EditTextPreference>
+	<PreferenceScreen android:title="Period limit alert" android:summary="define your period to check"><CheckBoxPreference android:key="limit_from_to" android:summary="define your period to check" android:title="Payments Limit Alert"></CheckBoxPreference><EditTextPreference android:key="fromDate" android:summary="enter start date" android:title="Choosen dates limit alert" android:dialogTitle="Choose date to start" android:dialogMessage="date form - mm/dd/yyyy (01/30/2011)"></EditTextPreference>
 
 <EditTextPreference android:key="limit_period" android:summary="Define your period limit" android:title="Enter period limit"></EditTextPreference>
 </PreferenceScreen><PreferenceScreen android:title="Delete receipts"
