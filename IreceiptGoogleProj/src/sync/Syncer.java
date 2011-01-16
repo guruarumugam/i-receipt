@@ -46,7 +46,7 @@ public class Syncer {
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://ireceipt.assaf.in/sync");
+		HttpPost httppost = new HttpPost("http://receipt1234.appspot.com/sync");
 
 		// Add your data
 		if (list == null)
@@ -131,6 +131,8 @@ public class Syncer {
 				else
 					delete_in = response.getHeaders("delete" + delete_counter)[0]
 							.getValue();
+				iReceipt shoudDelete = null;
+				boolean addnew = true;
 				for (iReceipt rr : idan.rec_arr) {
 					if (rec != null) {
 						if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
@@ -145,17 +147,25 @@ public class Syncer {
 								rr.setTotal(rec.getTotal());
 								rr.setUpdate(rec.getUpdate());
 								rr.setSync(rec.getSyncdate());
+								addnew = false;
 							}
 						}
 
 					}
 					if (delete_in != null) {
 						if ((rr.getUniqueIndex() + "").equals(delete_in)) {
-							idan.rec_arr.remove(rr);
-							delete_counter++;
+							shoudDelete = rr;
+							addnew = false;
 						}
 					}
 				}
+				if (shoudDelete != null) {
+					idan.rec_arr.remove(shoudDelete);
+					delete_counter++;
+					shoudDelete = null;
+				}
+				if (rec != null && addnew)
+					idan.rec_arr.add(rec);
 			}
 			// //////////////////////////////////
 			// delete receipts
