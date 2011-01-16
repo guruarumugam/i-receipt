@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.Date;
 
+import misc.Misc;
+
 public class Preferences extends PreferenceActivity {
 	SharedPreferences preferences;
 
@@ -138,6 +140,7 @@ public class Preferences extends PreferenceActivity {
 
 		// String limit = preferences.getString("limit", "0");
 		// setResult(555);
+		Misc.saveSetting(this);
 		finish();
 	}
 
