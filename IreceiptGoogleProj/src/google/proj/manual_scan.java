@@ -51,8 +51,8 @@ public class manual_scan extends Activity implements OnClickListener {
 	private static final int SELECT_PICTURE = 1;
 	private String selectedImagePath;
 	private String filemanagerstring;
-	public static int limit = 600;
-	private static Double total = 0.0;
+	// public static int limit = 600;
+	public static Double total;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -204,7 +204,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public void onClick3(View view) {
 		String str1;
-		int month, day, year, i;
+		int month, day, year, i = 0;
 		// setResult(1);
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
@@ -221,7 +221,9 @@ public class manual_scan extends Activity implements OnClickListener {
 			rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
 		saveList();
-		i = checkLimitException(limit);
+		if (idan.settings.getMaxmonth() != (-1)) {
+			i = checkLimitException(idan.settings.getMaxmonth());
+		}
 		if (i == 1) // over limit
 			setResult(100);
 		else
@@ -380,9 +382,9 @@ public class manual_scan extends Activity implements OnClickListener {
 		}
 	}
 
-	public int checkLimitException(int limit) {
-		int calYear, calMonth;
+	public int checkLimitException(Double limit) {
 		total = 0.0;
+		int calYear, calMonth;
 		// int calDay;
 		IDate date;
 		final Calendar cal = Calendar.getInstance();

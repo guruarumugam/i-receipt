@@ -16,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -81,7 +80,10 @@ public class Preferences extends PreferenceActivity {
 			Double double_limit;
 			try {
 				double_limit = Double.parseDouble(str_limit);
-				idan.settings.setMaxMonth(double_limit);
+				if (double_limit > 0)
+					idan.settings.setMaxMonth(double_limit);
+				else
+					idan.settings.setMaxMonth(-1.0);
 			} catch (NumberFormatException ex) {
 				idan.settings.setMaxMonth(-1.0);
 			}

@@ -43,7 +43,6 @@ public class idan extends Activity {
 	public static List<iReceipt> rec_arr;
 	public static Settings settings;
 
-
 	// private ImageButton new_scan, manual, receipts, stats;
 	// nothing
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,32 +52,31 @@ public class idan extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		/*
-		rec_arr = loadList();
-		*/
-		////////////////////////////////////////////
-		rec_arr=Misc.loadList(this);
-		receiptUniqueIndex=Misc.loadreceiptUniqueIndex(this);
+		 * rec_arr = loadList();
+		 */
+		// //////////////////////////////////////////
+		rec_arr = Misc.loadList(this);
+		receiptUniqueIndex = Misc.loadreceiptUniqueIndex(this);
 
-		///////////////////////////////////////////////
+		// /////////////////////////////////////////////
 
-		if (rec_arr==null)
-		rec_arr = new ArrayList<iReceipt>();
+		if (rec_arr == null)
+			rec_arr = new ArrayList<iReceipt>();
 		if (sync == null)
 			sync = new Syncer(google.proj.loginpage.accountname);
 
 		sync.sendSync();
-		
-		settings=Misc.loadSetting(this);
-		if (settings==null)
-		settings=new Settings();
+
+		settings = Misc.loadSetting(this);
+		if (settings == null)
+			settings = new Settings();
 		Misc.saveSetting(this);
 
-		if (Misc.needToCheckDelete()){
+		if (Misc.needToCheckDelete()) {
 			Misc.makeDelete();
 		}
 		Misc.saveList(this);
-		
-		
+
 	}
 
 	public void new_scan_handler(View view) {
@@ -113,8 +111,10 @@ public class idan extends Activity {
 
 		if (resultCode == 100) { // return after save from compute receipt
 			CustomizeDialog customizeDialog = new CustomizeDialog(this,
-					"Your expenditures this month passed your limit - \""
-							+ manual_scan.limit + "\"");
+					"Your expenditures this month passed your limit - "
+							+ idan.settings.getMaxmonth()
+							+ ". \nyour expenditures - " + manual_scan.total
+							+ ".");
 			customizeDialog.show();
 			// return;
 		}
@@ -152,8 +152,6 @@ public class idan extends Activity {
 		}
 	}
 
-
-
 	public void receipts_handler(View view) {
 		Intent i = new Intent(idan.this, listview.class);
 		startActivity(i);
@@ -164,41 +162,26 @@ public class idan extends Activity {
 		startActivity(i);
 	}
 
-	
-	
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	///////////replace with Misc
+	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// /////////replace with Misc
 	/*
-	public ArrayList<iReceipt> loadList() {
-		try {
-			ObjectInputStream inputStream = new ObjectInputStream(
-					openFileInput("RecListsave.tmp"));
-			@SuppressWarnings("unchecked")
-			ArrayList<iReceipt> rec_arr_tmp = (ArrayList<iReceipt>) inputStream
-					.readObject();
-			inputStream.close();
-
-			inputStream = new ObjectInputStream(
-					openFileInput("recIndexsave.tmp"));
-			Integer tmp = (Integer) inputStream.readObject();
-			inputStream.close();
-			receiptUniqueIndex = tmp;
-
-			return rec_arr_tmp;
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	*/
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * public ArrayList<iReceipt> loadList() { try { ObjectInputStream
+	 * inputStream = new ObjectInputStream( openFileInput("RecListsave.tmp"));
+	 * 
+	 * @SuppressWarnings("unchecked") ArrayList<iReceipt> rec_arr_tmp =
+	 * (ArrayList<iReceipt>) inputStream .readObject(); inputStream.close();
+	 * 
+	 * inputStream = new ObjectInputStream( openFileInput("recIndexsave.tmp"));
+	 * Integer tmp = (Integer) inputStream.readObject(); inputStream.close();
+	 * receiptUniqueIndex = tmp;
+	 * 
+	 * return rec_arr_tmp;
+	 * 
+	 * } catch (IOException ex) { ex.printStackTrace(); return null; } catch
+	 * (ClassNotFoundException e) { e.printStackTrace(); return null; } }
+	 */
+	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void crash() {
 		System.err.println(2 / 0);
@@ -219,8 +202,10 @@ public class idan extends Activity {
 			Intent settingsActivity = new Intent(getBaseContext(),
 					Preferences.class);
 			startActivityForResult(settingsActivity, index);
-			/*i = new Intent(idan.this, HelloPreferences.class);
-			startActivity(i);*/
+			/*
+			 * i = new Intent(idan.this, HelloPreferences.class);
+			 * startActivity(i);
+			 */
 			break;
 		case ABOUT_IRECEIPT:
 			i = new Intent(idan.this, aboutireceipt.class);
