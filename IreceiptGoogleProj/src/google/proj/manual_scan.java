@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import misc.Misc;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -242,49 +244,15 @@ public class manual_scan extends Activity implements OnClickListener {
 	 */
 
 	public void saveList() {
-
-		// ConnectivityManager conMgr =
-		// (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		rec.setUpdate();
-
-		/*
-		 * boolean connected = ( conMgr.getActiveNetworkInfo() != null &&
-		 * conMgr.getActiveNetworkInfo().isAvailable() &&
-		 * conMgr.getActiveNetworkInfo().isConnected() );
-		 */
-		// add rec to update rec list
-
-		// check if the device is connected
-
-		boolean connected = false;
-		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
-
-		if (info == null || !mConnectivity.getBackgroundDataSetting())
-			connected = false;
-		else {
-			int netType = info.getType();
-			int netSubtype = info.getSubtype();
-			if (netType == ConnectivityManager.TYPE_WIFI) {
-				connected = info.isConnected();
-			}
-			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
-					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-					&& !mTelephony.isNetworkRoaming()) {
-				connected = info.isConnected();
-			}
-		}
-
+		boolean connected = Misc.chekConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
-
 				if (rec_view.notSync(tmprr)) {
 					tmprr.setSync();
 					idan.sync.addtoUpdateList(tmprr);
 				}
 			}
-
 			idan.sync.sendSync();
 			// need to check if the sync run ok
 			// for (iReceipt tmprr: idan.sync.getUpdateList()){
@@ -292,21 +260,7 @@ public class manual_scan extends Activity implements OnClickListener {
 			// }
 			idan.sync.clearUpdateList();
 		}
-
-		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(
-					openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject(idan.rec_arr);
-			outputStream.close();
-			outputStream = new ObjectOutputStream(openFileOutput(
-					"recIndexsave.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject((Integer) idan.receiptUniqueIndex);
-			outputStream.close();
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
+		Misc.saveList(this);
 	}
 
 	String onlyNumbers(String str) {

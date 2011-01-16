@@ -46,7 +46,7 @@ public class Syncer {
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://http://ireceipt.assaf.in/sync");
+		HttpPost httppost = new HttpPost("http://ireceipt.assaf.in/sync");
 
 		// Add your data
 		if (list == null)
