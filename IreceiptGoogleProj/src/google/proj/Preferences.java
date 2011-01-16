@@ -144,29 +144,22 @@ public class Preferences extends PreferenceActivity {
 		finish();
 	}
 
-	private void getPrefs() {
-		boolean delete_sync;
-		String ListPreference;
-		String editTextPreference;
-		String ringtonePreference;
-		String secondEditTextPreference;
-		String customPref;
-		// Get the xml/preferences.xml preferences
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
-		delete_sync = prefs.getBoolean("delete_sync", false);
-		ListPreference = prefs.getString("listPref", "nr1");
-		editTextPreference = prefs.getString("editTextPref",
-				"Nothing has been entered");
-		ringtonePreference = prefs.getString("ringtonePref",
-				"DEFAULT_RINGTONE_URI");
-		secondEditTextPreference = prefs.getString("SecondEditTextPref",
-				"Nothing has been entered");
-		// Get the custom preference
-		SharedPreferences mySharedPreferences = getSharedPreferences(
-				"myCustomSharedPrefs", Activity.MODE_PRIVATE);
-		customPref = mySharedPreferences.getString("myCusomPref", "");
-	}
+	/*
+	 * private void getPrefs() { boolean delete_sync; String ListPreference;
+	 * String editTextPreference; String ringtonePreference; String
+	 * secondEditTextPreference; String customPref; // Get the
+	 * xml/preferences.xml preferences SharedPreferences prefs =
+	 * PreferenceManager .getDefaultSharedPreferences(getBaseContext());
+	 * delete_sync = prefs.getBoolean("delete_sync", false); ListPreference =
+	 * prefs.getString("listPref", "nr1"); editTextPreference =
+	 * prefs.getString("editTextPref", "Nothing has been entered");
+	 * ringtonePreference = prefs.getString("ringtonePref",
+	 * "DEFAULT_RINGTONE_URI"); secondEditTextPreference =
+	 * prefs.getString("SecondEditTextPref", "Nothing has been entered"); // Get
+	 * the custom preference SharedPreferences mySharedPreferences =
+	 * getSharedPreferences( "myCustomSharedPrefs", Activity.MODE_PRIVATE);
+	 * customPref = mySharedPreferences.getString("myCusomPref", ""); }
+	 */
 
 	/*
 	 * public void onStart() { // Bundle savedInstanceState // public void

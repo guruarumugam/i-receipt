@@ -113,14 +113,38 @@ public class idan extends Activity {
 			CustomizeDialog customizeDialog = new CustomizeDialog(this,
 					"Your expenditures this month passed your limit - "
 							+ idan.settings.getMaxmonth()
-							+ ". \nyour expenditures - " + manual_scan.total
-							+ ".");
+							+ ". \nyour expenditures - "
+							+ manual_scan.totalMonth);
 			customizeDialog.show();
 			// return;
 		}
 		if (resultCode == 2) {
 			return;
 		}
+		if (resultCode == 200) { // return after save from compute receipt
+			CustomizeDialog customizeDialog = new CustomizeDialog(
+					this,
+					"Your expenditures this month passed your limit - "
+							+ idan.settings.getMaxmonth()
+							+ ". \nyour expenditures - "
+							+ manual_scan.totalMonth
+							+ "\nYour expenditures this Period also passed your limit - "
+							+ idan.settings.getMaxUniquely()
+							+ ". \nyour expenditures - "
+							+ manual_scan.totalPeriod);
+			customizeDialog.show();
+			// return;
+		}
+		if (resultCode == 300) { // return after save from compute receipt
+			CustomizeDialog customizeDialog = new CustomizeDialog(this,
+					"Your expenditures this Period passed your limit - "
+							+ idan.settings.getMaxUniquely()
+							+ ". \nyour expenditures - "
+							+ manual_scan.totalPeriod);
+			customizeDialog.show();
+			// return;
+		}
+
 		if (requestCode == TAKE_PICTURE)
 			if (resultCode != Activity.RESULT_OK) {
 				rec_arr.remove(index);

@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import misc.Misc;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -38,6 +37,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import java.util.Date;
 
 public class manual_scan extends Activity implements OnClickListener {
 
@@ -52,7 +52,7 @@ public class manual_scan extends Activity implements OnClickListener {
 	private String selectedImagePath;
 	private String filemanagerstring;
 	// public static int limit = 600;
-	public static Double total;
+	public static double totalMonth, totalPeriod;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -204,7 +204,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public void onClick3(View view) {
 		String str1;
-		int month, day, year, i = 0;
+		int month, day, year, i = 0, j = 0;
 		// setResult(1);
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
@@ -224,10 +224,21 @@ public class manual_scan extends Activity implements OnClickListener {
 		if (idan.settings.getMaxmonth() != (-1)) {
 			i = checkLimitException(idan.settings.getMaxmonth());
 		}
-		if (i == 1) // over limit
-			setResult(100);
-		else
-			setResult(2);
+		if (idan.settings.getMaxUniquely() != (-1)) {
+			j = checkPeriodLimitException(idan.settings.getMaxUniquely(),
+					idan.settings.getDateEx());
+		}
+		if (i == 1) {// over MonthLimit
+			if (j == 0)
+				setResult(100); // only over MonthLimit
+			else
+				setResult(200);// over MonthLimit and PeriodLimit
+		} else {
+			if (j == 0)
+				setResult(2); // NOT over any limit
+			else
+				setResult(300);// over PeriodLimit
+		}
 		finish();
 	}
 
@@ -382,8 +393,8 @@ public class manual_scan extends Activity implements OnClickListener {
 		}
 	}
 
-	public int checkLimitException(Double limit) {
-		total = 0.0;
+	public static int checkLimitException(double limit) {
+		totalMonth = 0.0;
 		int calYear, calMonth;
 		// int calDay;
 		IDate date;
@@ -392,18 +403,34 @@ public class manual_scan extends Activity implements OnClickListener {
 		calMonth = cal.get(Calendar.MONTH);
 		// calDay = cal.get(Calendar.DAY_OF_MONTH);
 		date = new IDate(calYear, calMonth + 1, 1); // start of this month
-		// if (price.getText() != null)
-		// total = Double.parseDouble(price.getText().toString());
 		for (iReceipt rec : idan.rec_arr) {
 			if (rec.getRdate().compareTo(date) <= 0)
-				total += rec.getTotal();
+				totalMonth += rec.getTotal();
 		}
-		if (total > limit) {
+		if (totalMonth > limit) {
 			/*
 			 * CustomizeDialog customizeDialog = new CustomizeDialog(this,
 			 * "Your expenditures this month passed your limit - \"" + limit +
 			 * "\""); customizeDialog.show();
 			 */
+			return 1;
+		}
+		return 0;
+	}
+
+	public static int checkPeriodLimitException(double limit, Date idate) {
+		totalPeriod = 0.0;
+		int calYear, calMonth, calDay;
+		IDate date;
+		calYear = idate.getYear();
+		calMonth = idate.getMonth();
+		calDay = idate.getDay();
+		date = new IDate(calYear, calMonth, calDay);
+		for (iReceipt rec : idan.rec_arr) {
+			if (rec.getRdate().compareTo(date) <= 0)
+				totalPeriod += rec.getTotal();
+		}
+		if (totalPeriod > limit) {
 			return 1;
 		}
 		return 0;
