@@ -20,65 +20,61 @@ import google.proj.idan;
 
 public class Misc {
 
-	private static Date date=null;
-	
-	
-	public static void makeDelete(){
-		
-		
-		List<iReceipt> list=new ArrayList<iReceipt>();
-		for (iReceipt rec : idan.rec_arr){
-			
-			if(idan.settings.needToDelete(rec)){
+	private static Date date = null;
+
+	public static void makeDelete() {
+		List<iReceipt> list = new ArrayList<iReceipt>();
+		for (iReceipt rec : idan.rec_arr) {
+
+			if (idan.settings.needToDelete(rec)) {
 				list.add(rec);
 			}
 		}
-		deleteReceipt(list,idan.settings.getDeleteOnSerever());
-		date=new Date();
+		deleteReceipt(list, idan.settings.getDeleteOnSerever());
+		date = new Date();
 	}
-	
-	
-	public static void deleteReceipt(List<iReceipt> list, boolean deleteOnServer){
-		if (list==null)
+
+	public static void deleteReceipt(List<iReceipt> list, boolean deleteOnServer) {
+		if (list == null)
 			return;
 		for (iReceipt rec : list) {
-			deleteReceipt_helper(rec,Settings.deleteOnServer());
+			deleteReceipt_helper(rec, Settings.deleteOnServer());
 		}
-		if (deleteOnServer)		
+		if (deleteOnServer)
 			idan.sync.sendSync();
-
 	}
 
-	//important: this method deletes the receipt from both the server and yhe device
-	public static void deleteReceipt(iReceipt rec){
-		deleteReceipt_helper(rec,Settings.deleteOnServer());
+	// important: this method deletes the receipt from both the server and yhe
+	// device
+	public static void deleteReceipt(iReceipt rec) {
+		deleteReceipt_helper(rec, Settings.deleteOnServer());
 		idan.sync.sendSync();
 	}
 
-	private static void deleteReceipt_helper(iReceipt rec,boolean deleteOnServer){
-		int recIndex=rec.getUniqueIndex();
-		if (deleteOnServer){
-			idan.sync.addToDeleteList(recIndex+"");
+	private static void deleteReceipt_helper(iReceipt rec,
+			boolean deleteOnServer) {
+		int recIndex = rec.getUniqueIndex();
+		if (deleteOnServer) {
+			idan.sync.addToDeleteList(recIndex + "");
 		}
-		if (rec.getFilepath()!=null&&rec.getFilepath()!=""){
-			File file=new File(rec.getFilepath());
+		if (rec.getFilepath() != null && rec.getFilepath() != "") {
+			File file = new File(rec.getFilepath());
 			file.delete();
 		}
 		idan.rec_arr.remove(rec);
 	}
-	
-	public static  boolean needToCheckDelete(){
 
-		if (date==null)
+	public static boolean needToCheckDelete() {
+
+		if (date == null)
 			return true;
-		else if ((new Date()).getTime()- date.getTime() > 86400000)
+		else if ((new Date()).getTime() - date.getTime() > 86400000)
 			return true;
-		else return false;
-		
+		else
+			return false;
 	}
-	
-	
-	public static void saveList(Activity act){
+
+	public static void saveList(Activity act) {
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
 					act.openFileOutput("RecListsave.tmp", Context.MODE_PRIVATE));
@@ -91,14 +87,15 @@ public class Misc {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
 	}
-	
-	public static boolean chekConnection(Activity act){
-		
+
+	public static boolean chekConnection(Activity act) {
+
 		boolean connected = false;
-		ConnectivityManager mConnectivity = (ConnectivityManager) act.getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) act.getSystemService(Context.TELEPHONY_SERVICE);
+		ConnectivityManager mConnectivity = (ConnectivityManager) act
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		TelephonyManager mTelephony = (TelephonyManager) act
+				.getSystemService(Context.TELEPHONY_SERVICE);
 		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
 
 		if (info == null || !mConnectivity.getBackgroundDataSetting())
@@ -115,13 +112,10 @@ public class Misc {
 				connected = info.isConnected();
 			}
 		}
-		
 		return connected;
-		
 	}
-	
-	public static void saveSetting(Activity act){
-		
+
+	public static void saveSetting(Activity act) {
 		try {
 			ObjectOutputStream outputStream = new ObjectOutputStream(
 					act.openFileOutput("Settings.tmp", Context.MODE_PRIVATE));
@@ -131,40 +125,37 @@ public class Misc {
 			ex.printStackTrace();
 		}
 	}
-	
-	public static Settings loadSetting(Activity act){
+
+	public static Settings loadSetting(Activity act) {
 		try {
-			
-			FileInputStream ofi=act.openFileInput("Settings.tmp");
-			if (ofi==null)
-				return null ;
-			
+
+			FileInputStream ofi = act.openFileInput("Settings.tmp");
+			if (ofi == null)
+				return null;
+
 			ObjectInputStream inputStream = new ObjectInputStream(ofi);
-			
-			Settings settmp = (Settings) inputStream
-			.readObject();
-			if (settmp ==null ){
+
+			Settings settmp = (Settings) inputStream.readObject();
+			if (settmp == null) {
 				inputStream.close();
-				return null ;
+				return null;
 			}
 			inputStream.close();
-			
-		return settmp;
+
+			return settmp;
 		}
-		
-		catch (FileNotFoundException ex){
-			return  null;
-		}
-		catch (IOException ex) {
-			return null ;
+
+		catch (FileNotFoundException ex) {
+			return null;
+		} catch (IOException ex) {
+			return null;
 		} catch (ClassNotFoundException e) {
-		 return null ;
+			return null;
 		}
 	}
-	
-	
-	public static List<iReceipt> loadList(Activity act){
-		
+
+	public static List<iReceipt> loadList(Activity act) {
+
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(
 					act.openFileInput("RecListsave.tmp"));
@@ -173,7 +164,7 @@ public class Misc {
 					.readObject();
 			inputStream.close();
 			return rec_arr_tmp;
-			
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return null;
@@ -181,23 +172,16 @@ public class Misc {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
-	
-	
-	
-	
-	public static int loadreceiptUniqueIndex(Activity act){
-		
-		
+
+	public static int loadreceiptUniqueIndex(Activity act) {
+
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(
 					act.openFileInput("recIndexsave.tmp"));
 			Integer tmp = (Integer) inputStream.readObject();
 			inputStream.close();
-			
 			return tmp;
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return 0;
@@ -207,4 +191,9 @@ public class Misc {
 		}
 	}
 
+	public static void deleteAllReceipts(Activity act) {
+
+		deleteReceipt(idan.rec_arr, idan.settings.getDeleteOnSerever());
+		saveList(act);
+	}
 }

@@ -403,7 +403,7 @@ public class listview extends Activity {
 		// return search_rec_arr;
 	}
 
-	public IDate getDate(String str) { // 0-9 or "-" or "/"
+	public static IDate getDate(String str) { // 0-9 or "-" or "/"
 
 		char[] ch = str.toCharArray();
 		int len = ch.length;

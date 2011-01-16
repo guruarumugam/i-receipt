@@ -14,9 +14,7 @@ import android.content.Context;
 public class Settings implements java.io.Serializable {
 
 	private boolean deleteOnServer;
-
 	private int daysToStay;
-
 	private double maxuniquly;
 	private double maxmonth;
 	private Date dateEx;

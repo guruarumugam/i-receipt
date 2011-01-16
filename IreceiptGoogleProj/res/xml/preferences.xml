@@ -10,14 +10,16 @@
 		android:title="Deletion sync" android:summary="Deletion on Android - delete on web?"
 		android:summaryOn="Deletion on Android - DOES delete on web" android:key="delete_sync"></CheckBoxPreference>
 
-	<CheckBoxPreference android:title="Payments Limit Alert"
-		android:summary="Alerts when you passes your defined limit" android:key="payment_alert"></CheckBoxPreference>
+	<CheckBoxPreference android:key="payment_alert" android:summary="Alerts when you passes your monthly defined limit" android:title="Monthly Limit Alert"></CheckBoxPreference>
 
 	<EditTextPreference android:dialogTitle="Payments Limit Alert"
-		android:dialogLayout="@layout/edittextpreferences" android:summary="define your payments limit "
+		android:summary="define your payments limit "
 		android:title="Payments Limit" android:key="limit"></EditTextPreference>
 
-	<PreferenceScreen android:title="Delete receipts"
+	<PreferenceScreen android:key="period_alert" android:title="Period limit alert" android:summary="define your period to check"><CheckBoxPreference android:key="limit_from_to" android:summary="define your period to check" android:title="Payments Limit Alert"></CheckBoxPreference><EditTextPreference android:key="fromDate" android:summary="enter start date" android:title="Choosen dates limit alert" android:dialogTitle="Choose date to start" android:dialogMessage="date form - mm/dd/yyyy (01/30/2011)"></EditTextPreference>
+
+<EditTextPreference android:key="limit_period" android:summary="Define your period limit" android:title="Enter period limit"></EditTextPreference>
+</PreferenceScreen><PreferenceScreen android:title="Delete receipts"
 		android:summary="delete all receipts from the android" android:key="deleteall1">
 
 		<EditTextPreference android:title="Delete all receipts"
@@ -25,4 +27,6 @@
 			android:dialogTitle="Delete receipts" android:key="deleteall2"></EditTextPreference>
 
 	</PreferenceScreen>
+
+
 </PreferenceScreen>

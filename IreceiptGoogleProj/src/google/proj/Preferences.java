@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.Date;
+
 public class Preferences extends PreferenceActivity {
 	SharedPreferences preferences;
 
@@ -55,20 +58,59 @@ public class Preferences extends PreferenceActivity {
 	}
 
 	public void onBackPressed() {
+		Double limit = 0.0, periodLimit = 0.0;
+		int day, month, year;
 		boolean delete_sync = preferences.getBoolean("delete_sync", false);
 		boolean payment_alert = preferences.getBoolean("payment_alert", false);
-		String duration2 = preferences.getString("duration", null);
-		int duration = Integer.parseInt(duration2);
+		if (payment_alert) {
+			String str_limit = preferences.getString("limit", "0");
+			Double double_limit;
+			try {
+				double_limit = Double.parseDouble(str_limit);
+				idan.settings.setMaxMonth(double_limit);
+			} catch (NumberFormatException ex) {
+				idan.settings.setMaxMonth(-1.0);
+			}
+		}
+		String str_duration = preferences.getString("duration", null);
+		int duration = Integer.parseInt(str_duration);
+		boolean periodAlert = preferences.getBoolean("limit_from_to", false);
+		if (periodAlert) { // only if checkbok == true
+			String str_date = preferences.getString("Choose date to start",
+					null);
+			IDate i_date = listview.getDate(str_date);
+			if (i_date != null) {
+				String str_period_limit = preferences.getString("limit_period",
+						null);
+				try {
+					periodLimit = Double.parseDouble(str_period_limit);
+					day = i_date.getDay();
+					month = i_date.getMonth();
+					year = i_date.getYear();
+					Date date = new Date(year - 1900, month - 1, day);
+					idan.settings.setDate(date);
+					idan.settings.setMaxUniquely(periodLimit);
+				} catch (NumberFormatException ex) {
+					idan.settings.setMaxUniquely(-1.0);
+				}
+			} else {
+				idan.settings.setDate(null);
+				idan.settings.setMaxUniquely(-1.0);
+			}
+		}
+
 		if (duration == 1) // week
-			;
+			idan.settings.setdaysToStay(7);
 		if (duration == 2)// month
-			;
+			idan.settings.setdaysToStay(28);
 		if (duration == 3)// year
-			;
+			idan.settings.setdaysToStay(365);
 		if (duration == 4)// forever
-			;
-		String limit = preferences.getString("limit", "0").toString();
-		int limit2 = Integer.parseInt(limit);
+			idan.settings.setdaysToStay(-1);
+		idan.settings.setDeleteOnServer(delete_sync);
+
+		// String limit = preferences.getString("limit", "0").toString();
+		// int limit2 = Integer.parseInt(limit);
 		/*
 		 * EditText limit2 = (EditText) findViewById(R.id.limit); String limit3
 		 * = limit2.getText().toString(); לא עובד!!!
