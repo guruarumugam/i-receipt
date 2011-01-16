@@ -1,13 +1,17 @@
 package misc;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
@@ -115,7 +119,92 @@ public class Misc {
 		return connected;
 		
 	}
+	
+	public static void saveSetting(Activity act){
+		
+		try {
+			ObjectOutputStream outputStream = new ObjectOutputStream(
+					act.openFileOutput("Settings.tmp", Context.MODE_PRIVATE));
+			outputStream.writeObject(idan.settings);
+			outputStream.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public static Settings loadSetting(Activity act){
+		try {
+			
+			FileInputStream ofi=act.openFileInput("Settings.tmp");
+			if (ofi==null)
+				return null ;
+			
+			ObjectInputStream inputStream = new ObjectInputStream(ofi);
+			
+			Settings settmp = (Settings) inputStream
+			.readObject();
+			if (settmp ==null ){
+				inputStream.close();
+				return null ;
+			}
+			inputStream.close();
+			
+		return settmp;
+		}
+		
+		catch (FileNotFoundException ex){
+			return  null;
+		}
+		catch (IOException ex) {
+			return null ;
+		} catch (ClassNotFoundException e) {
+		 return null ;
+		}
+	}
+	
+	
+	public static List<iReceipt> loadList(Activity act){
+		
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(
+					act.openFileInput("RecListsave.tmp"));
+			@SuppressWarnings("unchecked")
+			ArrayList<iReceipt> rec_arr_tmp = (ArrayList<iReceipt>) inputStream
+					.readObject();
+			inputStream.close();
+			return rec_arr_tmp;
+			
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 
+	}
+	
+	
+	
+	
+	public static int loadreceiptUniqueIndex(Activity act){
+		
+		
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(
+					act.openFileInput("recIndexsave.tmp"));
+			Integer tmp = (Integer) inputStream.readObject();
+			inputStream.close();
+			
+			return tmp;
 
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return 0;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
 }

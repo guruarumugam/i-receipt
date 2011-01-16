@@ -43,6 +43,7 @@ public class idan extends Activity {
 	public static List<iReceipt> rec_arr;
 	public static Settings settings;
 
+
 	// private ImageButton new_scan, manual, receipts, stats;
 	// nothing
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,22 +52,33 @@ public class idan extends Activity {
 		setContentView(R.layout.main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+		/*
 		rec_arr = loadList();
-		if (rec_arr == null)
-			rec_arr = new ArrayList<iReceipt>();
-		if (sync == null) {
-			rec_arr = new ArrayList<iReceipt>();
-			sync = new Syncer(google.proj.loginpage.accountname);
-		}
-		sync.sendSync();
-		settings = new Settings();
-		loadSettingis();
-		saveSettings();
+		*/
+		////////////////////////////////////////////
+		rec_arr=Misc.loadList(this);
+		receiptUniqueIndex=Misc.loadreceiptUniqueIndex(this);
 
-		if (Misc.needToCheckDelete()) {
+		///////////////////////////////////////////////
+
+		if (rec_arr==null)
+		rec_arr = new ArrayList<iReceipt>();
+		if (sync == null)
+			sync = new Syncer(google.proj.loginpage.accountname);
+
+		sync.sendSync();
+		
+		settings=Misc.loadSetting(this);
+		if (settings==null)
+		settings=new Settings();
+		Misc.saveSetting(this);
+
+		if (Misc.needToCheckDelete()){
 			Misc.makeDelete();
 		}
 		Misc.saveList(this);
+		
+		
 	}
 
 	public void new_scan_handler(View view) {
@@ -140,16 +152,7 @@ public class idan extends Activity {
 		}
 	}
 
-	/*
-	 * @Override protected void onActivityResult(int requestCode, int
-	 * resultCode, Intent data) { // in case we cancel in compute_receipt if
-	 * (requestCode == TAKE_PICTURE) if (resultCode != Activity.RESULT_OK) {
-	 * rec_arr.remove(requestCode); return; } else { Intent i = new
-	 * Intent(idan.this, compute_receipt.class); i.setFlags(index);
-	 * startActivityForResult(i, index); }
-	 * 
-	 * if (resultCode == 0) { rec_arr.remove(requestCode); } }
-	 */
+
 
 	public void receipts_handler(View view) {
 		Intent i = new Intent(idan.this, listview.class);
@@ -161,6 +164,14 @@ public class idan extends Activity {
 		startActivity(i);
 	}
 
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	///////////replace with Misc
+	/*
 	public ArrayList<iReceipt> loadList() {
 		try {
 			ObjectInputStream inputStream = new ObjectInputStream(
@@ -186,48 +197,8 @@ public class idan extends Activity {
 			return null;
 		}
 	}
-
-	public void loadSettingis() {
-		try {
-			FileInputStream ofi = openFileInput("Settings.tmp");
-			if (ofi == null)
-				return;
-
-			ObjectInputStream inputStream = new ObjectInputStream(ofi);
-
-			Settings settmp = (Settings) inputStream.readObject();
-			if (settmp == null) {
-				inputStream.close();
-				return;
-			}
-			inputStream.close();
-
-			settings.setdaysToStay(settmp.getdaysToStay());
-			settings.setDeleteOnServer(settmp.getDeleteOnSerever());
-			settings.setMaxMonth(settmp.getMaxmonth());
-			settings.setMaxUniquely(settmp.getMaxUniquely());
-		}
-
-		catch (FileNotFoundException ex) {
-			return;
-		} catch (IOException ex) {
-			return;
-		} catch (ClassNotFoundException e) {
-			return;
-		}
-	}
-
-	public void saveSettings() {
-
-		try {
-			ObjectOutputStream outputStream = new ObjectOutputStream(
-					openFileOutput("Settings.tmp", Context.MODE_PRIVATE));
-			outputStream.writeObject(this);
-			outputStream.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
+	*/
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void crash() {
 		System.err.println(2 / 0);
@@ -248,10 +219,8 @@ public class idan extends Activity {
 			Intent settingsActivity = new Intent(getBaseContext(),
 					Preferences.class);
 			startActivityForResult(settingsActivity, index);
-			/*
-			 * i = new Intent(idan.this, HelloPreferences.class);
-			 * startActivity(i);
-			 */
+			/*i = new Intent(idan.this, HelloPreferences.class);
+			startActivity(i);*/
 			break;
 		case ABOUT_IRECEIPT:
 			i = new Intent(idan.this, aboutireceipt.class);
