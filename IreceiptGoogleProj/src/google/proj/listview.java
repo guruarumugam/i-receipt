@@ -59,13 +59,6 @@ public class listview extends Activity {
 			Misc.saveList(this);
 		}
 		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			idan.rec_arr.add((iReceipt) extras.get("Receipt"));
-			if (extras.getBoolean("man")) {// comes from manual
-				setResult(30);
-				finish();
-			}
-		}
 		switcher = 0;
 		int index = getIntent().getFlags();
 		if (index == 5) // back from advance search

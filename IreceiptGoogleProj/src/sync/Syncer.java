@@ -132,7 +132,6 @@ public class Syncer {
 					delete_in = response.getHeaders("delete" + delete_counter)[0]
 							.getValue();
 				iReceipt shoudDelete = null;
-				boolean addnew = true;
 				for (iReceipt rr : idan.rec_arr) {
 					if (rec != null) {
 						if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
@@ -147,7 +146,6 @@ public class Syncer {
 								rr.setTotal(rec.getTotal());
 								rr.setUpdate(rec.getUpdate());
 								rr.setSync(rec.getSyncdate());
-								addnew = false;
 							}
 						}
 
@@ -155,7 +153,6 @@ public class Syncer {
 					if (delete_in != null) {
 						if ((rr.getUniqueIndex() + "").equals(delete_in)) {
 							shoudDelete = rr;
-							addnew = false;
 						}
 					}
 				}
@@ -164,8 +161,6 @@ public class Syncer {
 					delete_counter++;
 					shoudDelete = null;
 				}
-				if (rec != null && addnew)
-					idan.rec_arr.add(rec);
 			}
 			// //////////////////////////////////
 			// delete receipts

@@ -141,6 +141,7 @@ public class Preferences extends PreferenceActivity {
 		// String limit = preferences.getString("limit", "0");
 		// setResult(555);
 		Misc.saveSetting(this);
+		setResult(1000);
 		finish();
 	}
 

@@ -106,8 +106,9 @@ public class Misc {
 			if (netType == ConnectivityManager.TYPE_WIFI) {
 				connected = info.isConnected();
 			}
+
 			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
-					&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
+		//			&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
 					&& !mTelephony.isNetworkRoaming()) {
 				connected = info.isConnected();
 			}

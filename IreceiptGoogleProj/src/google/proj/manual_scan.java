@@ -210,9 +210,13 @@ public class manual_scan extends Activity implements OnClickListener {
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(notes.getText().toString());
 		str1 = date.getText().toString();
+		
+
+
+		
 		month = Integer.parseInt(str1.substring(0, 2));
 		day = Integer.parseInt(str1.substring(3, 5));
-		year = Integer.parseInt(str1.substring(6, 10));
+		year = Integer.parseInt(str1.substring(6,10));
 		rec.setRdate(new IDate(year, month, day));
 		rec.setStoreName(business.getText().toString());
 		if (price.getText().toString().length() == 0)
@@ -220,6 +224,29 @@ public class manual_scan extends Activity implements OnClickListener {
 		else
 			rec.setTotal(Double.parseDouble(price.getText().toString()));
 		rec.setFilepath(uri.getText().toString());
+		if (idan.settings.getMaxmonth() != (-1)) {  
+			   i = checkLimitException(idan.settings.getMaxmonth());  
+			   }  
+			   if (idan.settings.getMaxUniquely() != (-1)) {  
+			    j = checkPeriodLimitException(idan.settings.getMaxUniquely(),  
+			      idan.settings.getDateEx());  
+			   }  
+			   if (i == 1) {// over MonthLimit  
+			    if (j == 0)  
+			     setResult(100); // only over MonthLimit  
+			    else  
+			     setResult(200);// over MonthLimit and PeriodLimit  
+			   } else {  
+			    if (j == 0)  
+			     setResult(2); // NOT over any limit  
+			    else  
+			     setResult(300);// over PeriodLimit  
+			   }
+		
+		
+		
+		
+		
 		(new save()).execute();//will finish
 	}
 

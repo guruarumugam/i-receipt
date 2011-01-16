@@ -140,8 +140,10 @@ public class compute_receipt extends Activity {
 			Object item = parent.getItemAtPosition(pos);
 			String str = (String) item;
 			IDate date;
-			if (str.equals(""))
-				date = new IDate(2010, 10, 10);
+			if (str.equals("")){
+				final Calendar cal = Calendar.getInstance();
+				date = new IDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)); // start of this month
+			}
 			else {
 				String str_arr[] = str.split("-");
 				int month = Integer.parseInt(str_arr[0]);
@@ -317,7 +319,26 @@ public class compute_receipt extends Activity {
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(myEditText.getText().toString());
 		//saveList();
-		setResult(100);
+		int i=0,j=0;
+		if (idan.settings.getMaxmonth() != (-1)) {  
+			   i = manual_scan.checkLimitException(idan.settings.getMaxmonth());  
+			   }  
+			   if (idan.settings.getMaxUniquely() != (-1)) {  
+			    j = manual_scan.checkPeriodLimitException(idan.settings.getMaxUniquely(),  
+			      idan.settings.getDateEx());  
+			   }  
+			   if (i == 1) {// over MonthLimit  
+			    if (j == 0)  
+			     setResult(100); // only over MonthLimit  
+			    else  
+			     setResult(200);// over MonthLimit and PeriodLimit  
+			   } else {  
+			    if (j == 0)  
+			     setResult(2); // NOT over any limit  
+			    else  
+			     setResult(300);// over PeriodLimit  
+			   }
+			   
 		(new save()).execute();
 		
 		//finish();
