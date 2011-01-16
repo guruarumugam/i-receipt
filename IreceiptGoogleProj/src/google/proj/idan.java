@@ -1,12 +1,16 @@
 package google.proj;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -20,6 +24,9 @@ import android.view.Window;
 import google.proj.R;
 import java.util.ArrayList;
 import java.util.List;
+
+import misc.Misc;
+import misc.Settings;
 import sync.Syncer;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -34,6 +41,7 @@ public class idan extends Activity {
 	public static int receiptUniqueIndex;
 	public static Syncer sync;
 	public static List<iReceipt> rec_arr;
+	public static Settings settings;
 
 	// private ImageButton new_scan, manual, receipts, stats;
 	// nothing
@@ -44,11 +52,21 @@ public class idan extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		rec_arr = loadList();
-		if (rec_arr==null)
+		if (rec_arr == null)
 			rec_arr = new ArrayList<iReceipt>();
-		if (sync == null){
-			sync = new Syncer(google.proj.loginpage.accountname);}
+		if (sync == null) {
+			rec_arr = new ArrayList<iReceipt>();
+			sync = new Syncer(google.proj.loginpage.accountname);
+		}
 		sync.sendSync();
+		settings = new Settings();
+		loadSettingis();
+		saveSettings();
+
+		if (Misc.needToCheckDelete()) {
+			Misc.makeDelete();
+		}
+		Misc.saveList(this);
 	}
 
 	public void new_scan_handler(View view) {
@@ -169,6 +187,48 @@ public class idan extends Activity {
 		}
 	}
 
+	public void loadSettingis() {
+		try {
+			FileInputStream ofi = openFileInput("Settings.tmp");
+			if (ofi == null)
+				return;
+
+			ObjectInputStream inputStream = new ObjectInputStream(ofi);
+
+			Settings settmp = (Settings) inputStream.readObject();
+			if (settmp == null) {
+				inputStream.close();
+				return;
+			}
+			inputStream.close();
+
+			settings.setdaysToStay(settmp.getdaysToStay());
+			settings.setDeleteOnServer(settmp.getDeleteOnSerever());
+			settings.setMaxMonth(settmp.getMaxmonth());
+			settings.setMaxUniquely(settmp.getMaxUniquely());
+		}
+
+		catch (FileNotFoundException ex) {
+			return;
+		} catch (IOException ex) {
+			return;
+		} catch (ClassNotFoundException e) {
+			return;
+		}
+	}
+
+	public void saveSettings() {
+
+		try {
+			ObjectOutputStream outputStream = new ObjectOutputStream(
+					openFileOutput("Settings.tmp", Context.MODE_PRIVATE));
+			outputStream.writeObject(this);
+			outputStream.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	public void crash() {
 		System.err.println(2 / 0);
 	}
@@ -188,8 +248,10 @@ public class idan extends Activity {
 			Intent settingsActivity = new Intent(getBaseContext(),
 					Preferences.class);
 			startActivityForResult(settingsActivity, index);
-			/*i = new Intent(idan.this, HelloPreferences.class);
-			startActivity(i);*/
+			/*
+			 * i = new Intent(idan.this, HelloPreferences.class);
+			 * startActivity(i);
+			 */
 			break;
 		case ABOUT_IRECEIPT:
 			i = new Intent(idan.this, aboutireceipt.class);
