@@ -316,10 +316,11 @@ public class compute_receipt extends Activity {
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(myEditText.getText().toString());
-		saveList();
-		// (new save()).execute(null);
+		//saveList();
 		setResult(100);
-		finish();
+		(new save()).execute();
+		
+		//finish();
 	}
 
 	public void onClick2(View view) {
