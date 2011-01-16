@@ -14,6 +14,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -35,6 +37,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class compute_receipt extends Activity {
 	// public static DocsService client= new DocsService("My new Application");
@@ -221,6 +224,8 @@ public class compute_receipt extends Activity {
 					String price_new = text.getText().toString();
 					prices[3] = price_new;
 					spinner_p.setSelection(3);
+					if (price_new.equals(""))
+						price_new="0";
 					rec.setTotal(Double.valueOf(price_new));
 					dialog5.dismiss();
 				}
@@ -325,7 +330,7 @@ public class compute_receipt extends Activity {
 	public void saveList() {
 
 		rec.setUpdate();
-		boolean connected = Misc.chekConnection(this);
+		boolean connected = Misc.checkConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {
@@ -426,87 +431,105 @@ public class compute_receipt extends Activity {
 							"Extracting the data from the receipt."
 									+ "\n\n(Press the back key to skip...)",
 							true, true);
+			progressDialog.setOnCancelListener(new OnCancelListener() {
+                
+				
+				
+				@Override
+                public void onCancel(DialogInterface dialog) {
+					initialize_fields();
+					Toast.makeText(compute_receipt.this, ocr_preform.this.cancel(true)+"", Toast.LENGTH_SHORT).show();
+					
+					
+				}
+				
 
+		});
 		}
 
-		protected Void doInBackground(Void... params) {
-			if (rec.getFilepath() != null)
-				good_ocr = preform_ocr(rec);
-			if (!good_ocr) {
-				prices[0] = "";
-				prices[1] = "";
-				prices[2] = "";
-				prices[3] = "";
-				dates[0] = "";
-				dates[1] = "";
-				dates[2] = "";
-				dates[3] = "";
-				stores[0] = "";
-				stores[1] = "";
-				stores[2] = "";
-				stores[3] = "";
+		protected void initialize_fields(){
+			prices[0] = "";
+			prices[1] = "";
+			prices[2] = "";
+			prices[3] = "";
+			dates[0] = "";
+			dates[1] = "";
+			dates[2] = "";
+			dates[3] = "";
+			stores[0] = "";
+			stores[1] = "";
+			stores[2] = "";
+			stores[3] = "";
+		
+		cat[0] = "Dining";
+		cat[1] = "Car";
+		cat[2] = "Travel";
+		cat[3] = "Shopping";
+		cat[4] = "Rent";
+		cat[5] = "Groceries";
+		cat[6] = "Presents";
+		cat[7] = "Entertainment";
+		cat[8] = "Household goods";
+		cat[9] = "Other";
+		spinner_s = (Spinner) findViewById(R.id.Spinner01);
+		adapter_s = new ArrayAdapter<String>(compute_receipt.this,
+				android.R.layout.simple_spinner_item, stores);
+		adapter_s
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_s.setAdapter(adapter_s);
+		spinner_s
+				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
+
+		spinner_d = (Spinner) findViewById(R.id.Spinner02);
+		adapter_d = new ArrayAdapter<String>(compute_receipt.this,
+				android.R.layout.simple_spinner_item, dates);
+		adapter_d
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_d.setAdapter(adapter_d);
+		spinner_d
+				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
+
+		spinner_p = (Spinner) findViewById(R.id.Spinner03);
+		adapter_p = new ArrayAdapter<String>(compute_receipt.this,
+				android.R.layout.simple_spinner_item, prices);
+		adapter_p
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_p.setAdapter(adapter_p);
+		spinner_p
+				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
+
+		spinner_c = (Spinner) findViewById(R.id.Spinner04);
+		adapter_c = new ArrayAdapter<String>(compute_receipt.this,
+				android.R.layout.simple_spinner_item, cat);
+		adapter_c
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_c.setAdapter(adapter_c);
+		spinner_c
+				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
+
+		PickDate = (TextView) findViewById(R.id.EditDate);
+
+		PickDate.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showDialog(DATE_DIALOG_ID);
 			}
-			cat[0] = "Dining";
-			cat[1] = "Car";
-			cat[2] = "Travel";
-			cat[3] = "Shopping";
-			cat[4] = "Rent";
-			cat[5] = "Groceries";
-			cat[6] = "Presents";
-			cat[7] = "Entertainment";
-			cat[8] = "Household goods";
-			cat[9] = "Other";
-
-			return null;
+		});
+		
 		}
+	
+		protected Void doInBackground(Void... params) {
+			if (rec.getFilepath() != null){
+				
+				good_ocr = preform_ocr(rec);
+			}
+			return null;
+			}
 
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(null);
 
-			spinner_s = (Spinner) findViewById(R.id.Spinner01);
-			adapter_s = new ArrayAdapter<String>(compute_receipt.this,
-					android.R.layout.simple_spinner_item, stores);
-			adapter_s
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner_s.setAdapter(adapter_s);
-			spinner_s
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
 
-			spinner_d = (Spinner) findViewById(R.id.Spinner02);
-			adapter_d = new ArrayAdapter<String>(compute_receipt.this,
-					android.R.layout.simple_spinner_item, dates);
-			adapter_d
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner_d.setAdapter(adapter_d);
-			spinner_d
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
-
-			spinner_p = (Spinner) findViewById(R.id.Spinner03);
-			adapter_p = new ArrayAdapter<String>(compute_receipt.this,
-					android.R.layout.simple_spinner_item, prices);
-			adapter_p
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner_p.setAdapter(adapter_p);
-			spinner_p
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
-
-			spinner_c = (Spinner) findViewById(R.id.Spinner04);
-			adapter_c = new ArrayAdapter<String>(compute_receipt.this,
-					android.R.layout.simple_spinner_item, cat);
-			adapter_c
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner_c.setAdapter(adapter_c);
-			spinner_c
-					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
-
-			PickDate = (TextView) findViewById(R.id.EditDate);
-
-			PickDate.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					showDialog(DATE_DIALOG_ID);
-				}
-			});
-
+			initialize_fields();
 			// get the current date
 			final Calendar c = Calendar.getInstance();
 			mYear = c.get(Calendar.YEAR);

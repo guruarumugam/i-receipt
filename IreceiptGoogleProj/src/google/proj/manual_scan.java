@@ -258,7 +258,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public void saveList() {
 		rec.setUpdate();
-		boolean connected = Misc.chekConnection(this);
+		boolean connected = Misc.checkConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {

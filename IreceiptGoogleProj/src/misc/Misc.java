@@ -89,7 +89,7 @@ public class Misc {
 		}
 	}
 
-	public static boolean chekConnection(Activity act) {
+	public static boolean checkConnection(Activity act) {
 
 		boolean connected = false;
 		ConnectivityManager mConnectivity = (ConnectivityManager) act
