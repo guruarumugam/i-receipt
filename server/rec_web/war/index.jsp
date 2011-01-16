@@ -49,7 +49,7 @@
  </ul>
 <div id="content">
 <table class="table3"><tr><td>
-<table class="table3"><tr><div id="title">Ireceipt</div><div id="small_title">Smart solution for managing your rceipts and expenses.</div></tr><tr><td><h2>Save</h2>
+<table class="table3"><tr><div id="title">Ireceipt</div><div id="small_title">Smart solution for managing your receipts and expenses.</div></tr><tr><td><h2>Save</h2>
      <p>Gain easy access to your receipts from anywhere at anytime.
      </p></td><td><h2>Manage</h2>
       <p class="small_title">Manage and Update your information online with full synchronization with your Android device.</p></td></tr><tr><td>
