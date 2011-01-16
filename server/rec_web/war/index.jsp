@@ -49,12 +49,12 @@
  </ul>
 <div id="content">
 <table class="table3"><tr><td>
-<table class="table3"><tr><div id="title">Ireceipt</div><div id="small_title">Smart solution for managing yout rceipts and expenses.</div></tr><tr><td><h2>Save</h2>
-     <p>Gain easy access to your receipts from anywhare at anytime.
+<table class="table3"><tr><div id="title">Ireceipt</div><div id="small_title">Smart solution for managing your rceipts and expenses.</div></tr><tr><td><h2>Save</h2>
+     <p>Gain easy access to your receipts from anywhere at anytime.
      </p></td><td><h2>Manage</h2>
       <p class="small_title">Manage and Update your information online with full synchronization with your Android device.</p></td></tr><tr><td>
       <h2>Analize</h2>
-      <p class="small_title">Enjoy smart analization of your data, by different filters.</p></td><td> <h2>It's simple!</h2>
+      <p class="small_title">Enjoy smart analysis of your data, by different filters.</p></td><td> <h2>It's simple!</h2>
       <p class="small_title">Very easy to use interface. No new account is needed. Just use your google account to sign in. </p></td></tr></table>
  </td><td><img src="images/internet-statistics.png"/></td></tr></table>
      
