@@ -2,6 +2,8 @@ package google.proj;
 
 import java.io.FileNotFoundException;
 import google.proj.R;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -346,6 +348,10 @@ public class compute_receipt extends Activity {
 
 	public void onClick2(View view) {
 		setResult(0);
+		if (rec.getFilepath()!=null&&!rec.getFilepath().equals("")){
+		 File file = new File(rec.getFilepath());
+		 file.delete();
+		}
 		finish();
 	}
 
