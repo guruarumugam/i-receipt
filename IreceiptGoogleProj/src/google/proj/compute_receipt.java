@@ -84,30 +84,6 @@ public class compute_receipt extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.compute_receipt_layout);
 
-		// speack
-		Button speakButton = (Button) findViewById(R.id.speachButton1);
-		// Check to see if a recognition activity is present
-		PackageManager pm = getPackageManager();
-		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(
-				RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-		if (activities.size() != 0) {
-			speakButton.setOnClickListener(new OnClickListener() {
-
-				public void onClick(View v) {
-					Intent intent = new Intent(
-							RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-					intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-							RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-					intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-							"Speech recognition demo");
-					startActivityForResult(intent, 1234);
-
-				}
-			});
-		} else {
-			speakButton.setEnabled(false);
-		}
-
 		myCheckBox = (CheckBox) findViewById(R.id.CheckBox1);
 		myEditText = (EditText) findViewById(R.id.EditNotesManual);
 		int index = getIntent().getFlags();
@@ -142,11 +118,12 @@ public class compute_receipt extends Activity {
 			Object item = parent.getItemAtPosition(pos);
 			String str = (String) item;
 			IDate date;
-			if (str.equals("")){
+			if (str.equals("")) {
 				final Calendar cal = Calendar.getInstance();
-				date = new IDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)); // start of this month
-			}
-			else {
+				date = new IDate(cal.get(Calendar.YEAR),
+						cal.get(Calendar.MONTH) + 1,
+						cal.get(Calendar.DAY_OF_MONTH)); // start of this month
+			} else {
 				String str_arr[] = str.split("-");
 				int month = Integer.parseInt(str_arr[0]);
 				int day = Integer.parseInt(str_arr[1]);
@@ -229,7 +206,7 @@ public class compute_receipt extends Activity {
 					prices[3] = price_new;
 					spinner_p.setSelection(3);
 					if (price_new.equals(""))
-						price_new="0";
+						price_new = "0";
 					rec.setTotal(Double.valueOf(price_new));
 					dialog5.dismiss();
 				}
@@ -320,37 +297,37 @@ public class compute_receipt extends Activity {
 		rec.setProcessed(true);
 		rec.setFlaged(myCheckBox.isChecked());
 		rec.setNotes(myEditText.getText().toString());
-		//saveList();
-		int i=0,j=0;
-		if (idan.settings.getMaxmonth() != (-1)) {  
-			   i = manual_scan.checkLimitException(idan.settings.getMaxmonth());  
-			   }  
-			   if (idan.settings.getMaxUniquely() != (-1)) {  
-			    j = manual_scan.checkPeriodLimitException(idan.settings.getMaxUniquely(),  
-			      idan.settings.getDateEx());  
-			   }  
-			   if (i == 1) {// over MonthLimit  
-			    if (j == 0)  
-			     setResult(100); // only over MonthLimit  
-			    else  
-			     setResult(200);// over MonthLimit and PeriodLimit  
-			   } else {  
-			    if (j == 0)  
-			     setResult(2); // NOT over any limit  
-			    else  
-			     setResult(300);// over PeriodLimit  
-			   }
-			   
+		// saveList();
+		int i = 0, j = 0;
+		if (idan.settings.getMaxmonth() != (-1)) {
+			i = manual_scan.checkLimitException(idan.settings.getMaxmonth());
+		}
+		if (idan.settings.getMaxUniquely() != (-1)) {
+			j = manual_scan.checkPeriodLimitException(
+					idan.settings.getMaxUniquely(), idan.settings.getDateEx());
+		}
+		if (i == 1) {// over MonthLimit
+			if (j == 0)
+				setResult(100); // only over MonthLimit
+			else
+				setResult(200);// over MonthLimit and PeriodLimit
+		} else {
+			if (j == 0)
+				setResult(2); // NOT over any limit
+			else
+				setResult(300);// over PeriodLimit
+		}
+
 		(new save()).execute();
-		
-		//finish();
+
+		// finish();
 	}
 
 	public void onClick2(View view) {
 		setResult(0);
-		if (rec.getFilepath()!=null&&!rec.getFilepath().equals("")){
-		 File file = new File(rec.getFilepath());
-		 file.delete();
+		if (rec.getFilepath() != null && !rec.getFilepath().equals("")) {
+			File file = new File(rec.getFilepath());
+			file.delete();
 		}
 		finish();
 	}
@@ -460,22 +437,20 @@ public class compute_receipt extends Activity {
 									+ "\n\n(Press the back key to skip...)",
 							true, true);
 			progressDialog.setOnCancelListener(new OnCancelListener() {
-                
-				
-				
-				@Override
-                public void onCancel(DialogInterface dialog) {
-					initialize_fields();
-					Toast.makeText(compute_receipt.this, ocr_preform.this.cancel(true)+"", Toast.LENGTH_SHORT).show();
-					
-					
-				}
-				
 
-		});
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					initialize_fields();
+					Toast.makeText(compute_receipt.this,
+							ocr_preform.this.cancel(true) + "",
+							Toast.LENGTH_SHORT).show();
+
+				}
+
+			});
 		}
 
-		protected void initialize_fields(){
+		protected void initialize_fields() {
 			prices[0] = "";
 			prices[1] = "";
 			prices[2] = "";
@@ -488,82 +463,79 @@ public class compute_receipt extends Activity {
 			stores[1] = "";
 			stores[2] = "";
 			stores[3] = "";
-		
-		cat[0] = "Dining";
-		cat[1] = "Car";
-		cat[2] = "Travel";
-		cat[3] = "Shopping";
-		cat[4] = "Rent";
-		cat[5] = "Groceries";
-		cat[6] = "Presents";
-		cat[7] = "Entertainment";
-		cat[8] = "Household goods";
-		cat[9] = "Other";
-		spinner_s = (Spinner) findViewById(R.id.Spinner01);
-		adapter_s = new ArrayAdapter<String>(compute_receipt.this,
-				android.R.layout.simple_spinner_item, stores);
-		adapter_s
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_s.setAdapter(adapter_s);
-		spinner_s
-				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
 
-		spinner_d = (Spinner) findViewById(R.id.Spinner02);
-		adapter_d = new ArrayAdapter<String>(compute_receipt.this,
-				android.R.layout.simple_spinner_item, dates);
-		adapter_d
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_d.setAdapter(adapter_d);
-		spinner_d
-				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
+			cat[0] = "Dining";
+			cat[1] = "Car";
+			cat[2] = "Travel";
+			cat[3] = "Shopping";
+			cat[4] = "Rent";
+			cat[5] = "Groceries";
+			cat[6] = "Presents";
+			cat[7] = "Entertainment";
+			cat[8] = "Household goods";
+			cat[9] = "Other";
+			spinner_s = (Spinner) findViewById(R.id.Spinner01);
+			adapter_s = new ArrayAdapter<String>(compute_receipt.this,
+					android.R.layout.simple_spinner_item, stores);
+			adapter_s
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner_s.setAdapter(adapter_s);
+			spinner_s
+					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner01());
 
-		spinner_p = (Spinner) findViewById(R.id.Spinner03);
-		adapter_p = new ArrayAdapter<String>(compute_receipt.this,
-				android.R.layout.simple_spinner_item, prices);
-		adapter_p
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_p.setAdapter(adapter_p);
-		spinner_p
-				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
+			spinner_d = (Spinner) findViewById(R.id.Spinner02);
+			adapter_d = new ArrayAdapter<String>(compute_receipt.this,
+					android.R.layout.simple_spinner_item, dates);
+			adapter_d
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner_d.setAdapter(adapter_d);
+			spinner_d
+					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner02());
 
-		spinner_c = (Spinner) findViewById(R.id.Spinner04);
-		adapter_c = new ArrayAdapter<String>(compute_receipt.this,
-				android.R.layout.simple_spinner_item, cat);
-		adapter_c
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner_c.setAdapter(adapter_c);
-		spinner_c
-				.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
+			spinner_p = (Spinner) findViewById(R.id.Spinner03);
+			adapter_p = new ArrayAdapter<String>(compute_receipt.this,
+					android.R.layout.simple_spinner_item, prices);
+			adapter_p
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner_p.setAdapter(adapter_p);
+			spinner_p
+					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner03());
 
-		PickDate = (TextView) findViewById(R.id.EditDate);
+			spinner_c = (Spinner) findViewById(R.id.Spinner04);
+			adapter_c = new ArrayAdapter<String>(compute_receipt.this,
+					android.R.layout.simple_spinner_item, cat);
+			adapter_c
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinner_c.setAdapter(adapter_c);
+			spinner_c
+					.setOnItemSelectedListener(new MyOnItemSelectedListenerSpinner04());
 
-		PickDate.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				showDialog(DATE_DIALOG_ID);
-			}
-		});
-		
-		}
-	
-		protected Void doInBackground(Void... params) {
-			if (rec.getFilepath() != null){
-				
-				good_ocr = preform_ocr(rec);
-			}
-			return null;
-			}
+			PickDate = (TextView) findViewById(R.id.EditDate);
 
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(null);
-
-
-			initialize_fields();
-			// get the current date
+			PickDate.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					showDialog(DATE_DIALOG_ID);
+				}
+			});
 			final Calendar c = Calendar.getInstance();
 			mYear = c.get(Calendar.YEAR);
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
+			
+		}
 
+		protected Void doInBackground(Void... params) {
+			if (rec.getFilepath() != null) {
+
+				good_ocr = preform_ocr(rec);
+			}
+			return null;
+		}
+
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(null);
+			initialize_fields();
+			// get the current date
 			progressDialog.dismiss();
 		}
 

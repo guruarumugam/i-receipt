@@ -74,7 +74,7 @@ public class rec_view extends Activity {
 		int cat_index = get_cat_index(rec.getCategory());
 		spinner_c.setSelection(cat_index);
 		category = rec.getCategory();
-		if (rec.getFilepath() == null)
+		if (rec.getFilepath() == null || rec.getFilepath().equals(""))
 			myImage.setVisibility(View.INVISIBLE);
 		/*
 		 * ImageView image = (ImageView) findViewById(R.id.Image01); if

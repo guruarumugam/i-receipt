@@ -9,8 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -120,6 +122,27 @@ public class idan extends Activity {
 		}
 		if (resultCode == 2) {
 			return;
+		}
+		if (resultCode == 1000) {
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+			builder1.setMessage("Are you sure you want to delete all receipts?")
+					.setCancelable(false)
+					.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									Misc.deleteAllReceipts(idan.this);
+								}
+							})
+					.setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									dialog.cancel();
+								}
+							});
+			AlertDialog alert = builder1.create();
+			alert.show();
 		}
 		if (resultCode == 200) { // return after save from compute receipt
 			CustomizeDialog customizeDialog = new CustomizeDialog(

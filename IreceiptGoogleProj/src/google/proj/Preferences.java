@@ -72,6 +72,8 @@ public class Preferences extends PreferenceActivity {
 		String str_period_limit = preferences.getString("limit_period", null);
 		edit.commit();
 
+		boolean deleteAllRec = preferences.getBoolean("deleteallrec", false);
+
 		Double limit = 0.0, periodLimit = 0.0;
 		int day, month, year;
 		boolean delete_sync = preferences.getBoolean("delete_sync", false);
@@ -141,8 +143,11 @@ public class Preferences extends PreferenceActivity {
 		// String limit = preferences.getString("limit", "0");
 		// setResult(555);
 		Misc.saveSetting(this);
-	    Misc.makeDelete();
-		setResult(1000);
+		Misc.makeDelete();
+		if (deleteAllRec)
+			setResult(1000);
+		else
+			setResult(2000);
 		finish();
 	}
 

@@ -15,11 +15,9 @@
 				android:layout_width="87sp" android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|center_horizontal|center">
 			</TextView>
-			<Spinner android:id="@+id/Spinner01" android:layout_width="150sp"
-				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
-			<Button android:drawableTop="@drawable/mic"
-				android:layout_width="40dip" android:id="@+id/speachButton2"
-				android:layout_height="40sp" android:layout_marginTop="3sp"></Button>
+			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp"
+				android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
+			
 			<TextView android:onClick="@string/EditStoreName"
 				android:id="@+id/ButtonEditStorname" android:layout_gravity="center_vertical|center_horizontal|center"
 				android:gravity="right" android:clickable="true" android:background="@drawable/edit"
@@ -35,13 +33,12 @@
 				android:textSize="20sp" android:textColor="@color/black"
 				android:layout_width="87sp" android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
-			<Spinner android:id="@+id/Spinner02" android:layout_width="150sp"
-				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
-			<TextView android:onClick="@string/EditStoreName"
-				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:gravity="right" android:clickable="true" android:id="@+id/EditDate"
+			<Spinner android:id="@+id/Spinner02" android:layout_height="40sp"
+				android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
+			<TextView android:layout_gravity="center_vertical|center_horizontal|center"
+				android:clickable="true" android:id="@+id/EditDate"
 				android:layout_height="40sp" android:layout_width="40sp"
-				android:layout_marginLeft="10sp" android:background="@drawable/calendaricon2"></TextView>
+				android:background="@drawable/calendaricon2"></TextView>
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout03Spinner3" android:layout_height="40sp"
@@ -51,11 +48,9 @@
 				android:textSize="20sp" android:textColor="@color/black"
 				android:layout_width="87sp" android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
-			<Spinner android:id="@+id/Spinner03" android:layout_width="150sp"
-				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
-			<Button android:id="@+id/speachButton1" android:drawableTop="@drawable/mic"
-				android:layout_marginTop="3sp" android:layout_height="40dip"
-				android:layout_width="40dip"></Button>
+			<Spinner android:id="@+id/Spinner03" android:layout_height="40sp"
+				android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
+			
 			<TextView android:onClick="@string/getDialogPrice"
 				android:id="@+id/Button03EditPrice" android:layout_gravity="center_vertical|center_horizontal|center"
 				android:clickable="true" android:background="@drawable/edit"
@@ -71,8 +66,8 @@
 				android:layout_width="87sp" android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
 			<Spinner android:id="@+id/Spinner04" android:clipChildren="true"
-				android:clipToPadding="true" android:layout_width="150sp"
-				android:layout_height="40sp" android:layout_marginTop="3sp"></Spinner>
+				android:clipToPadding="true" android:layout_height="40sp"
+				android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
 			<TextView android:onClick="@string/CatEdit" android:id="@+id/Button04EditCat"
 				android:clickable="true" android:layout_gravity="right|center_vertical|center_horizontal|center"
 				android:layout_height="40sp" android:layout_marginLeft="10sp"
@@ -99,7 +94,8 @@
 				android:layout_height="wrap_content" android:maxLength="120"
 				android:minWidth="150sp" android:maxWidth="200sp" android:id="@+id/EditNotesManual"
 				android:layout_marginTop="6sp"></EditText>
-		</LinearLayout>
+		
+</LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutFlaged"
 			android:layout_width="fill_parent" android:paddingLeft="10sp"
 			android:layout_height="58sp" android:layout_marginTop="10sp">

@@ -24,9 +24,10 @@
 
 		<EditTextPreference android:title="Delete all receipts"
 			android:dialogLayout="@layout/delete_all_receipts"
-			android:dialogTitle="Delete receipts" android:key="deleteall2"></EditTextPreference>
+			android:dialogTitle="Delete receipts" android:key="deleteall2" android:positiveButtonText="singer"></EditTextPreference>
 
-	</PreferenceScreen>
+	<CheckBoxPreference android:summaryOn="DELETE all" android:summaryOff="DONT delete all" android:title="Delete all receipts" android:key="deleteallrec"></CheckBoxPreference>
+</PreferenceScreen>
 
 
 </PreferenceScreen>
