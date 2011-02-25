@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 			Color.parseColor("#8b4513"), Color.parseColor("#228b22") };
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
 	Double total_period;
+	ImageView mImageView;
 	// //////////////////////
 	public static int period; // 0 => last week, 1=> last month, 2=>last
 								// year 3=>not initialized yet
@@ -62,6 +63,7 @@ public class MainActivity extends Activity {
 		myMonth = statistics.Month + 1;
 		myDay = statistics.Day;
 		period = 3;
+		mImageView = (ImageView) findViewById(R.id.piecontainer);
 		lin1 = (LinearLayout) findViewById(R.id.LinearLayout02);
 		lin2 = (LinearLayout) findViewById(R.id.LinearLayout07);
 		lin3 = (LinearLayout) findViewById(R.id.LinearLayout04);
@@ -120,6 +122,7 @@ public class MainActivity extends Activity {
 		int MaxPieItems = cat.length;
 		Double MaxCount = 0.0;
 		// ///////////////////////////////////////////////////////////////
+		mImageView.setVisibility(View.VISIBLE);
 		IDate dateToday = new IDate(myYear, myMonth, myDay);// today
 		IDate date = new IDate();
 		date = getDateFrom(dateToday, period);
@@ -227,6 +230,11 @@ public class MainActivity extends Activity {
 			PieData.add(Item);
 			MaxCount += sumPerCat[q++];
 		}
+		if (MaxCount==0) { //****************
+			mImageView.setVisibility(View.INVISIBLE);
+			return;
+		}
+		else mImageView.setVisibility(View.VISIBLE); //**********
 		// ------------------------------------------------------------------------------------------
 		// OverlayId => Image to be drawn on top of pie to make it more
 		// beautiful!
@@ -263,7 +271,7 @@ public class MainActivity extends Activity {
 		// ------------------------------------------------------------------------------------------
 		// Create a new ImageView to add to main layout
 		// ------------------------------------------------------------------------------------------
-		ImageView mImageView = (ImageView) findViewById(R.id.piecontainer);
+		
 		// ImageView mImageView = new ImageView(this);
 		/*
 		 * mImageView.setLayoutParams(new
