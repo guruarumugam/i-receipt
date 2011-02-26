@@ -176,11 +176,13 @@ public class searchReceipt extends Activity {
 		if (radioCategory.isChecked())
 			CategoryHandler();
 		if (wait == 0) {
-			Intent i = new Intent(searchReceipt.this, listview.class);
+			/*Intent i = new Intent(searchReceipt.this, listview.class);
 			i.setFlags(5);
-			startActivity(i);
+			startActivity(i);*/
+			setResult(1);
 		}
 		wait = 0;
+		finish();
 	}
 
 	/*

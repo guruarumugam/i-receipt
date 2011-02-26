@@ -171,6 +171,9 @@ public class listview extends Activity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == 1) {
+		switcher=2;
+		}
 		EA.notifyDataSetChanged();
 		if (resultCode == 30)
 			Misc.saveList(this);
@@ -382,8 +385,9 @@ public class listview extends Activity {
 				search_rec_arr.clear();
 				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
 				switcher = 1;
+				int num=0;
 				Intent i = new Intent(listview.this, searchReceipt.class);
-				startActivity(i);
+				startActivityForResult(i, num);
 				/*
 				 * final Dialog dialog5 = new Dialog(listview.this);
 				 * dialog5.setContentView(R.layout.searchreceipt);

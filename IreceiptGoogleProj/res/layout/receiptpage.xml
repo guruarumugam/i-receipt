@@ -5,36 +5,46 @@
 
 	<LinearLayout android:id="@+id/LinearLayout01"
 		android:orientation="vertical" android:padding="5dip"
-		android:background="@drawable/recpage8"
-		android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="6">
+		android:background="@drawable/recpage8" android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:layout_weight="6">
 
 		<LinearLayout android:id="@+id/Layout01RP"
-			android:paddingLeft="10dip" android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="50dip" android:layout_marginTop="30dip">
-			<TextView android:layout_height="wrap_content"
-				android:id="@+id/Text02" android:text="Date:"
-				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:textColor="@color/black" android:textSize="20dip" android:layout_weight="1" android:layout_width="70dip"></TextView>
+			android:paddingLeft="10dip" android:layout_weight="1"
+			android:layout_width="fill_parent" android:layout_height="50dip"
+			android:layout_marginTop="30dip">
+			<TextView android:layout_height="wrap_content" android:id="@+id/Text02"
+				android:text="Date:" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:textColor="@color/black" android:textSize="20dip"
+				android:layout_weight="1" android:layout_width="70dip"></TextView>
 			<TextView android:id="@+id/dateDisplay"
 				android:layout_height="wrap_content" android:text=""
 				android:textColor="@color/darkGreen" android:layout_gravity="left|center_vertical"
-				android:gravity="left|center_vertical" android:textSize="20dip" android:layout_weight="1" android:layout_width="100dip" android:layout_marginLeft="50dip"/>
+				android:gravity="left|center_vertical" android:textSize="20dip"
+				android:layout_weight="1" android:layout_width="100dip"
+				android:layout_marginLeft="50dip" />
 			<TextView android:id="@+id/TextView01" android:clickable="true"
-				android:onClick="@string/EditStoreName" android:background="@drawable/calendaricon" android:layout_gravity="center_vertical" android:layout_marginLeft="2dip" android:layout_height="15dip" android:layout_weight="1" android:layout_width="5dip" android:layout_marginRight="25dip"></TextView>
+				android:onClick="@string/EditStoreName" android:background="@drawable/calendaricon"
+				android:layout_gravity="center_vertical" android:layout_marginLeft="2dip"
+				android:layout_height="15dip" android:layout_weight="1"
+				android:layout_width="5dip" android:layout_marginRight="25dip"></TextView>
 		</LinearLayout>
 
 		<LinearLayout android:id="@+id/Layout04RP"
-			android:layout_width="fill_parent" android:paddingLeft="10dip" android:layout_weight="1" android:layout_height="50dip">
-			<TextView android:layout_height="wrap_content"
-				android:id="@+id/Text04" android:text="Total:"
-				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:textColor="@color/black" android:layout_width="100dip" android:textSize="20dip" android:layout_weight="0.5"></TextView>
+			android:layout_width="fill_parent" android:paddingLeft="10dip"
+			android:layout_weight="1" android:layout_height="50dip">
+			<TextView android:layout_height="wrap_content" android:id="@+id/Text04"
+				android:text="Total:" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:textColor="@color/black" android:layout_width="100dip"
+				android:textSize="20dip" android:layout_weight="0.5"></TextView>
 			<EditText android:layout_height="wrap_content" android:id="@+id/EText02"
 				android:numeric="decimal" android:layout_gravity="center_vertical|center_horizontal|center"
-				android:background="@android:color/transparent"
-				android:textColor="@color/darkGreen" android:layout_marginLeft="35dip" android:layout_width="160dip" android:layout_weight="0.5"></EditText>
+				android:background="@android:color/transparent" android:textColor="@color/darkGreen"
+				android:layout_marginLeft="35dip" android:layout_width="160dip"
+				android:layout_weight="0.5"></EditText>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout03RP"
-			android:layout_width="fill_parent" android:paddingLeft="10dip" android:layout_weight="1" android:layout_height="50dip">
+			android:layout_width="fill_parent" android:paddingLeft="10dip"
+			android:layout_weight="1" android:layout_height="50dip">
 			<TextView android:layout_height="wrap_content"
 				android:textSize="20sp" android:id="@+id/Text03" android:text="Business:"
 				android:layout_gravity="center_vertical|center_horizontal|center"
@@ -46,20 +56,25 @@
 				android:textColor="@color/darkGreen" android:scrollHorizontally="true"></EditText>
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout05RP"
-			android:layout_width="fill_parent" android:paddingLeft="10dip" android:layout_weight="1" android:layout_height="50dip">
-			<TextView android:layout_height="wrap_content"
-				android:id="@+id/Text05" android:text="Category:"
+			android:layout_width="fill_parent" android:paddingLeft="10dip"
+			android:layout_weight="1" android:layout_height="50dip">
+			<TextView android:layout_height="wrap_content" android:id="@+id/Text05"
+				android:text="Category:" android:layout_gravity="center_vertical|center_horizontal|center"
+				android:layout_width="100sp" android:textColor="@color/black"
+				android:textSize="20dip"></TextView>
+			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp"
+				android:layout_marginTop="5sp" android:layout_width="150sp"
+				android:layout_marginLeft="30sp"></Spinner>
+			<EditText android:layout_height="wrap_content" android:id="@+id/EText03"
 				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:layout_width="100sp" android:textColor="@color/black" android:textSize="20dip"></TextView>
-			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp" android:layout_marginTop="5sp" android:layout_width="150sp" android:layout_marginLeft="30sp"></Spinner><EditText android:layout_height="wrap_content"
-				android:id="@+id/EText03"
-				android:layout_gravity="center_vertical|center_horizontal|center"
-				android:background="@android:color/transparent"
-				android:textColor="@color/darkGreen" android:layout_marginLeft="35dip" android:layout_width="160dip" android:visibility="invisible"></EditText>
-		
-</LinearLayout>
+				android:background="@android:color/transparent" android:textColor="@color/darkGreen"
+				android:layout_marginLeft="35dip" android:layout_width="160dip"
+				android:visibility="invisible"></EditText>
+
+		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout05RP"
-			android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="140dip" android:layout_weight="1">
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="140dip" android:layout_weight="1">
 			<LinearLayout android:layout_width="wrap_content"
 				android:orientation="vertical" android:layout_height="wrap_content"
 				android:id="@+id/LinearLayout022">
@@ -80,15 +95,19 @@
 
 		</LinearLayout>
 		<LinearLayout android:id="@+id/Layout06RP"
-			android:layout_width="fill_parent" android:paddingLeft="10sp" android:layout_height="wrap_content">
+			android:layout_width="fill_parent" android:paddingLeft="10sp"
+			android:layout_height="wrap_content">
 
-			<Button android:id="@+id/deleteButton" android:background="@drawable/delete" android:onClick="@string/deleteRec" android:layout_height="35dip" android:layout_marginTop="35dip" android:layout_width="100dip"></Button><ImageView android:id="@+id/Image01" android:clickable="true"
-				android:onClick="@string/onClickPic" android:layout_gravity="bottom" android:background="@drawable/showrec0" android:layout_width="115sp" android:layout_height="100dip"></ImageView>
+			<Button android:id="@+id/deleteButton" android:background="@drawable/delete"
+				android:onClick="@string/deleteRec" android:layout_height="35dip"
+				android:layout_marginTop="35dip" android:layout_width="100dip"></Button>
+			<ImageView android:id="@+id/Image01" android:clickable="true"
+				android:onClick="@string/onClickPic" android:layout_gravity="bottom"
+				android:background="@drawable/showrec0" android:layout_width="115sp"
+				android:layout_height="100dip"></ImageView>
 			<Button android:id="@+id/B01" android:onClick="onClick"
-				android:background="@drawable/save9" android:layout_height="35dip" android:layout_marginTop="35dip" android:layout_width="70dip"></Button>
-
-		
-</LinearLayout>
-	
-</LinearLayout>
+				android:background="@drawable/save9" android:layout_height="35dip"
+				android:layout_marginTop="35dip" android:layout_width="70dip"></Button>
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>
