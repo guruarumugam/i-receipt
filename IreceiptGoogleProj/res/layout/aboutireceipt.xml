@@ -5,13 +5,17 @@
 	android:orientation="vertical" android:background="@color/white">
 	<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:textSize="30sp"
-		android:textColor="@color/black"
-		android:layout_gravity="center_horizontal" android:layout_marginTop="20sp" android:text="About iReceipt"></TextView>
-	<ScrollView android:id="@+id/ScrollView01" android:layout_height="fill_parent" android:layout_width="fill_parent"><TextView android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/about" android:textSize="20sp" android:textColor="@color/black"></TextView>
-</ScrollView><LinearLayout android:id="@+id/LinearLayout01"
-		android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
-	
+		android:textColor="@color/black" android:layout_gravity="center_horizontal"
+		android:layout_marginTop="20sp" android:text="About iReceipt"></TextView>
+	<ScrollView android:id="@+id/ScrollView01"
+		android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_marginTop="15dip">
+		<TextView android:layout_height="fill_parent"
+			android:layout_width="fill_parent" android:id="@+id/about"
+			android:textSize="20sp" android:textColor="@color/black" android:paddingLeft="10dip"></TextView>
+	</ScrollView>
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:orientation="vertical">
 
-</LinearLayout>
-
+	</LinearLayout>
 </LinearLayout>

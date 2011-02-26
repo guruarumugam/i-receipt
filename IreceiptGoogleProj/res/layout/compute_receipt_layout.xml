@@ -5,25 +5,14 @@
 	<LinearLayout android:id="@+id/LinearLayoutComputeUP"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_marginBottom="10sp" android:orientation="vertical"
-		android:background="@drawable/recpage8" android:padding="3dip">
-		<LinearLayout android:layout_width="fill_parent"
-			android:id="@+id/LinearLayout01Spinner1" android:layout_height="40sp"
-			android:layout_marginTop="25sp" android:paddingLeft="4sp">
-			<TextView android:id="@+id/TextViewStoreName_computeR"
-				android:gravity="left|center_vertical|center_horizontal"
-				android:text="Business:" android:textSize="20sp" android:textColor="@color/black"
-				android:layout_width="87sp" android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical|center_horizontal|center">
+		android:background="@drawable/recpage8" android:padding="3dip"><LinearLayout android:layout_width="fill_parent" android:id="@+id/LinearLayout01Spinner1" android:layout_height="40sp" android:layout_marginTop="25sp" android:paddingLeft="4sp">
+			<TextView android:id="@+id/TextViewStoreName_computeR" android:gravity="left|center_vertical|center_horizontal" android:text="Business:" android:textSize="20sp" android:textColor="@color/black" android:layout_width="87sp" android:layout_height="wrap_content" android:layout_gravity="center_vertical|center_horizontal|center">
 			</TextView>
-			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp"
-				android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
+			<Spinner android:id="@+id/Spinner01" android:layout_height="40sp" android:layout_marginTop="3sp" android:layout_width="150sp"></Spinner>
 			
-			<TextView android:onClick="@string/EditStoreName"
-				android:id="@+id/ButtonEditStorname" android:layout_gravity="center_vertical|center_horizontal|center"
-				android:gravity="right" android:clickable="true" android:background="@drawable/edit"
-				android:layout_height="30sp" android:layout_width="30sp"
-				android:layout_marginTop="1sp" android:layout_marginLeft="-3sp"></TextView>
+			<TextView android:onClick="@string/EditStoreName" android:id="@+id/ButtonEditStorname" android:layout_gravity="center_vertical|center_horizontal|center" android:gravity="right" android:clickable="true" android:background="@drawable/edit" android:layout_height="30sp" android:layout_width="30sp" android:layout_marginTop="1sp" android:layout_marginLeft="-3sp"></TextView><Button android:drawableBottom="@drawable/mic" android:layout_height="42dip" android:id="@+id/voice1" android:layout_width="44dip" android:layout_marginTop="2dip" android:layout_marginLeft="-2dip"></Button><Button android:drawableBottom="@drawable/mic" android:id="@+id/voice1" android:layout_width="44dip" android:layout_marginTop="2dip" android:layout_marginLeft="-2dip"></Button>
 		</LinearLayout>
+		
 		<LinearLayout android:layout_width="fill_parent"
 			android:orientation="horizontal" android:id="@+id/LinearLayout02Spinner2"
 			android:layout_marginTop="9sp" android:layout_height="40sp"
@@ -55,7 +44,7 @@
 				android:id="@+id/Button03EditPrice" android:layout_gravity="center_vertical|center_horizontal|center"
 				android:clickable="true" android:background="@drawable/edit"
 				android:layout_height="30sp" android:layout_width="30sp"
-				android:layout_marginTop="1sp" android:layout_marginLeft="-3sp"></TextView>
+				android:layout_marginTop="1sp" android:layout_marginLeft="-3sp"></TextView><Button android:drawableBottom="@drawable/mic" android:layout_height="42dip" android:id="@+id/voice1" android:layout_width="44dip" android:layout_marginTop="2dip" android:layout_marginLeft="-2dip"></Button>
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
 			android:id="@+id/LinearLayout04Spinner4" android:layout_height="40sp"
@@ -93,7 +82,7 @@
 			<EditText android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:maxLength="120"
 				android:minWidth="150sp" android:maxWidth="200sp" android:id="@+id/EditNotesManual"
-				android:layout_marginTop="6sp"></EditText>
+				android:layout_marginTop="6sp"></EditText><Button android:drawableBottom="@drawable/mic" android:layout_height="42dip" android:id="@+id/voice1" android:layout_width="44dip" android:layout_marginLeft="25dip"></Button>
 		
 </LinearLayout>
 		<LinearLayout android:id="@+id/LinearLayoutFlaged"

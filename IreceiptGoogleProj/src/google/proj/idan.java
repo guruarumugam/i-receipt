@@ -38,6 +38,7 @@ public class idan extends Activity {
 	static final int PROGRESS_DIALOG = 0;
 	private static final int SETTINGS = 0;
 	private static final int ABOUT_IRECEIPT = 1;
+	private static final int SYNC_NOW = 2;
 	ProgressDialog progressDialog;
 	int index = 0;
 	public static int receiptUniqueIndex;
@@ -238,6 +239,7 @@ public class idan extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, SETTINGS, 0, "Settings");
 		menu.add(Menu.NONE, ABOUT_IRECEIPT, 1, "About iReceipt");
+		menu.add(Menu.NONE, SYNC_NOW, 2, "Sync now");
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -258,7 +260,10 @@ public class idan extends Activity {
 			i = new Intent(idan.this, aboutireceipt.class);
 			startActivity(i);
 			break;
+		case SYNC_NOW:        //*************** add sync!!!!!!!!!!!!
+			break;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 }
