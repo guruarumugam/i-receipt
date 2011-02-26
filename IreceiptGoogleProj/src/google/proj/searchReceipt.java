@@ -327,4 +327,9 @@ public class searchReceipt extends Activity {
 		Intent i = new Intent(searchReceipt.this, listview.class);
 		startActivity(i);
 	}
+	
+	public void onBackPressed() {
+		setResult(0);
+		finish();
+		}
 }

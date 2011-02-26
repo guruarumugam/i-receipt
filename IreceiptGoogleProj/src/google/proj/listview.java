@@ -174,6 +174,9 @@ public class listview extends Activity {
 		if (resultCode == 1) {
 		switcher=2;
 		}
+		if (resultCode == 0) {
+			switcher=0;
+			}
 		EA.notifyDataSetChanged();
 		if (resultCode == 30)
 			Misc.saveList(this);
