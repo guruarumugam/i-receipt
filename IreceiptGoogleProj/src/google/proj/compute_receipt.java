@@ -438,7 +438,7 @@ public class compute_receipt extends Activity {
 							true, true);
 			progressDialog.setOnCancelListener(new OnCancelListener() {
 
-				@Override
+				
 				public void onCancel(DialogInterface dialog) {
 					initialize_fields();
 					Toast.makeText(compute_receipt.this,

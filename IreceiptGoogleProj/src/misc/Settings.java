@@ -92,6 +92,6 @@ public class Settings implements java.io.Serializable {
 	}
 
 	public static boolean deleteOnServer() {
-		return true;
+		return idan.settings.deleteOnServer;
 	}
 }

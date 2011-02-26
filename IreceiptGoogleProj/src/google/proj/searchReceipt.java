@@ -1,6 +1,5 @@
 package google.proj;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -140,13 +139,13 @@ public class searchReceipt extends Activity {
 		 * KeyEvent event) { radioPrice.setChecked(true); return false; } });
 		 */
 		PriceTo.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			public void onFocusChange(View v, boolean hasFocus) {
 				radioPrice.setChecked(true);
 			}
 		});
 		PriceFrom.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			public void onFocusChange(View v, boolean hasFocus) {
 				radioPrice.setChecked(true);
 			}
@@ -176,9 +175,10 @@ public class searchReceipt extends Activity {
 		if (radioCategory.isChecked())
 			CategoryHandler();
 		if (wait == 0) {
-			/*Intent i = new Intent(searchReceipt.this, listview.class);
-			i.setFlags(5);
-			startActivity(i);*/
+			Intent i = new Intent(searchReceipt.this, listview.class);
+			/*
+			 * i.setFlags(5); startActivity(i);
+			 */
 			setResult(1);
 		}
 		wait = 0;
@@ -327,9 +327,9 @@ public class searchReceipt extends Activity {
 		Intent i = new Intent(searchReceipt.this, listview.class);
 		startActivity(i);
 	}
-	
+
 	public void onBackPressed() {
 		setResult(0);
 		finish();
-		}
+	}
 }

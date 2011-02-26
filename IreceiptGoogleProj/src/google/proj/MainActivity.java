@@ -32,8 +32,9 @@ public class MainActivity extends Activity {
 			"Household goods", "Other" };
 	int[] colors = new int[] { Color.BLUE, Color.GREEN,
 			Color.parseColor("#8b8878"), Color.YELLOW,
-			Color.parseColor("#00ced1"), Color.RED, Color.LTGRAY, Color.parseColor("#ff8c00"),
-			Color.parseColor("#8b4513"), Color.parseColor("#228b22") };
+			Color.parseColor("#00ced1"), Color.RED, Color.LTGRAY,
+			Color.parseColor("#ff8c00"), Color.parseColor("#8b4513"),
+			Color.parseColor("#228b22") };
 	List<PieDetailsItem> PieData = new ArrayList<PieDetailsItem>(0);
 	Double total_period;
 	ImageView mImageView;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity {
 	RadioGroup rg;
 	RadioButton r1, r2, r3;
 	private int myYear, myMonth, myDay;
+
 	// //////////////////////
 
 	/** Called when the activity is first created. */
@@ -230,11 +232,11 @@ public class MainActivity extends Activity {
 			PieData.add(Item);
 			MaxCount += sumPerCat[q++];
 		}
-		if (MaxCount==0) { //****************
+		if (MaxCount == 0) { // ****************
 			mImageView.setVisibility(View.INVISIBLE);
 			return;
-		}
-		else mImageView.setVisibility(View.VISIBLE); //**********
+		} else
+			mImageView.setVisibility(View.VISIBLE); // **********
 		// ------------------------------------------------------------------------------------------
 		// OverlayId => Image to be drawn on top of pie to make it more
 		// beautiful!
@@ -271,7 +273,6 @@ public class MainActivity extends Activity {
 		// ------------------------------------------------------------------------------------------
 		// Create a new ImageView to add to main layout
 		// ------------------------------------------------------------------------------------------
-		
 		// ImageView mImageView = new ImageView(this);
 		/*
 		 * mImageView.setLayoutParams(new

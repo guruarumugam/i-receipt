@@ -31,10 +31,12 @@ public class Syncer {
 	List<iReceipt> update_rec_list;
 	private String account = null;
 	private List<String> delete_rec_list;
+	private List<Integer> deletefromphonenoreturn;
 
 	public Syncer(String account) {
 		update_rec_list = new ArrayList<iReceipt>();
 		delete_rec_list = new ArrayList<String>();
+		deletefromphonenoreturn=new ArrayList<Integer>();
 		lastsync = new Date(100, 5, 5);
 		this.setAccount(account);
 	}
@@ -46,7 +48,7 @@ public class Syncer {
 	public void sendSync(List<iReceipt> list) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://receipt1234.appspot.com/sync");
+		HttpPost httppost = new HttpPost("http://87.69.168.154:8888/sync");
 
 		// Add your data
 		if (list == null)
@@ -91,6 +93,20 @@ public class Syncer {
 							this.delete_rec_list.get(j)));
 				}
 			}
+			
+			//nameValuePairs.add(new BasicNameValuePair("deletenoret", 0+""));
+			nameValuePairs.add(new BasicNameValuePair("deletenoret",
+					this.deletefromphonenoreturn.size()+""));
+			if (!this.deletefromphonenoreturn.isEmpty()){
+				
+				
+				for (int j=0; j< this.deletefromphonenoreturn.size(); j++){
+					nameValuePairs.add(new BasicNameValuePair("deletenoret"+j,
+							this.deletefromphonenoreturn.get(j)+""));
+				}
+			}
+			
+			
 			nameValuePairs.add(new BasicNameValuePair("account", String
 					.valueOf(account)));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -111,7 +127,9 @@ public class Syncer {
 				delete = Integer.parseInt(response.getHeaders("delete")[0]
 						.getValue());
 			int delete_counter = 0;
+			boolean newrec=false;
 			for (int j = 0; j < Math.max(size, delete); j++) {
+				newrec=false;
 				String in;
 				if (response.getHeaders(j + "").length == 0)
 					in = null;
@@ -136,11 +154,12 @@ public class Syncer {
 					if (rec != null) {
 						if (rr.getUniqueIndex() == rec.getUniqueIndex()) { // same
 							// receipt\
+							newrec=true;
 							if (rec.getUpdate().after(rr.getUpdate())) {
 								rr.setCategory(rec.getCategory());
 								rr.setFlaged(rec.isFlaged());
 								rr.setNotes(rec.getNotes());
-								rr.setProcessed(rec.isProcessed());
+								rr.setProcessed(true);
 								rr.setRdate(rec.getRdate());
 								rr.setStoreName(rec.getStoreName());
 								rr.setTotal(rec.getTotal());
@@ -153,13 +172,31 @@ public class Syncer {
 					if (delete_in != null) {
 						if ((rr.getUniqueIndex() + "").equals(delete_in)) {
 							shoudDelete = rr;
+							
 						}
 					}
 				}
+				
 				if (shoudDelete != null) {
+					newrec=true;
 					idan.rec_arr.remove(shoudDelete);
 					delete_counter++;
 					shoudDelete = null;
+				}
+				
+				if (!newrec){ //new receipt from web
+					iReceipt r = new iReceipt(rec.getUniqueIndex());
+					r.setCategory(rec.getCategory());
+					r.setFlaged(rec.isFlaged());
+					r.setNotes(rec.getNotes());
+					r.setProcessed(true);
+					r.setRdate(rec.getRdate());
+					r.setStoreName(rec.getStoreName());
+					r.setUpdate(rec.getUpdate());
+					r.setSync();
+					r.setTotal(rec.getTotal());
+					idan.rec_arr.add(r);
+					
 				}
 			}
 			// //////////////////////////////////
@@ -168,6 +205,7 @@ public class Syncer {
 			lastsync = new Date();
 			this.clearDelete_rec_list();
 			this.clearUpdateList();
+			this.clereDelete_no_ret();
 			alreadysync = true;
 
 		} catch (SocketException e) {
@@ -235,6 +273,9 @@ public class Syncer {
 	public List<String> getDelete_rec_list() {
 		return delete_rec_list;
 	}
+	public void clereDelete_no_ret(){
+		this.deletefromphonenoreturn.clear();
+	}
 
 	public void clearDelete_rec_list() {
 		this.delete_rec_list.clear();
@@ -242,5 +283,8 @@ public class Syncer {
 
 	public void addToDeleteList(String id) {
 		delete_rec_list.add(id);
+	}
+	public void addToDeleteno_ret(int id) {
+		deletefromphonenoreturn.add(id);
 	}
 }

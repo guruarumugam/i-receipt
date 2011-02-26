@@ -263,7 +263,6 @@ public class idan extends Activity {
 		case SYNC_NOW:        //*************** add sync!!!!!!!!!!!!
 			break;
 		}
-		
 		return super.onOptionsItemSelected(item);
 	}
 }

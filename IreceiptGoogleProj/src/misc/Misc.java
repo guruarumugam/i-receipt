@@ -57,6 +57,9 @@ public class Misc {
 		if (deleteOnServer) {
 			idan.sync.addToDeleteList(recIndex + "");
 		}
+		else{
+			idan.sync.addToDeleteno_ret(recIndex);
+		}
 		if (rec.getFilepath() != null && rec.getFilepath() != "") {
 			File file = new File(rec.getFilepath());
 			file.delete();

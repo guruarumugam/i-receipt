@@ -160,23 +160,25 @@ public class listview extends Activity {
 					}
 				}
 				i.setFlags(idan.rec_arr.indexOf(r));
-				if (r.isProcessed()) {
-					startActivityForResult(i, 1);
-				} else {
-					i.setClass(listview.this, compute_receipt.class);
-					startActivityForResult(i, idan.rec_arr.indexOf(r));
-				}
+				// ///////////////////////////////////////////////////////
+
+				// if (r.isProcessed()) {
+				startActivityForResult(i, 1);
+				/*
+				 * } else { i.setClass(listview.this, compute_receipt.class);
+				 * startActivityForResult(i, idan.rec_arr.indexOf(r)); }
+				 */
 			}
 		});
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == 1) {
-		switcher=2;
+			switcher = 2;
 		}
 		if (resultCode == 0) {
-			switcher=0;
-			}
+			switcher = 0;
+		}
 		EA.notifyDataSetChanged();
 		if (resultCode == 30)
 			Misc.saveList(this);
@@ -388,7 +390,7 @@ public class listview extends Activity {
 				search_rec_arr.clear();
 				// intent for the advance search!!!!!!!!!!!!!!!!!!!!!!
 				switcher = 1;
-				int num=0;
+				int num = 0;
 				Intent i = new Intent(listview.this, searchReceipt.class);
 				startActivityForResult(i, num);
 				/*

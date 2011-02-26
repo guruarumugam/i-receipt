@@ -181,7 +181,7 @@ public class rec_view extends Activity {
 		else
 			rec.setNotes(show_notes.getText().toString());
 		saveList();
-		setResult(1);
+		setResult(0);
 		finish();
 	}
 
