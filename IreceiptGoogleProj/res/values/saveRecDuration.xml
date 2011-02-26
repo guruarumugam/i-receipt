@@ -12,14 +12,18 @@
 		<item>3</item>
 		<item>4</item>
 	</string-array>
-<string-array name="Syncfrequency"><item>Hour</item>
-<item>Twice A Day</item><item>Day</item>
-<item>Week</item>
+<string-array name="Syncfrequency"><item>2 min</item>
+<item>5 min</item><item>10 min</item>
+<item>30 min</item>
 
+<item>60 min</item>
+<item>Never</item>
 </string-array>
 <string-array name="SyncfrequencyValues"><item>1</item>
 <item>2</item>
 <item>3</item>
 <item>4</item>
+<item>5</item>
+<item>6</item>
 </string-array>
 </resources>

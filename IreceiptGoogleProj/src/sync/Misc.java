@@ -19,5 +19,4 @@ public class Misc {
 		}
 		idan.rec_arr.remove(rec);
 	}
-
 }

@@ -56,8 +56,7 @@ public class Misc {
 		int recIndex = rec.getUniqueIndex();
 		if (deleteOnServer) {
 			idan.sync.addToDeleteList(recIndex + "");
-		}
-		else{
+		} else {
 			idan.sync.addToDeleteno_ret(recIndex);
 		}
 		if (rec.getFilepath() != null && rec.getFilepath() != "") {
@@ -111,7 +110,7 @@ public class Misc {
 			}
 
 			if (!connected && netType == ConnectivityManager.TYPE_MOBILE
-		//			&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
+			// && netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
 					&& !mTelephony.isNetworkRoaming()) {
 				connected = info.isConnected();
 			}

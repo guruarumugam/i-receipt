@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<ListPreference android:dialogTitle="Sync frequency" android:key="frequency" android:title="Sync frequency" android:entries="@array/Syncfrequency" android:entryValues="@array/SyncfrequencyValues" android:defaultValue="3"></ListPreference><ListPreference android:dialogTitle="Save receipts duration"
+	<ListPreference android:dialogTitle="Sync frequency" android:key="frequency" android:title="Sync frequency" android:entries="@array/Syncfrequency" android:entryValues="@array/SyncfrequencyValues" android:defaultValue="2"></ListPreference><ListPreference android:dialogTitle="Save receipts duration"
 		android:summary="After that period - auto delete" android:title="Save receipts duration"
 		android:entries="@array/saveRecDuration" android:entryValues="@array/saveRecDurationValues"
 		android:defaultValue="4" android:key="duration"></ListPreference>

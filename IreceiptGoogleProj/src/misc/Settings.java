@@ -18,6 +18,7 @@ public class Settings implements java.io.Serializable {
 	private double maxuniquly;
 	private double maxmonth;
 	private Date dateEx;
+	private int frequency;
 
 	public Settings() {
 		deleteOnServer = false;
@@ -25,6 +26,7 @@ public class Settings implements java.io.Serializable {
 		maxmonth = -1; // לימיט בחודש האחרון
 		maxuniquly = -1;// לימיט על תחום תאריכים
 		dateEx = null; // החל מהתאריך הזה נבדוק
+		frequency = 2; // sync every 5 min.
 	}
 
 	public boolean getDeleteOnSerever() {
@@ -57,12 +59,15 @@ public class Settings implements java.io.Serializable {
 		this.daysToStay = days;
 	}
 
+	public void setSyncFrequency(int min) {
+		this.frequency = min;
+	}
+
 	public void setDeleteOnServer(boolean bool) {
 		deleteOnServer = bool;
 	}
 
 	public void setMaxMonth(double max) {
-
 		maxmonth = max;
 	}
 
@@ -72,6 +77,10 @@ public class Settings implements java.io.Serializable {
 
 	public int getdaysToStay() {
 		return daysToStay;
+	}
+
+	public double getSyncFrequency() {
+		return frequency;
 	}
 
 	public double getMaxmonth() {

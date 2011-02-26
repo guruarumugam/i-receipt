@@ -70,6 +70,7 @@ public class Preferences extends PreferenceActivity {
 		String str_duration = preferences.getString("duration", null);
 		String str_date = preferences.getString("fromDate", null);
 		String str_period_limit = preferences.getString("limit_period", null);
+		String str_frequency = preferences.getString("frequency", null);
 		edit.commit();
 
 		boolean deleteAllRec = preferences.getBoolean("deleteallrec", false);
@@ -94,6 +95,7 @@ public class Preferences extends PreferenceActivity {
 		}
 		// String str_duration = preferences.getString("duration", null);
 		int duration = Integer.parseInt(str_duration);
+		int frequency = Integer.parseInt(str_frequency);
 		boolean periodAlert = preferences.getBoolean("limit_from_to", false);
 		if (periodAlert) { // only if checkbok == true
 			// String str_date =
@@ -128,6 +130,19 @@ public class Preferences extends PreferenceActivity {
 		if (duration == 4)// forever
 			idan.settings.setdaysToStay(-1);
 		idan.settings.setDeleteOnServer(delete_sync);
+
+		if (frequency == 1) // 2 minutes
+			idan.settings.setSyncFrequency(2);
+		if (frequency == 2)// 5 minutes
+			idan.settings.setSyncFrequency(5);
+		if (frequency == 3)// 10 minutes
+			idan.settings.setSyncFrequency(10);
+		if (frequency == 4)// 30 minutes
+			idan.settings.setSyncFrequency(30);
+		if (frequency == 5)// 60 minutes
+			idan.settings.setSyncFrequency(60);
+		if (frequency == 6)// Never
+			idan.settings.setSyncFrequency(-1);
 
 		// String limit = preferences.getString("limit", "0").toString();
 		// int limit2 = Integer.parseInt(limit);
