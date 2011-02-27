@@ -7,6 +7,8 @@ import google.proj.rec_view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class Syncer {
 
 	boolean alreadysync = false;
 	private Date lastsync;
-	List<iReceipt> update_rec_list;
+	//List<iReceipt> update_rec_list;
 	private String account = null;
 	private List<String> delete_rec_list;
 	private List<Integer> deletefromphonenoreturn;
@@ -48,16 +50,48 @@ public class Syncer {
 
 
 
+	@SuppressWarnings("unchecked")
 	public Syncer(String account,Activity act) {
-		update_rec_list = new ArrayList<iReceipt>();
-		delete_rec_list = new ArrayList<String>();
-		deletefromphonenoreturn=new ArrayList<Integer>();
+		//update_rec_list = new ArrayList<iReceipt>();
+		//delete_rec_list = new ArrayList<String>();
+		//deletefromphonenoreturn=new ArrayList<Integer>();
 		lastsync = new Date(100, 5, 5);
 		this.setAccount(account);
 		syncthread=new Thread(new SyncThread(),"syncThread");
 		this.syncthread.start();
 		boolean boo=isAliveSyncThread();
 		this.activity=act;
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(
+					act.openFileInput("delete_rec_list.tmp"));
+			
+			delete_rec_list = (List<String>) inputStream
+					.readObject();
+			inputStream.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			delete_rec_list = new ArrayList<String>();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			delete_rec_list = new ArrayList<String>();
+		}
+		
+		try {
+			ObjectInputStream inputStream = new ObjectInputStream(
+					act.openFileInput("deletefromphonenoreturn.tmp"));
+			deletefromphonenoreturn = (List<Integer>) inputStream
+					.readObject();
+			inputStream.close();
+			
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			deletefromphonenoreturn=new ArrayList<Integer>();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			deletefromphonenoreturn=new ArrayList<Integer>();
+		}
+		
 	}
 
 	public void syncNow(Context context){
@@ -105,12 +139,24 @@ public class Syncer {
 
 
 
-			public void sendSync() {
+			public void sendSync1() {
 				//sendSync(this.update_rec_list);
 			}
 
-			private void sendSync_h() {
-				sendSync(this.update_rec_list);
+			public void sendSync_h() {
+				ArrayList list = new ArrayList<iReceipt>();
+				for (iReceipt rec : idan.rec_arr) {
+					if (rec.getSyncdate().before(rec.getUpdate())){
+						list.add(rec);
+						rec.setSync();
+					}
+					
+				}
+				
+					
+				
+				sendSync(list);
+				//sendSync();
 			}
 
 			private void sendSync(List<iReceipt> list) {
@@ -271,9 +317,9 @@ public class Syncer {
 					// delete receipts
 
 					lastsync = new Date();
-					this.clearDelete_rec_list();
-					this.clearUpdateList();
-					this.clereDelete_no_ret();
+					this.clearDelete_rec_list(activity);
+					//this.clearUpdateList();
+					this.clereDelete_no_ret(activity);
 					alreadysync = true;
 
 				} catch (SocketException e) {
@@ -294,7 +340,7 @@ public class Syncer {
 					e.printStackTrace();
 				}
 			}
-
+/*
 			public void addtoUpdateList(iReceipt r) {
 				update_rec_list.add(r);
 			}
@@ -306,7 +352,7 @@ public class Syncer {
 			public void clearUpdateList() {
 				update_rec_list.clear();
 			}
-
+*/
 			public boolean needtoSync() {
 				Date d1 = new Date();
 				long l1 = d1.getTime();
@@ -329,32 +375,96 @@ public class Syncer {
 			public Date getLastsync() {
 				return lastsync;
 			}
+			
+			public Activity getActivity(){
+				return this.activity;
+			}
 
 			public void setLastsync(Date lastsync) {
 				this.lastsync = lastsync;
 			}
 
-			public void setDelete_rec_list(List<String> delete_rec_list) {
+			public void setDelete_rec_list(List<String> delete_rec_list,Activity act) {
 				this.delete_rec_list = delete_rec_list;
+				
+				try {
+					ObjectOutputStream outputStream = new ObjectOutputStream(
+							act.openFileOutput("delete_rec_list.tmp", Context.MODE_PRIVATE));
+				
+					outputStream.writeObject(this.delete_rec_list);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
+
 			}
 
 			public List<String> getDelete_rec_list() {
 				return delete_rec_list;
 			}
-			public void clereDelete_no_ret(){
+			public void clereDelete_no_ret(Activity act){
 				this.deletefromphonenoreturn.clear();
+				try {
+					ObjectOutputStream outputStream = new ObjectOutputStream(
+							act.openFileOutput("deletefromphonenoreturn.tmp", Context.MODE_PRIVATE));
+				
+					outputStream.writeObject(this.deletefromphonenoreturn);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
 			}
 
-			public void clearDelete_rec_list() {
+			public void clearDelete_rec_list(Activity act) {
 				this.delete_rec_list.clear();
+				try {
+					ObjectOutputStream outputStream = new ObjectOutputStream(
+							act.openFileOutput("delete_rec_list.tmp", Context.MODE_PRIVATE));
+				
+					outputStream.writeObject(this.delete_rec_list);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
 			}
 
-			public void addToDeleteList(String id) {
+			public void addToDeleteList(String id,Activity act) {
 				delete_rec_list.add(id);
+				try {
+					ObjectOutputStream outputStream = new ObjectOutputStream(
+							act.openFileOutput("delete_rec_list.tmp", Context.MODE_PRIVATE));
+				
+					outputStream.writeObject(this.delete_rec_list);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
 			}
-			public void addToDeleteno_ret(int id) {
+			
+			public void addToDeleteno_ret(int id,Activity act) {
 				deletefromphonenoreturn.add(id);
+				try {
+					ObjectOutputStream outputStream = new ObjectOutputStream(
+							act.openFileOutput("deletefromphonenoreturn.tmp", Context.MODE_PRIVATE));
+				
+					outputStream.writeObject(this.deletefromphonenoreturn);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+					e.printStackTrace();
+				}
 			}
+				
+			
 
 			
 

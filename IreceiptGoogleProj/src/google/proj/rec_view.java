@@ -247,7 +247,7 @@ public class rec_view extends Activity {
 	public void saveList() {
 
 		rec.setUpdate();
-		boolean connected = Misc.checkConnection(this);
+		/*boolean connected = Misc.checkConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {
@@ -261,7 +261,7 @@ public class rec_view extends Activity {
 			// tmprr.setSync();
 			// }
 			idan.sync.clearUpdateList();
-		}
+		}*/
 		Misc.saveList(this);
 	}
 

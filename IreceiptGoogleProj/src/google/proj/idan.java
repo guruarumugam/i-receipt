@@ -68,7 +68,7 @@ public class idan extends Activity {
 		if (sync == null)
 			sync = new Syncer(google.proj.loginpage.accountname,this);
 
-		sync.sendSync();
+		sync.sendSync_h();
 
 		settings = Misc.loadSetting(this);
 		if (settings == null)
@@ -231,9 +231,7 @@ public class idan extends Activity {
 	 */
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void crash() {
-		System.err.println(2 / 0);
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

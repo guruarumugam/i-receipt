@@ -1,5 +1,5 @@
 package sync;
-
+/*
 import java.io.File;
 
 import google.proj.iReceipt;
@@ -11,7 +11,7 @@ public class Misc {
 		int recIndex=rec.getUniqueIndex();
 		if (Settings.deleteOnServer()){
 			idan.sync.addToDeleteList(recIndex+"");
-			idan.sync.sendSync();
+		//	idan.sync.sendSync();
 		}
 		if (rec.getFilepath()!=null){
 			File file=new File(rec.getFilepath());
@@ -19,4 +19,4 @@ public class Misc {
 		}
 		idan.rec_arr.remove(rec);
 	}
-}
+}*/

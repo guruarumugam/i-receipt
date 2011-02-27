@@ -40,24 +40,24 @@ public class Misc {
 		for (iReceipt rec : list) {
 			deleteReceipt_helper(rec, Settings.deleteOnServer());
 		}
-		if (deleteOnServer)
-			idan.sync.sendSync();
+	/*	if (deleteOnServer)
+			idan.sync.sendSync();*/
 	}
 
 	// important: this method deletes the receipt from both the server and yhe
 	// device
 	public static void deleteReceipt(iReceipt rec) {
 		deleteReceipt_helper(rec, Settings.deleteOnServer());
-		idan.sync.sendSync();
+		/*idan.sync.sendSync();*/
 	}
 
 	private static void deleteReceipt_helper(iReceipt rec,
 			boolean deleteOnServer) {
 		int recIndex = rec.getUniqueIndex();
 		if (deleteOnServer) {
-			idan.sync.addToDeleteList(recIndex + "");
+			idan.sync.addToDeleteList(recIndex + "",idan.sync.getActivity());
 		} else {
-			idan.sync.addToDeleteno_ret(recIndex);
+			idan.sync.addToDeleteno_ret(recIndex,idan.sync.getActivity());
 		}
 		if (rec.getFilepath() != null && rec.getFilepath() != "") {
 			File file = new File(rec.getFilepath());

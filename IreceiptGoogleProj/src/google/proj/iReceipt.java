@@ -212,6 +212,8 @@ public class iReceipt implements Receipt, java.io.Serializable {
 	}
 
 	public Date getSyncdate() {
+		if (syncdate==null)
+			return new java.util.Date(0);
 		return syncdate;
 	}
 

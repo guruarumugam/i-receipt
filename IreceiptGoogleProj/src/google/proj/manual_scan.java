@@ -247,7 +247,9 @@ public class manual_scan extends Activity implements OnClickListener {
 		
 		
 		
-		(new save()).execute();//will finish
+		//(new save()).execute();//will finish
+			   saveList();
+			   finish();
 	}
 
 	public void onClick4(View view) {
@@ -266,7 +268,7 @@ public class manual_scan extends Activity implements OnClickListener {
 
 	public void saveList() {
 		rec.setUpdate();
-		boolean connected = Misc.checkConnection(this);
+		/*boolean connected = Misc.checkConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {
@@ -280,7 +282,7 @@ public class manual_scan extends Activity implements OnClickListener {
 			// tmprr.setSync();
 			// }
 			idan.sync.clearUpdateList();
-		}
+		}*/
 		Misc.saveList(this);
 	}
 
@@ -376,7 +378,7 @@ public class manual_scan extends Activity implements OnClickListener {
 		} else
 			return null;
 	}
-
+/*
 	class save extends AsyncTask<Void, Void, Void> {
 
 		protected ProgressDialog progressDialog;
@@ -400,7 +402,7 @@ public class manual_scan extends Activity implements OnClickListener {
 			finish();
 		}
 	}
-
+*/
 	public static int checkLimitException(double limit) {
 		totalMonth = 0.0;
 		int calYear, calMonth;

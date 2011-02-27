@@ -34,8 +34,8 @@ public class statistics extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.stats);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		if (idan.sync.needtoSync())
-			idan.sync.sendSync();
+		/*if (idan.sync.needtoSync())
+			idan.sync.sendSync();*/
 		if (Misc.needToCheckDelete()) {
 			Misc.makeDelete();
 			Misc.saveList(this);

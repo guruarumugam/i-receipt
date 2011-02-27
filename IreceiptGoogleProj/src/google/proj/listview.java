@@ -52,8 +52,8 @@ public class listview extends Activity {
 		setContentView(R.layout.listview2);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		ListView myListView = (ListView) findViewById(R.id.ListView01);
-		if (idan.sync.needtoSync())
-			idan.sync.sendSync();
+		/*if (idan.sync.needtoSync())
+			idan.sync.sendSync();*/
 		if (Misc.needToCheckDelete()) {
 			Misc.makeDelete();
 			Misc.saveList(this);

@@ -318,9 +318,10 @@ public class compute_receipt extends Activity {
 				setResult(300);// over PeriodLimit
 		}
 
-		(new save()).execute();
+		//(new save()).execute();
+		saveList();
 
-		// finish();
+		finish();
 	}
 
 	public void onClick2(View view) {
@@ -335,7 +336,8 @@ public class compute_receipt extends Activity {
 	public void saveList() {
 
 		rec.setUpdate();
-		boolean connected = Misc.checkConnection(this);
+		
+		/*boolean connected = Misc.checkConnection(this);
 		if (connected) {
 			for (iReceipt tmprr : idan.rec_arr) {
 				if (rec_view.notSync(tmprr)) {
@@ -343,10 +345,10 @@ public class compute_receipt extends Activity {
 					idan.sync.addtoUpdateList(tmprr);
 				}
 			}
-			idan.sync.sendSync();
+			//idan.sync.sendSync();
 			// need to check if the sync run ok
-			idan.sync.clearUpdateList();
-		}
+			//idan.sync.clearUpdateList();
+		}*/
 		Misc.saveList(this);
 
 	}
@@ -367,7 +369,7 @@ public class compute_receipt extends Activity {
 
 		finish();
 	}
-
+/*
 	class save extends AsyncTask<Void, Void, Void> {
 
 		protected ProgressDialog progressDialog;
@@ -391,7 +393,7 @@ public class compute_receipt extends Activity {
 		}
 
 	}
-
+*/
 	class ocr_preform extends AsyncTask<Void, Void, Void> {
 
 		private boolean preform_ocr(iReceipt r) {
