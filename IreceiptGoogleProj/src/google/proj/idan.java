@@ -66,7 +66,7 @@ public class idan extends Activity {
 		if (rec_arr == null)
 			rec_arr = new ArrayList<iReceipt>();
 		if (sync == null)
-			sync = new Syncer(google.proj.loginpage.accountname);
+			sync = new Syncer(google.proj.loginpage.accountname,this);
 
 		sync.sendSync();
 
@@ -260,7 +260,8 @@ public class idan extends Activity {
 			i = new Intent(idan.this, aboutireceipt.class);
 			startActivity(i);
 			break;
-		case SYNC_NOW:        //*************** add sync!!!!!!!!!!!!
+		case SYNC_NOW:
+			sync.syncNow(this);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
