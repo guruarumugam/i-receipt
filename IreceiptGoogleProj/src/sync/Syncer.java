@@ -53,8 +53,8 @@ public class Syncer {
 	@SuppressWarnings("unchecked")
 	public Syncer(String account,Activity act) {
 		//update_rec_list = new ArrayList<iReceipt>();
-		//delete_rec_list = new ArrayList<String>();
-		//deletefromphonenoreturn=new ArrayList<Integer>();
+		delete_rec_list = new ArrayList<String>();
+		deletefromphonenoreturn=new ArrayList<Integer>();
 		lastsync = new Date(100, 5, 5);
 		this.setAccount(account);
 		syncthread=new Thread(new SyncThread(),"syncThread");
@@ -69,10 +69,8 @@ public class Syncer {
 					.readObject();
 			inputStream.close();
 		} catch (IOException ex) {
-			ex.printStackTrace();
 			delete_rec_list = new ArrayList<String>();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 			delete_rec_list = new ArrayList<String>();
 		}
 		
@@ -85,10 +83,8 @@ public class Syncer {
 			
 
 		} catch (IOException ex) {
-			ex.printStackTrace();
 			deletefromphonenoreturn=new ArrayList<Integer>();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 			deletefromphonenoreturn=new ArrayList<Integer>();
 		}
 		
