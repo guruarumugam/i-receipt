@@ -113,7 +113,9 @@ public class idan extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// in case we cancel in compute_receipt
-
+		if (resultCode==7){
+			Misc.deleteAllReceipts(idan.this);
+		}
 		if (resultCode == 100) { // return after save from compute receipt
 			CustomizeDialog customizeDialog = new CustomizeDialog(this,
 					"Your expenditures this month passed your limit - "
