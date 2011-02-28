@@ -131,18 +131,7 @@ public class Preferences extends PreferenceActivity {
 			idan.settings.setdaysToStay(-1);
 		idan.settings.setDeleteOnServer(delete_sync);
 
-		if (frequency == 1) // 2 minutes
-			idan.settings.setSyncFrequency(2);
-		if (frequency == 2)// 5 minutes
-			idan.settings.setSyncFrequency(5);
-		if (frequency == 3)// 10 minutes
-			idan.settings.setSyncFrequency(10);
-		if (frequency == 4)// 30 minutes
-			idan.settings.setSyncFrequency(30);
-		if (frequency == 5)// 60 minutes
-			idan.settings.setSyncFrequency(60);
-		if (frequency == 6)// Never
-			idan.settings.setSyncFrequency(-1);
+		idan.settings.setSyncFrequency(frequency);
 
 		// String limit = preferences.getString("limit", "0").toString();
 		// int limit2 = Integer.parseInt(limit);
