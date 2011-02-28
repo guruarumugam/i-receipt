@@ -68,7 +68,7 @@ public class idan extends Activity {
 		if (sync == null)
 			sync = new Syncer(google.proj.loginpage.accountname,this);
 
-		sync.sendSync_h();
+		
 
 		settings = Misc.loadSetting(this);
 		if (settings == null)
@@ -79,6 +79,8 @@ public class idan extends Activity {
 			Misc.makeDelete();
 		}
 		Misc.saveList(this);
+		Intent i = new Intent(this,OpeningAnimation.class);
+		startActivity(i);
 
 	}
 
