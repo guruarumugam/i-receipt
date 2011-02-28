@@ -477,8 +477,10 @@ public class Syncer {
 						sendSync_h();
 						Misc.saveList(activity);
 						try {
+							if (idan.settings.getSyncFrequency()==-1)
+								return;
 							synchronized(this){
-							this.wait(60000);}//two minutes	
+							this.wait(idan.settings.getSyncFrequency());}	
 						} catch (InterruptedException e) {
 							return;
 						}

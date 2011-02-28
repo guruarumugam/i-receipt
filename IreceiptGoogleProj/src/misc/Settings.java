@@ -79,8 +79,21 @@ public class Settings implements java.io.Serializable {
 		return daysToStay;
 	}
 
-	public double getSyncFrequency() {
-		return frequency;
+	public int getSyncFrequency() {
+		switch (this.frequency) {
+		case 1:
+			return 2*60*1000;
+		case 2:
+			return 5*60*1000;
+		case 3:
+			return 10*60*1000;
+		case 4:
+			return 30*60*1000;
+		case 5:
+			return 60*60*1000;
+		default:
+			return -1;
+		}
 	}
 
 	public double getMaxmonth() {
