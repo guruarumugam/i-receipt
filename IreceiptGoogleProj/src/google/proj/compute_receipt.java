@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import misc.Misc;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -41,7 +40,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class compute_receipt extends Activity {
+public class compute_receipt extends Activity implements OnClickListener {
 	// public static DocsService client= new DocsService("My new Application");
 
 	private TextView PickDate;
@@ -84,6 +83,23 @@ public class compute_receipt extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.compute_receipt_layout);
 
+		// speak
+		Button speakButton1 = (Button) findViewById(R.id.voice1);
+		Button speakButton2 = (Button) findViewById(R.id.voice2);
+		Button speakButton3 = (Button) findViewById(R.id.voice3);
+		// Check to see if a recognition activity is present
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(
+				RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		if (activities.size() != 0) {
+			speakButton1.setOnClickListener(this);
+			speakButton2.setOnClickListener(this);
+			speakButton3.setOnClickListener(this);
+		} else {
+			speakButton1.setEnabled(false);
+			speakButton2.setEnabled(false);
+			speakButton3.setEnabled(false);
+		}
 		myCheckBox = (CheckBox) findViewById(R.id.CheckBox1);
 		myEditText = (EditText) findViewById(R.id.EditNotesManual);
 		int index = getIntent().getFlags();
@@ -318,7 +334,7 @@ public class compute_receipt extends Activity {
 				setResult(300);// over PeriodLimit
 		}
 
-		//(new save()).execute();
+		// (new save()).execute();
 		saveList();
 
 		finish();
@@ -336,24 +352,43 @@ public class compute_receipt extends Activity {
 	public void saveList() {
 
 		rec.setUpdate();
-		
-		/*boolean connected = Misc.checkConnection(this);
-		if (connected) {
-			for (iReceipt tmprr : idan.rec_arr) {
-				if (rec_view.notSync(tmprr)) {
-					tmprr.setSync();
-					idan.sync.addtoUpdateList(tmprr);
-				}
-			}
-			//idan.sync.sendSync();
-			// need to check if the sync run ok
-			//idan.sync.clearUpdateList();
-		}*/
+
+		/*
+		 * boolean connected = Misc.checkConnection(this); if (connected) { for
+		 * (iReceipt tmprr : idan.rec_arr) { if (rec_view.notSync(tmprr)) {
+		 * tmprr.setSync(); idan.sync.addtoUpdateList(tmprr); } }
+		 * //idan.sync.sendSync(); // need to check if the sync run ok
+		 * //idan.sync.clearUpdateList(); }
+		 */
 		Misc.saveList(this);
 
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (((requestCode == 11) || (requestCode == 22) || (requestCode == 33))
+				&& resultCode == RESULT_OK) {
+			ArrayList<String> matches = data
+					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			String res = "";
+			for (String string : matches) {
+				res = res + " " + string;
+			}
+			if (requestCode == 11) {
+				// business.setText(res);//spinner_s
+				stores[3] = res;
+				spinner_s.setSelection(3);
+				adapter_s.notifyDataSetChanged();
+			}
+			if (requestCode == 22) {
+				// price.setText(onlyNumbers(res));//spinner_p
+				prices[3] = res;
+				spinner_s.setSelection(3);
+				adapter_s.notifyDataSetChanged();
+			}
+			if (requestCode == 33)
+				myEditText.setText(res);
+			return;
+		}
 		if (requestCode == 1234 && resultCode == RESULT_OK) {
 			ArrayList<String> matches = data
 					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -366,34 +401,28 @@ public class compute_receipt extends Activity {
 			adapter_s.notifyDataSetChanged();
 			return;
 		}
-
 		finish();
 	}
-/*
-	class save extends AsyncTask<Void, Void, Void> {
 
-		protected ProgressDialog progressDialog;
-
-		protected void onPreExecute() {
-			super.onPreExecute();
-			progressDialog = ProgressDialog.show(compute_receipt.this,
-					"Ireceipt", "Saving...", true, false);
-		}
-
-		protected Void doInBackground(Void... params) {
-			saveList();
-			return null;
-		}
-
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(null);
-			progressDialog.dismiss();
-			finish();
-
-		}
-
-	}
-*/
+	/*
+	 * class save extends AsyncTask<Void, Void, Void> {
+	 * 
+	 * protected ProgressDialog progressDialog;
+	 * 
+	 * protected void onPreExecute() { super.onPreExecute(); progressDialog =
+	 * ProgressDialog.show(compute_receipt.this, "Ireceipt", "Saving...", true,
+	 * false); }
+	 * 
+	 * protected Void doInBackground(Void... params) { saveList(); return null;
+	 * }
+	 * 
+	 * protected void onPostExecute(Void result) { super.onPostExecute(null);
+	 * progressDialog.dismiss(); finish();
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 	class ocr_preform extends AsyncTask<Void, Void, Void> {
 
 		private boolean preform_ocr(iReceipt r) {
@@ -440,7 +469,6 @@ public class compute_receipt extends Activity {
 							true, true);
 			progressDialog.setOnCancelListener(new OnCancelListener() {
 
-				
 				public void onCancel(DialogInterface dialog) {
 					initialize_fields();
 					Toast.makeText(compute_receipt.this,
@@ -523,7 +551,7 @@ public class compute_receipt extends Activity {
 			mYear = c.get(Calendar.YEAR);
 			mMonth = c.get(Calendar.MONTH);
 			mDay = c.get(Calendar.DAY_OF_MONTH);
-			
+
 		}
 
 		protected Void doInBackground(Void... params) {
@@ -545,4 +573,52 @@ public class compute_receipt extends Activity {
 
 	// voice recognition
 
+	public void onClickVoice(View v) {
+		if (v.getId() == R.id.voice1)
+			startVoiceRecognitionActivity(11);
+		if (v.getId() == R.id.voice2)
+			startVoiceRecognitionActivity(22);
+		if (v.getId() == R.id.voice3)
+			startVoiceRecognitionActivity(33);
+	}
+
+	String onlyNumbers(String str) {
+		String ret = "";
+		boolean point = false;
+		if (str == null)
+			return null;
+		for (int i = 0; i < str.length(); i++) {
+			if ((str.charAt(i) >= '0') && (str.charAt(i) <= '9'))
+				ret += str.charAt(i);
+			if (str.charAt(i) == '.' && !point) {
+				if (ret.length() == 0)
+					ret += "0.";
+				else
+					ret += ".";
+				point = true;
+			}
+		}
+		if (ret.charAt(ret.length() - 1) == '.')
+			ret += '0';
+		return ret;
+	}
+
+	/**
+	 * Fire an intent to start the speech recognition activity.
+	 */
+	private void startVoiceRecognitionActivity(int code) {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		String str = " ";
+		if (code == 11)
+			str = "Say business name:";
+		else if (code == 22)
+			str = "Say price:";
+		else if (code == 33)
+			str = "Say Notes:";
+
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT, str);
+		startActivityForResult(intent, code);
+	}
 }

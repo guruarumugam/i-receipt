@@ -45,4 +45,5 @@
 <string name="deleteRec">deleteRec</string>
 <string name="onClick3">onClick3</string>
 <string name="onClick4">onClick4</string>
+<string name="onClickVoice">onClickVoice</string>
 </resources>
